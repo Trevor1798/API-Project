@@ -12,12 +12,6 @@ router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 
-
-
-router.post('/test', function(req, res) {
-  res.json({ requestBody: req.body });
-});
-
 router.get('/set-token-cookie', async (_req, res) => {
   const user = await User.findOne({
     where: {
@@ -33,15 +27,18 @@ router.get(
   (req, res) => {
     return res.json(req.user);
   }
-);
+  );
 
-router.get(
-  '/require-auth',
-  requireAuth,
-  (req, res) => {
-    return res.json(req.user);
-  }
-);
+  router.get(
+    '/require-auth',
+    requireAuth,
+    (req, res) => {
+      return res.json(req.user);
+    }
+    );
 
+    router.post('/test', function(req, res) {
+      res.json({ requestBody: req.body });
+    });
 
-module.exports = router;
+    module.exports = router;
