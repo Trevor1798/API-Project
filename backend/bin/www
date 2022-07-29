@@ -1,6 +1,8 @@
 //  #!/usr/bin/env node
 
 require('dotenv').config();
+
+
 const { port } = require('../config');
 const app = require('../app');
 const db = require('../db/models');
