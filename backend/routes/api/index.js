@@ -21,18 +21,18 @@ router.get(
         return res.json(req.user);
     }
     );
-    // router.get('/set-token-cookie', async (req, res) => {
-    //     const user = await User.findOne({
-    //         where: {
-    //             username: 'Demo-lition'
-    //         }
-    //     });
-    //     setTokenCookie(res, user);
-    //     return res.json({ user });
-    // });
+    router.get('/set-token-cookie', async (req, res) => {
+        const user = await User.findOne({
+            where: {
+                username: 'Demo-lition'
+            }
+        });
+        setTokenCookie(res, user);
+        return res.json({ user });
+    });
 
-    // router.post('/test', (req, res) => {
-    //     res.json({ requestBody: req.body})
-    // })
+    router.post('/test', (req, res) => {
+        res.json({ requestBody: req.body})
+    })
 
     module.exports = router;
