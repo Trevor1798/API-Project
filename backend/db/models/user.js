@@ -7,10 +7,6 @@ const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
 
   class User extends Model {
-    toSafeObject() {
-      const { id, username, email } = this; // context will be the User instance
-      return { id, username, email };
-    }
     static async login({ credential, password }) {
       const user = await User.scope('loginUser').findOne({
         where: {
@@ -38,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
     }
     static getCurrentUserById(id) {
       return User.scope("currentUser").findByPk(id);
+    }
+    toSafeObject() {
+      const { id, username, email } = this; // context will be the User instance
+      return { id, username, email };
     }
     static associate(models) {
       // define association here
