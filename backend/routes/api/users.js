@@ -6,6 +6,8 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
+
+//connected to handleValidationErrorsMiddleware
 const validateSignup = [
   check('email')
     .exists({ checkFalsy: true })
@@ -26,6 +28,8 @@ const validateSignup = [
   handleValidationErrors
 ];
 
+
+//Sign-up new user
 router.post('/', validateSignup, async (req, res) => {
       const { email, password, username } = req.body;
       const user = await User.signup({ email, username, password });
@@ -37,6 +41,8 @@ router.post('/', validateSignup, async (req, res) => {
       });
     }
   );
+
+ 
 
 
 

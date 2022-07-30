@@ -1,6 +1,14 @@
-{
+{  "scripts": {
+  "install": "npm --prefix backend install backend",
+  "dev:backend": "npm install --prefix backend start",
+  "sequelize": "npm run --prefix backend sequelize",
+  "sequelize-cli": "npm run --prefix backend sequelize-cli",
+  "start": "npm start --prefix backend"
+},
+
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "express-validator": "^6.14.2"
+    "express-validator": "^6.14.2",
+    "pg": "^8.7.3"
   }
 }

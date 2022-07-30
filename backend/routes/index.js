@@ -16,13 +16,7 @@ router.get("/api/csrf/restore", (req, res) => {
       'XSRF-Token': csrfToken
     });
   });
-  router.get("/api/csrf/restore", (req, res) => {
-    const csrfToken = req.csrfToken();
-    res.cookie("XSRF-TOKEN", csrfToken);
-    res.status(200).json({
-      'XSRF-Token': csrfToken
-    });
-  });
+ 
 
 
 
