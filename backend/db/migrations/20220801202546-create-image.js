@@ -12,8 +12,8 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      imageType: {
-        type: Sequelize.STRING,
+      previewImg: {
+        type: Sequelize.BOOLEAN,
         allowNull: false
       },
       spotId: {

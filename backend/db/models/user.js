@@ -36,10 +36,13 @@ module.exports = (sequelize, DataTypes) => {
       return User.scope("currentUser").findByPk(id);
     }
     toSafeObject() {
-      const { id, username, email } = this; // context will be the User instance
-      return { id, username, email };
+      const { id, username, email, firstName, lastName } = this; // context will be the User instance
+      return { id, username, email, firstName, lastName };
     }
     static associate(models) {
+      User.hasMany(models.Booking, {foreignKey: 'userId'})
+      User.hasMany(models.Review, {foreignKey: 'userId'})
+      User.hasMany(models.Spot, {foreignKey: 'ownerId'})
       // define association here
     }
   };
