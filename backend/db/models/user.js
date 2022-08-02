@@ -7,6 +7,8 @@ const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
 
   class User extends Model {
+
+
     static async login({ credential, password }) {
       const user = await User.scope('loginUser').findOne({
         where: {
@@ -20,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
         return await User.scope('currentUser').findByPk(user.id);
       }
     }
+
+
     static async signup({ firstName, lastName, username, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
@@ -31,16 +35,25 @@ module.exports = (sequelize, DataTypes) => {
       });
       return await User.scope('currentUser').findByPk(user.id);
     }
+
+
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
     }
+
+
     static getCurrentUserById(id) {
       return User.scope("currentUser").findByPk(id);
     }
+
+
     toSafeObject() {
       const { firstName, lastName, id, username, email } = this; // context will be the User instance
       return {firstName, lastName, id, username, email};
     }
+
+
+    
     static associate(models) {
       User.hasMany(models.Booking, {foreignKey: 'userId', hooks: true})
       User.hasMany(models.Review, {foreignKey: 'userId', onDelete: 'CASCADE', hooks:true})
