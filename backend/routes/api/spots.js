@@ -6,12 +6,20 @@ const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { check } = require('express-validator');
 
 
-
+//Get all Spots
 router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll()
     res.status(200)
     return res.json(allSpots)
 })
 
+//Create a spot
+router.post('/', async (req, res) => {
+    let spot = req.spot
+    const {address, city, state, country, lat, lng, name, description, price} = req.body
+    const newSpot = await Spot.create({
+        this.address = address,
+    })
+})
 
 module.exports = router
