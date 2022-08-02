@@ -4,19 +4,19 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Images', [
       {
-        url: '',
         reviewId: 1,
-        spotId: 1
+        spotId: 1,
+        url: 'https://the-naruto-world.fandom.com/wiki/Konoha?file=Konohavillage.jpg',
       },
       {
         spotId: 2,
         reviewId: 2,
-        stars: 5
+        url: 'https://gameofthrones.fandom.com/wiki/King%27s_Landing?file=Redkeep_kingslanding.jpg'
       },
       {
         spotId: 3,
         reviewId: 3,
-        url: ''
+        url: 'https://gta.fandom.com/wiki/Clinton_Residence?file=ClintonResidence-GTAV.jpg'
 
       }
     ], {})
