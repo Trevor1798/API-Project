@@ -2,7 +2,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-return queryInterface.bulkInsert('Reviews', [
+ await queryInterface.bulkInsert('Reviews', [
   {
     userId: 1,
     spotId: 1,
@@ -20,16 +20,12 @@ return queryInterface.bulkInsert('Reviews', [
     spotId: 3,
     review: 'great experience wont do again, somehow I ended up in a heist to rob a bank',
     stars: 2
-  }
+  },
 ], {})
 
 },
 async down (queryInterface, Sequelize) {
-    const Op = Sequelize.Op
-     return queryInterface.bulkDelete('Reviews', {
-      userId: { [Op.in]: [1,2,3]},
-      spotId: { [Op.in]: [1,2,3]}
-    },
-  {})
-}
-}
+   await queryInterface.bulkDelete('Reviews', null, {});
+
+  }
+};

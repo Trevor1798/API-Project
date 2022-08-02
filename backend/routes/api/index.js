@@ -5,11 +5,11 @@ const { restoreUser } = require('../../utils/auth.js');
 const { requireAuth } = require('../../utils/auth.js');
 
 
-
+const spotsRouter = require('./spots.js')
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 
-
+router.use('/spots', spotsRouter)
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 

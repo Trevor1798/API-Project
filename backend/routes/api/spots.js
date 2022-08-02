@@ -12,3 +12,6 @@ router.get('/', async (req, res) => {
     res.status(200)
     return res.json(allSpots)
 })
+
+
+module.exports = router
