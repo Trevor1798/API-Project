@@ -8,8 +8,10 @@ const { check } = require('express-validator');
 
 
 router.get('/', async (req, res) => {
-    const { }
     const allSpots = await Spot.findAll()
     res.status(200)
     return res.json(allSpots)
 })
+
+
+module.exports = router
