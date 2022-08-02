@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         username,
+        firstName,
+        lastName,
         email,
         hashedPassword
       });
@@ -36,16 +38,34 @@ module.exports = (sequelize, DataTypes) => {
       return User.scope("currentUser").findByPk(id);
     }
     toSafeObject() {
-      const { id, username, email } = this; // context will be the User instance
-      return { id, username, email };
+      const { id, username, email, firstName, lastName } = this; // context will be the User instance
+      return { id, username, email, firstName, lastName };
     }
     static associate(models) {
+      User.hasMany(models.Booking, {foreignKey: 'userId'})
+      User.hasMany(models.Review, {foreignKey: 'userId'})
+      User.hasMany(models.Spot, {foreignKey: 'ownerId'})
+      User.hasMany(models.Image, {foreignKey: 'userId'})
       // define association here
     }
   };
 
   User.init(
     {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [4, 80]
+        }
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [4, 300]
+        }
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
