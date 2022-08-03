@@ -56,9 +56,9 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
         }
 
         const newReviewImage = await Image.create({
+            reviewId,
             url,
             currentUser,
-
         })
         res.status(200)
         return res.json(newReviewImage)
@@ -67,5 +67,3 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
 
 
 //edit a review
-
-    
