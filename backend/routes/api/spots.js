@@ -141,9 +141,9 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
             res.status(404)
             return res.json({"message": "Spot couldnt be found"})
         }
-        if (!review) {
+        if (!review || !review.length ) {
             res.status(400)
-            return res.json({"message": "Review text is required"})
+            return res.json({"message": "Review couldn't be found or text is required"})
         }
         if (stars > 5 || stars < 1 || !stars) {
             res.status(400)
