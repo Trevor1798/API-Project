@@ -6,10 +6,9 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { User, Spot, Booking, Image, Review} = require('../../db/models')
 
 
-
+//get all reviews of the current user
 router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
         const currentUser = req.user.id
-
             const review = await Review.findAll({
                     where: {userId: currentUser},
                     include: [
@@ -24,10 +23,10 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
                     model: Image,
                     attributes: ['id','url' ]
                     }
-
-
-                    ]
-
+                 ]
             })
-
+                return res.json(review)
 })
+
+
+//add an image to a review based on the reviews ID

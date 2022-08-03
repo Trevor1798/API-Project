@@ -129,6 +129,43 @@ router.delete('/:spotId', restoreUser, requireAuth, async (req, res) => {
                 return res.json({"message": "Successfully Deleted"})
 })
 
+//create a review for a spot based on the spots id
+router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
+        const spotId = req.params.spotId
+        const currentUser = req.user.id
+        const {review, stars } = req.body
 
+        const spotReview = await Spot.findByPk(spotId)
+
+        if(!spotReview) {
+            res.status(404)
+            return res.json({"message": "Spot couldnt be found"})
+        }
+        if (!review) {
+            res.status(400)
+            return res.json({"message": "Review text is required"})
+        }
+        if (stars > 5 || stars < 1 || !stars) {
+            res.status(400)
+            return res.json({"message": "Stars must be an integer from 1 to 5"})
+        }
+
+
+        const userReview = await Review.findAll(currentUser)
+            if (userReview.length >= 1) {
+                res.status(403)
+                return res.json({"message": "User already has a review"})
+            }
+
+            const createUserReview = await Review.create({
+                userId: currentUser,
+                spotId,
+                review,
+                stars
+            })
+            res.status(200)
+            return res.json({createUserReview})
+
+})
 
 module.exports = router
