@@ -98,7 +98,6 @@ router.post('/', restoreUser, requireAuth, async (req, res) => {
 })
 
 //edit a spot
-
 router.put('/:spotId', restoreUser, requireAuth, async (req, res) => {
     let spotId = req.params.spotId
     let currentUser = req.user.id
@@ -120,10 +119,16 @@ router.delete('/:spotId', restoreUser, requireAuth, async (req, res) => {
         const currentUser = req.user.id
 
             let spot = await Spot.findByPk(spotId)
+
+            //error handling: must be a spot and ownerId must be the same as user id
             if (!spot) return res.json({"message": "Spot couldn't be found", "statusCode": 404})
             if (spot.ownerId !== currentUser) return res.json({"message": "Authorization required", "statusCode": 400})
-              await Spot.destroy({where: {id: spotId}})
+
+
+            await Spot.destroy({where: {id: spotId}})
                 return res.json({"message": "Successfully Deleted"})
 })
+
+
 
 module.exports = router
