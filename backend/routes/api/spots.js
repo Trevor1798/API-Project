@@ -170,4 +170,53 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
 
 })
 
+//get all booking for a spot based on the spots id
+router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
+    const currentUser = req.user.id
+    const spotId = req.params.spotId
+        const userBookings = await Booking.findAll({
+        where: { spotId },
+        include: {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+                 }
+        })
+        const allBookings = await Booking.findAll({
+            where: {spotId},
+            attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
+        })
+
+        const spot = await Spot.findByPk(spotId, {
+            where: {ownerId: currentUser}
+        })
+
+        if (!spot) {
+            res.status(404)
+            return res.json({"message": "Spot couldn't be found"})
+        }
+        if (spot.ownerId === currentUser) return res.json(userBookings)
+        else return res.json(allBookings)
+})
+
+
+//create a booking from a spot based on the spots id
+    router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
+            const spotId = req.params.spotId
+            const currentUser = req.user.id
+            const {startDate, endDate, createdAt, updatedAt} = req.body
+
+            const spot = await Spot.findByPk(spotId)
+
+            if (!spot) {
+                res.status(403)
+                return res.json({"message": "Spot couldn't be found"})
+            }
+
+            if (startDate >= endDate) {
+                res.status(400)
+                return res.json({"message": "validation error", "endDate": "endDate cannot be on or before startDate"})
+            }
+
+    })
+
 module.exports = router

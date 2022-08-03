@@ -3,7 +3,7 @@ const router  = express.Router()
 const {setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth')
 const {Booking, Review, Image, Spot, User} = require('../../db/models')
 
-
+//get all bookings for current user
 router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
         const currentUser = req.user.id
         let BookingsCurrentlyOwned = await Booking.findAll({
@@ -13,6 +13,8 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
     })
     return res.json(BookingsCurrentlyOwned)
 })
+
+
 
 
 
