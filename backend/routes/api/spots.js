@@ -10,9 +10,21 @@ const Sequelize = require('sequelize');
 
 
 
+//get spots owned by current user
+router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
+    const currentUser = req.user.id
+
+    let spotsCurrentlyOwned = await Spot.findAll({
+        where: {
+            userId: ownerId
+        }
+    })
+    return res.json(spotsCurrentlyOwned)
+})
+
 //Get details of a spot from an id
 router.get('/:spotId', async (req, res) => {
-    const spotId = req.params.ownerId
+    const spotId = req.params.spotId
     let spots = await Spot.findByPk(spotId)
 
     if (!spots) {
@@ -21,19 +33,9 @@ router.get('/:spotId', async (req, res) => {
             "message": "Spot does not exist"
         })
     }
+    res.status(200)
+    return res.json(spots)
 })
-//get spots owned by current user
-router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
-    const currentUser = req.user
-
-    let spotsCurrentlyOwned = await Spot.findAll({
-        where: {
-            currentUser
-        }
-    })
-    return res.json(spotsCurrentlyOwned)
-})
-
 //Add image to spot based on the spots id
 
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
