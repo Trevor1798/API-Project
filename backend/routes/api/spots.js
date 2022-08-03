@@ -10,7 +10,12 @@ const { check } = require('express-validator');
 
 //Get all Spots
 router.get('/', async (req, res) => {
-    const allSpots = await Spot.findAll()
+    const allSpots = await Spot.findAll({
+        include: [
+            {model: Review, attributes: []},
+            {model: Image, attributes: [], where: {previewImg: true}}
+        ]
+    })
     res.status(200)
     return res.json(allSpots)
 })
@@ -18,21 +23,21 @@ router.get('/', async (req, res) => {
 
 
 //Get details of a spot from an id
-router.get('/:spotId', async (req, res) => {
+router.get('/:ownerId', async (req, res) => {
     const spotId = req.params.spotId
     let spots = await Spot.findByPk(spotId)
 
     if (!spots) {
         res.status(404)
         return res.json({
-            "message": 'Spot does not exist'
+            "message": "Spot does not exist"
         })
     }
 })
 
 
 //get spots owned by current user
-router.get('/current-user', requireAuth, async (req, res) => {
+router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
     const currentUser = req.user.id
 
     let spotsCurrentlyOwned = await Spot.findAll({
@@ -45,7 +50,7 @@ router.get('/current-user', requireAuth, async (req, res) => {
 
 //Create a spot
 router.post('/', async (req, res) => {
-    const {address, city, state, country, lat, lng, name, description, price} = req.body
+    const {ownerId, address, city, state, country, lat, lng, name, description, price} = req.body
     const newSpot = await Spot.create(req.body)
 
     res.status(200)

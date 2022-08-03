@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -42,7 +42,7 @@ router.post('/', validateSignup, async (req, res) => {
     }
   );
     //Get current user
- router.get('/current-user', requireAuth, async (req, res) => {
+ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
   return res.json(req.user)
  })
 
