@@ -13,7 +13,7 @@ module.exports = {
         lat: 10.123456,
         lng: 15.123456,
         name: "Naruto's Apartment",
-        description: ' This all inclusive stay at the 7th Hokage\'s first apartment is a sight to see!',
+        description: 'This all inclusive stay at the 7th Hokage\'s first apartment is a sight to see!',
         price: 100,
 
 
