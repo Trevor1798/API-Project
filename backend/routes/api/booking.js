@@ -16,7 +16,6 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
 
 //edit a booking
 router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
-        const currentUser = req.user.id
         const bookingId = req.params.bookingId
         let {startDate, endDate} = req.body
 
@@ -25,8 +24,19 @@ router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
         if (!editBookings) {
           res.status(404)
           return res.json({
-            "message": "Booking could'nt be found",
+            "message": "Booking couldn't be found",
             "statusCode": 404
+          })
+        }
+
+        if (startDate >= endDate) {
+          res.status(400)
+          return res.json({
+            "message": "Validation error",
+            "statusCode": 400,
+            "errors": {
+              "endDate": "endDate cannot come before startDate"
+        }
           })
         }
         let today = new Date()
@@ -58,14 +68,49 @@ router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
               }
           })
         } else {
-          editBookings.startDate = startDate
-          editBookings.endDate = endDate
+          editBookings.set({
+            startDate,
+            endDate
+          })
+          await editBookings.save()
+          res.status(200)
+          return res.json(editBookings)
         }
 
 
 })
 
+//delete an existing booking
 
+  router.delete('/:bookingId', restoreUser, requireAuth, async (req, res) => {
+         const bookingId = req.params.bookingId
+
+         const deleteBooking = await Booking.findByPk(bookingId)
+
+         if (!deleteBooking) {
+          res.status(404)
+          return res.json({
+            "message": "Booking couldn't be found",
+            "statusCode": 404
+           })
+         }
+         let today = new Date()
+         if (today >= startDate) {
+          res.status(403)
+          return res.json({
+            "message": "Bookings that have been started can't be deleted",
+            "statusCode": 403
+           })
+         }
+          else {
+           await deleteBooking.destroy()
+          }
+          res.status(200)
+          return res.json({
+            "message": "Successfully deleted",
+            "statusCode": 200
+          })
+  })
 
 
 
