@@ -96,19 +96,33 @@ router.get('/:spotId', async (req, res) => {
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
     const spotId = req.params.spotId
     const currentUser = req.user.id
+
+    let {url, previewImg} = req.body
     let spot = await Spot.findByPk(spotId)
 
-    if (spot.ownerId !== currentUser) {
+    if (!spot) {
         res.status(404)
         return res.json({
-            "message": "Spot couldnt be found"
+            "message": "Spot couldnt be found",
+            "statusCode": 404
         })
     }
-        img = req.body
-        img.spotId = spotId
 
-    const image = await Image.create(img)
-    return res.json(image)
+    const image = await Image.create({
+        spotId,
+        currentUser,
+        url,
+        previewImg
+    })
+    const imgjson = image.toJSON()
+
+    
+    res.status(200)
+    return res.json({
+        id: imgjson.id,
+        imageableId: imgjson.spotId,
+        url: imgjson.url
+    })
 })
 
 

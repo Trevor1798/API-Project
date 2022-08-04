@@ -2,17 +2,38 @@ const express = require('express')
 const router  = express.Router()
 const {setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth')
 const {Booking, Review, Image, Spot, User} = require('../../db/models')
+const { Op } = require('sequelize')
 
 //get all bookings for current user
 router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
         const currentUser = req.user.id
+
         let BookingsCurrentlyOwned = await Booking.findAll({
-        where: {
-          userId: currentUser
-        }
-    })
-    return res.json(BookingsCurrentlyOwned)
-})
+            where: {
+            userId: currentUser
+          }
+        })
+
+            for (let booking of BookingsCurrentlyOwned){
+            let spots = await Spot.findOne({
+              where: {id: booking.spotId},
+              attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
+            })
+            previewImage = await Image.findOne({
+               where: { previewImg: true, spotId: booking.spotId },
+               attributes:  [ 'url']
+            })
+
+            booking.dataValues.spots = spots
+            booking.dataValues.previewImage = previewImage.url
+
+            return res.json({Bookings: BookingsCurrentlyOwned})
+
+          }
+        })
+
+
+
 
 //edit a booking
 router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
@@ -95,16 +116,17 @@ router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
            })
          }
          let today = new Date()
-         if (today >= startDate) {
+         //console.log(startDate)
+        //  console.log(deleteBooking.startDate)
+         if (today >= deleteBooking.startDate) {
           res.status(403)
           return res.json({
             "message": "Bookings that have been started can't be deleted",
             "statusCode": 403
            })
          }
-          else {
-           await deleteBooking.destroy()
-          }
+
+          await deleteBooking.destroy()
           res.status(200)
           return res.json({
             "message": "Successfully deleted",
