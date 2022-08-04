@@ -165,15 +165,33 @@ router.put('/:spotId', spotValidator, restoreUser, requireAuth, async (req, res)
     let currentUser = req.user.id
 
       let spot = await Spot.findByPk(spotId)
-      if (!spot) return res.json({"message": "Spot couldn't be found", "statusCode": 404})
+
+      if (!spot) {
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          })
+        }
+
         if (spot.ownerId === currentUser) {
          const {address, city, state, country, lat, lng, name, description, price} = req.body
-          spot.update({ address, city, state, country, lat, lng, name, description, price})
+          spot.set({
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+             })
+        }
+            await spot.save()
             res.status(200)
             return res.json(spot)
-        } else return res.json({"message": "Authorization required"})
-
     })
+
 
 //delete a spot
 router.delete('/:spotId', restoreUser, requireAuth, async (req, res) => {
@@ -187,15 +205,8 @@ router.delete('/:spotId', restoreUser, requireAuth, async (req, res) => {
                     "message": "Spot couldn't be found",
                     "statusCode": 404})
                 }
-//error handling: must be a spot and ownerId must be the same as user id
-            if (spot.ownerId !== currentUser) {
-            return res.json({
-                "message": "Authorization required",
-                "statusCode": 400
-            })
-        }
 
-            await Spot.destroy({where: {id: spotId}})
+                await Spot.destroy({where: {id: spotId}})
                 return res.json({"message": "Successfully Deleted"})
 })
 
@@ -233,9 +244,39 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
                 review,
                 stars
             })
+            await createUserReview.save()
             res.status(200)
             return res.json({createUserReview})
 
+})
+
+
+//Get all reviews by a spots ID
+router.get('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
+    const spotId = req.params.spotId
+    
+    let spot = await Spot.findByPk(spotId)
+
+    if (!spot){
+        res.status(404)
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+
+    const reviews = await Review.findAll({
+        where: {
+            spotId,
+        },
+        include: [
+        { model: User, attributes: ['id', 'firstName', 'lastName']},
+        { model: Image, attributes: ['id', 'imageableId', 'url']
+            }
+        ]
+    })
+    res.status(200)
+    return res.json({reviews})
 })
 
 //get all booking for a spot based on the spots id
