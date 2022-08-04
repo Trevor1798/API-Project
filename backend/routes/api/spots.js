@@ -110,7 +110,7 @@ router.get('/', async (req, res) => {
             .withMessage('State is required'),
         check('country')
             .exists({checkFalsy: true})
-            .notEmpty
+            .notEmpty()
             .withMessage('Country is required'),
         check('lat')
             .exists({checkFalsy: true})
@@ -232,7 +232,7 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
         }
 
 
-        const userReview = await Review.findAll(currentUser)
+        const userReview = await Review.findByPk(currentUser)
             if (userReview.length >= 1) {
                 res.status(403)
                 return res.json({"message": "User already has a review"})
@@ -254,7 +254,7 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
 //Get all reviews by a spots ID
 router.get('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
     const spotId = req.params.spotId
-    
+
     let spot = await Spot.findByPk(spotId)
 
     if (!spot){
@@ -267,11 +267,11 @@ router.get('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
 
     const reviews = await Review.findAll({
         where: {
-            spotId,
+            spotId: spotId,
         },
         include: [
         { model: User, attributes: ['id', 'firstName', 'lastName']},
-        { model: Image, attributes: ['id', 'imageableId', 'url']
+        { model: Image, attributes: ['id', 'url']
             }
         ]
     })
@@ -352,8 +352,8 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                 })
             } else if (alreadyBooked.length < 1) {
                 const createBooking = await Booking.create({
-                    spotId,
                     currentUser,
+                    spotId,
                     startDate,
                     endDate,
                 })
