@@ -30,6 +30,7 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
         },
         group: ['Spot.id']
     })
+
     for (let spot of spotsCurrentlyOwned){
         previewImage = await Image.findOne({
            where: { previewImg: true, spotId: spot.id },
@@ -116,7 +117,7 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
     })
     const imgjson = image.toJSON()
 
-    
+
     res.status(200)
     return res.json({
         id: imgjson.id,
@@ -125,34 +126,73 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
     })
 })
 
+let paginationValidator = [
+        check('page')
+            .exists({checkFalsy: true})
+            .isLength({ min: 0})
+            .withMessage('Page must be greater than or equal to 0'),
+        check('size')
+            .exists({checkFalsy: true})
+            .isLength({min: 0})
+            .withMessage('Size must be greater than or equal to 0'),
+        check('lat')
+            .exists({checkFalsy: true})
+            .isLength({min: -180, max: 180})
+            .withMessage('Maximum or minimum latitude is invalid'),
+        check('lng')
+            .exists({checkFalsy: true})
+            .isLength({min: -90, max: 90})
+            .withMessage('Maximum or minimum latitude is invalid'),
+        check('price')
+            .exists({checkFalsy: true})
+            .isLength({min: 0})
+            .withMessage('Maximum price and minimum price must be greater than or equal to 0 '),
+]
+
+
+
 
 
 //Get all Spots
-router.get('/', async (req, res) => {
+router.get('/',   async (req, res) => {
 
-    let allSpots = await Spot.findAll({
-        include: [
-            {model: Review, attributes: []},
-            ], attributes: {
-            include: [
-              [ Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating' ]
-            ]
-          },
-          group: ['Spot.id'],
-        })
-        for (let spot of allSpots){
-            previewImage = await Image.findOne({
-               where: { previewImg: true, spotId: spot.id },
-               attributes:  [ 'url']
-          })
+           // pagination
+            let {size, page} = req.query
+            if (!page) page = 0
+            if (!size) size = 20
+            page = parseInt(page)
+            size = parseInt(size)
 
-          spot.dataValues.previewImage = previewImage.url
+            let pagination = {}
+            if (page >= 1 && size >= 1){
+                pagination.limit = size
+                pagination.offset = size * (page - 1)
+            }
 
-        //   console.log(dataValues)
-        }
 
-        res.status(200)
-        return res.json({Spots: allSpots})
+            let allSpots = await Spot.findAll({
+            ...pagination
+             })
+
+                 for (let spot of allSpots) {
+
+                 let avgRating = await Review.findAll({
+                     where: {id: spot.id},
+                     attributes: [[ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
+                 })
+                 let previewImage = await Image.findOne({
+                    where: { previewImg: true, spotId: spot.id },
+                    attributes:  ['url']
+                 })
+ //  console.log(spot.dataValues)
+                 spot.dataValues.avgRating = avgRating
+                 spot.dataValues.previewImage = previewImage.url
+                 spot.dataValues.page = page
+                 spot.dataValues.size = size
+             }
+
+                res.status(200)
+                return res.json({Spots: allSpots})
     })
 
 
