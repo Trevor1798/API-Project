@@ -13,12 +13,12 @@ const {Op} = require('sequelize');
 
 //get spots owned by current user
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
-    const currentUser = req.user.id
+
 
 
     let spotsCurrentlyOwned = await Spot.findAll({
         where: {
-            ownerId: req.params.currentUser
+            id: req.params.ownerId
         },
         include: [
            { model: Review, attributes: []},
