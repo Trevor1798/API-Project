@@ -19,13 +19,13 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
               where: {id: booking.spotId},
               attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
             })
+            booking.dataValues.spots = spots
             previewImage = await Image.findOne({
                where: { previewImg: true, spotId: booking.spotId },
                attributes:  [ 'url']
             })
-
-            booking.dataValues.spots = spots
             booking.dataValues.previewImage = previewImage.url
+
 
             return res.json({Bookings: BookingsCurrentlyOwned})
 
@@ -70,15 +70,10 @@ router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
         }
 
         let alreadyBooked = await Booking.findAll({
-          where: {
-              [Op.and]: [
-                  {startDate: req.body.startDate },
-                  {spotId: editBookings.spotId}
-              ]
-          }
+          where: {bookingId}
       })
 
-      if (alreadyBooked.length >= 1) {
+      if (alreadyBooked) {
           res.status(403)
           return res.json({
               "message": "Sorry, this spot is already booked for the specified dates",
