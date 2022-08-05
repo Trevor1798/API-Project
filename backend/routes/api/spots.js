@@ -33,7 +33,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
     for (let spot of spotsCurrentlyOwned){
         previewImage = await Image.findOne({
-           where: { previewImg: true, spotId: spot.id },
+           where: { previewImage: true, spotId: spot.id },
            attributes:  [ 'url']
       })
 
@@ -114,7 +114,7 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
             spotId: req.params.spotId,
             userId: userId,
             url,
-            previewImage: previewImg
+            previewImage: previewImage
 
         })
 

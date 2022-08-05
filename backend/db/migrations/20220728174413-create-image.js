@@ -9,14 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-       
+
         type: Sequelize.INTEGER
       },
       url: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      previewImg: {
+      previewImage: {
         type: Sequelize.BOOLEAN,
 
       },
