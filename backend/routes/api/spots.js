@@ -12,7 +12,7 @@ const {Op} = require('sequelize')
 
 //get spots owned by current user
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
-    const currentUser = req.user.id
+    const currentUser = req.user
 
 
     let spotsCurrentlyOwned = await Spot.findAll({
@@ -48,7 +48,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
 //Get details of a spot from an id
 router.get('/:spotId', async (req, res) => {
-        const spotId = req.params.spotId
+        const spotId = req.params
 
     let spots = await Spot.findOne({
         where: {id: spotId}
@@ -95,8 +95,8 @@ router.get('/:spotId', async (req, res) => {
 
 //create image to spot based on the spots id
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
-    const spotId = req.params.spotId
-    const currentUser = req.user.id
+    const spotId = req.params
+    const currentUser = req.user
 
     let {url, previewImg} = req.body
     let spot = await Spot.findByPk(spotId)
@@ -244,7 +244,7 @@ router.get('/', paginationValidator,  async (req, res) => {
 //Create a spot
 router.post('/', spotValidator, restoreUser, requireAuth, async (req, res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body
-    const ownerId = req.user.id
+    const ownerId = req.user
     const newSpot = await Spot.create({
         ownerId,
         address,
@@ -264,7 +264,7 @@ router.post('/', spotValidator, restoreUser, requireAuth, async (req, res) => {
 
 //edit a spot
 router.put('/:spotId', spotValidator, restoreUser, requireAuth, async (req, res) => {
-    let spotId = req.params.spotId
+    let spotId = req.params
     let currentUser = req.user.id
 
       let spot = await Spot.findByPk(spotId)
