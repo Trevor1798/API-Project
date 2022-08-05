@@ -99,7 +99,7 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
     const currentUser = req.user
 
     let {url, previewImg} = req.body
-    let spot = await Spot.findByPk(spotId)
+    let spot = await Spot.findByPk(req.params.spotId)
 
     if (!spot) {
         res.status(404)
