@@ -443,18 +443,34 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                 }
             })
 
-            if (startDate === (alreadyBooked.startDate && alreadyBooked.endDate)) {
+        for (let booking of alreadyBooked) {
+
+
+            let newStartDate = booking.startDate
+            let newEndDate = booking.endDate
+
+            if ((newStartDate <= startDate) && (newEndDate >= startDate )) {
                 res.status(403)
                 return res.json({
-                    "message": "Sorry, this spot is already booked for the specified dates",
-                    "statusCode": 403,
-                    "errors": {
-                      "startDate": "Start date conflicts with an existing booking",
-                      "endDate": "End date conflicts with an existing booking"
-                    }
-                })
-            } else {
-                const createBooking = await Booking.create({
+                  "message": "Sorry, this spot is already booked for the specified dates",
+                  "statusCode": 403,
+                  "errors": {
+                  "startDate": "Start date conflicts with an existing booking",
+            }
+          })
+        }
+          if ((newEndDate >= endDate) && (newStartDate <= endDate)) {
+              res.status(403)
+              return res.json({
+               "message": "Sorry, this spot is already booked for the specified dates",
+               "statusCode": 403,
+               "errors": {
+               "endDate": "End date conflicts with an existing booking",
+            }
+          })
+        }
+      }
+         const createBooking = await Booking.create({
                     currentUser,
                     spotId,
                     startDate,
@@ -462,8 +478,6 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                 })
                 res.status(201)
                 return res.json(createBooking)
-
-            }
 
     })
 

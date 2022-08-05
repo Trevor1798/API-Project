@@ -6,10 +6,10 @@ const { Op } = require('sequelize')
 
 //get all bookings for current user
 router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
-      const {user} = req.body
+
         let BookingsCurrentlyOwned = await Booking.findAll({
             where: {
-            userId: user.id
+            userId: req.params.userId
           }
         })
 
@@ -73,28 +73,43 @@ router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
           where: {id: req.params.bookingId}
       })
 
-      if (editBookings.startDate === (alreadyBooked.startDate && alreadyBooked.endDate)) {
-          res.status(403)
-          return res.json({
-              "message": "Sorry, this spot is already booked for the specified dates",
-              "statusCode": 403,
-              "errors": {
-                "startDate": "Start date conflicts with an existing booking",
-                "endDate": "End date conflicts with an existing booking"
-              }
+        for (let booking of alreadyBooked) {
+
+
+            let newStartDate = booking.startDate
+            let newEndDate = booking.endDate
+
+            if ((newStartDate <= startDate) && (newEndDate >= startDate )) {
+                res.status(403)
+                return res.json({
+                  "message": "Sorry, this spot is already booked for the specified dates",
+                  "statusCode": 403,
+                  "errors": {
+                  "startDate": "Start date conflicts with an existing booking",
+            }
           })
-        } else {
-          editBookings.update({
-            startDate,
-            endDate
-          })
-          await editBookings.save()
-          res.status(200)
-          return res.json(editBookings)
         }
+          if ((newEndDate >= endDate) && (newStartDate <= endDate)) {
+              res.status(403)
+              return res.json({
+               "message": "Sorry, this spot is already booked for the specified dates",
+               "statusCode": 403,
+               "errors": {
+               "endDate": "End date conflicts with an existing booking",
+            }
+          })
+        }
+      }
 
+        editBookings.update({
+          startDate,
+          endDate
+        })
+        await editBookings.save()
+        res.status(200)
+        return res.json(editBookings)
 
-})
+    })
 
 //delete an existing booking
 
