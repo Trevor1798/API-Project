@@ -20,7 +20,7 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
             })
             booking.dataValues.spots = spots
             previewImage = await Image.findOne({
-               where: { previewImg: true, spotId: booking.spotId },
+               where: { previewImage: true, spotId: spots.id },
                attributes:  [ 'url']
             })
             booking.dataValues.previewImage = previewImage.url
