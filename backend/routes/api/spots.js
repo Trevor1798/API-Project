@@ -437,13 +437,19 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
             })
 
             }
+
             let alreadyBooked = await Booking.findAll({
                 where: {
                     spotId: req.params.spotId,
                 }
             })
+            if (userId !== spot.ownerId){
+                let error = new Error('Authentication error')
+                error.status(403)
+                throw error
+            }
 
-        for (let booking of alreadyBooked) {
+            for (let booking of alreadyBooked) {
 
 
             let newStartDate = booking.startDate
