@@ -124,7 +124,7 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
             imageableId: image.spotId,
             url: image.url
         })
-    
+
 })
 
 let paginationValidator = [
@@ -315,9 +315,9 @@ router.delete('/:spotId', restoreUser, requireAuth, async (req, res) => {
 })
 
 //create a review for a spot based on the spots id
-router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
+router.post('/:spotId/reviews', restoreUser, async (req, res) => {
         const spotId = req.params.spotId
-        const currentUser = req.user.id
+        const userId = req.user.id
         const {review, stars } = req.body
 
         const spotReview = await Spot.findByPk(spotId)
@@ -336,19 +336,21 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
         }
 
 
-        const userReview = await Review.findByPk(currentUser)
-            if (userReview.length >= 1) {
+        const userReview = await Review.findOne({
+            where: {userId: userId, spotId: spotId }
+        })
+            if (userReview) {
                 res.status(403)
                 return res.json({"message": "User already has a review"})
             }
 
             const createUserReview = await Review.create({
-                userId: currentUser,
+                userId,
                 spotId,
                 review,
                 stars
             })
-            await createUserReview.save()
+    
             res.status(200)
             return res.json({createUserReview})
 
