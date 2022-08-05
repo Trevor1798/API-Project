@@ -98,7 +98,10 @@ router.get('/:spotId', async (req, res) => {
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
     let userId = req.user.id
     let {url, previewImage} = req.body
-    let spot = await Spot.findByPk(req.params.spotId)
+    let spot = await Spot.findOne({
+        where: {id: req.params.spotId}
+
+    })
     let ownerId = spot.ownerId
 
     if (!spot) {
