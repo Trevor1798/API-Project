@@ -443,7 +443,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                     spotId: req.params.spotId,
                 }
             })
-            if (userId !== alreadyBookeduserId){
+            if (userId !== alreadyBooked.userId){
                 let error = new Error('Authentication error')
                 error.status = '403'
                 throw error
