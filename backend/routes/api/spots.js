@@ -97,7 +97,7 @@ router.get('/:spotId', async (req, res) => {
 //create image to spot based on the spots id
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
     let userId = req.user.id
-    let {url, previewImage} = req.body
+    let {url} = req.body
     let spot = await Spot.findOne({
         where: {id: req.params.spotId}
 
@@ -111,28 +111,26 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
             "statusCode": 404
         })
     }
-    if (ownerId === userId) {
+        if (ownerId === userId) throw new Error('Authorization Error')
+
+
         let findImg = await Image.findOne({
             where: {spotId: req.params.spotId}
         })
-        if (findImg) previewImage = false
 
+        if (findImg) previewImage = false
         const image = await Image.create ({
             spotId: req.params.spotId,
             userId: req.params.userId,
             url: url,
             previewImage: previewImage
         })
-
-
         res.status(200)
         return res.json({
-
             id: image.id,
             imageableId: image.spotId,
             url: image.url
         })
-    }
 })
 
 let paginationValidator = [
