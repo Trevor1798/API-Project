@@ -11,7 +11,7 @@ const {Op} = require('sequelize')
 
 
 //get spots owned by current user
-router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
+router.get('/current', restoreUser, requireAuth, async (req, res) => {
     const currentUser = req.user.id
 
 
@@ -93,13 +93,11 @@ router.get('/:spotId', async (req, res) => {
 })
 
 
-//Add image to spot based on the spots id
+//create image to spot based on the spots id
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
-    const spotId = req.params.spotId
-    const currentUser = req.user.id
-
-    let {url, previewImg} = req.body
-    let spot = await Spot.findByPk(spotId)
+    let {user} = req
+    let {url} = req.body
+    let spot = await Spot.findByPk(req.params.spotId)
 
     if (!spot) {
         res.status(404)
@@ -108,22 +106,24 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
             "statusCode": 404
         })
     }
+    if (spot.dataValues.ownerId === user.id) {
 
-    const image = await Image.create({
-        spotId,
-        currentUser,
-        url,
-        previewImg
-    })
-    const imgjson = image.toJSON()
+        const image = await Image.create ({
+            spotId: spot.dataValues.id,
+            userId: user.id,
+            url,
+        })
 
+        const imgObj ={
+            id: image.id,
+            imageableId: image.spotId,
+            url: image.url
 
-    res.status(200)
-    return res.json({
-        id: imgjson.id,
-        imageableId: imgjson.spotId,
-        url: imgjson.url
-    })
+        }
+
+        res.status(200)
+        return res.json(imgObj)
+    }
 })
 
 let paginationValidator = [
