@@ -111,8 +111,8 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
     if (ownerId !== userId) {
 
         const image = await Image.create ({
-            spotId: req.params.spotId,
-            userId,
+            // spotId: req.params.spotId,
+            // userId,
             url,
         })
 
