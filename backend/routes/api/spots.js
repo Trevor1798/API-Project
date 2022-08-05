@@ -117,7 +117,7 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
         let findImg = await Image.findOne({
             where: {spotId: req.params.spotId}
         })
-
+        let previewImage = true
         if (findImg) previewImage = false
         const image = await Image.create ({
             spotId: req.params.spotId,
