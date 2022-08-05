@@ -114,7 +114,7 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
             spotId: req.params.spotId,
             userId: userId,
             url,
-            previewImage
+            
         })
 
         res.status(200)
