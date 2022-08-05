@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
 
     },
-   previewImg: {
+   previewImage: {
       type: DataTypes.BOOLEAN,
 
     },

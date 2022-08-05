@@ -6,11 +6,10 @@ const { Op } = require('sequelize')
 
 //get all bookings for current user
 router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
-        const currentUser = req.user.id
 
         let BookingsCurrentlyOwned = await Booking.findAll({
             where: {
-            userId: currentUser
+            userId: req.params.userId
           }
         })
 
@@ -21,7 +20,7 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
             })
             booking.dataValues.spots = spots
             previewImage = await Image.findOne({
-               where: { previewImg: true, spotId: booking.spotId },
+               where: { previewImage: true, spotId: spots.id },
                attributes:  [ 'url']
             })
             booking.dataValues.previewImage = previewImage.url
@@ -37,10 +36,10 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
 
 //edit a booking
 router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
-        const bookingId = req.params.bookingId
+
         let {startDate, endDate} = req.body
 
-        const editBookings = await Booking.findByPk(bookingId)
+        const editBookings = await Booking.findByPk(req.params.bookingId)
 
         if (!editBookings) {
           res.status(404)
@@ -60,8 +59,9 @@ router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
         }
           })
         }
-        let today = new Date()
-        if (today >= startDate) {
+        let date = new Date()
+        let todaysDate = Date.parse(date)
+        if (todaysDate >= editBookings.startDate) {
           res.status(403)
           return res.json({
             "message": "Past bookings can't be modified",
@@ -70,31 +70,46 @@ router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
         }
 
         let alreadyBooked = await Booking.findAll({
-          where: {bookingId}
+          where: {id: req.params.bookingId}
       })
 
-      if (alreadyBooked) {
-          res.status(403)
-          return res.json({
-              "message": "Sorry, this spot is already booked for the specified dates",
-              "statusCode": 403,
-              "errors": {
-                "startDate": "Start date conflicts with an existing booking",
-                "endDate": "End date conflicts with an existing booking"
-              }
+        for (let booking of alreadyBooked) {
+
+
+            let newStartDate = booking.startDate
+            let newEndDate = booking.endDate
+
+            if ((newStartDate <= startDate) && (newEndDate >= startDate )) {
+                res.status(403)
+                return res.json({
+                  "message": "Sorry, this spot is already booked for the specified dates",
+                  "statusCode": 403,
+                  "errors": {
+                  "startDate": "Start date conflicts with an existing booking",
+            }
           })
-        } else {
-          editBookings.set({
-            startDate,
-            endDate
-          })
-          await editBookings.save()
-          res.status(200)
-          return res.json(editBookings)
         }
+          if ((newEndDate >= endDate) && (newStartDate <= endDate)) {
+              res.status(403)
+              return res.json({
+               "message": "Sorry, this spot is already booked for the specified dates",
+               "statusCode": 403,
+               "errors": {
+               "endDate": "End date conflicts with an existing booking",
+            }
+          })
+        }
+      }
 
+        editBookings.update({
+          startDate,
+          endDate
+        })
+        await editBookings.save()
+        res.status(200)
+        return res.json(editBookings)
 
-})
+    })
 
 //delete an existing booking
 
