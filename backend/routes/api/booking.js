@@ -6,11 +6,10 @@ const { Op } = require('sequelize')
 
 //get all bookings for current user
 router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
-        const currentUser = req.user.id
 
         let BookingsCurrentlyOwned = await Booking.findAll({
             where: {
-            userId: currentUser
+            userId: req.params.userId
           }
         })
 
@@ -37,7 +36,7 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
 
 //edit a booking
 router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
-       
+
         let {startDate, endDate} = req.body
 
         const editBookings = await Booking.findByPk(req.params.bookingId)
