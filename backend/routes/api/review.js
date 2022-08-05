@@ -8,9 +8,9 @@ const { User, Spot, Booking, Image, Review} = require('../../db/models')
 
 //get all reviews of the current user
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
-        const currentUser = req.user.id
+
             const review = await Review.findAll({
-                    where: {userId: currentUser},
+                    where: {userId: req.user.id},
                     include: [
                     {
                     model: User,
@@ -32,11 +32,10 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 //add an image to a review based on the reviews ID
 
 router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
-        const reviewId = req.params.reviewId
         const currentUser = req.user.id
         const { url } = req.body
 
-        const newReviewId = await Review.findByPk(reviewId)
+        const newReviewId = await Review.findByPk(req.params.reviewId)
 
         if (!newReviewId) {
             res.status(404)
@@ -48,7 +47,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
         }
 
         const imgNum = await Image.findAll({
-            where: {reviewId: reviewId}
+            where: {reviewId: req.params.reviewId}
         })
         if (imgNum.length > 10) {
             res.status(403)
@@ -56,7 +55,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
         }
 
         const newReviewImage = await Image.create({
-            reviewId,
+            reviewId: req.params.reviewId,
             url,
             currentUser,
         })
