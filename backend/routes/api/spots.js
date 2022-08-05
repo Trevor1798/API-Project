@@ -154,7 +154,7 @@ let paginationValidator = [
 
 
 //Get all Spots
-router.get('/',   async (req, res) => {
+router.get('/', paginationValidator,  async (req, res) => {
 
            // pagination
             let {size, page} = req.query
