@@ -21,7 +21,7 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
                     },
                     {
                     model: Image,
-                    attributes: ['id','url' ]
+                    attributes: ['id',['reviewId','imageableId'],'url' ]
                     }
                  ]
             })
@@ -74,18 +74,34 @@ router.put('/:reviewId', restoreUser, requireAuth, async (req, res) => {
 
         const getReview = await Review.findByPk(reviewId)
 
-        if (!getReview || !getReview.length ) {
+        if (!getReview ) {
             res.status(400)
-            return res.json({"message": "Review couldn't be found or text is required"})
-        }
-        if (stars > 5 || stars < 1 || !stars) {
-            res.status(400)
-            return res.json({"message": "Stars must be an integer from 1 to 5"})
+            return res.json({
+                "message": "Review couldn't be found",
+                "statusCode": 404
+            })
         }
 
-         let editReview = await Review.findByPk(reviewId)
-          editReview.update(review, stars)
-          editReview.save()
+         let editReview = await Review.findOne({
+            where: {
+                id: reviewId,
+            }
+         })
+         if(!editReview.review || (editReview.stars < 1 || editReview.stars > 5)) {
+            res.status(400)
+           return res.json({
+            "message": "Validation error",
+            "statusCode": 400,
+             "errors": {
+            "review": "Review text is required",
+            "stars": "Stars must be an integer from 1 to 5"
+              }
+            })
+         }
+
+          editReview.review = review
+          editReview.stars = stars
+          await editReview.save()
           res.status(200)
           return res.json(editReview)
 
@@ -103,13 +119,19 @@ router.put('/:reviewId', restoreUser, requireAuth, async (req, res) => {
 
                 if (!deleteReview) {
                     res.status(404)
-                    return res.json({"message": "Review couldn't be found"})
+                    return res.json({
+                        "message": "Review couldn't be found",
+                         "statusCode": 404
+                        })
                 }
-                if (reviewId.userId !== currentUser)
+                if (reviewId.userId === currentUser)
                     deleteReview.destroy()
                     res.status(200)
-                    return res.json({"message": "Successfully deleted"})
-    })
+                    return res.json({
+                        "message": "Successfully deleted",
+                        "statusCode": 200
+                    })
+                })
 
 
     module.exports = router

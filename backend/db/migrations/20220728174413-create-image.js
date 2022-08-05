@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        allowNull: false,
+       
         type: Sequelize.INTEGER
       },
       url: {
@@ -18,7 +18,7 @@ module.exports = {
       },
       previewImg: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+
       },
       spotId: {
         type: Sequelize.INTEGER,
@@ -31,7 +31,7 @@ module.exports = {
       },
       reviewId: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+
         references: {
           model: 'Reviews',
           key: 'id',

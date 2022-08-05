@@ -18,7 +18,7 @@ const validateSignup = [
     .isLength({ min: 4 })
     .withMessage('Please provide a username with at least 4 characters.'),
   check('username')
-    .not()
+    .notEmpty()
     .isEmail()
     .withMessage('Username cannot be an email.'),
   check('password')
@@ -58,7 +58,7 @@ router.post('/', validateSignup, async (req, res) => {
             "username": "User with that username already exists"
           }
         })
-      
+
       } else {
         const newUser = await User.signup({firstName, lastName, email, username, password });
         await setTokenCookie(res, user);

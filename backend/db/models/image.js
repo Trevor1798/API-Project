@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Image.init({
     userId: {
-      allowNull: false,
+      
       type: DataTypes.INTEGER
     },
     url: {
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
    previewImg: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+
     },
     spotId: {
       type: DataTypes.INTEGER,
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     reviewId:{
       type: DataTypes.INTEGER,
-      allowNull: false
+
 
     },
   }, {

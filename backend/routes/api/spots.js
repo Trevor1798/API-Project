@@ -13,13 +13,14 @@ const {Op} = require('sequelize')
 //get spots owned by current user
 router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
     const currentUser = req.user.id
+
+
     let spotsCurrentlyOwned = await Spot.findAll({
         where: {
             ownerId: currentUser
         },
         include: [
-           { model: Review},
-           { model: Image, where: {previewImg:true}},
+           { model: Review, attributes: []},
         ],
         attributes: {
             include: [
@@ -29,6 +30,17 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
         },
         group: ['Spot.id']
     })
+
+    for (let spot of spotsCurrentlyOwned){
+        previewImage = await Image.findOne({
+           where: { previewImg: true, spotId: spot.id },
+           attributes:  [ 'url']
+      })
+
+      spot.dataValues.previewImage = previewImage.url
+
+    //   console.log(dataValues)
+    }
     return res.json(spotsCurrentlyOwned)
 })
 
@@ -36,8 +48,11 @@ router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
 
 //Get details of a spot from an id
 router.get('/:spotId', async (req, res) => {
-    const spotId = req.params.spotId
-    let spots = await Spot.findByPk(spotId)
+        const spotId = req.params.spotId
+
+    let spots = await Spot.findOne({
+        where: {id: spotId}
+    })
 
     if (!spots) {
         res.status(404)
@@ -46,50 +61,138 @@ router.get('/:spotId', async (req, res) => {
             "statusCode": 404
         })
     }
+    let avgStarRating = await Review.findAll({
+        where: {spotId},
+        attributes: [
+            [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating'],
+
+        ],
+    })
+
+    let numReviews = await Review.count({
+        where: {spotId}
+    })
+
+    let img = await Image.findAll({
+        where: {spotId},
+        attributes: ['id', ['spotId', 'imageableId'], 'url']
+    })
+
+    let owner = await User.findByPk(spots.ownerId, {
+       attributes: ['id', 'firstName', 'lastName']
+    })
+
+    const jsonify = spots.toJSON()
+    jsonify.avgStarRating = avgStarRating
+    jsonify.numReviews = numReviews
+    jsonify.img = img
+    jsonify.owner = owner
+
     res.status(200)
-    return res.json(spots)
+    return res.json(jsonify)
 })
+
 
 //Add image to spot based on the spots id
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
     const spotId = req.params.spotId
     const currentUser = req.user.id
+
+    let {url, previewImg} = req.body
     let spot = await Spot.findByPk(spotId)
 
-    if (spot.ownerId !== currentUser) {
+    if (!spot) {
         res.status(404)
         return res.json({
-            "message": "Spot couldnt be found"
+            "message": "Spot couldnt be found",
+            "statusCode": 404
         })
     }
-        img = req.body
-        img.spotId = spotId
 
-    const image = await Image.create(img)
-    return res.json(image)
+    const image = await Image.create({
+        spotId,
+        currentUser,
+        url,
+        previewImg
+    })
+    const imgjson = image.toJSON()
+
+
+    res.status(200)
+    return res.json({
+        id: imgjson.id,
+        imageableId: imgjson.spotId,
+        url: imgjson.url
+    })
 })
+
+let paginationValidator = [
+        check('page')
+            .exists({checkFalsy: true})
+            .isLength({ min: 0})
+            .withMessage('Page must be greater than or equal to 0'),
+        check('size')
+            .exists({checkFalsy: true})
+            .isLength({min: 0})
+            .withMessage('Size must be greater than or equal to 0'),
+        check('lat')
+            .exists({checkFalsy: true})
+            .isLength({min: -180, max: 180})
+            .withMessage('Maximum or minimum latitude is invalid'),
+        check('lng')
+            .exists({checkFalsy: true})
+            .isLength({min: -90, max: 90})
+            .withMessage('Maximum or minimum latitude is invalid'),
+        check('price')
+            .exists({checkFalsy: true})
+            .isLength({min: 0})
+            .withMessage('Maximum price and minimum price must be greater than or equal to 0 '),
+]
+
+
 
 
 
 //Get all Spots
-router.get('/', async (req, res) => {
+router.get('/',   async (req, res) => {
 
-    const allSpots = await Spot.findAll({
-        include: [
-            {model: Review, attributes: [],  },
-            {model: Image,},
-             {where: {previewImg : true}
+           // pagination
+            let {size, page} = req.query
+            if (!page) page = 0
+            if (!size) size = 20
+            page = parseInt(page)
+            size = parseInt(size)
+
+            let pagination = {}
+            if (page >= 1 && size >= 1){
+                pagination.limit = size
+                pagination.offset = size * (page - 1)
             }
-        ], attributes: {
-            include: [
-              [ Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating' ],
 
-            ]
-          },
-          group: ['Spot.id'],
-        })
-        res.status(200)
-        return res.json(allSpots)
+
+            let allSpots = await Spot.findAll({
+            ...pagination
+             })
+
+                 for (let spot of allSpots) {
+
+                 let avgRating = await Review.findAll({
+                     where: {id: spot.id},
+                     attributes: [[ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
+                 })
+                 let previewImage = await Image.findOne({
+                    where: { previewImg: true, spotId: spot.id },
+                    attributes:  ['url']
+                 })
+ //  console.log(spot.dataValues)
+                 spot.dataValues.avgRating = avgRating
+                 spot.dataValues.previewImage = previewImage.url
+                 spot.dataValues.page = page
+                 spot.dataValues.size = size
+             }
+
+                res.status(200)
+                return res.json({Spots: allSpots})
     })
 
 
@@ -110,7 +213,7 @@ router.get('/', async (req, res) => {
             .withMessage('State is required'),
         check('country')
             .exists({checkFalsy: true})
-            .notEmpty
+            .notEmpty()
             .withMessage('Country is required'),
         check('lat')
             .exists({checkFalsy: true})
@@ -232,7 +335,7 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
         }
 
 
-        const userReview = await Review.findAll(currentUser)
+        const userReview = await Review.findByPk(currentUser)
             if (userReview.length >= 1) {
                 res.status(403)
                 return res.json({"message": "User already has a review"})
@@ -254,7 +357,7 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
 //Get all reviews by a spots ID
 router.get('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
     const spotId = req.params.spotId
-    
+
     let spot = await Spot.findByPk(spotId)
 
     if (!spot){
@@ -267,11 +370,11 @@ router.get('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
 
     const reviews = await Review.findAll({
         where: {
-            spotId,
+            spotId: spotId,
         },
         include: [
         { model: User, attributes: ['id', 'firstName', 'lastName']},
-        { model: Image, attributes: ['id', 'imageableId', 'url']
+        { model: Image, attributes: ['id', 'url']
             }
         ]
     })
@@ -352,8 +455,8 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                 })
             } else if (alreadyBooked.length < 1) {
                 const createBooking = await Booking.create({
-                    spotId,
                     currentUser,
+                    spotId,
                     startDate,
                     endDate,
                 })
