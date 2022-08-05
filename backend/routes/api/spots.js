@@ -444,7 +444,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                 }
             })
 
-            if (alreadyBooked) {
+            if (startDate === (alreadyBooked.startDate && alreadyBooked.endDate)) {
                 res.status(403)
                 return res.json({
                     "message": "Sorry, this spot is already booked for the specified dates",
