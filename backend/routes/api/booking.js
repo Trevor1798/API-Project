@@ -6,10 +6,10 @@ const { Op } = require('sequelize')
 
 //get all bookings for current user
 router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
-
+      const {user} = req.body
         let BookingsCurrentlyOwned = await Booking.findAll({
             where: {
-            userId: req.params.userId
+            userId: user.id
           }
         })
 
