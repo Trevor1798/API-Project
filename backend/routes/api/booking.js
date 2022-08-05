@@ -71,10 +71,10 @@ router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
         }
 
         let alreadyBooked = await Booking.findAll({
-          where: {bookingId}
+          where: {id: req.params.bookingId}
       })
 
-      if (alreadyBooked.length >= 1) {
+      if (editBookings.startDate === (alreadyBooked.startDate && alreadyBooked.endDate)) {
           res.status(403)
           return res.json({
               "message": "Sorry, this spot is already booked for the specified dates",
