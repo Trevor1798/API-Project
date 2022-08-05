@@ -404,9 +404,12 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
 
         if (!spot) {
             res.status(404)
-            return res.json({"message": "Spot couldn't be found"})
+            return res.json({
+                "message": "Spot couldn't be found",
+                "statusCode": 404
+            })
         }
-        if (spot.ownerId === currentUser) return res.json(userBookings)
+        if (spot.ownerId !== currentUser) return res.json(userBookings)
         else return res.json(allBookings)
 })
 
@@ -420,7 +423,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
             const spot = await Spot.findByPk(spotId)
 
             if (!spot) {
-                res.status(403)
+                res.status(404)
                 return res.json({"message": "Spot couldn't be found", "statusCode": 404})
             }
 
@@ -436,14 +439,10 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
             let alreadyBooked = await Booking.findAll({
                 where: {
                     spotId: spotId,
-                    [Op.and]: [
-                        {startDate: req.body.startDate },
-                        {spotId: req.params.spotId}
-                    ]
                 }
             })
 
-            if (alreadyBooked.length >= 1) {
+            if (alreadyBooked) {
                 res.status(403)
                 return res.json({
                     "message": "Sorry, this spot is already booked for the specified dates",
@@ -453,14 +452,14 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                       "endDate": "End date conflicts with an existing booking"
                     }
                 })
-            } else if (alreadyBooked.length < 1) {
+            } else {
                 const createBooking = await Booking.create({
                     currentUser,
                     spotId,
                     startDate,
                     endDate,
                 })
-                res.status(200)
+                res.status(201)
                 return res.json(createBooking)
 
             }
