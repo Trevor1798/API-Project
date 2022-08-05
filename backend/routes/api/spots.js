@@ -388,14 +388,14 @@ router.get('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
 router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
     const spotId = req.params.spotId
         const userBookings = await Booking.findAll({
-        where: { spotId },
+        where: { id: req.params.spotId },
         include: {
                 model: User,
                 attributes: ['id', 'firstName', 'lastName']
                  }
         })
         const allBookings = await Booking.findAll({
-            where: {spotId},
+            where: {id: req.params.spotId},
             attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
         })
 
