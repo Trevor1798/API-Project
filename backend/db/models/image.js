@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     url: {
       type: DataTypes.STRING,
-      allowNull: false
+
     },
    previewImg: {
       type: DataTypes.BOOLEAN,
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     spotId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+
     },
     reviewId:{
       type: DataTypes.INTEGER,
