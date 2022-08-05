@@ -95,7 +95,7 @@ router.get('/:spotId', async (req, res) => {
 
 //create image to spot based on the spots id
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
-    const spotId = req.params
+
     const currentUser = req.user.id
 
     let {url, user} = req.body
@@ -112,7 +112,7 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
 
         const image = await Image.create ({
             spotId: spot.dataValues.id,
-            userId: currentUser,
+            userId: user.id,
             url,
         })
         const imgjson = image.toJSON()
