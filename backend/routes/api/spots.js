@@ -5,7 +5,8 @@ const {handleValidationErrors} = require('../../utils/validation')
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const Sequelize = require('sequelize');
-const {Op} = require('sequelize')
+const {Op} = require('sequelize');
+const user = require('../../db/models/user');
 
 
 
@@ -111,17 +112,18 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
     if (ownerId !== userId) {
 
         const image = await Image.create ({
-            // spotId: req.params.spotId,
-            // userId,
+            spotId: spot.id,
+            userId: user.id,
             url,
+            previewImage
         })
 
 
         res.status(200)
         return res.json({
 
-            // id: image.id,
-            // imageableId: image.spotId,
+            id: image.id,
+            imageableId: image.spotId,
             url: image.url
         })
     }
