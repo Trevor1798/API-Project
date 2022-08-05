@@ -183,7 +183,7 @@ router.get('/', paginationValidator,  async (req, res) => {
                      attributes: [[ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
                  })
                  let previewImage = await Image.findOne({
-                    where: { previewImg: true, spotId: spot.id },
+                    where: { previewImage: true, spotId: spot.id },
                     attributes:  ['url']
                  })
  //  console.log(spot.dataValues)
