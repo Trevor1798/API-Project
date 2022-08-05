@@ -118,13 +118,13 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
 
         })
 
-       jsoned = image.toJSON()
+
         res.status(200)
         return res.json({
 
-            id: jsoned.id,
-            imageableId: jsoned.spotId,
-            url: jsoned.url
+            id: image.id,
+            imageableId: image.spotId,
+            url: image.url
         })
     }
 })
