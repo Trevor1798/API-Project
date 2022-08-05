@@ -6,7 +6,7 @@ const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth')
 const { check } = require('express-validator');
 const Sequelize = require('sequelize');
 const {Op} = require('sequelize');
-const user = require('../../db/models/user');
+
 
 
 
@@ -124,7 +124,7 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
             imageableId: image.spotId,
             url: image.url
         })
-    }
+    
 })
 
 let paginationValidator = [
