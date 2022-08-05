@@ -471,7 +471,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                     }
                 })
             }
-            throw new Error('Sorry this spot is already booked for the specified dates')
+            
 
       }
          const createBooking = await Booking.create({
