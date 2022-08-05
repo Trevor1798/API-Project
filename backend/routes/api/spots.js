@@ -11,7 +11,7 @@ const {Op} = require('sequelize')
 
 
 //get spots owned by current user
-router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
+router.get('/current', restoreUser, requireAuth, async (req, res) => {
     const currentUser = req.user.id
 
 
@@ -93,7 +93,7 @@ router.get('/:spotId', async (req, res) => {
 })
 
 
-//Add image to spot based on the spots id
+//create image to spot based on the spots id
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
     const spotId = req.params.spotId
     const currentUser = req.user.id
