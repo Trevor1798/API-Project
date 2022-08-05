@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Booking.belongsTo(models.User, {foreignKey: 'userId'})
       Booking.belongsTo(models.Spot, {foreignKey: 'spotId'})
-      
+
     }
   }
   Booking.init({
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: {
      type: DataTypes.INTEGER,
-     allowNull: false
+     
     },
     startDate:  {
     type: DataTypes.DATE,
