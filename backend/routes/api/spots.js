@@ -111,8 +111,11 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
             "statusCode": 404
         })
     }
-
     if (ownerId === userId) {
+        let findImg = await Image.findOne({
+            where: {spotId: req.params.spotId}
+        })
+        if (findImg) previewImage = false
 
         const image = await Image.create ({
             spotId: req.params.spotId,
