@@ -409,7 +409,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
 
 //create a booking from a spot based on the spots id
     router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
-            const userId = req.params.userId
+            
             const {startDate, endDate} = req.body
             const spotId = req.params.spotId
 
@@ -470,7 +470,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
 
       }
          const createBooking = await Booking.create({
-                    userId,
+                    userId: req.user.id,
                     spotId,
                     startDate,
                     endDate,
