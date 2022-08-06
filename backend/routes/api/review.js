@@ -4,13 +4,14 @@ const {setTokenCookie, requireAuth, restoreUser} = require('../../utils/auth')
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { User, Spot, Booking, Image, Review} = require('../../db/models')
-
+const {Op} = require('sequelize')
 
 //get all reviews of the current user
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
             const review = await Review.findAll({
-                    where: {userId: req.user.id},
+                where: {userId: req.user.id},
+
                     include: [
                     {
                     model: User,
@@ -23,9 +24,10 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
                     model: Image,
                     attributes: ['id',['reviewId','imageableId'],'url' ]
                     }
-                 ]
+                 ],
             })
-                return res.json(review)
+
+                return res.json({review})
 })
 
 
@@ -33,9 +35,9 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
 router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
         const reviewId = req.params.reviewId
-        const { url, previewImage } = req.body
+        const { url } = req.body
 
-        const newReviewId = await Review.findByPk(req.params.reviewId)
+        const newReviewId = await Review.findByPk(reviewId)
 
         if (!newReviewId) {
             res.status(404)
@@ -46,23 +48,30 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
             return res.json({"message": "Image url couldn't be found"})
         }
 
-        const imgNum = await Image.findAll({
-            where: {reviewId: req.params.reviewId}
+        const image = await Image.findAll({
+            where: {
+                [Op.and]: [
+                {reviewId}
+                ]
+            }
         })
-        if (imgNum.length > 10) {
+
+
+      let imgNum =  parseInt(image)
+        if (imgNum > 10) {
             res.status(403)
             return res.json({"message": "Maximum number of images for this resource was reached"})
         }
 
-        const newReviewImage = await Image.create({
-            reviewId: req.params.reviewId,
+        let newReviewImage = await Image.create({
+            reviewId,
             url,
-            currentUser,
+            userId: req.user.id,
 
         })
         let imgObj = {
             id: newReviewImage.id,
-            imageableId: newReviewImage.spotId,
+            imageableId: newReviewImage.reviewId,
             url: newReviewImage.url
    }
             res.status(200)
@@ -119,9 +128,7 @@ router.put('/:reviewId', restoreUser, requireAuth, async (req, res) => {
 
     router.delete('/:reviewId', restoreUser, requireAuth, async (req, res) => {
             const currentUser = req.user.id
-            const reviewId = req.params.reviewId
-
-            const deleteReview = await Review.findByPk(reviewId)
+            const deleteReview = await Review.findByPk(req.params.reviewId)
 
                 if (!deleteReview) {
                     res.status(404)
@@ -130,14 +137,22 @@ router.put('/:reviewId', restoreUser, requireAuth, async (req, res) => {
                          "statusCode": 404
                         })
                 }
-                if (reviewId.userId === currentUser)
+                if (deleteReview.userId !== currentUser) {
+                    res.status(403)
+                    return res.json({
+                        "message": "Authorization error",
+                        "statusCode": 403
+                    })
+
+                }
                     deleteReview.destroy()
                     res.status(200)
                     return res.json({
                         "message": "Successfully deleted",
                         "statusCode": 200
                     })
-                })
+
+         })
 
 
     module.exports = router
