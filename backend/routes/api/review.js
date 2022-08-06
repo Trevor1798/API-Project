@@ -71,8 +71,6 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
             })
 
 
-})
-
 
 //edit a review
 router.put('/:reviewId', restoreUser, requireAuth, async (req, res) => {
