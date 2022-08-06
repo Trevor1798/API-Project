@@ -7,7 +7,7 @@ const { User, Spot, Booking, Image, Review} = require('../../db/models')
 const {Op} = require('sequelize')
 
 //get all reviews of the current user
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/current', restoreUser, requireAuth, async (req, res) => {
             const {user} = req
             const review = await Review.findAll({
 
