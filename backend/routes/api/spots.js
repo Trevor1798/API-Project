@@ -406,37 +406,38 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
 
 
 //create a booking from a spot based on the spots id
-    router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
+router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
 
-            const {startDate, endDate} = req.body
-            const spotId = req.params.spotId
+    const {startDate, endDate} = req.body
+    const spotId = req.params.spotId
 
-            const spot = await Spot.findByPk(req.params.spotId)
+    const spot = await Spot.findByPk(req.params.spotId)
 
-            if (!spot) {
-                res.status(404)
-                return res.json({"message": "Spot couldn't be found", "statusCode": 404})
+    if (!spot) {
+        res.status(404)
+        return res.json({"message": "Spot couldn't be found", "statusCode": 404})
+    }
+
+    if (startDate >= endDate) {
+        res.status(400)
+        return res.json({
+            "message": "Validation error",
+            "statusCode": 400,
+            "endDate": "endDate cannot be on or before startDate",
+        })
+
             }
-
-            if (startDate >= endDate) {
-                res.status(400)
-                return res.json({
-                  "message": "Validation error",
-                  "statusCode": 400,
-                  "endDate": "endDate cannot be on or before startDate",
-            })
-
-            }
-
             let alreadyBooked = await Booking.findAll({
                 where: {
-                    spotId: req.params.spotId,
-                }
-            })
-            if (alreadyBooked.length >= 1) {
+                    spotId: spotId,
+                    [Op.and]: [
+                      {endDate: {[Op.gte]: startDate}},
+                      {startDate: {[Op.lte]: endDate}},
+                    ],
+                  },
+                });
 
-                for (let booking of alreadyBooked) {
-                    if ((booking.startDate <= endDate) && (booking.endDate >= startDate )) {
+            if (alreadyBooked.length) {
                         res.status(403)
                         return res.json({
                             "message": "Sorry, this spot is already booked for the specified dates",
@@ -447,9 +448,6 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                     }
                 })
             }
-            }
-        } else {
-
             const createBooking = await Booking.create({
                 userId: req.user.id,
                 spotId,
@@ -458,8 +456,6 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
             })
             res.status(201)
             return res.json(createBooking)
-        }
-
 
     })
 
