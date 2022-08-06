@@ -34,13 +34,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId:  {
      type: DataTypes.INTEGER,
-     allowNull: false,
+
      references: {model: 'Users'},
      onDelete: 'CASCADE'
     },
     spotId:  {
      type: DataTypes.INTEGER,
-     allowNull: false,
+   
      references: {model: 'Spots'},
      onDelete: 'CASCADE'
     },
