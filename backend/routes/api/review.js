@@ -46,10 +46,12 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
             return res.json({"message": "Image url couldn't be found"})
         }
 
-        const imgNum = await Image.count({
+        const image = await Image.count({
             where: {reviewId: req.params.reviewId}
         })
-        parseInt(imgNum)
+
+        console.log(image)
+      let imgNum =  parseInt(imgNum)
         if (imgNum.length > 10) {
             res.status(403)
             return res.json({"message": "Maximum number of images for this resource was reached"})
