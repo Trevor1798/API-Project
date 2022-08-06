@@ -5,7 +5,7 @@ const {Booking, Review, Image, Spot, User} = require('../../db/models')
 const { Op } = require('sequelize')
 
 //get all bookings for current user
-router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
+router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
         let BookingsCurrentlyOwned = await Booking.findAll({
             where: {

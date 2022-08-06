@@ -63,9 +63,9 @@ router.get('/', restoreUser, (req, res) => {
 );
 
    //Get current user
-   router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
-    return res.json(req.user)
-   })
+  //  router.get('/current-user', restoreUser, requireAuth, async (req, res) => {
+  //   return res.json(req.user)
+  //  })
 
 
 
