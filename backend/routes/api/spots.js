@@ -449,7 +449,9 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                     }
                 })
             }
-        }
+            }
+        } else {
+
             const createBooking = await Booking.create({
                 userId: req.user.id,
                 spotId,
@@ -459,6 +461,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
             res.status(201)
             return res.json(createBooking)
         }
+
 
     })
 
