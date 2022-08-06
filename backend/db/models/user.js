@@ -1,13 +1,24 @@
 'use strict';
 const { Model, Validator } = require('sequelize');
-const { Op } = require('sequelize');
-const bcrypt = require('bcryptjs');
 
 
 module.exports = (sequelize, DataTypes) => {
+  const bcrypt = require('bcryptjs');
+  const { Op } = require('sequelize');
 
   class User extends Model {
 
+    toSafeObject() {
+      const { firstName, lastName, id, username, email } = this; // context will be the User instance
+      return {firstName, lastName, id, username, email};
+    }
+
+    validatePassword(password) {
+      return bcrypt.compareSync(password, this.hashedPassword.toString());
+    }
+        static getCurrentUserById(id) {
+          return User.scope("currentUser").findByPk(id);
+        }
 
     static async login({ credential, password }) {
       const user = await User.scope('loginUser').findOne({
@@ -35,25 +46,6 @@ module.exports = (sequelize, DataTypes) => {
       });
       return await User.scope('currentUser').findByPk(user.id);
     }
-
-
-    validatePassword(password) {
-      return bcrypt.compareSync(password, this.hashedPassword.toString());
-    }
-
-
-    static getCurrentUserById(id) {
-      return User.scope("currentUser").findByPk(id);
-    }
-
-
-    toSafeObject() {
-      const { firstName, lastName, id, username, email } = this; // context will be the User instance
-      return {firstName, lastName, id, username, email};
-    }
-
-
-
     static associate(models) {
       User.hasMany(models.Booking, {foreignKey: 'userId'})
       User.hasMany(models.Review, {foreignKey: 'userId' })

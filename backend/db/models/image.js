@@ -12,13 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Image.belongsTo(models.User, {foreignKey: 'userId'})
       Image.belongsTo(models.Spot, {foreignKey: 'spotId'})
-      Image.belongsTo(models.Review, {foreginKey: 'reviewId'})
+      Image.belongsTo(models.Review, {foreignKey: 'reviewId'})
 
     }
   }
   Image.init({
     userId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      references: {model: 'Users'},
+      onDelete: "CASCADE"
     },
     url: {
       type: DataTypes.STRING,
@@ -30,10 +32,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     spotId: {
       type: DataTypes.INTEGER,
+      references: {model: 'Spots'},
+      onDelete: 'CASCADE'
 
     },
     reviewId:{
       type: DataTypes.INTEGER,
+      references: {model: 'Reviews'},
+      onDelete: 'CASCADE'
     },
   }, {
     sequelize,
