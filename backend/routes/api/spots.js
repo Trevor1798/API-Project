@@ -409,7 +409,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
 
 //create a booking from a spot based on the spots id
     router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
-            
+
             const {startDate, endDate} = req.body
             const spotId = req.params.spotId
 
@@ -435,7 +435,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                     spotId: req.params.spotId,
                 }
             })
-            if (userId !== alreadyBooked.userId){
+            if (req.user.id !== alreadyBooked.userId){
                 let error = new Error('Authentication error')
                 error.status = '403'
                 throw error
