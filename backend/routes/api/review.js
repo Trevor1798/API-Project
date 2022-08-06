@@ -41,31 +41,30 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
             res.status(404)
             return res.json({"message": "Review couldnt be found"})
         }
-        // if (!url) {
-        //    res.status(404)
-        //     return res.json({"message": "Image url couldn't be found"})
-        // }
+        if (!url) {
+           res.status(404)
+            return res.json({"message": "Image url couldn't be found"})
+        }
 
-        // const imgNum = await Image.findAll({
-        //     where: {
-        //         [Op.and]: [
-        //         {reviewId}
-        //         ]
-        //     }
-        // })
+        const image = await Image.findAll({
+            where: {
+                [Op.and]: [
+                {reviewId}
+                ]
+            }
+        })
 
-        // console.log(image)
-    //   let imgNum =  parseInt(image)
-        // if (imgNum > 10) {
-        //     res.status(403)
-        //     return res.json({"message": "Maximum number of images for this resource was reached"})
-        // }
+
+      let imgNum =  parseInt(image)
+        if (imgNum > 10) {
+            res.status(403)
+            return res.json({"message": "Maximum number of images for this resource was reached"})
+        }
 
         let newReviewImage = await Image.create({
             reviewId,
             url,
             userId: req.user.id,
-           
 
         })
         let imgObj = {
