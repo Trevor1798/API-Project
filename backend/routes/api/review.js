@@ -8,8 +8,9 @@ const {Op} = require('sequelize')
 
 //get all reviews of the current user
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
-            const {user} = req
+
             const review = await Review.findAll({
+                where: {userId: req.user.id},
 
                     include: [
                     {
@@ -24,7 +25,6 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
                     attributes: ['id',['reviewId','imageableId'],'url' ]
                     }
                  ],
-                 where: {userId: req.user.id}
             })
 
                 return res.json({review})
@@ -128,9 +128,7 @@ router.put('/:reviewId', restoreUser, requireAuth, async (req, res) => {
 
     router.delete('/:reviewId', restoreUser, requireAuth, async (req, res) => {
             const currentUser = req.user.id
-            const reviewId = req.params.reviewId
-
-            const deleteReview = await Review.findByPk(reviewId)
+            const deleteReview = await Review.findByPk(req.params.reviewId)
 
                 if (!deleteReview) {
                     res.status(404)
@@ -139,14 +137,16 @@ router.put('/:reviewId', restoreUser, requireAuth, async (req, res) => {
                          "statusCode": 404
                         })
                 }
-                if (reviewId.userId === currentUser)
+                if (deleteReview.userId === currentUser) {
                     deleteReview.destroy()
                     res.status(200)
                     return res.json({
                         "message": "Successfully deleted",
                         "statusCode": 200
                     })
-                })
+                }
+
+         })
 
 
     module.exports = router
