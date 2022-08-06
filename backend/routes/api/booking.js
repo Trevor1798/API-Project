@@ -38,7 +38,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
 
         let {startDate, endDate} = req.body
-        let spotId = req.params.spotId
+        let bookingId = req.params.bookingId
         const editBookings = await Booking.findByPk(req.params.bookingId)
 
         if (!editBookings) {
@@ -68,10 +68,10 @@ router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
             "statusCode": 403
           })
         }
-
+        let spotId = editBookings.spotId
         let alreadyBooked = await Booking.findAll({
           where: {
-              spotId: spotId,
+              spotId: spotId ,
               [Op.and]: [
                 {endDate: {[Op.gte]: startDate}},
                 {startDate: {[Op.lte]: endDate}},
