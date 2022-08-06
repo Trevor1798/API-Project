@@ -17,9 +17,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
 
     let spotsCurrentlyOwned = await Spot.findAll({
-        where: {
-            id: req.params.ownerId
-        },
+        where: {ownerId: req.user.id},
         include: [
            { model: Review, attributes: []},
         ],
@@ -33,12 +31,12 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     })
 
     for (let spot of spotsCurrentlyOwned){
-        previewImage = await Image.findOne({
+       let image = await Image.findOne({
+            attributes: ['url'],
            where: { previewImage: true, spotId: spot.id },
-           attributes: ['url']
       })
 
-      spot.dataValues.previewImage = previewImage.url
+      spot.dataValues.previewImage = image
 
     //   console.log(dataValues)
     }
