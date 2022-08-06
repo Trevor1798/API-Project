@@ -94,11 +94,11 @@ router.get('/:spotId', async (req, res) => {
 
 //create image to spot based on the spots id
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
-    let userId = req.user.id
-    let {url, previewImage} = req.body
+
+    let {url} = req.body
     let spotId = req.params.spotId
     let spot = await Spot.findByPk(spotId)
-    let ownerId = spot.ownerId
+
 
 
     if (!spot) {
@@ -107,14 +107,13 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
             "message": "Spot couldnt be found",
             "statusCode": 404
         })
-    }
-        if (ownerId === userId) throw new Error('Authorization Error')
 
+    }
         const image = await Image.create ({
-            spotId,
-            userId,
+            spotId: spot.dataValues.id,
+            userId: req.user.id,
             url,
-            previewImage,
+        
                 })
         res.status(200)
         return res.json({
