@@ -33,7 +33,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
 router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
         const reviewId = req.params.reviewId
-        const { url, previewImage } = req.body
+        const { url } = req.body
 
         const newReviewId = await Review.findByPk(reviewId)
 
@@ -65,7 +65,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
             reviewId,
             url,
             userId: req.user.id,
-            previewImage: previewImage
+           
 
         })
         let imgObj = {
