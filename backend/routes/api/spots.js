@@ -343,7 +343,6 @@ router.delete('/:spotId', restoreUser, requireAuth, async (req, res) => {
 //create a review for a spot based on the spots id
 router.post('/:spotId/reviews', restoreUser, async (req, res) => {
         const spotId = req.params.spotId
-        const userId = req.user.id
         const {review, stars } = req.body
 
         const spotReview = await Spot.findByPk(spotId)
@@ -363,7 +362,7 @@ router.post('/:spotId/reviews', restoreUser, async (req, res) => {
 
 
         const userReview = await Review.findOne({
-            where: {userId: req.user.id, spotId: spotId }
+            where: {userId: req.user.id}
         })
             if (userReview) {
                 res.status(403)
