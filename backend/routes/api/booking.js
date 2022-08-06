@@ -38,7 +38,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
 
         let {startDate, endDate} = req.body
-
+        let spotId = req.params.spotId
         const editBookings = await Booking.findByPk(req.params.bookingId)
 
         if (!editBookings) {
@@ -70,35 +70,25 @@ router.put('/:bookingId', restoreUser, requireAuth, async (req, res) => {
         }
 
         let alreadyBooked = await Booking.findAll({
-          where: {id: req.params.bookingId}
-      })
+          where: {
+              spotId: spotId,
+              [Op.and]: [
+                {endDate: {[Op.gte]: startDate}},
+                {startDate: {[Op.lte]: endDate}},
+              ],
+            },
+          });
 
-        for (let booking of alreadyBooked) {
-
-
-            let newStartDate = booking.startDate
-            let newEndDate = booking.endDate
-
-            if ((newStartDate <= startDate) && (newEndDate >= startDate )) {
-                res.status(403)
-                return res.json({
-                  "message": "Sorry, this spot is already booked for the specified dates",
-                  "statusCode": 403,
-                  "errors": {
+      if (alreadyBooked.length >= 1) {
+                  res.status(403)
+                  return res.json({
+                      "message": "Sorry, this spot is already booked for the specified dates",
+                      "statusCode": 403,
+              "errors": {
                   "startDate": "Start date conflicts with an existing booking",
-            }
+                  "endDate": "End date conflicts with an existing booking"
+              }
           })
-        }
-          if ((newEndDate >= endDate) && (newStartDate <= endDate)) {
-              res.status(403)
-              return res.json({
-               "message": "Sorry, this spot is already booked for the specified dates",
-               "statusCode": 403,
-               "errors": {
-               "endDate": "End date conflicts with an existing booking",
-            }
-          })
-        }
       }
 
         editBookings.update({
