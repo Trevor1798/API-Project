@@ -259,12 +259,12 @@ router.get('/', paginationValidator,  async (req, res) => {
                 },
                 include: [
                 { model: User, attributes: ['id', 'firstName', 'lastName']},
-                { model: Image, attributes: ['id', 'url']
+                { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url']
                     }
                 ]
             })
             res.status(200)
-            return res.json({reviews})
+            return res.json({Reviews: reviews})
         })
 
 
@@ -326,7 +326,7 @@ router.put('/:spotId', spotValidator, restoreUser, requireAuth, async (req, res)
 //delete a spot
 router.delete('/:spotId', restoreUser, requireAuth, async (req, res) => {
         const spotId = req.params.spotId
-        const currentUser = req.user.id
+
 
             let spot = await Spot.findByPk(spotId)
 
