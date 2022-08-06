@@ -8,7 +8,7 @@ const {Op} = require('sequelize')
 
 //get all reviews of the current user
 router.get('/current', requireAuth, async (req, res) => {
-
+            const {user} = req
             const review = await Review.findAll({
 
                     include: [
@@ -26,8 +26,8 @@ router.get('/current', requireAuth, async (req, res) => {
                  ],
                  where: {userId: req.user.id}
             })
-            let jsonReview = review.toJSON()
-                return res.json({Reviews: jsonReview})
+
+                return res.json({review})
 })
 
 
