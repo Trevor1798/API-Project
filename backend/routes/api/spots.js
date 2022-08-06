@@ -388,7 +388,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
             "statusCode": 404
         })
     }
-    const userBookings = await Booking.findAll({
+    const spotBookings = await Booking.findAll({
         where: { spotId },
         include: {
                 model: User,
@@ -400,7 +400,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
             attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
         })
 
-        if (spot.ownerId === req.user.id) return res.json({userBookings})
+        if (spot.ownerId === req.user.id) return res.json({spotBookings})
         else return res.json({allBookings})
 })
 
