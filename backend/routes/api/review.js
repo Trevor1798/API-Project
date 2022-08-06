@@ -46,13 +46,13 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
             return res.json({"message": "Image url couldn't be found"})
         }
 
-        const imgNum = await Image.findAll({
-            where: {
-                [Op.and]: [
-                {reviewId}
-                ]
-            }
-        })
+        // const imgNum = await Image.findAll({
+        //     where: {
+        //         [Op.and]: [
+        //         {reviewId}
+        //         ]
+        //     }
+        // })
 
         // console.log(image)
     //   let imgNum =  parseInt(image)
