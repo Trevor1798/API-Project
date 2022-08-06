@@ -341,7 +341,7 @@ router.delete('/:spotId', restoreUser, requireAuth, async (req, res) => {
 })
 
 //create a review for a spot based on the spots id
-router.post('/:spotId/reviews', restoreUser, async (req, res) => {
+router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
         const spotId = req.params.spotId
         const {review, stars } = req.body
 
@@ -350,10 +350,6 @@ router.post('/:spotId/reviews', restoreUser, async (req, res) => {
         if(!spotReview) {
             res.status(404)
             return res.json({"message": "Spot couldnt be found"})
-        }
-        if (!review || !review.length ) {
-            res.status(400)
-            return res.json({"message": "Review couldn't be found or text is required"})
         }
         if (stars > 5 || stars < 1 || !stars) {
             res.status(400)
