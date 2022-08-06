@@ -344,10 +344,7 @@ router.delete('/:spotId', restoreUser, requireAuth, async (req, res) => {
 router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
         const spotId = req.params.spotId
         const {review, stars } = req.body
-        const {user} = req
-
         const spotReview = await Spot.findByPk(spotId)
-
         if(!spotReview) {
             res.status(404)
             return res.json({"message": "Spot couldnt be found"})
@@ -356,8 +353,6 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
             res.status(400)
             return res.json({"message": "Stars must be an integer from 1 to 5"})
         }
-
-
         // const userReview = await Review.findOne({
         //     where: {userId: req.user.id}
         // })
