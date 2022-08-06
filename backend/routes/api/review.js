@@ -10,7 +10,7 @@ const {Op} = require('sequelize')
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
             const review = await Review.findAll({
-                    where: {userId: req.user.id},
+
                     include: [
                     {
                     model: User,
@@ -25,7 +25,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
                     }
                  ]
             })
-                return res.json(review)
+                return res.json({Reviews: review})
 })
 
 
