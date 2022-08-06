@@ -23,7 +23,8 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
                     model: Image,
                     attributes: ['id',['reviewId','imageableId'],'url' ]
                     }
-                 ]
+                 ],
+                 where: {userId: req.user.id}
             })
                 return res.json({Reviews: review})
 })
