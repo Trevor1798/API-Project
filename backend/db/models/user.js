@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
 
   class User extends Model {
 
+    toSafeObject() {
+      const { firstName, lastName, id, username, email } = this; // context will be the User instance
+      return {firstName, lastName, id, username, email};
+    }
 
     static async login({ credential, password }) {
       const user = await User.scope('loginUser').findOne({
@@ -45,13 +49,6 @@ module.exports = (sequelize, DataTypes) => {
     static getCurrentUserById(id) {
       return User.scope("currentUser").findByPk(id);
     }
-
-
-    toSafeObject() {
-      const { firstName, lastName, id, username, email } = this; // context will be the User instance
-      return {firstName, lastName, id, username, email};
-    }
-
 
 
     static associate(models) {

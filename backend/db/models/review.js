@@ -28,17 +28,21 @@ module.exports = (sequelize, DataTypes) => {
      type: DataTypes.INTEGER,
      allowNull: false,
      validate: {
-      min: 0,
+      min: 1,
       max: 5
      }
     },
     userId:  {
      type: DataTypes.INTEGER,
-     allowNull: false
+     allowNull: false,
+     references: {model: 'Users'},
+     onDelete: 'CASCADE'
     },
     spotId:  {
      type: DataTypes.INTEGER,
-     allowNull: false
+     allowNull: false,
+     references: {model: 'Spots'},
+     onDelete: 'CASCADE'
     },
   }, {
     sequelize,

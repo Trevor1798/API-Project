@@ -9,8 +9,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {model: 'Users'},
+        onDelete: 'CASCADE'
       },
       url: {
         type: Sequelize.STRING,
@@ -25,16 +26,13 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Spots',
-          key: 'id',
         },
         onDelete: 'CASCADE'
       },
       reviewId: {
         type: Sequelize.INTEGER,
-
         references: {
           model: 'Reviews',
-          key: 'id',
         },
         onDelete: 'CASCADE'
       },

@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Image.init({
     userId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      references: {model: 'Users'},
+      onDelete: "CASCADE"
     },
     url: {
       type: DataTypes.STRING,
@@ -30,10 +32,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     spotId: {
       type: DataTypes.INTEGER,
+      references: {model: 'Spots'},
+      onDelete: 'CASCADE'
 
     },
     reviewId:{
       type: DataTypes.INTEGER,
+      references: {model: 'Reviews'},
+      onDelete: 'CASCADE'
     },
   }, {
     sequelize,
