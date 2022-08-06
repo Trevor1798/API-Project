@@ -26,7 +26,8 @@ router.get('/current', requireAuth, async (req, res) => {
                  ],
                  where: {userId: req.user.id}
             })
-                return res.json({Reviews: review})
+            let jsonReview = review.toJSON()
+                return res.json({Reviews: jsonReview})
 })
 
 
