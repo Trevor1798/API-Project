@@ -363,7 +363,7 @@ router.post('/:spotId/reviews', restoreUser, async (req, res) => {
 
 
         const userReview = await Review.findOne({
-            where: {userId: userId, spotId: spotId }
+            where: {userId: req.user.id, spotId: spotId }
         })
             if (userReview) {
                 res.status(403)
@@ -371,7 +371,7 @@ router.post('/:spotId/reviews', restoreUser, async (req, res) => {
             }
 
             const createUserReview = await Review.create({
-                userId,
+                userId: req.user.id,
                 spotId,
                 review,
                 stars
