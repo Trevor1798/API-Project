@@ -4,7 +4,7 @@ const {setTokenCookie, requireAuth, restoreUser} = require('../../utils/auth')
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { User, Spot, Booking, Image, Review} = require('../../db/models')
-
+const {Op} = require('sequelize')
 
 //get all reviews of the current user
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
@@ -46,8 +46,13 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
             return res.json({"message": "Image url couldn't be found"})
         }
 
-        const image = await Image.count({
-            where: {reviewId: req.params.reviewId}
+        const image = await Image.findAll({
+            where: {
+                [Op.and]: [
+                {reviewId},{previewImage}
+
+                ]
+            }
         })
 
         console.log(image)
