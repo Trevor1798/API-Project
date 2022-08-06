@@ -35,7 +35,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
         const reviewId = req.params.reviewId
         const { url, previewImage } = req.body
 
-        const newReviewId = await Review.findByPk(req.params.reviewId)
+        const newReviewId = await Review.findByPk(reviewId)
 
         if (!newReviewId) {
             res.status(404)
@@ -46,31 +46,31 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
             return res.json({"message": "Image url couldn't be found"})
         }
 
-        const image = await Image.findAll({
+        const imgNum = await Image.findAll({
             where: {
                 [Op.and]: [
-                {reviewId},{previewImage}
-
+                {reviewId}
                 ]
             }
         })
 
-        console.log(image)
-      let imgNum =  parseInt(imgNum)
+        // console.log(image)
+    //   let imgNum =  parseInt(image)
         if (imgNum.length > 10) {
             res.status(403)
             return res.json({"message": "Maximum number of images for this resource was reached"})
         }
 
         const newReviewImage = await Image.create({
-            reviewId: req.params.reviewId,
+            reviewId,
             url,
-            currentUser,
+            userId: req.user.id,
+            previewImage: previewImage
 
         })
         let imgObj = {
             id: newReviewImage.id,
-            imageableId: newReviewImage.spotId,
+            imageableId: newReviewImage.reviewId,
             url: newReviewImage.url
    }
             res.status(200)
