@@ -137,14 +137,20 @@ router.put('/:reviewId', restoreUser, requireAuth, async (req, res) => {
                          "statusCode": 404
                         })
                 }
-                if (deleteReview.userId === currentUser) {
+                if (deleteReview.userId !== currentUser) {
+                    res.status(403)
+                    return res.json({
+                        "message": "Authorization error",
+                        "statusCode": 403
+                    })
+
+                }
                     deleteReview.destroy()
                     res.status(200)
                     return res.json({
                         "message": "Successfully deleted",
                         "statusCode": 200
                     })
-                }
 
          })
 
