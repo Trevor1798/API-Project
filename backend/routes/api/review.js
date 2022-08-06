@@ -32,8 +32,8 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 //add an image to a review based on the reviews ID
 
 router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
-        const currentUser = req.user.id
-        const { url } = req.body
+        const reviewId = req.params.reviewId
+        const { url, previewImage } = req.body
 
         const newReviewId = await Review.findByPk(req.params.reviewId)
 
@@ -58,9 +58,18 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
             reviewId: req.params.reviewId,
             url,
             currentUser,
+
         })
-        res.status(200)
-        return res.json(newReviewImage)
+        let imgObj = {
+            id: newReviewImage.id,
+            imageableId: newReviewImage.spotId,
+            url: newReviewImage.url
+   }
+            res.status(200)
+            return res.json(imgObj)
+
+            })
+
 
 })
 
