@@ -435,41 +435,21 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                     spotId: req.params.spotId,
                 }
             })
-            // if (req.user.id !== alreadyBooked.userId){
-            //     let error = new Error('Authentication error')
-            //     error.status = '403'
-            //     throw error
-            // }
 
             for (let booking of alreadyBooked) {
-
-
-            let newStartDate = booking.startDate
-            let newEndDate = booking.endDate
-
-            if ((newStartDate <= startDate) && (newEndDate >= startDate )) {
-                let error = new Error('"Sorry, this spot is already booked for the specified dates')
-                error.status = '403'
-                error.erros = {
-                    startDate: "Start date conflicts with an existing booking"
-                }
-                throw error
-
-
+            if ((booking.startDate <= endDate) || (booking.endDate >= startDate )) {
+                res.status(403)
+                return res.json({
+                    "message": "Sorry, this spot is already booked for the specified dates",
+                    "statusCode": 403,
+                    "errors": {
+                      "startDate": "Start date conflicts with an existing booking",
+                      "endDate": "End date conflicts with an existing booking"
+                    }
+                  })
             }
-            // throw new Error('Sorry this spot is already booked for the specified dates')
-          if ((newEndDate >= endDate) && (newStartDate <= endDate)) {
-              let error = new Error('"Sorry, this spot is already booked for the specified dates')
-              error.status = '403'
-              error.erros = {
-                  startDate: "End date conflicts with an existing booking"
-              }
-              throw error
-            }
-
-
       }
-         const createBooking = await Booking.create({
+            const createBooking = await Booking.create({
                     userId: req.user.id,
                     spotId,
                     startDate,
