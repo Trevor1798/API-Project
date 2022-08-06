@@ -435,7 +435,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
                     spotId: req.params.spotId,
                 }
             })
-            if (alreadyBooked) {
+            if (alreadyBooked.length >= 1) {
 
                 for (let booking of alreadyBooked) {
                     if ((booking.startDate <= endDate) && (booking.endDate >= startDate )) {
