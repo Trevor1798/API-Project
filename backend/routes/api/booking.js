@@ -22,8 +22,8 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
               where: {spotId: booking.spotId },
 
             })
-            booking.dataValues.spots = spots
-            booking.dataValues.previewImage = previewImage
+            booking.spots = spots
+            booking.previewImage = previewImage
 
 
             return res.json({Bookings: BookingsCurrentlyOwned})
