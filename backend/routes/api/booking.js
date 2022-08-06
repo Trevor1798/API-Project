@@ -9,7 +9,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
         let BookingsCurrentlyOwned = await Booking.findAll({
             where: {
-            userId: req.params.userId
+            userId: req.user.id
           }
         })
 
