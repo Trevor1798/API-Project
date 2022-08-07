@@ -216,8 +216,9 @@ router.get('/:spotId', async (req, res) => {
                          attributes: [[ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
                      })
                      let previewImage = await Image.findOne({
+                        attributes: ['url'],
                         where: { previewImage: true, spotId: spot.id },
-                      
+
                      })
      //  console.log(spot.dataValues)
                      spot.dataValues.avgRating = avgRating
