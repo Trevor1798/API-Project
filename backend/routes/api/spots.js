@@ -222,7 +222,7 @@ router.get('/:spotId', async (req, res) => {
                      })
      //  console.log(spot.dataValues)
                      spot.dataValues.avgRating = avgRating
-                     spot.dataValues.previewImage = previewImage.url
+                     spot.dataValues.previewImage = previewImage
                      spot.dataValues.page = page
                      spot.dataValues.size = size
                  }
