@@ -102,7 +102,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
     //   console.log(dataValues)
     }
-    return res.json(spotsCurrentlyOwned)
+    return res.json({Spots: spotsCurrentlyOwned})
 })
 
 
