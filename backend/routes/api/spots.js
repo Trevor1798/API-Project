@@ -102,7 +102,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
     //   console.log(dataValues)
     }
-    return res.json(spotsCurrentlyOwned)
+    return res.json({Spots: spotsCurrentlyOwned})
 })
 
 
@@ -216,12 +216,13 @@ router.get('/:spotId', async (req, res) => {
                          attributes: [[ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
                      })
                      let previewImage = await Image.findOne({
+                        attributes: ['url'],
                         where: { previewImage: true, spotId: spot.id },
-                        attributes:  ['url']
+
                      })
      //  console.log(spot.dataValues)
                      spot.dataValues.avgRating = avgRating
-                     spot.dataValues.previewImage = previewImage.url
+                     spot.dataValues.previewImage = previewImage
                      spot.dataValues.page = page
                      spot.dataValues.size = size
                  }
@@ -339,7 +340,7 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
         const spotReview = await Spot.findByPk(spotId)
         if(!spotReview) {
             res.status(404)
-            return res.json({"message": "Spot couldnt be found"})
+            return res.json({"message": "Spot couldnt be found", "statusCode": 404})
         }
         if (stars > 5 || stars < 1 || !stars) {
             res.status(400)
@@ -428,7 +429,7 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
 
             }
             let alreadyBooked = await Booking.findAll({
-                where: {
+                where: { 
                     spotId: spotId,
                     [Op.and]: [
                       {endDate: {[Op.gte]: startDate}},
