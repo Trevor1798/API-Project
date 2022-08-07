@@ -217,7 +217,7 @@ router.get('/:spotId', async (req, res) => {
                      })
                      let previewImage = await Image.findOne({
                         where: { previewImage: true, spotId: spot.id },
-                        attributes:  ['url']
+                      
                      })
      //  console.log(spot.dataValues)
                      spot.dataValues.avgRating = avgRating
@@ -339,7 +339,7 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
         const spotReview = await Spot.findByPk(spotId)
         if(!spotReview) {
             res.status(404)
-            return res.json({"message": "Spot couldnt be found"})
+            return res.json({"message": "Spot couldnt be found", "statusCode": 404})
         }
         if (stars > 5 || stars < 1 || !stars) {
             res.status(400)
