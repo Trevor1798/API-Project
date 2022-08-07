@@ -221,11 +221,11 @@ router.get('/:spotId', async (req, res) => {
 
                      })
      //  console.log(spot.dataValues)
+     allSpots.dataValues.avgRating = avgRating
+     allSpots.dataValues.previewImage = previewImage.url
+     allSpots.dataValues.page = page
+     allSpots.dataValues.size = size
     }
-    allSpots.dataValues.avgRating = avgRating
-    allSpots.dataValues.previewImage = previewImage.url
-    allSpots.dataValues.page = page
-    allSpots.dataValues.size = size
 
                     res.status(200)
                     return res.json({Spots: allSpots})
