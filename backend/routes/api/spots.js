@@ -83,25 +83,26 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
         include: [
            { model: Review, attributes: []},
         ],
-        attributes: {
-            include: [
-                [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating'],
-
-            ],
-        },
         group: ['Spot.id']
     })
 
     for (let spot of spotsCurrentlyOwned){
-       let image = await Image.findOne({
-            attributes: ['url'],
+        let avgRating = await Review.findAll({
+            where: {id: spot.id},
+            attributes: [[ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
+        })
+        let previewImage = await Image.findOne({
+           attributes: ['url'],
            where: { previewImage: true, spotId: spot.id },
-      })
 
-      spot.dataValues.previewImage = image.dataValues.url
-      spot.dataValues.avgRating = parseFloat(Number(avgRating[0].dataValues.avgRating)).toFixed(1)
+        })
+//  console.log(spot.dataValues)
+// console.log(avgRating[0].dataValues.avgRating)
+        spot.dataValues.avgRating = parseFloat(Number(avgRating[0].dataValues.avgRating)).toFixed(1)
+        spot.dataValues.previewImage = previewImage.url
+       }
+    //   spot.dataValues.previewImage = console.log(image.dataValues.url)
     //   console.log(dataValues)
-    }
     return res.json({Spots: spotsCurrentlyOwned})
 })
 
