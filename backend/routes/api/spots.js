@@ -79,11 +79,11 @@ let paginationValidator = [
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
     let spotsCurrentlyOwned = await Spot.findAll({
-        where: {ownerId: req.user.id},
-        include: [
-           { model: Review, attributes: []},
-        ],
-        group: ['Spot.id']
+        where: {ownerId: req.user.id}
+        // include: [
+        //    { model: Review, attributes: []},
+        // ],
+        // group: ['Spot.id']
     })
 
     for (let spot of spotsCurrentlyOwned){
