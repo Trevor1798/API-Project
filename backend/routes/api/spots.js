@@ -380,7 +380,7 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
         // })
             if (userReview.length >= 1) {
                 res.status(403)
-                return res.json({"message": "User already has a review"})
+                return res.json({"message": "User already has a review", "statusCode": 403})
             }
 
             const createUserReview = await Review.create({
