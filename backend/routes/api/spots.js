@@ -221,7 +221,7 @@ router.get('/:spotId', async (req, res) => {
 
                      })
      //  console.log(spot.dataValues)
-                     spot.dataValues.avgRating = avgRating
+                     spot.dataValues.avgRating = avgRating.toFixed(2)
                      spot.dataValues.previewImage = previewImage
                      spot.dataValues.page = page
                      spot.dataValues.size = size
@@ -429,7 +429,7 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
 
             }
             let alreadyBooked = await Booking.findAll({
-                where: { 
+                where: {
                     spotId: spotId,
                     [Op.and]: [
                       {endDate: {[Op.gte]: startDate}},
