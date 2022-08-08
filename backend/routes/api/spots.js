@@ -164,14 +164,20 @@ router.get('/:spotId', async (req, res) => {
             "statusCode": 404
         })
     }
-    let avgStarRating = await Review.findAll({
+    let reviews = await Review.findAll({
         where: {spotId},
         attributes: [
             [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating'],
 
         ],
     })
+    let avgStarRating = reviews[0].dataValues.avgRating
 
+    if (reviews.avgRating){
+        spots.dataValues.avgStarRating = parseFloat(avgRating.toFixed(1)); //star rating
+    } else {
+        spots.dataValues.avgStarRating = 'No ratings found' // if there is no rating
+    }
     let numReviews = await Review.count({
         where: {spotId}
     })
@@ -186,11 +192,11 @@ router.get('/:spotId', async (req, res) => {
     })
 
     const jsonify = spots.toJSON()
-    console.log()
+
     jsonify.avgStarRating = parseFloat(Number(avgStarRating[0].dataValues.avgStarRating)).toFixed(1)
     jsonify.numReviews = numReviews
-    jsonify.img = img
-    jsonify.owner = owner
+    jsonify.Images = img
+    jsonify.Owner = owner
 
     res.status(200)
     return res.json(jsonify)
