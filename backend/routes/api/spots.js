@@ -85,7 +85,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
         ],
         attributes: {
             include: [
-                [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
+                [Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating'],
 
             ],
         },
@@ -98,7 +98,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
            where: { previewImage: true, spotId: spot.id },
       })
 
-      spot.dataValues.previewImage = image
+      spot.dataValues.previewImage = image.url
 
     //   console.log(dataValues)
     }
