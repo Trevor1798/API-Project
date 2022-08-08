@@ -89,7 +89,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     for (let spot of spotsCurrentlyOwned){
         let avgRating = await Review.findAll({
             where: {id: spot.id},
-            attributes: [[ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
+            // attributes: [[ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
         })
         let previewImage = await Image.findOne({
            attributes: ['url'],
