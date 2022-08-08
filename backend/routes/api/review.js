@@ -41,11 +41,11 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
 
         if (!newReviewId) {
             res.status(404)
-            return res.json({"message": "Review couldnt be found"})
+            return res.json({"message": "Review couldnt be found", "statusCode": 404})
         }
         if (!url) {
            res.status(404)
-            return res.json({"message": "Image url couldn't be found"})
+            return res.json({"message": "Image url couldn't be found", "statusCode": 404})
         }
 
         const image = await Image.findAll({
