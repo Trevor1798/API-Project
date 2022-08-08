@@ -96,14 +96,12 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
            where: { previewImage: true, spotId: spot.id },
 
         })
-//  console.log(spot.dataValues)
-// console.log(avgRating[0].dataValues.avgRating)
         spot.dataValues.avgRating = parseFloat(Number(avgRating[0].dataValues.avgRating)).toFixed(1)
-        spot.dataValues.previewImage = previewImage.url
+        spot.dataValues.previewImage = previewImage
        }
     //   spot.dataValues.previewImage = console.log(image.dataValues.url)
     //   console.log(dataValues)
-    return res.json({Spots: spotsCurrentlyOwned})
+       return res.json({Spots: spotsCurrentlyOwned})
 })
 
 
