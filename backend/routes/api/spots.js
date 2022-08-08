@@ -238,7 +238,7 @@ router.get('/:spotId', async (req, res) => {
                      })
                      let previewImage = await Image.findOne({
                         attributes: ['url'],
-                        where: { previewImage: true, spotId: spot.id },
+                        where: {spotId: spot.id },
 
                      })
      //  console.log(spot.dataValues)
