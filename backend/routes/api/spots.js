@@ -221,7 +221,7 @@ router.get('/:spotId', async (req, res) => {
 
                      })
      //  console.log(spot.dataValues)
-                     spot.dataValues.avgRating.toFixed(2) = avgRating
+                     spot.dataValues.avgRating = parseFloat(Number(avgRating)).toFixed(2)
                      spot.dataValues.previewImage = previewImage
                      spot.dataValues.page = page
                      spot.dataValues.size = size
