@@ -98,7 +98,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     //   let avgRating = reviews.avgRating
         // console.log(reviews[0].avgRating)
       if (reviews[0].avgRating){
-          spot.dataValues.avgRating = parseFloat(reviews[0].avgRating.toFixed(1));
+          spot.dataValues.avgRating = parseFloat(parseFloat(reviews[0].avgRating).toFixed(1));
       } else {
           spot.dataValues.avgRating = 'No ratings found'
         }
