@@ -95,10 +95,10 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
       let avgRating = reviews[0].dataValues.avgRating
 
-      if (reviews.avgRating){
-          spot.dataValues.avgRating = parseFloat(avgRating.toFixed(1)); //star rating
+      if (avgRating){
+          spot.dataValues.avgRating = parseFloat(avgRating.toFixed(1));
       } else {
-          spot.dataValues.avgRating = 'No ratings found' // if there is no rating
+          spot.dataValues.avgRating = 'No ratings found'
       }
         let previewImage = await Image.findOne({
            attributes: ['url'],
@@ -174,9 +174,9 @@ router.get('/:spotId', async (req, res) => {
     let avgStarRating = reviews[0].dataValues.avgRating
 
     if (reviews.avgRating){
-        spots.dataValues.avgStarRating = parseFloat(avgRating.toFixed(1)); //star rating
-    } else {
-        spots.dataValues.avgStarRating = 'No ratings found' // if there is no rating
+        spots.dataValues.avgStarRating = parseFloat(avgRating.toFixed(1));
+        } else {
+        spots.dataValues.avgStarRating = 'No ratings found'
     }
     let numReviews = await Review.count({
         where: {spotId}
