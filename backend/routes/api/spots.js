@@ -87,18 +87,29 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     })
 
     for (let spot of spotsCurrentlyOwned){
-        let avgRating = await Review.findOne({
-            where: {id: spot.id},
-            attributes: [[ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
+        const reviews = await spot.getReviews({
+          attributes: [
+            [ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating' ]
+          ]
         })
+
+      let avgRating = reviews[0].dataValues.avgRating
+
+      if (reviews.avgRating){
+          spot.dataValues.avgRating = parseFloat(avgRating.toFixed(1)); //star rating
+      } else {
+          spot.dataValues.avgRating = 'No ratings found' // if there is no rating
+      }
         let previewImage = await Image.findOne({
            attributes: ['url'],
-           where: { previewImage: true, spotId: spot.id },
+           where: { spotId: spot.id },
 
         })
-        console.log(previewImage.url)
-        spot.dataValues.avgRating = parseFloat(Number(avgRating[0].dataValues.avgRating)).toFixed(1)
         spot.dataValues.previewImage = previewImage.url
+        // console.log(previewImage)
+        // console.log(previewImage.url)
+        // spot.dataValues.avgRating = 1
+        // spot.previewImage = previewImage.url
         // console.log(previewImage.dataValues.url)
        }
     //   spot.dataValues.previewImage = console.log(image.dataValues.url)
@@ -111,12 +122,9 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 //create image to spot based on the spots id
 router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
 
-           let {url} = req.body
+           let {url, previewImage} = req.body
            let spotId = req.params.spotId
            let spot = await Spot.findByPk(spotId)
-
-
-
             if (!spot) {
                     res.status(404)
                     return res.json({
@@ -129,6 +137,7 @@ router.post('/:spotId/images', restoreUser, requireAuth, async( req, res) => {
                   spotId: spot.dataValues.id,
                    userId: req.user.id,
                      url,
+                     previewImage,
                })
 
             let imgObj = {
@@ -177,7 +186,8 @@ router.get('/:spotId', async (req, res) => {
     })
 
     const jsonify = spots.toJSON()
-    jsonify.avgStarRating = avgStarRating
+    console.log()
+    jsonify.avgStarRating = parseFloat(Number(avgStarRating[0].dataValues.avgStarRating)).toFixed(1)
     jsonify.numReviews = numReviews
     jsonify.img = img
     jsonify.owner = owner
