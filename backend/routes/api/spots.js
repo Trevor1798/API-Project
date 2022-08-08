@@ -87,22 +87,24 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     })
 
     for (let spot of spotsCurrentlyOwned){
-        const reviews = await spot.getReviews({
+        const reviews = await Review.findAll({
+            where: {spotId: spot.id},
           attributes: [
             [ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating' ]
-          ]
+          ],
+          raw: true
         })
-
-      let avgRating = reviews[0].dataValues.avgRating
-
-      if (avgRating){
-          spot.dataValues.avgRating = parseFloat(avgRating.toFixed(1));
+        // console.log(reviews)
+    //   let avgRating = reviews.avgRating
+        // console.log(reviews[0].avgRating)
+      if (reviews[0].avgRating){
+          spot.dataValues.avgRating = parseFloat(reviews[0].avgRating.toFixed(1));
       } else {
           spot.dataValues.avgRating = 'No ratings found'
-      }
+        }
         let previewImage = await Image.findOne({
-           attributes: ['url'],
-           where: { spotId: spot.id },
+            attributes: ['url'],
+            where: { spotId: spot.id },
 
         })
         spot.dataValues.previewImage = previewImage.url
