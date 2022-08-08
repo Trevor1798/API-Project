@@ -75,7 +75,7 @@ let paginationValidator = [
         ]
 
 
-        //get spots owned by current user
+        //get spots by current user
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
     let spotsCurrentlyOwned = await Spot.findAll({
@@ -98,8 +98,8 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
            where: { previewImage: true, spotId: spot.id },
       })
 
-      spot.dataValues.previewImage = image.url
-
+      spot.dataValues.previewImage = image.dataValues.url
+      spot.dataValues.avgRating = parseFloat(Number(avgRating[0].dataValues.avgRating)).toFixed(1)
     //   console.log(dataValues)
     }
     return res.json({Spots: spotsCurrentlyOwned})
