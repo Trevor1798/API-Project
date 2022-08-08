@@ -192,8 +192,8 @@ router.get('/:spotId', async (req, res) => {
     })
 
     const jsonify = spots.toJSON()
-
-    jsonify.avgStarRating = parseFloat(Number(avgStarRating[0].dataValues.avgStarRating)).toFixed(1)
+// console.log(avgStarRating)
+    jsonify.avgStarRating = avgStarRating
     jsonify.numReviews = numReviews
     jsonify.Images = img
     jsonify.Owner = owner
