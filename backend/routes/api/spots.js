@@ -102,6 +102,8 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
       } else {
           spot.dataValues.avgRating = 'No ratings found'
         }
+
+
         let previewImage = await Image.findOne({
             attributes: ['url'],
             where: { spotId: spot.id },
@@ -350,7 +352,7 @@ router.delete('/:spotId', restoreUser, requireAuth, async (req, res) => {
                 }
 
                 await Spot.destroy({where: {id: spotId}})
-                return res.json({"message": "Successfully Deleted"})
+                return res.json({"message": "Successfully Deleted", "statusCode": 404})
 })
 
 //create a review for a spot based on the spots id
@@ -364,7 +366,7 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
         }
         if (stars > 5 || stars < 1 || !stars) {
             res.status(400)
-            return res.json({"message": "Stars must be an integer from 1 to 5"})
+            return res.json({"message": "Stars must be an integer from 1 to 5", "statusCode": 404})
         }
 
         const userReview = await Review.findAll({
@@ -476,7 +478,7 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
                 endDate,
             })
             res.status(201)
-            return res.json({createBooking})
+            return res.json({Booking: createBooking})
 
     })
 
