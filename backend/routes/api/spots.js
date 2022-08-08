@@ -96,9 +96,10 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
            where: { previewImage: true, spotId: spot.id },
 
         })
+        console.log(previewImage.url)
         spot.dataValues.avgRating = parseFloat(Number(avgRating[0].dataValues.avgRating)).toFixed(1)
-        spot.previewImage = previewImage.dataValues.url
-        console.log(previewImage.dataValues.url)
+        spot.dataValues.previewImage = previewImage.dataValues.url
+        // console.log(previewImage.dataValues.url)
        }
     //   spot.dataValues.previewImage = console.log(image.dataValues.url)
     //   console.log(dataValues)
