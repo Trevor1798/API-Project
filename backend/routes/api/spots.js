@@ -87,7 +87,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     })
 
     for (let spot of spotsCurrentlyOwned){
-        let avgRating = await Review.findAll({
+        let avgRating = await Review.findOne({
             where: {id: spot.id},
             attributes: [[ Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
         })
@@ -98,7 +98,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
         })
         console.log(previewImage.url)
         spot.dataValues.avgRating = parseFloat(Number(avgRating[0].dataValues.avgRating)).toFixed(1)
-        spot.dataValues.previewImage = previewImage.dataValues.url
+        spot.dataValues.previewImage = previewImage.url
         // console.log(previewImage.dataValues.url)
        }
     //   spot.dataValues.previewImage = console.log(image.dataValues.url)
