@@ -10,8 +10,7 @@ const { environment } = require("./config");
 const isProduction = environment === "production";
 const { ValidationError } = require("sequelize");
 const app = express();
-
-//test...
+ //test...
 const routes = require("./routes");
 app.use(morgan("dev"));
 app.use(cookieParser());
@@ -67,3 +66,6 @@ app.use((err, _req, res, _next) => {
 });
 
 module.exports = app;
+
+
+
