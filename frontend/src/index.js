@@ -1,24 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import './index.css';
-import {Provider} from 'react-redux'
-import {BrowserRouter} from 'react-router-dom'
+
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import { restoreCSRF, csrfFetch } from './store/csrf';
+import configureStore from './store';
 
-import configureStore from './store'
+let store = configureStore()
 
-const store = configureStore()
+
 if (process.env.NODE_ENV !== 'production') {
+  restoreCSRF()
+  window.csrfFetch = csrfFetch
   window.store = store
 }
-function Root(){
+function Root() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-      <App />
+        <App />
       </BrowserRouter>
     </Provider>
-  )
+  );
 }
 
 
