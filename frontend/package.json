@@ -9,10 +9,10 @@
     "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.0.2",
+    "react-redux": "^7.2.8",
     "react-router-dom": "^5.3.3",
     "react-scripts": "5.0.1",
-    "redux": "^3.7.2",
+    "redux": "^4.2.0",
     "redux-thunk": "^2.4.1"
   },
   "scripts": {
@@ -39,5 +39,5 @@
   "devDependencies": {
     "redux-logger": "^3.0.6"
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:8000"
 }

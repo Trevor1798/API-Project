@@ -1,11 +1,11 @@
 
 # Create React App Template
 
-A no-frills template from which to create React applications with
+A no-frills template from which to create React + Redux applications with
 [Create React App](https://github.com/facebook/create-react-app).
 
 ```sh
-npx create-react-app my-app --template @appacademy/simple --use-npm
+npx create-react-app my-app --template @appacademy/react-redux-v17 --use-npm
 ```
 
 ## Available Scripts
