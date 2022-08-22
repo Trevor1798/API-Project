@@ -11,7 +11,7 @@ function LoginForm() {
   const [errors, setErrors] = useState([]);
 
     if (sessionUser) {
-      return <Redirect to='/' /> 
+      return <Redirect to='/' />
     }
 
   const handleSubmit = (e) => {
@@ -26,12 +26,14 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='login-form' onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>
+      <div className='login-form-input'>
+
       <label>
         Username or Email
         <input
@@ -39,7 +41,7 @@ function LoginForm() {
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
           required
-        />
+          />
       </label>
       <label>
         Password
@@ -48,9 +50,10 @@ function LoginForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
+          />
       </label>
       <button type="submit">Log In</button>
+          </div>
     </form>
   );
 }

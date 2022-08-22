@@ -32,12 +32,13 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+
+      <button className='open-menu' onClick={openMenu}>
         <i className="fa-regular fa-dumpster-fire"/>
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{user.username}</li>
+          <li>Hello, {user.username}</li>
           <li>{user.email}</li>
           <li>
             <button onClick={logout}>Log Out</button>
