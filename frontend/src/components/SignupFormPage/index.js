@@ -67,6 +67,7 @@ function SignupFormPage() {
         type='text'
         value={lastName}
         onChanfe={(e) => setLastName(e.target.value)}
+        required
         />
       </label>
       <label>
