@@ -1,0 +1,14 @@
+
+
+.spotsContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.spots-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    place-content: center;
+    gap: 10px;
+
+}
