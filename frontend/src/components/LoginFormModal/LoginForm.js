@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import {Redirect} from 'react-router-dom'
-
+import '../CSS/LoginForm.css'
 function LoginForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user)
@@ -11,7 +11,7 @@ function LoginForm() {
   const [errors, setErrors] = useState([]);
 
     if (sessionUser) {
-      return <Redirect to='/' /> 
+      return <Redirect to='/' />
     }
 
   const handleSubmit = (e) => {
@@ -26,31 +26,36 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='login-form' onSubmit={handleSubmit}>
+      <div className='modal-header'>Log in or Sign up</div>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>
+          <div className='login-welcome'>Welcome to AirBnb</div>
+      <div className='login-form-input'>
       <label>
-        Username or Email
-        <input
+
+        <input className="login-username"
           type="text"
           value={credential}
+          placeholder='Username or Email'
           onChange={(e) => setCredential(e.target.value)}
           required
-        />
+          />
       </label>
       <label>
-        Password
-        <input
+        <input className="login-password"
           type="password"
           value={password}
+          placeholder='Password'
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
+          />
       </label>
-      <button type="submit">Log In</button>
+      <button className="login-button" type="submit">Continue</button>
+          </div>
     </form>
   );
 }

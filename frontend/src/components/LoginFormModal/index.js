@@ -2,27 +2,32 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import LoginForm from './LoginForm';
-import * as sessionActions from '../..store/session'
-
+import * as sessionActions from '../../store/session'
+import {useDispatch} from 'react-redux'
+import SignupFormPage from '../SignupFormPage/SignupForm';
+import '../CSS/LoginForm.css'
 function LoginFormModal() {
-  const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch()
   const [login, setLogin] = useState(false)
-  const [singup, setSignup] = useState(false)
+  const [signup, setSignup] = useState(false)
 
 
   const onLoginClick = (e) =>{
     e.preventDefault()
+    e.stopPropagation()
+
     setLogin(true)
   }
 
   const onSignupClick = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     setSignup(true)
   }
 
   const demoUserClick = (e) => {
     e.preventDefault()
-    return dispatchEvent(sessionActions.login({credential: 'Musk1', password: 'password2'}))
+    return dispatch(sessionActions.login({credential: 'Musk1', password: 'password2'}))
   }
   return (
     <>
@@ -35,10 +40,18 @@ function LoginFormModal() {
         </ul>
       </div>
     </div>
-      <button onClick={() => setShowModal(true)}>Log In</button>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+
+      {login && (
+        <Modal className='login-modal' onClose={() => setLogin(false)}>
+
+
           <LoginForm />
+        </Modal>
+      )}
+      {signup && (
+        <Modal className='signup-modal' onClose={() => setSignup(false)}>
+
+          <SignupFormPage/>
         </Modal>
       )}
     </>
