@@ -4,7 +4,7 @@ import { Modal } from '../../context/Modal';
 import LoginForm from './LoginForm';
 import * as sessionActions from '../../store/session'
 import {useDispatch} from 'react-redux'
-import SignupFormPage from '../SignupFormPage';
+import SignupFormPage from '../SignupFormPage/SignupForm';
 import '../CSS/LoginForm.css'
 function LoginFormModal() {
   const dispatch = useDispatch()
@@ -44,13 +44,13 @@ function LoginFormModal() {
       {login && (
         <Modal className='login-modal' onClose={() => setLogin(false)}>
 
-          
+
           <LoginForm />
         </Modal>
       )}
       {signup && (
         <Modal className='signup-modal' onClose={() => setSignup(false)}>
-           <div className='signup-Sign up'>Sign up</div>
+
           <SignupFormPage/>
         </Modal>
       )}
