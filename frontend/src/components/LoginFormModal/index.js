@@ -5,7 +5,7 @@ import LoginForm from './LoginForm';
 import * as sessionActions from '../../store/session'
 import {useDispatch} from 'react-redux'
 import SignupFormPage from '../SignupFormPage';
-
+import '../CSS/LoginForm.css'
 function LoginFormModal() {
   const dispatch = useDispatch()
   const [login, setLogin] = useState(false)
@@ -43,15 +43,14 @@ function LoginFormModal() {
 
       {login && (
         <Modal className='login-modal' onClose={() => setLogin(false)}>
-          <div className='welcome-to-airbnb'>Welcome to AirBnB!</div>
-          <div className='login-or-signup'>Log in or sign up</div>
+
+          
           <LoginForm />
         </Modal>
       )}
       {signup && (
         <Modal className='signup-modal' onClose={() => setSignup(false)}>
-          <div className='signup-welcome-to-airbnb'>Welcome to AirBnb</div>
-          <div className='signup-Sign up'>Sign up</div>
+           <div className='signup-Sign up'>Sign up</div>
           <SignupFormPage/>
         </Modal>
       )}

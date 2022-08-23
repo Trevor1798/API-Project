@@ -35,7 +35,7 @@ function SignupFormPage() {
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <div className='singup-form-input'>
-
+        <div className='signup-welcome'>Welcome to AirBnb</div>
       <label>
         Email
         <input
