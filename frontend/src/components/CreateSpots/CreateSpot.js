@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
-
+import { Redirect } from "react-router";
+import * as spotsActions from '../../store/spots.js'
+import '../CSS/CreateSpot.css'
+import { Modal } from '../../context/Modal'
+import { Link } from "react-router-dom";
 function CreateSpot () {
     let dispatch = useDispatch()
+    const [dispatched, setDispatched] = useState(false)
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState()
@@ -16,17 +20,54 @@ function CreateSpot () {
     const [previewImage, setPreviewImage] = useState('')
     const [error, setError] = useState([])
 
+
+
+    if (dispatched) {
+        return <Redirect to='/spots'/>
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        let dispatchData = {
+            name: name,
+            previewImage: previewImage,
+            address: address,
+            city: city,
+            state:state,
+            country: country,
+            lat: lat,
+            lng: lng,
+            description: description,
+            price: price
+        }
+        setError([])
+        return dispatch(spotsActions.getCreateSpots({dispatchData}))
+            .then(async (res) => setDispatched(true))
+            .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.error) setError(data.error);
+            })
     }
+
+
      return (
-        <div className="form-container">
+
+        // <div className="form-container">
+        //  {/* <button className='becomehost-button'>
+        // {becomeHostClick}
+        // <Modal className='become-host-modal' onClose={() => setHost(false)}>
+        //   <CreateSpot/>
+        // </Modal>
+        // </button> */}
+
+        // </div>
+
             <form className="create-spot" onSubmit={handleSubmit}>
              <ul>{error.map((error, i) => (
-                <li key={i}>{error}</li>
-             ))}
+                 <li key={i}>{error}</li>
+                 ))}
             </ul>
+
             <div className='host-place'>Become a host!</div>
             <label>
                 <input className="host-name"
@@ -118,7 +159,10 @@ function CreateSpot () {
                 Create your spot!
             </button>
         </form>
-        </div>
+
+
 
             )
 }
+
+export default CreateSpot

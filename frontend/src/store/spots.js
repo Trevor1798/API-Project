@@ -51,6 +51,7 @@ export const getCreateSpots = (spots) => async (dispatch) => {
     })
     if (response.ok) {
         const data = await response.json()
+        console.log('createSpots - res', response)
         dispatch(createSpots(data))
         return data
     }
@@ -88,10 +89,12 @@ export const getDeleteSpots = (id) => async (dispatch) => {
         case GET_SPOTS:
            newState = {...state, ...action.spots['Spots']}
            return newState
-        default:
-           return state
            case CREATE_SPOTS:
-            newState = {...state, ...action.spots}
+               newState = {...state}
+               return newState
+               default:
+                  return state
+
     }
 }
 

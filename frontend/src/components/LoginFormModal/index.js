@@ -6,11 +6,12 @@ import * as sessionActions from '../../store/session'
 import {useDispatch} from 'react-redux'
 import SignupFormPage from '../SignupFormPage/SignupForm';
 import '../CSS/LoginForm.css'
+import CreateSpot from '../CreateSpots/CreateSpot';
 function LoginFormModal() {
   const dispatch = useDispatch()
   const [login, setLogin] = useState(false)
   const [signup, setSignup] = useState(false)
-
+  // const [host, setHost] = useState(false)
 
   const onLoginClick = (e) =>{
     e.preventDefault()
@@ -29,7 +30,12 @@ function LoginFormModal() {
     e.preventDefault()
     return dispatch(sessionActions.login({credential: 'Musk1', password: 'password2'}))
   }
-  return (
+  // const becomeHostClick = (e) => {
+  //   e.preventDefault()
+  //   e.stopPropagation()
+  //   setHost(true)
+  // }
+   return (
     <>
     <div onClick={e => e.stopPropagation()}>
       <div className='profile-menu'>
@@ -38,6 +44,9 @@ function LoginFormModal() {
           <li><button onClick={onSignupClick}>Sign Up</button></li>
           <li><button onClick={demoUserClick}>Demo User</button></li>
         </ul>
+        <div className='become-host'>
+          {/* <button onClick={becomeHostClick}>Become a host!</button> */}
+        </div>
       </div>
     </div>
 
@@ -54,6 +63,11 @@ function LoginFormModal() {
           <SignupFormPage/>
         </Modal>
       )}
+      {/* {(
+        <Modal className='become-host-modal' onClose={() => setHost(false)}>
+          <CreateSpot/>
+        </Modal>
+      )} */}
     </>
   );
 }
