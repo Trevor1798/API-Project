@@ -5,7 +5,7 @@ import LoginForm from './LoginForm';
 import * as sessionActions from '../../store/session'
 import {useDispatch} from 'react-redux'
 import SignupFormPage from '../SignupFormPage/SignupForm';
-import '../CSS/LoginForm.css'
+import '../ALLCSS/LoginForm.css'
 import CreateSpot from '../CreateSpots/CreateSpot';
 function LoginFormModal() {
   const dispatch = useDispatch()

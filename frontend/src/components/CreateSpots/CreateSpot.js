@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router";
 import * as spotsActions from '../../store/spots.js'
-import '../CSS/CreateSpot.css'
+import '../ALLCSS/CreateSpot.css'
 import { Modal } from '../../context/Modal'
 import { Link } from "react-router-dom";
 function CreateSpot () {
@@ -62,13 +62,13 @@ function CreateSpot () {
 
         // </div>
 
-            <form className="create-spot" onSubmit={handleSubmit}>
+        <form className="create-spot" onSubmit={handleSubmit}>
              <ul>{error.map((error, i) => (
                  <li key={i}>{error}</li>
                  ))}
             </ul>
+                 <div className='host-place'>Become a host!</div>
 
-            <div className='host-place'>Become a host!</div>
             <label>
                 <input className="host-name"
                     type='text'
