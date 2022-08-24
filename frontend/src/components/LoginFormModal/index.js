@@ -7,10 +7,12 @@ import {useDispatch} from 'react-redux'
 import SignupFormPage from '../SignupFormPage/SignupForm';
 import '../ALLCSS/LoginForm.css'
 import CreateSpot from '../CreateSpots/CreateSpot';
+import {Link} from 'react-router-dom'
 function LoginFormModal() {
   const dispatch = useDispatch()
   const [login, setLogin] = useState(false)
   const [signup, setSignup] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   // const [host, setHost] = useState(false)
 
   const onLoginClick = (e) =>{
@@ -30,14 +32,25 @@ function LoginFormModal() {
     e.preventDefault()
     return dispatch(sessionActions.login({credential: 'Musk1', password: 'password2'}))
   }
-  // const becomeHostClick = (e) => {
-  //   e.preventDefault()
-  //   e.stopPropagation()
-  //   setHost(true)
-  // }
+  const becomeHostClick = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setShowModal(true)
+  }
    return (
     <>
     <div onClick={e => e.stopPropagation()}>
+      <div className='become-host'>
+        <Link className='become-host-button' onClick={becomeHostClick}>Become A Host</Link>
+        {showModal && (
+          <>
+          <Modal onClose={() => setShowModal(false)} >
+          <CreateSpot/>
+          </Modal>
+          </>
+        )}
+
+        </div>
       <div className='profile-menu'>
         <ul>
           <li><button onClick={onLoginClick}>Log In</button></li>

@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import AllSpots from "./components/Spots";
 import CreateSpot from './components/CreateSpots/CreateSpot.js'
 import SpotDetails from "./components/SpotDetails/Spotdetails";
+import EditSpots from "./components/EditSpots/EditSpots";
 
 
 function App() {
@@ -25,13 +26,12 @@ function App() {
         <Switch>
           <Route exact path='/'>
           <AllSpots/>
-          <CreateSpot/>
           </Route>
           <Route exact path='/spots/:spotId'>
             <SpotDetails/>
           </Route>
           <Route exact path='/spots/:spotId/edit'>
-            
+            <EditSpots/>
           </Route>
           <Route exact path="/signup">
             <SignupFormPage />

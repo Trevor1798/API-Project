@@ -1,16 +1,21 @@
 import {useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import { useEffect } from 'react'
-
-
-
+import { useEffect, useState } from 'react'
+import {Link} from 'react-router-dom'
+import {Modal} from '../../context/Modal'
+import EditSpots from '../EditSpots/EditSpots.js'
 function SpotDetails() {
 const {spotId} = useParams()
 const spot= useSelector((state) => Object.values(state.spots))
 const spots = spot.find((spots) => spots.id == spotId)
 console.log('watch', spots)
+const [showModal, setShowModal] = useState(false)
 
-
+const handleCloseModal = (e) => {
+e.stopPropagation()
+e.preventDefault()
+ setShowModal(true)
+}
 // useEffect(() => {
 
 // })
@@ -25,6 +30,16 @@ console.log('watch', spots)
            </div>
         <div className='spot-image'>
             <img className='spot-preview' src={spots.previewImage} />
+        </div>
+        <div className='edit-spot' onClick={e => e.stopPropagation()}>
+            <button className='edit-spot' onClick={handleCloseModal}>Edit Spot</button>
+            {showModal && (
+                <>
+            <Modal onClose={() => setShowModal(false)} >
+            <EditSpots/>
+                </Modal>
+                </>
+            )}
         </div>
         </div>
     )

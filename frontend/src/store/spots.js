@@ -90,8 +90,10 @@ export const getDeleteSpots = (id) => async (dispatch) => {
            newState = {...state, ...action.spots['Spots']}
            return newState
            case CREATE_SPOTS:
-               newState = {...state}
+               newState = {...state, ...action.spots}
                return newState
+            case EDIT_SPOTS:
+                newState = {...state, ...action.spots}
                default:
                   return state
 
