@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom'
+import {NavLink, useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
@@ -9,6 +9,7 @@ import * as sessionUser from '../../store/spots'
 function SpotDetails() {
 const {spotId} = useParams()
 const spot= useSelector((state) => Object.values(state.spots))
+console.log('look', spot)
 const spots = spot.find((spots) => spots.id == spotId)
 console.log('watch', spots)
 const [showModal, setShowModal] = useState(false)
@@ -35,7 +36,7 @@ e.preventDefault()
             <img className='spot-preview' src={spots.previewImage} />
         </div>
         <div className='edit-spot' onClick={e => e.stopPropagation()}>
-            <button className='edit-spot' onClick={handleCloseModal}>Edit Spot</button>
+            <NavLink to={`/spots/${spots.id}/edit`} className='edit-spot'>Edit Spot</NavLink>
         </div>
         </div>
     )

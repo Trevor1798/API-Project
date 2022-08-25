@@ -1,0 +1,32 @@
+/* .card-container{
+width: 350px;
+height: 400px;
+
+}
+
+.spot-img {
+border-radius: 12px;
+height: 250px;
+width:300px;
+
+}
+.location {
+font-weight:bold;
+text-decoration: none;
+
+}
+.spot-price {
+
+font-weight: bold;
+text-decoration: none;
+}
+
+
+.spot-description {
+
+display: flex;
+justify-content: flex-end;
+grid-template-columns: 3fr 1fr;
+padding: 15px 0px
+
+} */

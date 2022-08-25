@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('Images', [
       {
         userId: 1,
-        url: 'https://the-naruto-world.fandom.com/wiki/Konoha?file=Konohavillage.jpg',
+        url: 'https://i1.sndcdn.com/avatars-OAyLCVsp5HEPZyaC-Ji3JFw-t500x500.jpg',
         previewImage: true,
         spotId: 1,
         reviewId: 1,

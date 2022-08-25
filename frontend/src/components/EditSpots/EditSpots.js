@@ -28,7 +28,8 @@ function EditSpots () {
     const handleSubmit = (e) => {
 
         e.preventDefault()
-        let dispatchData = {
+        let data = {
+            id: spotId,
             name: name,
             previewImage: previewImage,
             address: address,
@@ -41,7 +42,7 @@ function EditSpots () {
             price: price
         }
         setError([])
-        return dispatch(spotActions.getEditSpots({dispatchData}))
+        return dispatch(spotActions.getEditSpots(data, spots.id))
         .then(async (res) => setDispatched(true))
         .catch(async (res) => {
             const data = await res.json();
@@ -53,7 +54,7 @@ function EditSpots () {
         return <Redirect to='/spots/:spotId'/>
     }
     return (
-        <form className="create-spot" onSubmit={handleSubmit}>
+        <form className='spots-create' onSubmit={handleSubmit}>
         <ul>{error.map((error, i) => (
             <li key={i}>{error}</li>
             ))}

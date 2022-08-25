@@ -41,15 +41,14 @@ function ProfileButton({ user }) {
         <ul className="profile-dropdown">
           <li>Hello, {user.username}</li>
           <li>{user.email}</li>
-          <li>
             <li>
               <NavLink to='/owned-spots'>My Spots</NavLink>
             </li>
             <li>
-              <NavLink to='/spot-create'>Become a Host</NavLink>
+              <NavLink to='/spots-create'>Become a Host</NavLink>
             </li>
             <button onClick={logout}>Log Out</button>
-          </li>
+      
         </ul>
       )}
     </>

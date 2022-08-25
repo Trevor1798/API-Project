@@ -10,6 +10,7 @@ const {
 const { check } = require("express-validator");
 const Sequelize = require("sequelize");
 const { Op } = require("sequelize");
+const spot = require("../../db/models/spot");
 
 let paginationValidator = [
   check("page")
@@ -268,22 +269,25 @@ router.get("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
 });
 
 //Create a spot
-router.post("/", requireAuth, async (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
+  let spotId = req.params.spotId;
+  let spot = await Spot.findByPk(spotId);
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
-  const ownerId = req.user.id;
-  const newSpot = await Spot.create({
-    ownerId: ownerId,
-    address: address,
-    city: city,
-    state: state,
-    country: country,
-    name: name,
-    description: description,
-    price: price,
+  const newSpot = await Spot.bulkCreate({
+    ownerId: req.user.id,
+    address,
+    city,
+    state,
+    country,
+    name,
+    lat,
+    lng,
+    description,
+    price,
+
   });
 
-  res.status(200);
   res.json(newSpot);
 });
 
@@ -306,7 +310,8 @@ router.put(
       });
     }
 
-    if (spot.ownerId === currentUser) {
+    // if (spot.ownerId === currentUser) {
+    // }
       const {
         address,
         city,
@@ -318,7 +323,7 @@ router.put(
         description,
         price,
       } = req.body;
-      spot.set({
+      spot.update({
         address,
         city,
         state,
@@ -329,8 +334,7 @@ router.put(
         description,
         price,
       });
-    }
-    await spot.save();
+      await spot.save();
     res.status(200);
     return res.json(spot);
   }
@@ -349,8 +353,8 @@ router.delete("/:spotId", restoreUser, requireAuth, async (req, res) => {
     });
   }
 
-  await Spot.destroy({ where: { id: spotId } });
-  return res.json({ message: "Successfully Deleted", statusCode: 404 });
+    Spot.destroy()
+   res.json({ message: "Successfully Deleted", statusCode: 404 });
 });
 
 //create a review for a spot based on the spots id
