@@ -1,4 +1,4 @@
-/* .card-container{
+.card-container{
 width: 350px;
 height: 400px;
 
@@ -29,4 +29,8 @@ justify-content: flex-end;
 grid-template-columns: 3fr 1fr;
 padding: 15px 0px
 
-} */
+}
+
+.spotRating {
+    
+}

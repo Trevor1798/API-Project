@@ -4,7 +4,7 @@ import { useDispatch, useSelector} from "react-redux";
 import { Redirect } from "react-router";
 import * as spotsActions from '../../store/spots.js'
 
-import '../ALLCSS/CreateSpot.css'
+import '../ALLCSS/SpotDetails.css'
 
 
 
