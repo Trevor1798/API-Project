@@ -52,7 +52,7 @@ export const getCreateSpots = (spots) => async (dispatch) => {
     // const {address, city, state, country, lat, lng, name, description, price} = spots
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
-        headers: {"Content-type": "application/json"},
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(spots)
     })
 
@@ -67,7 +67,7 @@ export const getCreateSpots = (spots) => async (dispatch) => {
 export const getEditSpots = (spots, spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
-        headers: {"Content-type": 'application/json'},
+        headers: {"Content-Type": 'application/json'},
         body: JSON.stringify(spots)
     })
         if (response.ok) {

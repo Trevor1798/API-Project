@@ -12,6 +12,7 @@ const Sequelize = require("sequelize");
 const { Op } = require("sequelize");
 const spot = require("../../db/models/spot");
 
+
 let paginationValidator = [
   check("page")
     .exists({ checkFalsy: true })
@@ -269,12 +270,11 @@ router.get("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
 });
 
 //Create a spot
-router.post('/', requireAuth, async (req, res) => {
-  let spotId = req.params.spotId;
-  let spot = await Spot.findByPk(spotId);
+router.post('/', restoreUser, requireAuth, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } =
-    req.body;
-  const newSpot = await Spot.bulkCreate({
+  req.body;
+  console.log({ address, city, state, country, lat, lng, name, description, price})
+  const newSpot = await Spot.create({
     ownerId: req.user.id,
     address,
     city,
@@ -287,6 +287,11 @@ router.post('/', requireAuth, async (req, res) => {
     price,
 
   });
+  // await Image.create({
+  //   spotId: createSpots.id,
+  //   userId: req.user.id,
+  //   url: "'https://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png'"
+  // })
 
   res.json(newSpot);
 });

@@ -6,6 +6,8 @@ import * as spotsActions from '../../store/spots.js'
 
 import '../ALLCSS/CreateSpot.css'
 
+
+
 function CreateSpots () {
 
     let dispatch = useDispatch()
@@ -31,7 +33,7 @@ function CreateSpots () {
     const handleSubmit = (e) => {
         e.preventDefault()
         let data ={
-            
+
             name,
             previewImage,
             address,
@@ -43,7 +45,7 @@ function CreateSpots () {
             description,
             price,
         }
-
+            console.log(data)
             return  dispatch(spotsActions.getCreateSpots(data))
             .then(async (res) => setDispatched(true))
             .catch(async (res) => {
