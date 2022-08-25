@@ -4,12 +4,15 @@ import { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 import {Modal} from '../../context/Modal'
 import EditSpots from '../EditSpots/EditSpots.js'
+import OwnerSpots from '../EditSpots/OwnedSpots'
+import * as sessionUser from '../../store/spots'
 function SpotDetails() {
 const {spotId} = useParams()
 const spot= useSelector((state) => Object.values(state.spots))
 const spots = spot.find((spots) => spots.id == spotId)
 console.log('watch', spots)
 const [showModal, setShowModal] = useState(false)
+
 
 const handleCloseModal = (e) => {
 e.stopPropagation()
@@ -33,13 +36,6 @@ e.preventDefault()
         </div>
         <div className='edit-spot' onClick={e => e.stopPropagation()}>
             <button className='edit-spot' onClick={handleCloseModal}>Edit Spot</button>
-            {showModal && (
-                <>
-            <Modal onClose={() => setShowModal(false)} >
-            <EditSpots/>
-                </Modal>
-                </>
-            )}
         </div>
         </div>
     )

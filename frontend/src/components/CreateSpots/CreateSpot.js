@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import * as spotsActions from '../../store/spots.js'
 import '../ALLCSS/CreateSpot.css'
-import { Modal } from '../../context/Modal'
-import { Link } from "react-router-dom";
-function CreateSpot () {
+
+function CreateSpots () {
+
     let dispatch = useDispatch()
     const [dispatched, setDispatched] = useState(false)
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [price, setPrice] = useState()
+    const [price, setPrice] = useState(0)
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
@@ -19,7 +19,7 @@ function CreateSpot () {
     const [lng, setLng] = useState('')
     const [previewImage, setPreviewImage] = useState('')
     const [error, setError] = useState([])
-
+    // const spots= useSelector((state) => Object.values(state.spots))
 
 
     if (dispatched) {
@@ -28,39 +28,28 @@ function CreateSpot () {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        let dispatchData = {
+        let data = {
             name: name,
-            previewImage: previewImage,
-            address: address,
-            city: city,
-            state:state,
-            country: country,
-            lat: lat,
-            lng: lng,
-            description: description,
-            price: price
+            previewImage: previewImage ,
+            address: address ,
+            city: city ,
+            state: state,
+            country: country ,
+             lat: lat,
+             lng: lng ,
+            description: description ,
+            price: price,
         }
-        setError([])
-        return dispatch(spotsActions.getCreateSpots({dispatchData}))
-            .then(async (res) => setDispatched(true))
-            .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.error) setError(data.error);
-            })
+        // setError([])
+         dispatch(spotsActions.getCreateSpots(data))
+            // .then(async (res) => setDispatched(true))
+            // .catch(async (res) => {
+            // const data = await res.json();
+            // if (data && data.error) setError(data.error);
+            // })
     }
 
-
      return (
-
-        // <div className="form-container">
-        //  {/* <button className='becomehost-button'>
-        // {becomeHostClick}
-        // <Modal className='become-host-modal' onClose={() => setHost(false)}>
-        //   <CreateSpot/>
-        // </Modal>
-        // </button> */}
-
-        // </div>
 
         <form className="create-spot" onSubmit={handleSubmit}>
              <ul>{error.map((error, i) => (
@@ -160,9 +149,7 @@ function CreateSpot () {
             </button>
         </form>
 
-
-
             )
 }
 
-export default CreateSpot
+export default CreateSpots

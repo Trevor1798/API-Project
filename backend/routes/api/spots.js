@@ -268,25 +268,23 @@ router.get("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
 });
 
 //Create a spot
-router.post("/", spotValidator, restoreUser, requireAuth, async (req, res) => {
+router.post("/", requireAuth, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
   const ownerId = req.user.id;
   const newSpot = await Spot.create({
-    ownerId,
-    address,
-    city,
-    state,
-    country,
-    lat,
-    lng,
-    name,
-    description,
-    price,
+    ownerId: ownerId,
+    address: address,
+    city: city,
+    state: state,
+    country: country,
+    name: name,
+    description: description,
+    price: price,
   });
 
-  res.status(201);
-  return res.json(newSpot);
+  res.status(200);
+  res.json(newSpot);
 });
 
 //edit a spot

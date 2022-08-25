@@ -25,7 +25,6 @@ function EditSpots () {
     const spots = spot.find((spots) => spots.id == spotId)
 
 
-
     const handleSubmit = (e) => {
 
         e.preventDefault()

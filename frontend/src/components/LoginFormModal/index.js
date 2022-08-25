@@ -6,8 +6,7 @@ import * as sessionActions from '../../store/session'
 import {useDispatch} from 'react-redux'
 import SignupFormPage from '../SignupFormPage/SignupForm';
 import '../ALLCSS/LoginForm.css'
-import CreateSpot from '../CreateSpots/CreateSpot';
-import {Link} from 'react-router-dom'
+
 function LoginFormModal() {
   const dispatch = useDispatch()
   const [login, setLogin] = useState(false)
@@ -18,7 +17,6 @@ function LoginFormModal() {
   const onLoginClick = (e) =>{
     e.preventDefault()
     e.stopPropagation()
-
     setLogin(true)
   }
 
@@ -32,56 +30,28 @@ function LoginFormModal() {
     e.preventDefault()
     return dispatch(sessionActions.login({credential: 'Musk1', password: 'password2'}))
   }
-  const becomeHostClick = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setShowModal(true)
-  }
+
    return (
     <>
-    <div onClick={e => e.stopPropagation()}>
-      <div className='become-host'>
-        <Link className='become-host-button' onClick={becomeHostClick}>Become A Host</Link>
-        {showModal && (
-          <>
-          <Modal onClose={() => setShowModal(false)} >
-          <CreateSpot/>
-          </Modal>
-          </>
-        )}
-
-        </div>
       <div className='profile-menu'>
         <ul>
           <li><button onClick={onLoginClick}>Log In</button></li>
           <li><button onClick={onSignupClick}>Sign Up</button></li>
           <li><button onClick={demoUserClick}>Demo User</button></li>
         </ul>
-        <div className='become-host'>
-          {/* <button onClick={becomeHostClick}>Become a host!</button> */}
-        </div>
       </div>
-    </div>
-
       {login && (
         <Modal className='login-modal' onClose={() => setLogin(false)}>
-
-
           <LoginForm />
         </Modal>
       )}
       {signup && (
         <Modal className='signup-modal' onClose={() => setSignup(false)}>
-
           <SignupFormPage/>
         </Modal>
       )}
-      {/* {(
-        <Modal className='become-host-modal' onClose={() => setHost(false)}>
-          <CreateSpot/>
-        </Modal>
-      )} */}
-    </>
+      </>
+
   );
 }
 
