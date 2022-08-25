@@ -1,0 +1,31 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+.host-form-button {
+    display: flex;
+    height: 50px;
+    width: 570px;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 10px;
+    border: 1px solid;
+    align-items: center;
+    justify-content: center;
+
+
+    background-image: linear-gradient(to right, #e51d4e, #d80665);
+    color: white;
+    font-size: 20px;
+}

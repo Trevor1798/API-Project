@@ -6,6 +6,11 @@ import * as sessionActions from "./store/session";
 import * as spotsActions from './store/spots.js'
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/Spots";
+import CreateSpots from './components/CreateSpots/CreateSpot.js'
+import SpotDetails from "./components/SpotDetails/Spotdetails";
+import EditSpots from "./components/EditSpots/EditSpots";
+import OwnerSpots from "./components/EditSpots/OwnedSpots";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -22,9 +27,21 @@ function App() {
           <Route exact path='/'>
           <AllSpots/>
           </Route>
+          <Route exact path='/spots/:spotId'>
+            <SpotDetails/>
+          </Route>
+          <Route exact path='/spots/:spotId/edit'>
+            <EditSpots/>
+          </Route>
           <Route exact path="/signup">
             <SignupFormPage />
-          </Route>
+            </Route>
+            <Route exact path='/spots-create'>
+              <CreateSpots />
+            </Route>
+            <Route exact path='/spots/current'>
+            <OwnerSpots/>
+            </Route>
         </Switch>
       )}
     </>

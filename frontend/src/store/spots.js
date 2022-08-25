@@ -4,7 +4,7 @@ export const GET_SPOTS = 'spots/getSpots'
 export const CREATE_SPOTS = 'spots/createSpots'
 export const EDIT_SPOTS ='spots/editSpots'
 export const DELETE_SPOTS = 'spots/deleteSpots'
-
+export const OWNED_SPOTS = 'spots/ownedSpots'
 
 const allSpots = (spots) => {
     return {
@@ -31,6 +31,12 @@ const deleteSpots = (id) => {
     }
 }
 
+const ownerSpots = (spots) => {
+    return {
+        type: OWNED_SPOTS,
+        spots
+    }
+}
 
 export const getAllSpots = () => async (dispatch) => {
     const response = await csrfFetch('/api/spots', {
@@ -38,12 +44,12 @@ export const getAllSpots = () => async (dispatch) => {
     })
     if (response.ok) {
         const spots = await response.json()
-        console.log('why', response)
         dispatch(allSpots(spots))
     }
 }
 
 export const getCreateSpots = (spots) => async (dispatch) => {
+    // const {address, city, state, country, lat, lng, name, description, price} = spots
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: {'Content-type': 'application/json'},
@@ -51,8 +57,9 @@ export const getCreateSpots = (spots) => async (dispatch) => {
     })
     if (response.ok) {
         const data = await response.json()
+        console.log('createSpots - res', response)
         dispatch(createSpots(data))
-        return data
+
     }
 }
 
@@ -63,6 +70,7 @@ export const getEditSpots = (spots) => async (dispatch) => {
         body: JSON.stringify(spots)
     })
         if (response.ok) {
+            console.log('here', response)
             const data = await response.json()
             dispatch(editSpots(data))
             return data
@@ -80,6 +88,15 @@ export const getDeleteSpots = (id) => async (dispatch) => {
         }
 }
 
+export const getOwnedSpots = () => async (dispatch) => {
+    const response = await csrfFetch('/api/users/current/spots')
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(ownerSpots(data))
+        return data
+    }
+}
+
 
 
  const spotReducer = (state = {}, action) => {
@@ -88,10 +105,23 @@ export const getDeleteSpots = (id) => async (dispatch) => {
         case GET_SPOTS:
            newState = {...state, ...action.spots['Spots']}
            return newState
-        default:
-           return state
            case CREATE_SPOTS:
-            newState = {...state, ...action.spots}
+            newState = {...state}
+               newState[action.spots.id] = action.spots
+               return newState;
+            case EDIT_SPOTS:
+                newState = {...state, ...action.spots}
+                return newState
+            case OWNED_SPOTS:
+                newState = {...state, ...action.spots}
+                return newState
+            case DELETE_SPOTS:
+                newState = {...state}
+                delete newState[action.spotId]
+                return newState
+               default:
+                  return state
+
     }
 }
 

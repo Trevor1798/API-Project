@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { NavLink } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 
 function ProfileButton({ user }) {
@@ -34,13 +35,19 @@ function ProfileButton({ user }) {
     <>
 
       <button className='open-menu' onClick={openMenu}>
-        <i className="fa-regular fa-dumpster-fire"/>
+        <i className="fa-solid fa-dumpster-fire"/>
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
           <li>Hello, {user.username}</li>
           <li>{user.email}</li>
           <li>
+            <li>
+              <NavLink to='/owned-spots'>My Spots</NavLink>
+            </li>
+            <li>
+              <NavLink to='/spot-create'>Become a Host</NavLink>
+            </li>
             <button onClick={logout}>Log Out</button>
           </li>
         </ul>

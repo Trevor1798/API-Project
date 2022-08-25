@@ -1,11 +1,12 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SpotCard from "./SpotCard";
 import './spots.css'
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 
 function AllSpots() {
     const _spots = useSelector((state) => Object.values(state.spots))
+
 
         return (
             <div className="allSpots">
