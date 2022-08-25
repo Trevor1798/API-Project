@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {useParams} from 'react-router-dom'
+import { useDispatch, useSelector} from "react-redux";
 import { Redirect } from "react-router";
 import * as spotsActions from '../../store/spots.js'
-import '../ALLCSS/CreateSpot.css'
+
+import '../ALLCSS/SpotDetails.css'
+
+
 
 function CreateSpots () {
 
     let dispatch = useDispatch()
+    const {spotId} = useParams()
     const [dispatched, setDispatched] = useState(false)
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
@@ -21,33 +26,35 @@ function CreateSpots () {
     const [error, setError] = useState([])
     // const spots= useSelector((state) => Object.values(state.spots))
 
-
     if (dispatched) {
-        return <Redirect to='/spots'/>
+        return <Redirect to='/'/>
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        let data = {
-            name: name,
-            previewImage: previewImage ,
-            address: address ,
-            city: city ,
-            state: state,
-            country: country ,
-             lat: lat,
-             lng: lng ,
-            description: description ,
-            price: price,
+        let data ={
+
+            name,
+            previewImage,
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            description,
+            price,
         }
-        // setError([])
-         dispatch(spotsActions.getCreateSpots(data))
-            // .then(async (res) => setDispatched(true))
-            // .catch(async (res) => {
-            // const data = await res.json();
-            // if (data && data.error) setError(data.error);
-            // })
-    }
+            console.log(data)
+            return  dispatch(spotsActions.getCreateSpots(data))
+            .then(async (res) => setDispatched(true))
+            .catch(async (res) => {
+                const data = await res.json()
+                if (data && data.errors ) setError([])
+
+            })
+
+        }
 
      return (
 

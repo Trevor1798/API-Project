@@ -24,10 +24,10 @@ const editSpots = (spots) => {
         spots
     }
 }
-const deleteSpots = (id) => {
+const deleteSpots = (spotId) => {
     return {
         type: DELETE_SPOTS,
-        id
+        spotId
     }
 }
 
@@ -52,48 +52,53 @@ export const getCreateSpots = (spots) => async (dispatch) => {
     // const {address, city, state, country, lat, lng, name, description, price} = spots
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
-        headers: {'Content-type': 'application/json'},
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(spots)
     })
-    if (response.ok) {
+
         const data = await response.json()
         console.log('createSpots - res', response)
         dispatch(createSpots(data))
+        return response
 
     }
-}
 
-export const getEditSpots = (spots) => async (dispatch) => {
-    const response = await csrfFetch('/api/spots', {
-        method: 'POST',
-        headers: {"Content-type": 'application/json'},
+
+export const getEditSpots = (spots, spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'PUT',
+        headers: {"Content-Type": 'application/json'},
         body: JSON.stringify(spots)
     })
         if (response.ok) {
             console.log('here', response)
             const data = await response.json()
             dispatch(editSpots(data))
-            return data
+            return response
         }
 }
 
-export const getDeleteSpots = (id) => async (dispatch) => {
-    const response = await csrfFetch('/api/spots', {
+export const getDeleteSpots = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     })
         if (response.ok) {
-            const data = await response.json()
-            dispatch(deleteSpots(id))
-            return data
+            dispatch(deleteSpots(spotId))
+
+            return response
         }
 }
 
 export const getOwnedSpots = () => async (dispatch) => {
-    const response = await csrfFetch('/api/users/current/spots')
+    const response = await csrfFetch('/api/spots/current', {
+        method: 'GET',
+    })
+    console.log(response)
     if (response.ok) {
         const data = await response.json()
         dispatch(ownerSpots(data))
-        return data
+
+        return response
     }
 }
 
@@ -113,8 +118,8 @@ export const getOwnedSpots = () => async (dispatch) => {
                 newState = {...state, ...action.spots}
                 return newState
             case OWNED_SPOTS:
-                newState = {...state, ...action.spots}
-                return newState
+                newState[action.spots.id] = action.spots
+                return {...newState}
             case DELETE_SPOTS:
                 newState = {...state}
                 delete newState[action.spotId]

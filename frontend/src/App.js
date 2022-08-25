@@ -27,7 +27,7 @@ function App() {
           <Route exact path='/'>
           <AllSpots/>
           </Route>
-          <Route exact path='/spots/:spotId'>
+          <Route  path='/spots/:spotId'>
             <SpotDetails/>
           </Route>
           <Route exact path='/spots/:spotId/edit'>
@@ -39,8 +39,8 @@ function App() {
             <Route exact path='/spots-create'>
               <CreateSpots />
             </Route>
-            <Route exact path='/spots/current'>
-            <OwnerSpots/>
+            <Route exact path='/owned-spots'>
+              <OwnerSpots/>
             </Route>
         </Switch>
       )}
