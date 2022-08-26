@@ -1,6 +1,10 @@
 .card-container{
+display: flex;
 width: 350px;
-height: 400px;
+height: 270px;
+padding: 10px ;
+align-items:center;
+
 
 }
 
@@ -8,6 +12,16 @@ height: 400px;
 border-radius: 12px;
 height: 250px;
 width:300px;
+display: block;
+justify-content: center;
+object-fit: cover;
+}
+.spot-description {
+
+display: grid;
+grid-template-columns: 3fr 1fr;
+padding: 15px 0px;
+width: 300px;
 
 }
 .location {
@@ -16,21 +30,26 @@ text-decoration: none;
 
 }
 .spot-price {
-
+margin-top: 10px;
 font-weight: bold;
 text-decoration: none;
 }
 
-
-.spot-description {
-
-display: flex;
-justify-content: flex-end;
-grid-template-columns: 3fr 1fr;
-padding: 15px 0px
+.bottom-descriptions {
+    vertical-align: top;
+    display: inline-block;
+    width: 275px;
 
 }
 
 .spotRating {
-    
+
+}
+
+.bottom-description {
+display: flex;
+justify-content: flex-end;
+margin-right: 10px;
+margin-bottom: 20px;
+
 }

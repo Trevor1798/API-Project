@@ -1,4 +1,5 @@
 .spot-details {
+  
 
 }
 .spot-name {
@@ -24,7 +25,11 @@ border-radius: 12px;
 }
 
 .spot-preview {
-
+display: flex;
+width: 300;
+height: 350;
+justify-content: center;
+border-radius: 7px;
 }
 
 .star-rating{

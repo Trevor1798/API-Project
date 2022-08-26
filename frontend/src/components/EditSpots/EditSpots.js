@@ -51,7 +51,7 @@ function EditSpots () {
     }
 
     if (dispatched) {
-        return <Redirect to='/spots/:spotId'/>
+        return <Redirect to='/spots/owned-spots'/>
     }
     return (
         <form className='spots-create' onSubmit={handleSubmit}>

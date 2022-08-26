@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage/SignupForm";
 import * as sessionActions from "./store/session";
@@ -10,10 +10,11 @@ import CreateSpots from './components/CreateSpots/CreateSpot.js'
 import SpotDetails from "./components/SpotDetails/Spotdetails";
 import EditSpots from "./components/EditSpots/EditSpots";
 import OwnerSpots from "./components/EditSpots/OwnedSpots";
-
+import CreateReviewForm from './components/CreateReview/CreateReviewForm.js'
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  // const user = useSelector((state) => state.session.user.user)
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(spotsActions.getAllSpots())
@@ -27,7 +28,7 @@ function App() {
           <Route exact path='/'>
           <AllSpots/>
           </Route>
-          <Route  path='/spots/:spotId'>
+          <Route  exact path='/spots/:spotId'>
             <SpotDetails/>
           </Route>
           <Route exact path='/spots/:spotId/edit'>
@@ -41,6 +42,9 @@ function App() {
             </Route>
             <Route exact path='/owned-spots'>
               <OwnerSpots/>
+            </Route>
+            <Route exact path='/spots/:spotId/create-reviews'>
+              <CreateReviewForm/>
             </Route>
         </Switch>
       )}

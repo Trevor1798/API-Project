@@ -107,11 +107,12 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
       spot.dataValues.avgRating = "No ratings found";
     }
 
-    let previewImage = await Image.findOne({
-      attributes: ["url"],
-      where: { spotId: spot.id },
-    });
-    spot.dataValues.previewImage = previewImage.url;
+    // let previewImage = await Image.findOne({
+    //   attributes: ["url"],
+    //   where: { spotId: spot.id },
+    // });
+    //   console.log(previewImage)
+    //   spot.dataValues.previewImage = previewImage.url;
     // console.log(previewImage)
     // console.log(previewImage.url)
     // spot.dataValues.avgRating = 1
@@ -201,7 +202,7 @@ router.get("/:spotId", async (req, res) => {
 });
 
 //Get all Spots
-router.get("/", paginationValidator, async (req, res) => {
+router.get("/", restoreUser,  paginationValidator, async (req, res) => {
   // pagination
   let { size, page } = req.query;
   if (!page) page = 0;
@@ -266,7 +267,7 @@ router.get("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
     ],
   });
   res.status(200);
-  return res.json({ Reviews: reviews });
+  return res.json({Reviews: reviews});
 });
 
 //Create a spot
@@ -358,7 +359,7 @@ router.delete("/:spotId", restoreUser, requireAuth, async (req, res) => {
     });
   }
 
-    Spot.destroy()
+    spot.destroy()
    res.json({ message: "Successfully Deleted", statusCode: 404 });
 });
 

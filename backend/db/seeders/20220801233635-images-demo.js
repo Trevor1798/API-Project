@@ -24,6 +24,14 @@ module.exports = {
         spotId: 3,
         reviewId: 3,
 
+      },
+      {
+        userId: 2,
+        url: 'https://cdnb.artstation.com/p/assets/images/images/012/370/613/large/steve-lund-castle-color2.jpg?1534439770',
+        previewImage: true,
+        spotId: 4,
+        reviewId: 2,
+
       }
     ], {})
 
