@@ -23,6 +23,16 @@ router.get("/restore-user", (req, res) => {
   return res.json(req.user);
 });
 
+router.get('/set-token-cookie', async (_req, res) => {
+  const user = await User.findOne({
+    where: {
+      username: 'Musk1'
+    }
+  });
+  setTokenCookie(res, user);
+  return res.json({ user });
+});
+
 router.get("/require-auth", requireAuth, (req, res) => {
   return res.json(req.user);
 });

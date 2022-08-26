@@ -12,6 +12,16 @@ const allSpots = (spots) => {
         spots
     }
 }
+export const getAllSpots = () => async (dispatch) => {
+    const response = await csrfFetch('/api/spots', {
+        method: 'GET'
+    })
+    if (response.ok) {
+        const spots = await response.json()
+        dispatch(allSpots(spots))
+    }
+        return response
+}
 const createSpots = (spots) => {
     return {
         type: CREATE_SPOTS,
@@ -38,15 +48,6 @@ const ownerSpots = (spots) => {
     }
 }
 
-export const getAllSpots = () => async (dispatch) => {
-    const response = await csrfFetch('/api/spots', {
-        method: 'GET'
-    })
-    if (response.ok) {
-        const spots = await response.json()
-        dispatch(allSpots(spots))
-    }
-}
 
 export const getCreateSpots = (spots) => async (dispatch) => {
     // const {address, city, state, country, lat, lng, name, description, price} = spots
@@ -71,7 +72,6 @@ export const getEditSpots = (spots, spotId) => async (dispatch) => {
         body: JSON.stringify(spots)
     })
         if (response.ok) {
-            console.log('here', response)
             const data = await response.json()
             dispatch(editSpots(data))
             return response
@@ -98,8 +98,9 @@ export const getOwnedSpots = () => async (dispatch) => {
         const data = await response.json()
         dispatch(ownerSpots(data))
 
-        return response
+        return data
     }
+    return response
 }
 
 
@@ -108,18 +109,22 @@ export const getOwnedSpots = () => async (dispatch) => {
     let newState;
     switch(action.type) {
         case GET_SPOTS:
-           newState = {...state, ...action.spots['Spots']}
+           newState = {...action.spots['Spots']}
            return newState
            case CREATE_SPOTS:
             newState = {...state}
                newState[action.spots.id] = action.spots
                return newState;
             case EDIT_SPOTS:
-                newState = {...state, ...action.spots}
+                newState = {...state}
+                newState[action.spots.id] = action.spots
                 return newState
             case OWNED_SPOTS:
-                newState[action.spots.id] = action.spots
-                return {...newState}
+                newState = {}
+                action.spots.Spots.forEach((spot) => {
+                    newState[spot.id] = spot
+                })
+                return newState
             case DELETE_SPOTS:
                 newState = {...state}
                 delete newState[action.spotId]

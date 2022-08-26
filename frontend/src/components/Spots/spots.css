@@ -3,12 +3,14 @@
 .spotsContainer {
     display: flex;
     justify-content: center;
+
 }
 
 .spots-grid {
+    margin-top: 50px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    place-content: center;
-    gap: 50px;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+
 
 }

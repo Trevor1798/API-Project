@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import SpotCard from "./SpotCard";
 import './spots.css'
+
 import React, { useEffect, useState } from "react";
 
 

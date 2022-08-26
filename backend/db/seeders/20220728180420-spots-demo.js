@@ -45,6 +45,19 @@ module.exports = {
         price: 150,
 
       },
+      {
+        ownerId: 2,
+        address: 'the village',
+        city: 'sound Village',
+        state: 'Konaha',
+        country: 'The land of fire',
+        lat: 10.123456,
+        lng: 15.123456,
+        name: "Sasukes",
+        description: 'This all inclusive stay at the 7th Hokage\'s first apartment is a sight to see!',
+        price: 100,
+
+      }
     ])
   },
 

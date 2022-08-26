@@ -48,7 +48,7 @@ function ProfileButton({ user }) {
               <NavLink to='/spots-create'>Become a Host</NavLink>
             </li>
             <button onClick={logout}>Log Out</button>
-      
+
         </ul>
       )}
     </>

@@ -5,26 +5,29 @@ import {Link} from 'react-router-dom'
 import {Modal} from '../../context/Modal'
 import EditSpots from '../EditSpots/EditSpots.js'
 import OwnerSpots from '../EditSpots/OwnedSpots'
-import * as sessionUser from '../../store/spots'
+import * as reviewActions from '../../store/reviews'
+import * as spotsActions from '../../store/spots'
+import '../ALLCSS/Spotcard.css'
+// import '../ALLCSS/SpotDetails.css'
+import SpotCard from '../Spots/SpotCard'
 function SpotDetails() {
+let dispatch = useDispatch()
 const {spotId} = useParams()
 const spot= useSelector((state) => Object.values(state.spots))
-console.log('look', spot)
+const review = useSelector((state) => Object.values(state.reviews))
+
 const spots = spot.find((spots) => spots.id == spotId)
-console.log('watch', spots)
-const [showModal, setShowModal] = useState(false)
+let plswork = review.filter((review) => review.spotId === parseInt(spotId))
+
+useEffect(() => {
+    dispatch(reviewActions.getReviews(spotId))
+}, [dispatch, spotId])
 
 
-const handleCloseModal = (e) => {
-e.stopPropagation()
-e.preventDefault()
- setShowModal(true)
-}
-// useEffect(() => {
-
-// })
 
     return (
+
+
         <div className='spot-details'>
             <div className='spot-name'>{spots.name}</div>
             <div className='spot-address'>{spots.city}, {spots.state}, {spots.country}</div>
@@ -35,10 +38,18 @@ e.preventDefault()
         <div className='spot-image'>
             <img className='spot-preview' src={spots.previewImage} />
         </div>
-        <div className='edit-spot' onClick={e => e.stopPropagation()}>
+        <div className="spotDetailReviews">
+        REVIEWS:
+        {plswork.map((review, i) => (
+          <div key={review.id} review={review}>Review: {''}
+          <i className="fa-solid fa-star"></i>{review.stars} {review.review}</div>
+        ))}
+      </div>
+        {/* <div className='edit-spot' onClick={e => e.stopPropagation()}>
             <NavLink to={`/spots/${spots.id}/edit`} className='edit-spot'>Edit Spot</NavLink>
+        </div> */}
         </div>
-        </div>
+
     )
 }
 

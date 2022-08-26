@@ -37,23 +37,24 @@ const deleteReview = (reviewId) => {
 
 
 export const getReviews = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-        method: 'GET'
-    })
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
     if (response.ok) {
         const data = await response.json()
-        dispatch(getReview(data.Reviews))
+        console.log(data)
+        dispatch(getReview(data))
+        return response
     }
 }
 
 export const getCreateReviews = (spotId, review) => async (dispatch) => {
-    const response = await csrfFetch(`api/spots/${spotId}/reviews`, {
-        method: 'POST',
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(review)
     })
     const data = await response.json()
     dispatch(createReview(data))
+    return response
 }
 
 
@@ -64,12 +65,13 @@ const reviewReducer = (state ={}, action) => {
             case CREATE_REVIEW:
             newState = {...state}
             newState[action.review.id] = action.review
+            console.log(newState)
             return newState
             case GET_REVIEW:
             newState = {}
-            action.reviews.forEach((review) => {
-                newState[review.id] = review
-            })
+          action.review.Reviews.forEach((review) => {
+            newState[review.id] = review
+        })
             return newState
             default:
                 return state
