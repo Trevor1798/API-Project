@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 
 function ProfileButton({ user }) {
@@ -32,26 +32,28 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <>
+
+      <div className='user-container'>
 
       <button className='open-menu' onClick={openMenu}>
-        <i className="fa-solid fa-dumpster-fire"/>
+        <i className="fa-solid fa-bars"/>
+        <i className="fas fa-user-cirle fa-2xl"/>
       </button>
       {showMenu && (
-        <ul className="profile-dropdown">
-          <li>Hello, {user.username}</li>
-          <li>{user.email}</li>
-            <li>
-              <NavLink to='/owned-spots'>My Spots</NavLink>
-            </li>
-            <li>
-              <NavLink to='/spots-create'>Become a Host</NavLink>
-            </li>
-            <button onClick={logout}>Log Out</button>
+        <div className="profile-dropdown-container">
+          <div className="profile-dropdown">
+          <li className="profile-name">Hello, {user.username}</li>
+          <div className="profile-spots"
+               onClick={() => <NavLink to='/spots/owned-spots'/>}>My Spots</div>
+          <div className="profile-host"
+               onClick={() => <NavLink to='spots/spots-create'/>}>Become a Host</div>
 
-        </ul>
+            <button className="logout" onClick={logout}>Log Out</button>
+        </div>
+        </div>
       )}
-    </>
+
+      </div>
   );
 }
 

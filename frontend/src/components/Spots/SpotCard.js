@@ -12,7 +12,6 @@ import '../ALLCSS/Spotcard.css'
             <div className='card-container'>
                 <img className="spot-img" src={spots.previewImage} alt='previewImage' />
                 </div>
-        </Link>
                 <div className="spot-description">
                 <div className="bottom-descriptions">
                 <div className='location'>{spots.city}, {spots.state}</div>
@@ -25,6 +24,7 @@ import '../ALLCSS/Spotcard.css'
                 </div>
             </div>
         </div>
+        </Link>
         </>
 
     )

@@ -24,9 +24,13 @@ console.log({sessionUser})
 
   return (
     <ul>
-      <li>
+      <li className="container">
 
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/">
+          <img className="airbnb-logo" src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png'
+          alt='AirBnb-logo.png'
+          />
+        </NavLink>
         {isLoaded && sessionLinks}
       </li>
     </ul>
