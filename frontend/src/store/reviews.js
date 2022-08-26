@@ -46,26 +46,50 @@ export const getReviews = (spotId) => async (dispatch) => {
     }
 }
 
-export const getCreateReviews = (spotId, review) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(review)
-    })
+export const getCreateReviews = (reviewData) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${reviewData.spotId}/reviews`,{
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(reviewData)
+    } )
+    console.log('this is response', response)
     const data = await response.json()
     dispatch(createReview(data))
     return response
 }
 
+export const getDeleteReviews = (reviewId) => async (dispatch) => {
+
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"},
+      
+    })
+    dispatch(deleteReview(reviewId))
+
+}
 
 
 const reviewReducer = (state ={}, action) => {
     let newState;
         switch(action.type){
             case CREATE_REVIEW:
-            newState = {...state}
-            newState[action.review.id] = action.review
-            console.log(newState)
+                action.review.Review.forEach((review) => {
+                    newState[review.id] = review
+                })
+                // if (!state[action.review.id]) {
+                //     const newStateForm = { ...state};
+                //     newStateForm[action.review.id] = action.review
+                //     return newStateForm
+                // }
+
+                // return {
+                //     ...state,
+                //     [action.review.id]: {
+                //         ...state[action.review.id],
+                //         ...action.payload
+                //     }
+                // }
             return newState
             case GET_REVIEW:
             newState = {}
@@ -73,6 +97,10 @@ const reviewReducer = (state ={}, action) => {
             newState[review.id] = review
         })
             return newState
+            case DELETE_REVIEW:
+                newState = {...state}
+                delete newState[action.reviewId]
+                return newState
             default:
                 return state
         }

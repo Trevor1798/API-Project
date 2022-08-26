@@ -153,7 +153,7 @@ router.delete("/:reviewId", restoreUser, requireAuth, async (req, res) => {
       statusCode: 403,
     });
   }
-  deleteReview.destroy();
+  await deleteReview.destroy();
   res.status(200);
   return res.json({
     message: "Successfully deleted",
