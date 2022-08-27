@@ -7,10 +7,8 @@ import EditSpots from '../EditSpots/EditSpots.js'
 import OwnerSpots from '../EditSpots/OwnedSpots'
 import * as reviewActions from '../../store/reviews'
 import * as spotsActions from '../../store/spots'
-import '../ALLCSS/Spotcard.css'
-// import '../ALLCSS/SpotDetails.css'
-import SpotCard from '../Spots/SpotCard'
-function SpotDetails() {
+import '../ALLCSS/SpotDetails.css'
+function SpotDetails( ) {
 let dispatch = useDispatch()
 const {spotId} = useParams()
 const spot= useSelector((state) => Object.values(state.spots))
@@ -23,32 +21,47 @@ useEffect(() => {
     dispatch(reviewActions.getReviews(spotId))
 }, [dispatch, spotId])
 
+const handleDelete = (reviewId) => {
 
+    dispatch(reviewActions.getDeleteReviews(parseInt(reviewId)))
+}
 
     return (
 
+        <div className='wrapper-container'>
 
-        <div className='spot-details'>
-            <div className='spot-name'>{spots.name}</div>
-            <div className='spot-address'>{spots.city}, {spots.state}, {spots.country}</div>
-            <div className='spot-description'>{spots.description}</div>
-           <div className='star-rating'>
+
+        <div className='spotdetails-container'>
+            <div className='spotdetailscontainer2'>
+            <div className='spotdetails-name'>{spots.name}
+            </div>
+            <div className='image-container'>
+            <img className='spotdetails-image' src={spots.previewImage} />
+            </div>
+        <div className='spotdetails-container'>
+            <div className='spotdetails-address'>{spots.city}, {spots.state}, {spots.country}</div>
+            <div className='spotdetails-description'>{spots.description}</div>
+           <div className='stardetails-rating'>
             <i className='fa-solid fa-star'>{spots.avgRating}</i>
+            </div>
+        </div>
            </div>
-        <div className='spot-image'>
-            <img className='spot-preview' src={spots.previewImage} />
-        </div>
         <div className="spotDetailReviews">
-        REVIEWS:
         {plswork.map((review, i) => (
-          <div key={review.id} review={review}>Review: {''}
+            <>
+        <div key={review.id} review={review}>Review: {''}
           <i className="fa-solid fa-star"></i>{review.stars} {review.review}</div>
-        ))}
-      </div>
-        {/* <div className='edit-spot' onClick={e => e.stopPropagation()}>
-            <NavLink to={`/spots/${spots.id}/edit`} className='edit-spot'>Edit Spot</NavLink>
-        </div> */}
+        <div className='detailscreate-review'>
+
+        <button onClick={() => handleDelete(review.id)}>Delete Review</button>
         </div>
+        </>
+        ))}
+        <Link to={`/spots/${spots.id}/create-reviews`}>Create Review</Link>
+      </div>
+        </div>
+        </div>
+
 
     )
 }

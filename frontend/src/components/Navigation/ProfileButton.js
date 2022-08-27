@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  let history = useHistory()
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -32,26 +33,34 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <>
+    <div className="test-route">
 
+        {/* <NavLink to='/spots/owned-spots'></NavLink>
+        <NavLink to='/spots/spots-create'>Become a Host</NavLink> */}
+      <div className='user-container'>
+        <div className="user-profile-menu">
       <button className='open-menu' onClick={openMenu}>
-        <i className="fa-solid fa-dumpster-fire"/>
+        <i className="fa-solid fa-bars"/>
+        <i className="fas fa-user-cirle fa-2xl"/>
       </button>
       {showMenu && (
-        <ul className="profile-dropdown">
-          <li>Hello, {user.username}</li>
-          <li>{user.email}</li>
-            <li>
-              <NavLink to='/owned-spots'>My Spots</NavLink>
-            </li>
-            <li>
-              <NavLink to='/spots-create'>Become a Host</NavLink>
-            </li>
-            <button onClick={logout}>Log Out</button>
+        <div className="profile-dropdown-container">
+          <div className="profile-dropdown">
 
-        </ul>
+          <li className="profile-name">Hello, {user.username}</li>
+          <div className="profile-spots"
+               onClick={() => history.push('/owned-spots')}>My Spots</div>
+          <div className="profile-host"
+               onClick={() => history.push('/spots-create')}>Become a Host</div>
+
+            <button className="logout" onClick={logout}>Log Out</button>
+        </div>
+        </div>
       )}
-    </>
+
+      </div>
+      </div>
+      </div>
   );
 }
 

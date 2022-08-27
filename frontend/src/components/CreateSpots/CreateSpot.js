@@ -22,7 +22,7 @@ function CreateSpots () {
     const [country, setCountry] = useState('')
     const [lat, setLat] = useState('')
     const [lng, setLng] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
+    const [url, setUrl] = useState('')
     const [error, setError] = useState([])
     // const spots= useSelector((state) => Object.values(state.spots))
 
@@ -35,7 +35,7 @@ function CreateSpots () {
         let data ={
 
             name,
-            previewImage,
+            previewImage:  true,
             address,
             city,
             state,
@@ -44,6 +44,7 @@ function CreateSpots () {
             lng,
             description,
             price,
+            url: url
         }
             console.log(data)
             return  dispatch(spotsActions.getCreateSpots(data))
@@ -78,8 +79,8 @@ function CreateSpots () {
                 <input className="preview-image"
                 type='text'
                 placeholder='Image URL'
-                value={previewImage}
-                onChange={(e) => setPreviewImage(e.target.value)}
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
                 required
                 />
             </label>

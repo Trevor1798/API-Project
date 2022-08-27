@@ -394,14 +394,14 @@ router.post("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
   }
 
   const createUserReview = await Review.create({
-    review,
+    review: review,
     stars,
     userId: req.user.id,
     spotId: spotId,
   });
-
+console.log('broh', createUserReview)
   res.status(200);
-  return res.json(createUserReview);
+  return res.json({createUserReview});
 });
 
 //get all booking for a spot based on the spots id

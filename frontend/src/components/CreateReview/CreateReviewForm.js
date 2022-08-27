@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as reviewActions from "../../store/reviews";
 function CreateReviewForm() {
   let dispatch = useDispatch();
   let history = useHistory();
   let { spotId } = useParams();
   const [errors, setErrors] = useState([]);
-  const [reviewInput, setReviewInput] = useState("");
-  const [rating, setRating] = useState("");
+  const [review, setReview] = useState("");
+  const [stars, setStars] = useState("");
 
-  useEffect(() => {
-    const data = { review: reviewInput, rating: rating };
-    dispatch(reviewActions.getCreateReviews(spotId, data));
-  }, [dispatch, spotId]);
+  const user = useSelector(state => state.session.user)
+
   const handleButtonClick = (e) => {
     e.preventDefault();
+    const data = {
+      userId: user.id,
+      spotId,
+      review,
+      stars
+     };
+    dispatch(reviewActions.getCreateReviews(data));
     history.push(`/spots/${spotId}`);
   };
 
@@ -32,16 +37,18 @@ function CreateReviewForm() {
           <input
             className="review-input"
             type="text"
-            value={reviewInput}
-            onChange={(e) => setReviewInput(e.target.value)}
+            value={review}
+            placeholder="Review"
+            onChange={(e) => setReview(e.target.value)}
           />
         </label>
         <label>
           <input
             className="review-rating"
             type="text"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
+            placeholder="rating"
+            value={stars}
+            onChange={(e) => setStars(e.target.value)}
           />
         </label>
         <button className="set-review-button" type="submit">

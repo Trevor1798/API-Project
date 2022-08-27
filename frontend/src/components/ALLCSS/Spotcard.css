@@ -1,55 +1,73 @@
 .card-container{
-display: flex;
-width: 350px;
-height: 270px;
-padding: 10px ;
-align-items:center;
+    height: 370px;
+    width: 340px;
+    /* display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; */
 
 
 }
 
 .spot-img {
-border-radius: 12px;
-height: 250px;
+border-radius: 7px;
+height: 280px;
 width:300px;
 display: block;
-justify-content: center;
+
 object-fit: cover;
 }
 .spot-description {
-
-display: grid;
-grid-template-columns: 3fr 1fr;
-padding: 15px 0px;
+display: flex;
 width: 300px;
+padding: 15px;
+height: 80px;
+margin-bottom: 40px;
+/* margin-right: 10px; */
+/* border: 2px solid black; */
 
 }
 .location {
 font-weight:bold;
 text-decoration: none;
-
+margin-bottom: 10px;
+position: relative;
+margin-right: 15px;
 }
 .spot-price {
-margin-top: 10px;
+margin-top: 5px;
 font-weight: bold;
 text-decoration: none;
 }
 
 .bottom-descriptions {
-    vertical-align: top;
-    display: inline-block;
-    width: 275px;
+
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-right: 15px;
+
 
 }
 
-.spotRating {
-
+.star-rating{
+  margin-right: 5px;
+  position: relative;
+  bottom: 50px;
+  right: 10px;
+  display: flex;
+  gap: 5px;
+  font-weight: bold;
 }
+
 
 .bottom-description {
 display: flex;
 justify-content: flex-end;
-margin-right: 10px;
-margin-bottom: 20px;
+/* margin-left: 70px; */
 
+
+}
+
+a {
+    text-decoration: none;
+    color: black
 }
