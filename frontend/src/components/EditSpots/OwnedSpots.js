@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import SpotCard from "../Spots/SpotCard.js";
 import { useEffect } from "react";
-
+import '../ALLCSS/Spotcard.css'
 function OwnerSpots() {
   // let {ownerId} = useParams()
   let dispatch = useDispatch();
@@ -27,29 +27,39 @@ function OwnerSpots() {
     return null;
   }
   return (
-    <div>
-      {/* <SpotCard key={spots.id} spots={spots} /> */}
+
+    <div className="allSpots">
+      <div className="spotsContainer">
+        <div className="spots-grid">
+
       {ownedSpots.map((spots, i) => (
-        <div key={i}>
-          {spots.address}
-          <Link to={`/spots/${spots.id}/edit`}>Edit spot</Link>
-          <div>{spots.name}</div>
-          <div>{spots.avgRating}</div>
-          <div>
-            {spots.city}, {spots.state}, {spots.country}
-          </div>
-          <div>{`$${spots.price}`}</div>
-          {spots.previewImage}
-          <button
-            className="delete-spot"
-            onClick={() => handleDelete(spots.id)}>
-            Delete Spot
-          </button>
+        <SpotCard key={spots.id} spots={spots}/>
+        ))}
         </div>
-      ))}
-      <div className="spots-container"></div>
-    </div>
-  );
+      </div>
+        </div>
+
+       //   <div key={spots.id}>
+        //     <div>
+        //       {spots.address}</div>
+        //     <div>{spots.name}</div>
+        //     <div>{spots.avgRating}</div>
+        //     <Link to={`/spots/${spots.id}/edit`}>Edit spot</Link>
+        //     <div>
+        //       {spots.city}, {spots.state}, {spots.country}
+
+        //     </div>
+        //     <div>{`$${spots.price}`}</div>
+        //     <div>{spots.previewImage}</div>
+      //     <button
+      //       className="delete-spot"
+      //       onClick={() => handleDelete(spots.id)}>
+      //       Delete Spot
+      //     </button>
+      //   </div>
+      // ))}
+      // <div className="spots-container"></div>
+      );
 }
 
 export default OwnerSpots;

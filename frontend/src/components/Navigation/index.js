@@ -24,6 +24,7 @@ console.log({sessionUser})
 
   return (
     <ul>
+      {isLoaded && sessionLinks}
       <li className="container">
 
         <NavLink exact to="/">
@@ -31,7 +32,6 @@ console.log({sessionUser})
           alt='AirBnb-logo.png'
           />
         </NavLink>
-        {isLoaded && sessionLinks}
       </li>
     </ul>
   );
