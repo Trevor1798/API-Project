@@ -9,8 +9,11 @@
 .spots-grid {
     margin-top: 50px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    place-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    /* justify-items: end; */
+    /* margin-left: auto;
+    margin-right: auto; */
+    gap: 5px;
 
 
 }

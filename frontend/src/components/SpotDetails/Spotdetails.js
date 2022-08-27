@@ -8,9 +8,7 @@ import OwnerSpots from '../EditSpots/OwnedSpots'
 import * as reviewActions from '../../store/reviews'
 import * as spotsActions from '../../store/spots'
 import '../ALLCSS/SpotDetails.css'
-// import '../ALLCSS/SpotDetails.css'
-import SpotCard from '../Spots/SpotCard'
-function SpotDetails() {
+function SpotDetails( ) {
 let dispatch = useDispatch()
 const {spotId} = useParams()
 const spot= useSelector((state) => Object.values(state.spots))
@@ -30,15 +28,23 @@ const handleDelete = (reviewId) => {
 
     return (
 
+        <div className='wrapper-container'>
 
-        <div className='spotdetails-image'>
-            <div className='spotdetails-name'>{spots.name}</div>
-            <img className='spotdetails-preview' src={spots.previewImage} />
+
+        <div className='spotdetails-container'>
+            <div className='spotdetailscontainer2'>
+            <div className='spotdetails-name'>{spots.name}
+            </div>
+            <div className='image-container'>
+            <img className='spotdetails-image' src={spots.previewImage} />
+            </div>
         <div className='spotdetails-container'>
             <div className='spotdetails-address'>{spots.city}, {spots.state}, {spots.country}</div>
             <div className='spotdetails-description'>{spots.description}</div>
            <div className='stardetails-rating'>
             <i className='fa-solid fa-star'>{spots.avgRating}</i>
+            </div>
+        </div>
            </div>
         <div className="spotDetailReviews">
         {plswork.map((review, i) => (
