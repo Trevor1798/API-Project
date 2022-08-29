@@ -42,7 +42,7 @@ function OwnerSpots() {
             Delete Spot
           </button>
 
-            <div key={spots.id}>
+            <div key={i}>
             <div>
               {spots.address}</div>
             <div>{spots.name}</div>
