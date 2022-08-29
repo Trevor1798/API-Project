@@ -4,6 +4,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import SpotCard from "../Spots/SpotCard.js";
 import { useEffect, useState } from "react";
 import '../ALLCSS/Spotcard.css'
+import '../ALLCSS/EditSpots.css'
 function OwnerSpots() {
   // let {ownerId} = useParams()
   let dispatch = useDispatch();
@@ -44,7 +45,7 @@ function OwnerSpots() {
           </button>
           <button
             className='edit-spot'
-              onClick={<Link to={`spots/${spots.id}/edit`}>Edit Spot</Link>}>
+              onClick={<Link to={`/spots/${spots.id}/edit`}>Edit Spot</Link>}>
               </button>
               </div>
 

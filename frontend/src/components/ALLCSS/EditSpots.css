@@ -1,0 +1,26 @@
+.edit-spot {
+
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 7px ;
+    width: 506px;
+    height:45px;
+    background: linear-gradient(to left, #e51e50, #d70565);
+    color: white;
+    border:none;
+    margin-top: 5px;
+}
+
+.delete-spot {
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 7px ;
+    width: 506px;
+    height:45px;
+    background: linear-gradient(to left, #e51e50, #d70565);
+    color: white;
+    border:none;
+    margin-top: 5px;
+}
