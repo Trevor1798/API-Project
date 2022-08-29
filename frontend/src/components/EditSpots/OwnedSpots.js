@@ -42,6 +42,10 @@ function OwnerSpots() {
             onClick={() => handleDelete(spots.id)}>
             Delete Spot
           </button>
+          <button
+            className='edit-spot'
+              onClick={<Link to={`spots/${spots.id}/edit`}>Edit Spot</Link>}>
+              </button>
               </div>
 
         ))}
