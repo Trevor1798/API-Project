@@ -28,23 +28,27 @@ function OwnerSpots() {
     return null;
   }
   return (
-
+    <>
     <div className="allSpots">
       <div className="spotsContainer">
         <div className="spots-grid">
 
       {ownedSpots.map((spots, i) => {
-      return <SpotCard key={spots.id} spots={spots}/>
+        return <SpotCard key={spots.id} spots={spots}/>
 
       })}
+      <div>
+
           <button
             className="delete-spot"
             onClick={() => handleDelete(spots.id)}>
             Delete Spot
           </button>
+              </div>
         </div>
       </div>
         </div>
+              </>
 
        //   <div key={spots.id}>
         //     <div>
