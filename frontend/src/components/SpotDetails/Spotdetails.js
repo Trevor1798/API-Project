@@ -19,7 +19,7 @@ let plswork = review.filter((review) => review.spotId == spotId)
 
 useEffect(() => {
     dispatch(reviewActions.getReviews(spotId))
-}, [dispatch, spotId])
+}, [])
 
 const handleDelete = (reviewId) => {
 
