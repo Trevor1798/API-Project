@@ -3,8 +3,8 @@ import {useParams} from 'react-router-dom'
 import { useDispatch, useSelector} from "react-redux";
 import { Redirect } from "react-router";
 import * as spotsActions from '../../store/spots.js'
-
 import '../ALLCSS/SpotDetails.css'
+import '../ALLCSS/CreateSpot.css'
 
 
 
@@ -58,8 +58,9 @@ function CreateSpots () {
         }
 
      return (
+        <div className="create-spot">
 
-        <form className="create-spot" onSubmit={handleSubmit}>
+        <form className="create-spots" onSubmit={handleSubmit}>
              <ul>{error.map((error, i) => (
                  <li key={i}>{error}</li>
                  ))}
@@ -156,6 +157,7 @@ function CreateSpots () {
                 Create your spot!
             </button>
         </form>
+                    </div>
 
             )
 }

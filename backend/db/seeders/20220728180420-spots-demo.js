@@ -54,7 +54,7 @@ module.exports = {
         lat: 10.123456,
         lng: 15.123456,
         name: "Snow-den",
-        description: 'This all inclusive stay at the 7th Hokage\'s first apartment is a sight to see!',
+        description: 'Incredible views',
         price: 100,
 
       },
@@ -121,13 +121,13 @@ module.exports = {
       {
         ownerId: 3,
         address: 'Rick Ross house',
-        city: 'Miama',
+        city: 'Miami',
         state: 'Florida',
         country: 'United States',
         lat: 10.123456,
         lng: 12.534356,
         name: 'MTV Cribs: Rick Ross House',
-        description: 'Rick Ross is one of our best part-time host at this company, enjoy the mtv cribs experience with full filming while you pretend to be Rick Ross, he might even show up!',
+        description: 'Rick Ross is one of our best part-time host at this company, enjoy the mtv cribs experience!',
         price: 250,
       },
       {
@@ -139,7 +139,7 @@ module.exports = {
         lat: 33.123456,
         lng: 11.123456,
         name: 'Farm House',
-        description: 'Help us work on the farm at a discounted price now only 100 a night we offer the all in one farming experinece, rooster wake up call is an additional amenity for $10',
+        description: 'Help us work on the farm at a discounted price now only 100 a night we offer the all in one farming experience, rooster wake up call is an additional amenity for $10',
         price: 100,
       },
       {
@@ -154,7 +154,7 @@ module.exports = {
         description: 'Be just like Aang and learn the ways of airbending at the this all inlcusive resort!',
         price: 250,
       },
-    
+
     ])
   },
 

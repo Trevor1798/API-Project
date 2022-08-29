@@ -2,7 +2,7 @@ import * as spotsActions from "../../store/spots.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import SpotCard from "../Spots/SpotCard.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import '../ALLCSS/Spotcard.css'
 function OwnerSpots() {
   // let {ownerId} = useParams()
@@ -11,14 +11,15 @@ function OwnerSpots() {
 
   const spots = useSelector((state) => Object.values(state.spots));
   const ownedSpots = spots.filter((spot) => spot.ownerId === user.id);
-
+  const [isLoaded, setIsLoaded] = useState(false)
   console.log({ user, ownedSpots, spots });
 
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(spotsActions.getOwnedSpots());
-  }, []);
+    dispatch(spotsActions.getOwnedSpots())
+    .then(async (res) => setIsLoaded(true))
+  }, [dispatch]);
 
   const handleDelete = (spotId) => {
     dispatch(spotsActions.getDeleteSpots(spotId));
@@ -32,9 +33,10 @@ function OwnerSpots() {
       <div className="spotsContainer">
         <div className="spots-grid">
 
-      {ownedSpots.map((spots, i) => (
-        <SpotCard key={spots.id} spots={spots}/>
-        ))}
+      {ownedSpots.map((spots, i) => {
+      return <SpotCard key={spots.id} spots={spots}/>
+
+      })}
         </div>
       </div>
         </div>

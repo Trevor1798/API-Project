@@ -47,7 +47,8 @@ function ProfileButton({ user }) {
         <div className="profile-dropdown-container">
           <div className="profile-dropdown">
 
-          <li className="profile-name">Hello, {user.username}</li>
+          <li className="profile-name">Hello, {user.username}
+          <Link to='/'></Link></li>
           <div className="profile-spots"
                onClick={() => history.push('/owned-spots')}>My Spots</div>
           <div className="profile-host"

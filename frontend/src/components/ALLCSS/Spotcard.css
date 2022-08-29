@@ -29,8 +29,11 @@ margin-bottom: 40px;
 font-weight:bold;
 text-decoration: none;
 margin-bottom: 10px;
-position: relative;
+
 margin-right: 15px;
+display: flex;
+
+
 }
 .spot-price {
 margin-top: 5px;
@@ -54,7 +57,7 @@ text-decoration: none;
   bottom: 50px;
   right: 10px;
   display: flex;
-  gap: 5px;
+  gap: px;
   font-weight: bold;
 }
 

@@ -399,7 +399,7 @@ router.post("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
     userId: req.user.id,
     spotId: spotId,
   });
-console.log('broh', createUserReview)
+console.log('broh', cr)
   res.status(200);
   return res.json({createUserReview});
 });

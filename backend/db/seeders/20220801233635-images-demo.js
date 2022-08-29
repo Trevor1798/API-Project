@@ -70,7 +70,7 @@ module.exports = {
       },
       {
         userId: 3,
-        url: 'https://sandrarose.com/images34/rick-745x416.jpg',
+        url: 'https://s1.cdn.autoevolution.com/images/news/rick-ross-shows-off-some-of-the-classics-in-his-car-collection-on-mtv-cribs-170028-7.jpg',
         previewImage: true,
         spotId: 10,
         // reviewId:10 ,

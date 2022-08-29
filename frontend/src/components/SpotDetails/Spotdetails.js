@@ -39,25 +39,29 @@ const handleDelete = (reviewId) => {
             <img className='spotdetails-image' src={spots.previewImage} />
             </div>
         <div className='spotdetails-container'>
-            <div className='spotdetails-address'>{spots.city}, {spots.state}, {spots.country}</div>
-            <div className='spotdetails-description'>{spots.description}</div>
+            <div className='spotdetails-address'>{spots.city}, {spots.state}, {spots.country}
+            <div className='spotdetails-description'>{spots.description}
            <div className='stardetails-rating'>
             <i className='fa-solid fa-star'>{spots.avgRating}</i>
+            </div>
+            </div>
             </div>
         </div>
            </div>
         <div className="spotDetailReviews">
         {plswork.map((review, i) => (
             <>
-        <div key={review.id} review={review}>Review: {''}
+            <button className='create-review-button'>
+        <Link to={`/spots/${spots.id}/create-reviews`}>Create Review</Link>
+            </button>
+        <div className='detailscreate-review' key={review.id} review={review}>Reviews: {''}
           <i className="fa-solid fa-star"></i>{review.stars} {review.review}</div>
         <div className='detailscreate-review'>
 
-        <button onClick={() => handleDelete(review.id)}>Delete Review</button>
+        <button className='delete-review-button' onClick={() => handleDelete(review.id)}>Delete Review</button>
         </div>
         </>
         ))}
-        <Link to={`/spots/${spots.id}/create-reviews`}>Create Review</Link>
       </div>
         </div>
         </div>

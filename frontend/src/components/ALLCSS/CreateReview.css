@@ -1,0 +1,23 @@
+.set-review-button {
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 7px ;
+    width: 142px;
+    height:35px;
+    background: linear-gradient(to left, #e51e50, #d70565);
+    color: white;
+    border:none
+}
+.cancel-button {
+
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 7px ;
+    width: 142px;
+    height:35px;
+    background: linear-gradient(to left, #e51e50, #d70565);
+    color: white;
+    border:none
+}

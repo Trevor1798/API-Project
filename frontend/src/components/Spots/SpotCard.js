@@ -5,7 +5,7 @@ import '../ALLCSS/Spotcard.css'
 
 
  const SpotCard = ({spots}) => {
-    console.log({spots})
+    // console.log({spots})
     return (
         <>
 
