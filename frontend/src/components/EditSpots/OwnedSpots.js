@@ -28,7 +28,8 @@ function OwnerSpots() {
     return null;
   }
   return (
-    
+    <>
+
     <div className="allSpots">
       <div className="spotsContainer">
         <div className="spots-grid">
@@ -47,6 +48,7 @@ function OwnerSpots() {
       </div>
         </div>
         </div>
+</>
 
        //   <div key={spots.id}>
         //     <div>
@@ -60,7 +62,6 @@ function OwnerSpots() {
         //     </div>
         //     <div>{`$${spots.price}`}</div>
         //     <div>{spots.previewImage}</div>
-        </div>
       // ))}
       // <div className="spots-container"></div>
       );
