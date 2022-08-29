@@ -41,26 +41,27 @@ function OwnerSpots() {
             onClick={() => handleDelete(spots.id)}>
             Delete Spot
           </button>
+
+            <div key={spots.id}>
+            <div>
+              {spots.address}</div>
+            <div>{spots.name}</div>
+            <div>{spots.avgRating}</div>
+            <Link to={`/spots/${spots.id}/edit`}>Edit spot</Link>
+            <div>
+              {spots.city}, {spots.state}, {spots.country}
+
+            </div>
+            <div>{`$${spots.price}`}</div>
+            <div>{spots.previewImage}</div>
+
+      <div className="spots-container"></div>
         </div>
+      </div>
       })}
       </div>
+      </div>
         </div>
-        </div>
-
-       //   <div key={spots.id}>
-        //     <div>
-        //       {spots.address}</div>
-        //     <div>{spots.name}</div>
-        //     <div>{spots.avgRating}</div>
-        //     <Link to={`/spots/${spots.id}/edit`}>Edit spot</Link>
-        //     <div>
-        //       {spots.city}, {spots.state}, {spots.country}
-
-        //     </div>
-        //     <div>{`$${spots.price}`}</div>
-        //     <div>{spots.previewImage}</div>
-      // ))}
-      // <div className="spots-container"></div>
       );
 }
 
