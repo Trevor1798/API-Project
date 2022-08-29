@@ -10,7 +10,7 @@ function OwnerSpots() {
   const user = useSelector((state) => state.session.user.user);
 
   const spots = useSelector((state) => Object.values(state.spots));
-  const ownedSpots = spots.filter((spot) => spot.ownerId === user.id);
+  const ownedSpots = spots.filter((spot) => spot.ownerId == user.id);
   const [isLoaded, setIsLoaded] = useState(false)
   console.log({ user, ownedSpots, spots });
 
