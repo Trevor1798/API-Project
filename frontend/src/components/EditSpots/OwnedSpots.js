@@ -18,7 +18,7 @@ function OwnerSpots() {
 
   useEffect(() => {
     dispatch(spotsActions.getOwnedSpots())
-    .then(async (res) => setIsLoaded(true))
+
   }, [dispatch]);
 
   const handleDelete = (spotId) => {
@@ -34,11 +34,17 @@ function OwnerSpots() {
         <div className="spots-grid">
 
       {ownedSpots.map((spots, i) => {
-      return <SpotCard key={spots.id} spots={spots}/>
-
-      })}
+      // return <SpotCard key={spots.id} spots={spots}/>
+        <div>
+          <button
+            className="delete-spot"
+            onClick={() => handleDelete(spots.id)}>
+            Delete Spot
+          </button>
         </div>
+      })}
       </div>
+        </div>
         </div>
 
        //   <div key={spots.id}>
@@ -53,12 +59,6 @@ function OwnerSpots() {
         //     </div>
         //     <div>{`$${spots.price}`}</div>
         //     <div>{spots.previewImage}</div>
-      //     <button
-      //       className="delete-spot"
-      //       onClick={() => handleDelete(spots.id)}>
-      //       Delete Spot
-      //     </button>
-      //   </div>
       // ))}
       // <div className="spots-container"></div>
       );

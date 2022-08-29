@@ -25,6 +25,7 @@ const handleDelete = (reviewId) => {
 
     dispatch(reviewActions.getDeleteReviews(parseInt(reviewId)))
 }
+if (!spots) return null
 
     return (
 
