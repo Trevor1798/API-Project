@@ -54,6 +54,8 @@ function EditSpots () {
         return <Redirect to='/spots/owned-spots'/>
     }
     return (
+        <div className='wrapper'>
+
         <form className='spots-create' onSubmit={handleSubmit}>
         <ul>{error.map((error, i) => (
             <li key={i}>{error}</li>
@@ -152,6 +154,7 @@ function EditSpots () {
        </button>
    </form>
 
+               </div>
 
 
 

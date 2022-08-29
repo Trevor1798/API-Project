@@ -5,6 +5,8 @@ import SpotCard from "../Spots/SpotCard.js";
 import { useEffect, useState } from "react";
 import '../ALLCSS/Spotcard.css'
 import '../ALLCSS/EditSpots.css'
+import { Modal } from "../../context/Modal.js";
+import EditSpots from "./EditSpots.js";
 function OwnerSpots() {
   // let {ownerId} = useParams()
   let dispatch = useDispatch();
@@ -12,7 +14,7 @@ function OwnerSpots() {
 
   const spots = useSelector((state) => Object.values(state.spots));
   const ownedSpots = spots.filter((spot) => spot.ownerId === user.id);
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   console.log({ user, ownedSpots, spots });
 
   const history = useHistory();
@@ -20,11 +22,17 @@ function OwnerSpots() {
   useEffect(() => {
     dispatch(spotsActions.getOwnedSpots())
 
+
   }, [dispatch]);
 
   const handleDelete = (spotId) => {
     dispatch(spotsActions.getDeleteSpots(spotId));
   };
+
+  const onEditSpotClick = (e) => {
+    e.preventDefault()
+    setShowModal(true)
+  }
   if (!spots) {
     return null;
   }
@@ -43,11 +51,16 @@ function OwnerSpots() {
             onClick={() => handleDelete(spots.id)}>
             Delete Spot
           </button>
-          <button
-            className='edit-spot'
-              onClick={() => <Link to={`/spots/${spots.id}/edit`}></Link>}>
-                Edit Spot
-              </button>
+          <div>
+            <div>
+              <button className="edit-spot" onClick={onEditSpotClick}>Edit Spot</button> </div>
+            { showModal &&
+
+              <Modal onClose={() => setShowModal(false)}>
+              <EditSpots />
+            </Modal>
+            }
+          </div>
               </div>
 
         ))}

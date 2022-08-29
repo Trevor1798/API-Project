@@ -1,3 +1,10 @@
+.wrapper {
+
+    width: 400px;
+    display: flex;
+    justify-content: center;
+}
+
 .edit-spot {
 
     padding: 10px;
@@ -23,4 +30,31 @@
     color: white;
     border:none;
     margin-top: 5px;
+}
+.spots-create {
+
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    /* height: 682px; */
+    width: 468px;
+    box-shadow: 7px #333434;
+    margin: 5px;
+    padding: 5px;
+}
+
+
+.host-form-button {
+    height: 60px;
+    width: 335px;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 10px;
+    border: 1px solid;
+    background-image: linear-gradient(to right, #e51d4e, #d80665);
+    color: white;
+    font-size: 20px;
+
 }
