@@ -10,7 +10,7 @@ function OwnerSpots() {
   const user = useSelector((state) => state.session.user.user);
 
   const spots = useSelector((state) => Object.values(state.spots));
-  const ownedSpots = spots.filter((spot) => spot.ownerId == user.id);
+  const ownedSpots = spots.filter((spot) => spot.ownerId === user.id);
   const [isLoaded, setIsLoaded] = useState(false)
   console.log({ user, ownedSpots, spots });
 
@@ -34,34 +34,33 @@ function OwnerSpots() {
         <div className="spots-grid">
 
       {ownedSpots.map((spots, i) => {
-      // return <SpotCard key={spots.id} spots={spots}/>
-        <div>
+      return <SpotCard key={spots.id} spots={spots}/>
+
+      })}
           <button
             className="delete-spot"
             onClick={() => handleDelete(spots.id)}>
             Delete Spot
           </button>
-
-            <div key={i}>
-            <div>
-              {spots.address}</div>
-            <div>{spots.name}</div>
-            <div>{spots.avgRating}</div>
-            <Link to={`/spots/${spots.id}/edit`}>Edit spot</Link>
-            <div>
-              {spots.city}, {spots.state}, {spots.country}
-
-            </div>
-            <div>{`$${spots.price}`}</div>
-            <div>{spots.previewImage}</div>
-
-      <div className="spots-container"></div>
         </div>
       </div>
-      })}
-      </div>
-      </div>
         </div>
+
+       //   <div key={spots.id}>
+        //     <div>
+        //       {spots.address}</div>
+        //     <div>{spots.name}</div>
+        //     <div>{spots.avgRating}</div>
+        //     <Link to={`/spots/${spots.id}/edit`}>Edit spot</Link>
+        //     <div>
+        //       {spots.city}, {spots.state}, {spots.country}
+
+        //     </div>
+        //     <div>{`$${spots.price}`}</div>
+        //     <div>{spots.previewImage}</div>
+        </div>
+      // ))}
+      // <div className="spots-container"></div>
       );
 }
 
