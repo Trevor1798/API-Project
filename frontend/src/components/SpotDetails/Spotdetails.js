@@ -14,12 +14,12 @@ const {spotId} = useParams()
 const spot= useSelector((state) => Object.values(state.spots))
 const review = useSelector((state) => Object.values(state.reviews))
 
-const spots = spot.find((spots) => spots.id == spotId)
-let plswork = review.filter((review) => review.spotId == spotId)
+const spots = spot.find((spots) => spots.id === spotId)
+let plswork = review.filter((review) => review.spotId === parseInt(spotId))
 
 useEffect(() => {
     dispatch(reviewActions.getReviews(spotId))
-}, [])
+}, [dispatch])
 
 const handleDelete = (reviewId) => {
 
@@ -54,7 +54,7 @@ const handleDelete = (reviewId) => {
             <button className='create-review-button'>
         <Link to={`/spots/${spots.id}/create-reviews`}>Create Review</Link>
             </button>
-        <div className='detailscreate-review' key={review?.id} review={review}>Reviews: {''}
+        <div className='detailscreate-review' key={review.id} review={review}>Reviews: {''}
           <i className="fa-solid fa-star"></i>{review.stars} {review.review}</div>
         <div className='detailscreate-review'>
 
