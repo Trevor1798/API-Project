@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as reviewActions from "../../store/reviews";
+import '../ALLCSS/CreateReview.css'
 function CreateReviewForm() {
   let dispatch = useDispatch();
   let history = useHistory();
