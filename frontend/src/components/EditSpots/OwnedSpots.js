@@ -45,7 +45,8 @@ function OwnerSpots() {
           </button>
           <button
             className='edit-spot'
-              onClick={<Link to={`/spots/${spots.id}/edit`}>Edit Spot</Link>}>
+              onClick={() => <Link to={`/spots/${spots.id}/edit`}></Link>}>
+                Edit Spot
               </button>
               </div>
 
