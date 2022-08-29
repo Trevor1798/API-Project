@@ -14,7 +14,7 @@ const {spotId} = useParams()
 const spot= useSelector((state) => Object.values(state.spots))
 const review = useSelector((state) => Object.values(state.reviews))
 
-const spots = spot.find((spots) => spots.id === spotId)
+const spots = spot.find((spots) => spots.id == spotId)
 let plswork = review.filter((review) => review.spotId === parseInt(spotId))
 
 useEffect(() => {
