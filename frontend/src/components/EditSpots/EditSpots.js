@@ -22,7 +22,7 @@ function EditSpots () {
 
     const {spotId} = useParams()
     const spot= useSelector((state) => Object.values(state.spots))
-    const spots = spot.find((spots) => spots.id == spotId)
+    const spots = spot.find((spots) => spots.id === parseInt(spotId))
 
 
     const handleSubmit = (e) => {

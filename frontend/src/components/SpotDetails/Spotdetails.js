@@ -27,7 +27,8 @@ const handleDelete = (reviewId) => {
 }
 if (!spots) return null
 
-    return (
+    return (spots && (
+
 
         <div className='wrapper-container'>
 
@@ -67,6 +68,7 @@ if (!spots) return null
         </div>
         </div>
 
+)
 
     )
 }

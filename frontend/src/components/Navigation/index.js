@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";
+import SignupFormPage from "../SignupFormPage/SignupForm";
 
 
 function Navigation({ isLoaded }) {
@@ -12,10 +13,11 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
 console.log({sessionUser})
   if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser.user} />;
+    sessionLinks = <ProfileButton user={sessionUser} />;
   } else {
     sessionLinks = (
       <>
+
         <LoginFormModal />
 
       </>
@@ -32,7 +34,11 @@ console.log({sessionUser})
           alt='AirBnb-logo.png'
           />
         </NavLink>
+        <div className="profile-host"
+               onClick={() => history.push('/spots-create')}>Become a Host</div>
       </li>
+
+
     </ul>
   );
 }
