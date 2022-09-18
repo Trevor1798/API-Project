@@ -34,11 +34,11 @@ font-size: 28px;
 }
 
 .spotdetails-description {
-/* display:grid;
-grid-template-columns: 1fr 1fr 1fr 1fr; */
-width: 390px;
-margin-top: 150px;
-/* position: relative; */
+    /* display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; */
+    width: 390px;
+    margin-top: 150px;
+    /* position: relative; */
 left: -150px;
 top: 50px;
 font-weight:bold;
@@ -47,7 +47,8 @@ font-size: 22px;
 
 }
 .spotdetails-image {
-width: 1065px;
+    width: 1065px;
+    border-radius: 7px;
 
 
 }
@@ -61,9 +62,9 @@ width: 1065px;
     object-fit: cover;
 
 
-/* display:flex;
-align-items: center;
-justify-content: center; */
+    /* display:flex;
+    align-items: center;
+    justify-content: center; */
 
 
 
@@ -79,13 +80,13 @@ justify-content: center; */
 }
 
 .stardetails-rating{
-font-weight: bold;
-display: flex;
-justify-content:center;
-position: relative;
-left: 830px;
-top: -350px;
-margin-top: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content:center;
+    position: relative;
+    left: 830px;
+    top: -350px;
+    margin-top: 30px;
 }
 
 .spotDetailReviews {
@@ -103,10 +104,10 @@ margin-top: 30px;
 
 }
 .detailscreate-review {
-gap: 10px;
-display: flex;
-width: 550px;
-font-size: 20px;
+    gap: 10px;
+    display: flex;
+    width: 550px;
+    font-size: 20px;
 
 }
 .fa-star {
