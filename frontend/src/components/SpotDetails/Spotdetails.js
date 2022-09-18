@@ -41,6 +41,7 @@ if (!spots) return null
             <img className='spotdetails-image' src={spots.previewImage} />
             </div>
         <div className='spotdetails-container'>
+            {/* <div className='hosted-by'>Home hosted by {spots.ownerId}</div> */}
             <div className='spotdetails-address'>{spots.city}, {spots.state}, {spots.country}
             <div className='spotdetails-description'>{spots.description}
            <div className='stardetails-rating'>
