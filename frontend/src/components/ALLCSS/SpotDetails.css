@@ -17,12 +17,50 @@ position: relative;
 
 /* border: 2px solid black */
 }
+.review-details {
+    display: flex;
+    position: absolute;
+    left: 45px;
+    top: 54.5px;
+    font-size: 18px;
+    font-weight: lighter;
+
+}
+.city-state {
+    position: absolute;
+    font-weight: lighter;
+    top: 54.5px;
+    left: 278px;
+    font-size: 18px;
+    text-decoration: underline;
+}
+.super-host {
+    position: relative;
+    top: 34.5px;
+    left: 5px;
+    font-size: 18px;
+    font-weight: lighter;
+}
+.reviews-count {
+   display: flex;
+   position: relative;
+   right: -10px;
+   top: -1px;
+    text-decoration: underline;
+
+}
+.fa-medal {
+    position: relative;
+    right: 8px;
+
+}
 .spotdetails-name {
 font-weight: bold;
-margin-bottom: 30px;
+margin-bottom: 20px;
+margin-top: 20px;
 display: flex;
 justify-content: flex-start;
-font-size: 32px;
+font-size: 20px;
 }
 .spotdetails-address {
 display: block;
@@ -55,7 +93,7 @@ font-size: 22px;
 
 .image-container {
     display: flex;
-    margin-top: 30px;
+    margin-top: 45px;
     width:1065px;
     height: 600px;
     /* border: 2px solid black; */
@@ -69,7 +107,16 @@ font-size: 22px;
 
 
 }
+.avg-rating {
 
+    position: absolute;
+    right: 77px;
+}
+
+.fa-star {
+    position: absolute;
+    right: 107px;
+}
 .spot-details-preview {
     display: flex;
     justify-content:center;
@@ -80,12 +127,12 @@ font-size: 22px;
 }
 
 .stardetails-rating{
-    font-weight: bold;
+    font-weight: lighter;
     display: flex;
     justify-content:center;
     position: relative;
     left: 830px;
-    top: -350px;
+    bottom: 950px;
     margin-top: 30px;
 }
 

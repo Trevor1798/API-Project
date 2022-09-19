@@ -1,12 +1,16 @@
 
+.container-top {
+margin: 0px;
+padding: 0px;
 
+}
 .container {
 display: flex;
 
 position:sticky;
 height: 20px;
 margin: auto;
-width: 110%;
+/* width: 110%; */
 justify-content: space-between;
 border-bottom: 1px solid rgba(128, 128, 128, 0.198);
 padding-bottom: 10px;

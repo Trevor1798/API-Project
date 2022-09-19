@@ -49,7 +49,7 @@ function OwnerSpots({isLoaded}) {
       <div className="spots-grid">
       {ownedSpots.map((spots, i) => (
         <div>
-                <SpotCard key={i} spots={spots} />
+                <SpotCard key={spots.id} spots={spots} />
                 <button
                   className="delete-spot"
                   onClick={() => handleDelete(spots.id)}
@@ -64,7 +64,7 @@ function OwnerSpots({isLoaded}) {
                   </div>
                   {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
-                      <EditSpots  spots={spot.id}/>
+                      <EditSpots/>
                     </Modal>
                   )}
                 </div>

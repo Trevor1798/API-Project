@@ -25,7 +25,7 @@ console.log({sessionUser})
   }
 
   return (
-    <ul>
+    <ul className='container-top'>
       {isLoaded && sessionLinks}
       <div className="navBar">
 

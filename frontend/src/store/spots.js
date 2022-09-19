@@ -28,7 +28,7 @@ const createSpots = (spots) => {
     spots,
   };
 };
-const editSpots = (spots) => {
+const editSpots = (spots, spotId) => {
   return {
     type: EDIT_SPOTS,
     spots,
@@ -73,16 +73,19 @@ export const getCreateSpots = (spots) => async (dispatch) => {
 };
 
 export const getEditSpots = (spots, spotId) => async (dispatch) => {
+  console.log('checking valid data', spotId)
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spots),
   });
+
   if (response.ok) {
     const data = await response.json();
     dispatch(editSpots(data));
-    return response;
+    return data
   }
+  return response;
 };
 
 export const getDeleteSpots = (spotId) => async (dispatch) => {
