@@ -7,7 +7,7 @@ import '../ALLCSS/Spotcard.css'
  const SpotCard = ({spots}) => {
     // console.log({spots})
     //
-    return (
+    return ( 
         <>
 
         <Link className='card-container' to={`/spots/${spots.id}`}>

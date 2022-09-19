@@ -10,9 +10,9 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-    if (sessionUser) {
-      return <Redirect to='/' />
-    }
+    // if (sessionUser) {
+    //   return <Redirect to='/' />
+    // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,11 +28,14 @@ function LoginForm() {
   return (
     <form className='login-form' onSubmit={handleSubmit}>
       <div className='modal-header'>Log in or Sign up</div>
+      <div className="error-container">
+
       <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
+        {errors.map((errors, idx) => (
+          <li className="login-error" key={idx}>{errors}</li>
+          ))}
       </ul>
+          </div>
           <div className='login-welcome'>Welcome to AirBnb</div>
       <div className='login-form-input'>
       <label>

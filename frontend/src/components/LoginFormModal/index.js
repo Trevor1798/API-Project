@@ -16,13 +16,13 @@ function LoginFormModal() {
 
   const onLoginClick = (e) =>{
     e.preventDefault()
-    e.stopPropagation()
+
     setLogin(true)
   }
 
   const onSignupClick = (e) => {
     e.preventDefault()
-    e.stopPropagation()
+
     setSignup(true)
   }
 
@@ -33,9 +33,9 @@ function LoginFormModal() {
 
    return (
     <>
-      <div className='profile-menu'>
-        <ul>
-          <li><button onClick={onLoginClick}>Log In</button></li>
+      <div className='profile-dropdown'>
+        <ul className='profile-menu'>
+          <li className='Log-in'><button onClick={onLoginClick}>Log In</button></li>
           <li><button onClick={onSignupClick}>Sign Up</button></li>
           <li><button onClick={demoUserClick}>Demo User</button></li>
         </ul>
