@@ -104,20 +104,20 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
       );
     //   console.log(parseFloat(reviews[0].avgRating).toFixed(1))
     } else {
-      spot.dataValues.avgRating = "No ratings found";
+      spot.dataValues.avgRating = "0.0";
     }
 
-    // let previewImage = await Image.findOne({
-    //   attributes: ["url"],
-    //   where: { spotId: spot.id },
-    // });
-    //   console.log(previewImage)
-    //   spot.dataValues.previewImage = previewImage.url;
-    // console.log(previewImage)
-    // console.log(previewImage.url)
-    // spot.dataValues.avgRating = 1
-    // spot.previewImage = previewImage.url
-    // console.log(previewImage.dataValues.url)
+    let previewImage = await Image.findOne({
+      attributes: ["url"],
+      where: { spotId: spot.id },
+    });
+      console.log(previewImage)
+      spot.dataValues.previewImage = previewImage.url;
+    console.log(previewImage)
+    console.log(previewImage.url)
+
+    spot.previewImage = previewImage.url
+    console.log(previewImage.dataValues.url)
   }
   //   spot.dataValues.previewImage = console.log(image.dataValues.url)
   //   console.log(dataValues)
@@ -399,7 +399,7 @@ router.post("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
     userId: req.user.id,
     spotId: spotId,
   });
-console.log('broh', cr)
+
   res.status(200);
   return res.json({createUserReview});
 });

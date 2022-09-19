@@ -27,6 +27,8 @@ console.log({sessionUser})
   return (
     <ul>
       {isLoaded && sessionLinks}
+      <div className="navBar">
+
       <li className="container">
 
         <NavLink exact to="/">
@@ -38,6 +40,7 @@ console.log({sessionUser})
                onClick={() => history.push('/spots-create')}>Become a Host</div>
       </li>
 
+        </div>
 
     </ul>
   );

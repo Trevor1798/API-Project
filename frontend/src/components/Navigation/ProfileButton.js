@@ -48,7 +48,7 @@ function ProfileButton({ user }) {
         <div className="profile-dropdown-container">
           <div className="profile-dropdown">
 
-          <div className="profile-name">Hello, {sessionUser.user.firstName}
+          <div className="profile-name">Hello, {user.firstName || sessionUser.user.firstName}
            <Link to='/'></Link></div>
           <div className="profile-spots">
           <Link to='/owned-spots'>My Spots</Link></div>
