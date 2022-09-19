@@ -11,16 +11,16 @@ import * as reviewActions from "../../store/reviews";
 
 
 
-function OwnerSpots() {
-  let {spotId} = useParams()
+function OwnerSpots({isLoaded}) {
+
   let dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const spot = useSelector((state) => state.spots);
-  const spots = spots[spotId]
-  const ownedSpots = spot.filter((spot) => spot.ownerId == sessionUser.id);
+  const spot = useSelector((state) => Object.values(state.spots));
+
+  const ownedSpots = spot.filter((spot) => spot.ownerId === sessionUser.user.id);
 
   const [showModal, setShowModal] = useState(false);
-  console.log({ sessionUser, ownedSpots, spot });
+  // console.log({ sessionUser, ownedSpots, spot });
 
 
   const history = useHistory();
@@ -32,28 +32,28 @@ function OwnerSpots() {
 
   const handleDelete = (spotId) => {
     dispatch(spotsActions.getDeleteSpots(spotId));
-    history.push("/spots-create");
+    history.push("/owned-spots");
   };
 
   const onEditSpotClick = (e) => {
     e.preventDefault();
     setShowModal(true);
   };
-  if (!spots) {
-    return null;
-  }
+
   return (
+
     <>
+
       <div className="allSpots">
-        <div className="spotsContainer">
-          <div className="spots-grid">
-            {ownedSpots?.map((spots, i) => (
-              <div>
-                <SpotCard key={spots?.id} spots={spots} />
+      <div className="spotsContainer">
+      <div className="spots-grid">
+      {ownedSpots.map((spots, i) => (
+        <div>
+                <SpotCard key={i} spots={spots} />
                 <button
                   className="delete-spot"
                   onClick={() => handleDelete(spots.id)}
-                >
+                  >
                   Delete Spot
                 </button>
                 <div>
@@ -64,32 +64,33 @@ function OwnerSpots() {
                   </div>
                   {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
-                      <EditSpots />
+                      <EditSpots  spots={spot.id}/>
                     </Modal>
                   )}
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </div>
-    </>
+            </div>
+            </div>
+            </div>
 
-    //   <div key={spots.id}>
-    //     <div>
-    //       {spots.address}</div>
-    //     <div>{spots.name}</div>
-    //     <div>{spots.avgRating}</div>
-    //     <Link to={`/spots/${spots.id}/edit`}>Edit spot</Link>
-    //     <div>
-    //       {spots.city}, {spots.state}, {spots.country}
+            </>
 
-    //     </div>
-    //     <div>{`$${spots.price}`}</div>
-    //     <div>{spots.previewImage}</div>
-    // ))}
-    // <div className="spots-container"></div>
-  );
-}
+            //   <div key={spots.id}>
+            //     <div>
+            //       {spots.address}</div>
+            //     <div>{spots.name}</div>
+            //     <div>{spots.avgRating}</div>
+            //     <Link to={`/spots/${spots.id}/edit`}>Edit spot</Link>
+            //     <div>
+            //       {spots.city}, {spots.state}, {spots.country}
 
-export default OwnerSpots;
+            //     </div>
+            //     <div>{`$${spots.price}`}</div>
+            //     <div>{spots.previewImage}</div>
+            // ))}
+            // <div className="spots-container"></div>
+            );
+          }
+
+          export default OwnerSpots;

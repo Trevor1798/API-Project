@@ -42,7 +42,7 @@ function EditSpots () {
             price: price
         }
         setError([])
-        return dispatch(spotActions.getEditSpots(data, spots.id))
+        return dispatch(spotActions.getEditSpots(data))
         .then(async (res) => setDispatched(true))
         .catch(async (res) => {
             const data = await res.json();
@@ -50,9 +50,7 @@ function EditSpots () {
         })
     }
 
-    if (dispatched) {
-        return <Redirect to='/spots/owned-spots'/>
-    }
+
     return (
         <div className='wrapper'>
 
@@ -149,7 +147,7 @@ function EditSpots () {
                onChange={(e) => setPrice(e.target.value)}
                />
        </label>
-       <button className="host-form-button" type='submit'>
+       <button className="host-form-button" type='submit' >
            Edit spot
        </button>
    </form>
