@@ -17,7 +17,7 @@ function OwnerSpots() {
   const sessionUser = useSelector((state) => state.session.user);
   const spot = useSelector((state) => state.spots);
   const spots = spots[spotId]
-  const ownedSpots = spot.filter((spot) => spot.ownerId === sessionUser.id);
+  const ownedSpots = spot.filter((spot) => spot.ownerId == sessionUser.id);
 
   const [showModal, setShowModal] = useState(false);
   console.log({ sessionUser, ownedSpots, spot });
@@ -28,7 +28,7 @@ function OwnerSpots() {
   useEffect(() => {
     dispatch(spotsActions.getOwnedSpots());
     // dispatch(reviewActions.getReviews(spotId));
-  }, []);
+  }, [dispatch]);
 
   const handleDelete = (spotId) => {
     dispatch(spotsActions.getDeleteSpots(spotId));

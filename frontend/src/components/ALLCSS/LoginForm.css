@@ -93,3 +93,26 @@ width: 500px;
     color: white;
     font-size: 20px;
 }
+.error-container {
+    padding-top: 10px;
+    position: relative;
+    bottom: 175px;
+    right: 80px;
+    font-family: 'Monsterrat', sans-serif
+
+
+}
+
+.login-error {
+   font-family: 'Monsterrat';
+   font-size: 24px;
+   position: relative;
+   color: red;
+
+}
+
+#text {
+    font-size: 28px;
+    position: relative;
+   color: red;
+}
