@@ -28,7 +28,7 @@ const createSpots = (spots) => {
     spots,
   };
 };
-const editSpots = (spots) => {
+const editSpots = (spots, spotId) => {
   return {
     type: EDIT_SPOTS,
     spots,
@@ -73,16 +73,19 @@ export const getCreateSpots = (spots) => async (dispatch) => {
 };
 
 export const getEditSpots = (spots, spotId) => async (dispatch) => {
+  console.log('checking valid data', spotId)
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spots),
   });
+
   if (response.ok) {
     const data = await response.json();
     dispatch(editSpots(data));
-    return response;
+    return data
   }
+  return response;
 };
 
 export const getDeleteSpots = (spotId) => async (dispatch) => {
@@ -104,8 +107,9 @@ export const getOwnedSpots = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(ownerSpots(data));
+    return data
 
-    return data;
+
   }
   return response;
 };
@@ -124,14 +128,14 @@ const spotReducer = (state = {}, action) => {
       newState = { ...state };
       newState[action.spots.id] = action.spots;
       return newState;
-    case OWNED_SPOTS:
-      newState = {};
-      action.spots.Spots.forEach((spot) => {
-        newState[spot.id] = spot;
-      });
+    // case OWNED_SPOTS:
+    //   newState = {};
+    //   action.spots.Spots.forEach((spot) => {
+    //     newState[spot.id] = spot;
+    //   });
       return newState;
     case DELETE_SPOTS:
-      newState = { ...state };
+      newState = {...state };
       delete newState[action.spotId];
       return newState;
     default:

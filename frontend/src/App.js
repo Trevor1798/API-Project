@@ -41,7 +41,7 @@ function App() {
               <CreateSpots />
             </Route>
             <Route exact path='/owned-spots'>
-              <OwnerSpots/>
+              <OwnerSpots isLoaded={isLoaded} setIsLoaded={setIsLoaded}/>
             </Route>
             <Route exact path='/spots/:spotId/create-reviews'>
               <CreateReviewForm/>

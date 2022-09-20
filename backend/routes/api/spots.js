@@ -305,8 +305,6 @@ router.put(
   requireAuth,
   async (req, res) => {
     let spotId = req.params.spotId;
-    let currentUser = req.user.id;
-
     let spot = await Spot.findByPk(spotId);
 
     if (!spot) {
@@ -315,9 +313,6 @@ router.put(
         statusCode: 404,
       });
     }
-
-    // if (spot.ownerId === currentUser) {
-    // }
       const {
         address,
         city,
@@ -329,20 +324,19 @@ router.put(
         description,
         price,
       } = req.body;
-      spot.update({
-        address,
-        city,
-        state,
-        country,
-        lat,
-        lng,
-        name,
-        description,
-        price,
-      });
+       spot.address = address
+       spot.city = city
+       spot.state = state
+       spot.country = country
+       spot.lat = lat
+       spot.lng = lng
+       spot.name = name
+       spot.description = description
+       spot.price = price
+
       await spot.save();
     res.status(200);
-    return res.json(spot);
+    res.json(spot);
   }
 );
 

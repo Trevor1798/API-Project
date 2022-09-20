@@ -13,7 +13,7 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
 console.log({sessionUser})
   if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
+    sessionLinks = <ProfileButton user={sessionUser || sessionUser.user} />;
   } else {
     sessionLinks = (
       <>
@@ -25,7 +25,7 @@ console.log({sessionUser})
   }
 
   return (
-    <ul>
+    <ul className='container-top'>
       {isLoaded && sessionLinks}
       <div className="navBar">
 

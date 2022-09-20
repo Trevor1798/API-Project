@@ -1,13 +1,17 @@
 
+.container-top {
+margin: 0px;
+padding: 0px
 
+}
 .container {
 display: flex;
 
 position:sticky;
 height: 20px;
-margin: auto;
-width: 110%;
-justify-content: space-between;
+/* margin: auto; */
+width: 100%;
+/* justify-content: space-between; */
 border-bottom: 1px solid rgba(128, 128, 128, 0.198);
 padding-bottom: 10px;
 
@@ -20,7 +24,7 @@ padding-bottom: 10px;
     position: absolute;
     margin-top: 5px;
     bottom: 25px;
-    left: 65px;
+    left: 92px;
     height: 32px;
 
 
@@ -28,12 +32,9 @@ padding-bottom: 10px;
 
 .user-container {
 
-    display: flex;
-    align-items: center;
-    position: relative;
-
-    left: 1650px;
-    top: 10px;
+   position: relative;
+   left: 1680px;
+   top: 10px;
 }
 .user-profile-menu > button:hover{
     position: relative;
@@ -118,7 +119,7 @@ bottom: 5px;
     font-weight: bold;
     cursor: pointer;
     position: absolute;
-    right: 430px;
+    right: 250px;
     bottom: 30px;
 }
 

@@ -1,10 +1,11 @@
-import { useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector, } from 'react-redux'
 import {useState, useEffect} from 'react'
-import { useParams } from 'react-router'
+import { useParams, useHistory,} from 'react-router'
 import * as spotActions from '../../store/spots.js'
 import {Redirect} from 'react-router-dom'
 
-function EditSpots () {
+function EditSpots ({showModal, setShowModal}) {
+    let history = useHistory()
     let dispatch = useDispatch()
     const [dispatched, setDispatched] = useState(false)
     const [name, setName] = useState('')
@@ -18,20 +19,20 @@ function EditSpots () {
     const [lng, setLng] = useState('')
     const [previewImage, setPreviewImage] = useState('')
     const [error, setError] = useState([])
-
+//    const [showModal, setShowModal] = useState(false)
 
     const {spotId} = useParams()
-    const spot= useSelector((state) => Object.values(state.spots))
-    const spots = spot.find((spots) => spots.id === parseInt(spotId))
+    const spots= useSelector((state) => Object.values(state.spots))
+    const spot = spots.find((spot) => spot.id === spotId)
+    console.log('this is the', spot)
+    console.log('also', spots)
 
 
     const handleSubmit = (e) => {
 
         e.preventDefault()
         let data = {
-            id: spotId,
             name: name,
-            previewImage: previewImage,
             address: address,
             city: city,
             state:state,
@@ -42,12 +43,14 @@ function EditSpots () {
             price: price
         }
         setError([])
-        return dispatch(spotActions.getEditSpots(data))
-        .then(async (res) => setDispatched(true))
+        dispatch(spotActions.getEditSpots(data, spotId )).then(() => dispatch(spotActions.getAllSpots()))
+        // .then(async (res) => setDispatched(true))
         .catch(async (res) => {
             const data = await res.json();
             if (data && data.error) setError(data.error);
         })
+
+        setShowModal(false)
     }
 
 
