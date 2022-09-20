@@ -107,8 +107,9 @@ export const getOwnedSpots = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(ownerSpots(data));
+    return data
 
-    return data;
+
   }
   return response;
 };
@@ -127,14 +128,14 @@ const spotReducer = (state = {}, action) => {
       newState = { ...state };
       newState[action.spots.id] = action.spots;
       return newState;
-    case OWNED_SPOTS:
-      newState = {};
-      action.spots.Spots.forEach((spot) => {
-        newState[spot.id] = spot;
-      });
+    // case OWNED_SPOTS:
+    //   newState = {};
+    //   action.spots.Spots.forEach((spot) => {
+    //     newState[spot.id] = spot;
+    //   });
       return newState;
     case DELETE_SPOTS:
-      newState = { ...state };
+      newState = {...state };
       delete newState[action.spotId];
       return newState;
     default:

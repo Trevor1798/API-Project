@@ -1,6 +1,6 @@
 import * as spotsActions from "../../store/spots.js";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams, Redirect } from "react-router-dom";
 import SpotCard from "../Spots/SpotCard.js";
 import { useEffect, useState } from "react";
 import "../ALLCSS/Spotcard.css";
@@ -11,73 +11,46 @@ import * as reviewActions from "../../store/reviews";
 
 
 
-function OwnerSpots({isLoaded}) {
+function OwnerSpots({isLoaded, setIsLoaded}) {
 
   let dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) =>(state.session.user));
   const spot = useSelector((state) => Object.values(state.spots));
 
-  const ownedSpots = spot.filter((spot) => spot.ownerId === sessionUser.user.id);
-
-
-  const [showModal, setShowModal] = useState(false);
-  // console.log({ sessionUser, ownedSpots, spot });
-
-
-  const history = useHistory();
+  const ownedSpots = spot.filter((spot) => spot.ownerId == sessionUser.user.id);
+  // const [isLoaded, setIsLoaded] = useState(false)
+  console.log('spots ', spot );
+  console.log('ownerSpots', ownedSpots)
+  // const history = useHistory();
 
   useEffect(() => {
-    dispatch(spotsActions.getOwnedSpots());
+    dispatch(spotsActions.getOwnedSpots())
+    dispatch(spotsActions.getAllSpots()).then(() => setIsLoaded(true))
     // dispatch(reviewActions.getReviews(spotId));
   }, [dispatch]);
 
-  const handleDelete = (spotId) => {
-    dispatch(spotsActions.getDeleteSpots(spotId));
-    history.push("/owned-spots");
-  };
+  if (!ownedSpots) return null
+  if (!isLoaded) return null
+  // if (!sessionUser) {
 
-  const onEditSpotClick = (e) => {
-    e.preventDefault();
-    setShowModal(true);
-  };
+  //  return <Redirect exact to='/'><div>{window.alert('You must be logged in to view Owner Spots')}</div></Redirect>
+  // }
+  return (isLoaded && (
+        <div className="allSpots">
+        <div className="spotsContainer">
+        <div className="spots-grid">
+        {ownedSpots?.map((spots, i) => (
+          <div>
+                <SpotCard key={spots.id } spots={spots} />
+            </div>
 
-  return (
-
-    <>
-
-      <div className="allSpots">
-      <div className="spotsContainer">
-      <div className="spots-grid">
-      {ownedSpots.map((spots, i) => (
-        <div>
-                <SpotCard key={spots.id} spots={spots} />
-                <button
-                  className="delete-spot"
-                  onClick={() => handleDelete(spots.id)}
-                  >
-                  Delete Spot
-                </button>
-                <div>
-                  <div>
-                    <button className="edit-spot" onClick={onEditSpotClick}>
-                      Edit Spot
-                    </button>{" "}
-                  </div>
-                  {showModal && (
-                    <Modal onClose={() => setShowModal(false)}>
-                      <EditSpots/>
-                    </Modal>
-                  )}
-                </div>
-              </div>
             ))}
             </div>
             </div>
             </div>
-
-            </>
-
-            //   <div key={spots.id}>
+          ))
+        }
+            {/* //   <div key={spots.id}>
             //     <div>
             //       {spots.address}</div>
             //     <div>{spots.name}</div>
@@ -92,6 +65,6 @@ function OwnerSpots({isLoaded}) {
             // ))}
             // <div className="spots-container"></div>
             );
-          }
+          } */}
 
           export default OwnerSpots;

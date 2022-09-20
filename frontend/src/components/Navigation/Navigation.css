@@ -24,7 +24,7 @@ padding-bottom: 10px;
     position: absolute;
     margin-top: 5px;
     bottom: 25px;
-    left: 65px;
+    left: 92px;
     height: 32px;
 
 
@@ -32,7 +32,9 @@ padding-bottom: 10px;
 
 .user-container {
 
-    object-fit: contain;
+   position: relative;
+   left: 1680px;
+   top: 10px;
 }
 .user-profile-menu > button:hover{
     position: relative;
@@ -117,7 +119,7 @@ bottom: 5px;
     font-weight: bold;
     cursor: pointer;
     position: absolute;
-    right: 430px;
+    right: 250px;
     bottom: 30px;
 }
 

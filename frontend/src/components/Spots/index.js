@@ -13,6 +13,7 @@ function AllSpots() {
 
     useEffect(() => {
         dispatch(spotsActions.getAllSpots())
+        // dispatch(spotsActions.getOwnedSpots())
     }, [dispatch])
         return (
             <div className="allSpots">
