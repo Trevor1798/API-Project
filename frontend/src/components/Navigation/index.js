@@ -13,7 +13,7 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
 console.log({sessionUser})
   if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
+    sessionLinks = <ProfileButton user={sessionUser || sessionUser.user} />;
   } else {
     sessionLinks = (
       <>

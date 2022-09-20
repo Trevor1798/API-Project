@@ -19,6 +19,7 @@ function OwnerSpots({isLoaded}) {
 
   const ownedSpots = spot.filter((spot) => spot.ownerId === sessionUser.user.id);
 
+
   const [showModal, setShowModal] = useState(false);
   // console.log({ sessionUser, ownedSpots, spot });
 

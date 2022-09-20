@@ -8,22 +8,33 @@ import OwnerSpots from '../EditSpots/OwnedSpots'
 import * as reviewActions from '../../store/reviews'
 import * as spotsActions from '../../store/spots'
 import '../ALLCSS/SpotDetails.css'
+import { csrfFetch } from '../../store/csrf'
+import { getAllUsers } from '../../store/user'
 function SpotDetails( ) {
     let history = useHistory()
 let dispatch = useDispatch()
 const {spotId} = useParams()
+const {ownerId} = useParams()
 const spot= useSelector((state) => Object.values(state.spots))
 const review = useSelector((state) => Object.values(state.reviews))
+const users = useSelector((state => Object.values(state.users)))
+
+console.log('-----------',users)
+// console.log('these are all my users', users.firstName)
+
 const sessionUser = useSelector((state) => state.session.user);
 const [isLoaded, setIsLoaded] =useState(false)
 const spots = spot.find((spots) => spots.id == spotId)
+console.log('check ', spots)
 let plswork = review.filter((review) => review.spotId === parseInt(spotId))
+console.log('this is my session user obj', sessionUser)
 
     const [showModal, setShowModal] = useState(false)
 
 useEffect(() => {
     dispatch(spotsActions.getAllSpots()).then(() => setIsLoaded(true))
     dispatch(reviewActions.getReviews(spotId))
+    dispatch(getAllUsers())
 }, [dispatch])
 
 if (!isLoaded) return null
@@ -42,6 +53,7 @@ if (!spots) return null
     return ( isLoaded && (
 
 
+
         <div className='wrapper-container'>
 
 
@@ -50,7 +62,7 @@ if (!spots) return null
             <div className='spotdetails-name'>{spots.name} {''}
             <br>
             </br>
-            <div className='review-details'><i className='fa-solid fa-star'></i>
+            <div className='review-details'><i className='topstar fa-solid fa-star'></i>
             <div className='avg-rating'>
             {spots.avgRating}
             </div>
@@ -58,7 +70,7 @@ if (!spots) return null
                 {''}
             {plswork.length} {'reviews'}</div>
             </div>
-            <div className='super-host'><i className='fa-solid fa-medal'></i>Superhost</div>
+                <div className='super-host'><i className='fa-solid fa-medal'></i>Superhost</div>
             <div className='city-state'> {spots.city}, {spots.state}</div>
             </div>
             <div className='image-container'>
@@ -66,10 +78,14 @@ if (!spots) return null
             </div>
         <div className='spotdetails-container'>
             {/* <div className='hosted-by'>Home hosted by {spots.ownerId}</div> */}
+
+            <div className='home-hosted'>Home hosted by {users?.usersId?.firstName} </div>
+
+
             <div className='spotdetails-address'>{spots.country}
             <div className='spotdetails-description'>{spots.description}
             <div className='edit-spots'>
-                {sessionUser.user.id == spots.ownerId && (
+                {sessionUser && (
 
                     <button className='edit-spot' onClick={onEditSpotClick} type='submit'>
                     Edit Spot
@@ -106,6 +122,7 @@ if (!spots) return null
       </div>
         </div>
         </div>
+
 
 )
 

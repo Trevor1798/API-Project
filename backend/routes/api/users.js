@@ -48,4 +48,12 @@ router.post("/", validateSignup, async (req, res) => {
   return res.json(user);
 });
 
+router.get('/', async (req, res) => {
+let users =  await User.findAll()
+
+res.status(200)
+res.json({users})
+
+})
+
 module.exports = router;

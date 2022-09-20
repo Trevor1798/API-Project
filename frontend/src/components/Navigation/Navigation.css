@@ -1,7 +1,7 @@
 
 .container-top {
 margin: 0px;
-padding: 0px;
+padding: 0px
 
 }
 .container {
@@ -9,9 +9,9 @@ display: flex;
 
 position:sticky;
 height: 20px;
-margin: auto;
-/* width: 110%; */
-justify-content: space-between;
+/* margin: auto; */
+width: 100%;
+/* justify-content: space-between; */
 border-bottom: 1px solid rgba(128, 128, 128, 0.198);
 padding-bottom: 10px;
 
@@ -32,12 +32,7 @@ padding-bottom: 10px;
 
 .user-container {
 
-    display: flex;
-    align-items: center;
-    position: relative;
-
-    left: 1650px;
-    top: 10px;
+    object-fit: contain;
 }
 .user-profile-menu > button:hover{
     position: relative;

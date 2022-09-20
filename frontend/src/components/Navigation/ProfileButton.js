@@ -52,10 +52,10 @@ function ProfileButton({ user }) {
         <NavLink to='/spots/spots-create'>Become a Host</NavLink> */}
       <div className='user-container'>
         <div className="user-profile-menu">
-      <button className='open-menu' onClick={openMenu}>
-        <i className="fa-solid fa-bars"/>
-        <i className="fas fa-user-circle fa-2xl"/>
-      </button>
+        <button className='open-menu' onClick={openMenu}>
+          <i className="fa-solid fa-bars"/>
+          <i className="fas fa-user-circle fa-2xl"/>
+        </button>
       {showMenu && (
         <div className="profile-dropdown-container">
           <div className="profile-dropdown">

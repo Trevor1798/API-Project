@@ -30,28 +30,30 @@ position: relative;
     position: absolute;
     font-weight: lighter;
     top: 54.5px;
-    left: 278px;
+    left: 271px;
     font-size: 18px;
     text-decoration: underline;
 }
 .super-host {
-    position: relative;
-    top: 34.5px;
-    left: 5px;
+    position: absolute;
+    top: 54.5px;
+    left: 171px;
     font-size: 18px;
     font-weight: lighter;
 }
 .reviews-count {
    display: flex;
    position: relative;
-   right: -10px;
-   top: -1px;
+   right: -11.5px;
+
     text-decoration: underline;
 
 }
 .fa-medal {
-    position: relative;
-    right: 8px;
+    position: absolute;
+    right: 100px;
+    top: 2px;
+
 
 }
 .spotdetails-name {
@@ -113,9 +115,10 @@ font-size: 22px;
     right: 77px;
 }
 
-.fa-star {
+.topstar {
     position: absolute;
-    right: 107px;
+    left: -44px;
+    top:0.5px;
 }
 .spot-details-preview {
     display: flex;
@@ -129,11 +132,12 @@ font-size: 22px;
 .stardetails-rating{
     font-weight: lighter;
     display: flex;
-    justify-content:center;
-    position: relative;
-    left: 830px;
-    bottom: 950px;
+    /* justify-content:center; */
+    position: absolute;
+    right: 830px;
+    bottom: -250px;
     margin-top: 30px;
+    border: 1px solid red
 }
 
 .spotDetailReviews {
