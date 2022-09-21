@@ -15,17 +15,17 @@ function OwnerSpots({isLoaded, setIsLoaded}) {
 
   let dispatch = useDispatch();
   const sessionUser = useSelector((state) =>(state.session.user));
-  const spot = useSelector((state) => Object.values(state.spots));
-
-  const ownedSpots = spot.filter((spot) => spot.ownerId == sessionUser.user.id);
+  const spotObj = useSelector((state) => (state.spots));
+const spots = Object.values(spotObj)
+  const ownedSpots = spots.filter((spot) => spot.ownerId === sessionUser.id);
   // const [isLoaded, setIsLoaded] = useState(false)
-  console.log('spots ', spot );
+  // console.log('spots ', spot );
   console.log('ownerSpots', ownedSpots)
   // const history = useHistory();
 
   useEffect(() => {
-    dispatch(spotsActions.getOwnedSpots())
-    dispatch(spotsActions.getAllSpots()).then(() => setIsLoaded(true))
+    dispatch(spotsActions.getOwnedSpots()).then(() => setIsLoaded(true))
+    // dispatch(spotsActions.getAllSpots())
     // dispatch(reviewActions.getReviews(spotId));
   }, [dispatch]);
 

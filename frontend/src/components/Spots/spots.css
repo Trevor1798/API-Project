@@ -7,13 +7,13 @@
 }
 
 .spots-grid {
-    margin-top: 50px;
+    margin-top: 70px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     /* justify-items: end; */
     /* margin-left: auto;
     margin-right: auto; */
-    
+
 
 
 }

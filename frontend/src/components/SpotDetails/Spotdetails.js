@@ -18,6 +18,7 @@ const {ownerId} = useParams()
 const spot= useSelector((state) => Object.values(state.spots))
 const review = useSelector((state) => Object.values(state.reviews))
 const users = useSelector((state => Object.values(state.users)))
+console.log(users[0])
 
 console.log('-----------',users)
 // console.log('these are all my users', users.firstName)
@@ -42,6 +43,10 @@ if (!isLoaded) return null
 const handleDelete = (reviewId) => {
 
    return dispatch(reviewActions.getDeleteReviews(parseInt(reviewId)))
+}
+const handleDeleteSpot = (spotId) => {
+    history.push('/owned-spots')
+    return dispatch(spotsActions.getDeleteSpots(spotId))
 }
 const onEditSpotClick = (e) => {
     e.preventDefault();
@@ -79,10 +84,31 @@ if (!spots) return null
         <div className='spotdetails-container'>
             {/* <div className='hosted-by'>Home hosted by {spots.ownerId}</div> */}
 
-            <div className='home-hosted'>Home hosted by {users?.usersId?.firstName} </div>
+            <div className='home-hosted'>Home hosted by a Superhost {users?.firstName} </div>
+            <div className='house-count'>{'2-4 guests'} {'•'} {'2 bedrooms'} {'•'} {'2 beds'} {'•'} {'3 baths'}</div>
+                </div>
+                <div className='symbols-container'>
+
+            <div className='symbol-info-container'>
+                <div className='great-parking'>
+            Great parking
+                </div>
+            <div className='parking-size'>
+            <i className="fa-solid fa-square-parking"></i>
+            <div className='location-info-container'>
+                <div className='location-excellent'>
+                    Excellent location
+
+                </div>
+                <i className="fa-solid fa-location-dot"></i>
+            </div>
+
+            </div>
+                </div>
 
 
-            <div className='spotdetails-address'>{spots.country}
+            </div>
+            <div className='spotdetails-address'>
             <div className='spotdetails-description'>{spots.description}
             <div className='edit-spots'>
                 {sessionUser && (
@@ -119,9 +145,13 @@ if (!spots) return null
         </div>
         </>
         ))}
+        <div className='delete-spot'>
+            <button className='delete-spot-button' onClick={() => handleDeleteSpot(spotId)}>Delete Spot</button>
+        </div>
+        <div className=''></div>
       </div>
         </div>
-        </div>
+
 
 
 )

@@ -18,7 +18,7 @@ console.log({sessionUser})
     sessionLinks = (
       <>
 
-        <LoginFormModal />
+        <LoginFormModal/>
 
       </>
     );

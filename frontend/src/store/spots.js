@@ -17,8 +17,8 @@ export const getAllSpots = () => async (dispatch) => {
     method: "GET",
   });
   if (response.ok) {
-    const spots = await response.json();
-    dispatch(allSpots(spots));
+    const data = await response.json();
+    dispatch(allSpots(data.Spots));
   }
   return response;
 };
@@ -106,7 +106,7 @@ export const getOwnedSpots = () => async (dispatch) => {
   console.log(response);
   if (response.ok) {
     const data = await response.json();
-    dispatch(ownerSpots(data));
+    dispatch(allSpots(data.Spots));
     return data
 
 
@@ -118,7 +118,10 @@ const spotReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
     case GET_SPOTS:
-      newState = { ...action.spots["Spots"] };
+      newState = {}
+      action.spots.forEach((spot) => {
+        newState[spot.id] = spot
+      })
       return newState;
     case CREATE_SPOTS:
       newState = { ...state };
