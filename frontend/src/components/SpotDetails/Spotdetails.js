@@ -28,12 +28,12 @@ console.log('-----------',users)
 // console.log('these are all my users', users.firstName)
 
 const sessionUser = useSelector((state) => state.session.user);
-const [isLoaded, setIsLoaded] =useState(false)
 const spots = spot.find((spots) => spots.id === parseInt(spotId))
 console.log('check ', spots)
 let plswork = review.filter((review) => review.spotId === parseInt(spotId))
 console.log('this is my session user obj', sessionUser)
 
+    const [isLoaded, setIsLoaded] =useState(false)
     const [showModal, setShowModal] = useState(false)
     const [showReview, setShowReview] = useState(false)
 
@@ -251,14 +251,14 @@ if (!spots) return null
             {sessionUser && (
         <button className='create-review-button' onClick={onReviewClick} type='submit'>
             Create Review
+            </button>
+                    )}
                 {showReview && (
                     <Modal onClose={() => setShowReview(false)}>
                         <CreateReviewForm showReview={showReview} setShowReview={setShowReview}/>
                     </Modal>
                 )}
-                {/* <Link to={`/spots/${spots.id}/create-reviews`}>Create Review</Link> */}
-        </button>
-            )}
+
             </div>
         { plswork.map((review, i) => (
             <>
