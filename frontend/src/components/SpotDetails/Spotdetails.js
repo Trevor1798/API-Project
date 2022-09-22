@@ -10,6 +10,7 @@ import * as spotsActions from '../../store/spots'
 import '../ALLCSS/SpotDetails.css'
 import { csrfFetch } from '../../store/csrf'
 import { getAllUsers } from '../../store/user'
+import CreateReviewForm from '../CreateReview/CreateReviewForm'
 function SpotDetails( ) {
     let history = useHistory()
 let dispatch = useDispatch()
@@ -28,18 +29,19 @@ console.log('-----------',users)
 
 const sessionUser = useSelector((state) => state.session.user);
 const [isLoaded, setIsLoaded] =useState(false)
-const spots = spot.find((spots) => spots.id == spotId)
+const spots = spot.find((spots) => spots.id === parseInt(spotId))
 console.log('check ', spots)
 let plswork = review.filter((review) => review.spotId === parseInt(spotId))
 console.log('this is my session user obj', sessionUser)
 
     const [showModal, setShowModal] = useState(false)
+    const [showReview, setShowReview] = useState(false)
 
 useEffect(() => {
     dispatch(spotsActions.getAllSpots()).then(() => setIsLoaded(true))
     dispatch(reviewActions.getReviews(spotId))
     dispatch(getAllUsers())
-}, [dispatch])
+}, [dispatch, spotId])
 
 if (!isLoaded) return null
 
@@ -54,10 +56,17 @@ const handleDeleteSpot = (spotId) => {
 const onEditSpotClick = (e) => {
     e.preventDefault();
     setShowModal(true);
+    setShowReview(false)
+};
+const onReviewClick = (e) => {
+    e.preventDefault();
+    setShowReview(true);
+    setShowModal(false)
 };
 function getRandomUser(max) {
     return Math.floor(Math.random() * max)
 }
+console.log('watch my avgRating', spots.avgRating)
 if (!spots) return null
 
     return ( isLoaded && (
@@ -74,14 +83,12 @@ if (!spots) return null
             </br>
             <div className='review-details'><i className='topstar fa-solid fa-star'></i>
             <div className='avg-rating'>
-            {spots.avgRating}
+            {spots?.avgRating}
             </div>
             <div className='reviews-count'>
                 {''}
             {plswork.length} {'reviews'}</div>
             </div>
-                <div className='super-host'><i className='fa-solid fa-medal'></i>Superhost</div>
-            <div className='city-state'> {spots.city}, {spots.state}</div>
             <div className='delete-and-edit-location'>
 
 
@@ -103,6 +110,8 @@ if (!spots) return null
                                 <button className='delete-spot-button' onClick={() => handleDeleteSpot(spotId)}>Delete Spot</button>
                                 )}
                         </div>
+                <div className='super-host'><i className='fa-solid fa-medal'></i>Superhost</div>
+            <div className='city-state'> {spots.city}, {spots.state}</div>
             </div>
             <div className='image-container'>
             <img className='spotdetails-image' src={spots.previewImage} />
@@ -237,12 +246,20 @@ if (!spots) return null
             </div>
         </div>
            </div>
-            <div className='create-review-location'>
-            <button className='create-review-button'>
-        <Link to={`/spots/${spots.id}/create-reviews`}>Create Review</Link>
-            </button>
-            </div>
         <div className="spotDetailReviews">
+            <div className='create-review-location'>
+            {sessionUser && (
+        <button className='create-review-button' onClick={onReviewClick} type='submit'>
+            Create Review
+                {showReview && (
+                    <Modal onClose={() => setShowReview(false)}>
+                        <CreateReviewForm showReview={showReview} setShowReview={setShowReview}/>
+                    </Modal>
+                )}
+                {/* <Link to={`/spots/${spots.id}/create-reviews`}>Create Review</Link> */}
+        </button>
+            )}
+            </div>
         { plswork.map((review, i) => (
             <>
             <div className='reviews-grid'>
@@ -251,12 +268,12 @@ if (!spots) return null
         <div className='detailscreate-review' key={review.id} review={review}>Anonymous User{' '}{getRandomUser(200)}: {''}
          <div className='actual-review'>
             <div className='reviews-stars-location'>
-            <i className=' starss fa-solid fa-star'></i>
-         {review.stars}
+            {/* <i className='starss fa-solid fa-star'></i> */}
+         {review.stars}/5{' •'}
          {' ' }{review.review}
             </div>
             </div>
-         </div>
+            </div>
             </div>
          </div>
         <div className='detailscreate-review'>

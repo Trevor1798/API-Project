@@ -20,7 +20,7 @@ position: relative;
 .review-details {
     display: flex;
     position: absolute;
-    left: 45px;
+    left: 15px;
     top: 54.5px;
     font-size: 18px;
     font-weight: lighter;
@@ -98,10 +98,10 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
 .image-container {
     display: flex;
     margin-top: 65px;
-    width:1065px;
+    width:1160px;
     height: 600px;
     /* border: 2px solid black; */
-    object-fit: cover;
+    object-fit: contain;
 
 
     /* display:flex;
@@ -113,8 +113,8 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
 }
 .avg-rating {
 
-    position: absolute;
-    right: 77px;
+   display: flex;
+   justify-content: flex-start;
 }
 
 .topstar {
@@ -133,10 +133,10 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
 
 .stardetails-rating{
     /* font-weight: lighter; */
-    display: flex;
+    /* display: flex; */
     /* justify-content:center; */
-    position: absolute;
-    right: 1010px;
+    position:absolute;
+    right: 1105px;
     bottom: -820px;
     margin-top: 30px;
     /* border: 1px solid red; */
@@ -155,7 +155,7 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
     position: relative;
     top: 229.7px;
     font-size: 24px;
-    left: 75px;
+    left: 85px;
 }
 .dot {
     position: absolute;
@@ -169,7 +169,7 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
     position: absolute;
     /* border: 2px solid rgb(219, 215, 215); */
     height: 200px;
-    left: 430px;
+    left: 530px;
     bottom: -1250px;
 
     border-radius: 7px;
@@ -195,17 +195,19 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
     gap: 10px;
 
 }
-.starss {
-    position: relative;
-    top :-2px;
-    left: -2px;
-    font-size: 16px;
-}
+/* .starss {
+    position:absolute;
+    top :5px;
+    left: 100px;
+    font-size: 16px; */
+
 .grid {
 
-    column-gap: 30px;
-    row-gap: 30px;
-    gap: 30px;
+    column-gap: 20px;
+    row-gap: 20px;
+    gap: 20px;
+    position: relative;
+    left: -120px;
 }
 .fa-star {
 
@@ -230,7 +232,7 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
 }
 
 .create-review-location {
-position: absolute;
+position: relative;
 left: 220px;
 top: -80px;
 
@@ -279,14 +281,16 @@ top: -80px;
     left: 870px;
 }
 .delete-and-edit-location {
-    position: relative;
-    left: 633px;
+    /* position: relative;
+    left: 633px; */
     display: flex;
-    justify-content: center;
-    justify-content: space-between;
+    justify-content:flex-end;
+    /* justify-content: space-between; */
     align-items: baseline;
     /* border: 2px solid red; */
-    width: 230px
+    width: 868px;
+    gap: 10px;
+    border: 2px solid red;
 }
 .house-count {
 margin-top: 12px;

@@ -12,17 +12,34 @@ function CreateReviewForm() {
   const [stars, setStars] = useState("");
 
   const user = useSelector(state => state.session.user)
-
+  const reviewObj = useSelector(state => state.reviews)
+  const reviews = Object.values(reviewObj)
+  const alreadyReviewed = reviews.find((review) => user.id === review.userId)
+  const spotsObj = useSelector(state => state.spots)
+const spots = Object.values(spotsObj)
+console.log('watch this pls=======', alreadyReviewed)
   const handleButtonClick = (e) => {
     e.preventDefault();
     const data = {
-      userId: user.id,
-      spotId,
       review,
-      stars
+      stars,
+      spotId
      };
-    dispatch(reviewActions.getCreateReviews(data));
-    history.push(`/spots/${spotId}`);
+
+     if (alreadyReviewed) {
+      setErrors({errors: 'User already has a review'})
+     }
+     if (!review || review.length < 5 || review.length > 200) {
+      setErrors({errors: 'Review must be between 5 and 200 characters'})
+
+     }
+     if (stars < 1 || stars > 5 ) {
+      setErrors({errors: 'Rating must be between 1 and 5'})
+     }
+
+       dispatch(reviewActions.getCreateReviews(data));
+       history.push(`/spots/${spotId}`);
+
   };
 
   return (
@@ -30,8 +47,8 @@ function CreateReviewForm() {
       <form className="review-form" onSubmit={handleButtonClick}>
         <div className="title">Leave a review</div>
         <ul>
-          {errors.map((error, i) => (
-            <li key={i}>{error}</li>
+          {Object.values(errors).map((error, i) => (
+            <li className="create-review-errors" key={i}>{error}</li>
           ))}
         </ul>
         <label>

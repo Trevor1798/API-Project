@@ -100,7 +100,7 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
     // console.log(reviews[0].avgRating)
     if (reviews[0].avgRating) {
       spot.dataValues.avgRating = parseFloat(
-        parseFloat(reviews[0].avgRating).toFixed(1)
+        parseFloat(reviews[0].avgRating).toFixed(2)
       );
     //   console.log(parseFloat(reviews[0].avgRating).toFixed(1))
     } else {
@@ -175,7 +175,7 @@ router.get("/:spotId", async (req, res) => {
   if (reviews.avgRating) {
     spots.dataValues.avgStarRating = parseFloat(avgRating.toFixed(1));
   } else {
-    spots.dataValues.avgStarRating = "No ratings found";
+    spots.dataValues.avgStarRating = "0.0";
   }
   let numReviews = await Review.count({
     where: { spotId },

@@ -18,6 +18,7 @@ function EditSpots ({showModal, setShowModal}) {
     const [lat, setLat] = useState('')
     const [lng, setLng] = useState('')
     const [previewImage, setPreviewImage] = useState('')
+    const [url, setUrl] = useState('')
     const [error, setError] = useState([])
 //    const [showModal, setShowModal] = useState(false)
 
@@ -27,6 +28,9 @@ function EditSpots ({showModal, setShowModal}) {
     console.log('this is the', spot)
     console.log('also', spots)
 
+    function imageCheck(url) {
+        return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url)
+    }
 
     const handleSubmit = (e) => {
 
@@ -40,15 +44,47 @@ function EditSpots ({showModal, setShowModal}) {
             lat: lat,
             lng: lng,
             description: description,
-            price: price
+            price: price,
+            url: url
+
         }
-        setError([])
+       if (!imageCheck(url)) {
+        setError({error: 'Image must be valid: jpg, jpeg, png, webp, avif, gif, svg'})
+       }
+       if (!name || name.length < 4 || name.length > 100) {
+        setError({error: 'Name must be between 4 and 100 characters'})
+    }
+    if (!imageCheck(url)) {
+        setError({error: 'Image must be valid: jpg, jpeg, png, webp, avif, gif, svg'})
+    }
+    if (!address || address.length < 5 || address.length > 100) {
+        setError({error: 'Address must be between 5 and 100 characters'})
+    }
+    if (!city || city.length < 5 || city.length > 100) {
+        setError({error: 'City must be between 5 and 100 characters'})
+
+    }
+    if (!state || state.length < 5 || state.length > 100) {
+        setError({error: 'State must be between 5 and 100 characters'})
+
+    }
+    if (!country || country.length < 5 || country.length > 255) {
+        setError({error: 'Country must be between 5 and 255 characters'})
+    }
+    if (!lat || lat.length < 8 || lat.length > 8 ) {
+        setError({error: 'Latitude must be 8 characters'})
+    }
+    if (!lng || lng.length < 8 || lng.length > 8) {
+        setError({error: 'Longitude must be 8 characters'})
+    }
+    if (!description || description.length < 10 || description.length > 300) {
+        setError({error: 'Descriptions must be between 10 and 300 characters'})
+    }
+    if (!price || price < 5 || price > 1000) {
+        setError({error: 'Price must be between $5 and $1000'})
+    }
         dispatch(spotActions.getEditSpots(data, spotId )).then(() => dispatch(spotActions.getAllSpots()))
         // .then(async (res) => setDispatched(true))
-        .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.error) setError(data.error);
-        })
 
         setShowModal(false)
     }
