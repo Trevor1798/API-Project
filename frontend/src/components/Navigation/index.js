@@ -5,12 +5,14 @@ import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";
 import SignupFormPage from "../SignupFormPage/SignupForm";
-
+import {Modal} from '../../context/Modal.js'
+import CreateSpots from "../CreateSpots/CreateSpot";
 
 function Navigation({ isLoaded }) {
+  // const [showModal, setShowModal] = useState(false)
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
-  let sessionLinks;
+   let sessionLinks;
 console.log({sessionUser})
   if (sessionUser) {
     sessionLinks = <ProfileButton user={sessionUser || sessionUser.user} />;
@@ -37,12 +39,13 @@ console.log({sessionUser})
           />
         </NavLink>
         <div className="profile-host"
-               onClick={() => history.push('/spots-create')}>Become a Host</div>
-      </li>
+            onClick={() => history.push('/spots-create')}>Become a Host</div>
+                    
 
-        </div>
+            </li>
+            </div>
 
-    </ul>
+            </ul>
   );
 }
 
