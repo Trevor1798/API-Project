@@ -267,7 +267,7 @@ router.get("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
     ],
   });
   res.status(200);
-  return res.json({Reviews: reviews});
+  return res.json( {Reviews: reviews});
 });
 
 //Create a spot
@@ -395,7 +395,7 @@ router.post("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
   });
 
   res.status(200);
-  return res.json({createUserReview});
+  return res.json(createUserReview);
 });
 
 //get all booking for a spot based on the spots id

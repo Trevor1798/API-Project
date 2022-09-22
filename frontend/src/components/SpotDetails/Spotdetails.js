@@ -15,10 +15,13 @@ function SpotDetails( ) {
 let dispatch = useDispatch()
 const {spotId} = useParams()
 const {ownerId} = useParams()
-const spot= useSelector((state) => Object.values(state.spots))
-const review = useSelector((state) => Object.values(state.reviews))
-const users = useSelector((state => Object.values(state.users)))
-console.log(users[0])
+const spotObj= useSelector((state) =>(state.spots))
+const reviewObj= useSelector((state) => (state.reviews))
+const usersObj = useSelector((state => (state.users)))
+const spot = Object.values(spotObj)
+const review = Object.values(reviewObj)
+const users = Object.values(usersObj)
+console.log(review)
 
 console.log('-----------',users)
 // console.log('these are all my users', users.firstName)
@@ -42,7 +45,7 @@ if (!isLoaded) return null
 
 const handleDelete = (reviewId) => {
 
-   return dispatch(reviewActions.getDeleteReviews(parseInt(reviewId)))
+    dispatch(reviewActions.getDeleteReviews(parseInt(reviewId)))
 }
 const handleDeleteSpot = (spotId) => {
     history.push('/owned-spots')
@@ -52,7 +55,9 @@ const onEditSpotClick = (e) => {
     e.preventDefault();
     setShowModal(true);
 };
-
+function getRandomUser(max) {
+    return Math.floor(Math.random() * max)
+}
 if (!spots) return null
 
     return ( isLoaded && (
@@ -77,6 +82,27 @@ if (!spots) return null
             </div>
                 <div className='super-host'><i className='fa-solid fa-medal'></i>Superhost</div>
             <div className='city-state'> {spots.city}, {spots.state}</div>
+            <div className='delete-and-edit-location'>
+
+
+                {sessionUser && (
+
+                    <button className='edit-spot' onClick={onEditSpotClick} type='submit'>
+                    Edit Spot
+                </button>
+                    )}
+                    {showModal && (
+                        <Modal onClose={() => setShowModal(false)}>
+                        <EditSpots showModal={showModal} setShowModal={setShowModal}/>
+
+                        </Modal>
+
+                            )}
+                            {sessionUser && (
+
+                                <button className='delete-spot-button' onClick={() => handleDeleteSpot(spotId)}>Delete Spot</button>
+                                )}
+                        </div>
             </div>
             <div className='image-container'>
             <img className='spotdetails-image' src={spots.previewImage} />
@@ -102,15 +128,92 @@ if (!spots) return null
                 </div>
                 <i className="fa-solid fa-location-dot"></i>
             </div>
+            <div className='trev-container'>
 
+            <div className='trev-cover'>
+                trev
+            </div>
+            <div className='cover-trev'>
+                cover
+            </div>
+            <div className='protection'>
+            Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
+            </div>
+            </div>
             </div>
                 </div>
+                <div className='the-space-container'>
+                    The space {'•'}  {`$${spots.price} night`}
+                </div>
+                <div className='check-in'>
+                    Check in time starts at 4:00 pm and lasts till 8:00 pm
+                </div>
+            <div className='spotdetails-description'>{spots.description}
 
 
             </div>
+            <div className='what-this-offers'>
+                What this place offers
+            </div>
+            <div className='amenity-grid-container'>
+                <div className='amenity-grid'>
+                    <div className='amenities'>
+
+                    <div className='wifi'>
+                <i className="fa-solid fa-wifi"> </i>
+                      {''}  Wifi
+                    </div>
+                    <div className='kitchen'>
+                    <i className="fa-solid fa-kitchen-set"></i>
+                        {''}  Kitchen
+                    </div>
+                    <div className='long-stays'>
+                    <i className="fa-regular fa-calendar"></i>
+                    {''} Long stays
+                    </div>
+                    <div className='fridge'>
+                        <i className="fa-solid fa-bowl-food"></i>
+                        {''}  Refrigerator
+                    </div>
+                    <div className='free-parking'>
+                    <i className="fa-solid fa-car-side"></i>
+                    {''}  Free parking
+                    </div>
+                    <div className='heating'>
+                    <i className="fa-solid fa-temperature-arrow-up"></i>
+                    {''} Heat
+                    </div>
+                    <div className='cooling'>
+                    <i className="fa-solid fa-temperature-arrow-down"></i>
+                    {''}  A/C
+                    </div>
+                    <div className='tv'>
+                        <i className="fa-solid fa-tv"></i>
+                        {''}  Tv
+                    </div>
+                    <div className='smoking'>
+                    <i className="fa-solid fa-joint"></i>
+                    {''}  Smoking
+                    </div>
+                    <div className='coffee-maker'>
+                        <i className="fa-solid fa-mug-hot"></i>
+                        {''}   Coffee maker
+                    </div>
+                    <div className='haunted'>
+                    <i className="fa-solid fa-ghost"></i>
+                    {''}{''} Haunted
+                    </div>
+                    <div className='charging-station'>
+                    <i className="fa-solid fa-charging-station"></i>
+                    {''} Charging station
+                    </div>
+
+                </div>
+
+                </div>
+            </div>
             <div className='spotdetails-address'>
-            <div className='spotdetails-description'>{spots.description}
-            <div className='edit-spots'>
+            {/* <div className='edit-spots'>
                 {sessionUser && (
 
                     <button className='edit-spot' onClick={onEditSpotClick} type='submit'>
@@ -123,32 +226,51 @@ if (!spots) return null
 
                         </Modal>
                         )}
-            </div>
+            </div> */}
            <div className='stardetails-rating'>
-            <i className='fa-solid fa-star'>{spots.avgRating}</i>
+            <i className=' star fa-solid fa-star'></i>
+           {''} {spots.avgRating}
             </div>
+
+           <div className='length-reviews'><div className='dot'>{'•'}</div>{review.length} reviews</div>
             </div>
             </div>
         </div>
            </div>
-        <div className="spotDetailReviews">
-        {plswork.map((review, i) => (
-            <>
+            <div className='create-review-location'>
             <button className='create-review-button'>
         <Link to={`/spots/${spots.id}/create-reviews`}>Create Review</Link>
             </button>
-        <div className='detailscreate-review' key={review.id} review={review}>Reviews: {''}
-          <i className="fa-solid fa-star"></i>{review.stars} {review.review}</div>
+            </div>
+        <div className="spotDetailReviews">
+        { plswork.map((review, i) => (
+            <>
+            <div className='reviews-grid'>
+            <div className='grid'>
+
+        <div className='detailscreate-review' key={review.id} review={review}>Anonymous User{' '}{getRandomUser(200)}: {''}
+         <div className='actual-review'>
+            <div className='reviews-stars-location'>
+            <i className=' starss fa-solid fa-star'></i>
+         {review.stars}
+         {' ' }{review.review}
+            </div>
+            </div>
+         </div>
+            </div>
+         </div>
         <div className='detailscreate-review'>
+        <div className='delete-review-location'>
 
         <button className='delete-review-button' onClick={() => handleDelete(review.id)}>Delete Review</button>
         </div>
-        </>
-        ))}
-        <div className='delete-spot'>
-            <button className='delete-spot-button' onClick={() => handleDeleteSpot(spotId)}>Delete Spot</button>
         </div>
-        <div className=''></div>
+        </>
+
+        ))}
+            {/* <button className='delete-spot-button' onClick={() => handleDeleteSpot(spotId)}>Delete Spot</button> */}
+
+
       </div>
         </div>
 
