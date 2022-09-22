@@ -76,13 +76,15 @@ font-size: 28px;
 .spotdetails-description {
     /* display:grid;
     grid-template-columns: 1fr 1fr 1fr 1fr; */
-    width: 390px;
+    width: 750px;
     margin-top: 150px;
-    /* position: relative; */
-left: -150px;
-top: 50px;
-font-weight:bold;
-font-size: 22px;
+    position: relative;
+    height: 90px;
+left: 0px;
+top: 150px;
+font-weight:lighter;
+font-size: 18px;
+border-bottom: 1px solid rgba(54, 53, 53, 0.362);
 
 
 }
@@ -95,7 +97,7 @@ font-size: 22px;
 
 .image-container {
     display: flex;
-    margin-top: 45px;
+    margin-top: 65px;
     width:1065px;
     height: 600px;
     /* border: 2px solid black; */
@@ -130,36 +132,80 @@ font-size: 22px;
 }
 
 .stardetails-rating{
-    font-weight: lighter;
+    /* font-weight: lighter; */
     display: flex;
     /* justify-content:center; */
     position: absolute;
-    right: 830px;
-    bottom: -250px;
+    right: 1010px;
+    bottom: -820px;
     margin-top: 30px;
-    border: 1px solid red
+    /* border: 1px solid red; */
+    font-size: 24px;
+    font-weight: bold;
 }
+.star {
+    font-size: 16px;
+    position: relative;
+    left: -3px;
+    top: 5px;
 
+}
+.length-reviews {
+
+    position: relative;
+    top: 229.7px;
+    font-size: 24px;
+    left: 75px;
+}
+.dot {
+    position: absolute;
+    left: -12px;
+}
 .spotDetailReviews {
 
     margin-top: 100px;
-    width: 550px;
-    margin-right: 100px;
+    width: 750px;
+    /* margin-right: 100px; */
     position: absolute;
     /* border: 2px solid rgb(219, 215, 215); */
     height: 200px;
-    left: 500px;
-    bottom: 10px;
-    box-shadow: 0px 0px 3px 5px #f2e1f2;
+    left: 430px;
+    bottom: -1250px;
+
     border-radius: 7px;
 
 }
 .detailscreate-review {
-    gap: 10px;
-    display: flex;
-    width: 550px;
+    gap: 0px;
+    column-gap: 0px;
+    margin: 5px;
+    padding: 5px;
+    /* display: flex; */
+    justify-content: flex-start;
+    width: 750px;
     font-size: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 
+
+}
+.reviews-grid {
+    width: 750px;
+    justify-content: space-around;
+    gap: 10px;
+
+}
+.starss {
+    position: relative;
+    top :-2px;
+    left: -2px;
+    font-size: 16px;
+}
+.grid {
+
+    column-gap: 30px;
+    row-gap: 30px;
+    gap: 30px;
 }
 .fa-star {
 
@@ -169,7 +215,7 @@ font-size: 22px;
     font-weight: bold;
     cursor: pointer;
     border-radius: 7px ;
-    width: 142px;
+    width: 122px;
     height:35px;
     background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
@@ -179,15 +225,23 @@ font-size: 22px;
 .create-review-button a {
     text-decoration: none;
     color: white;
+    position: relative;
+
 }
 
+.create-review-location {
+position: absolute;
+left: 220px;
+top: -80px;
+
+}
 .delete-review-button {
 
     padding: 10px;
     font-weight: bold;
     cursor: pointer;
     border-radius: 7px ;
-    width: 142px;
+    width: 122px;
     height:35px;
     background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
@@ -196,3 +250,202 @@ font-size: 22px;
     bottom: 74px;
     left: 300px
 }
+.delete-review-location {
+    position: absolute;
+    top: -80px;
+    left: 360px;
+}
+
+.edit-spot {
+
+    bottom: 159px;
+    left: 810px;
+    width: 112px;
+    height: 45px;
+}
+
+
+.delete-spot-button {
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 7px ;
+    width: 112px;
+    height:45px;
+    background: linear-gradient(to left, #e51e50, #d70565);
+    color: white;
+    border: none;
+
+    left: 870px;
+}
+.delete-and-edit-location {
+    position: relative;
+    left: 633px;
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: baseline;
+    /* border: 2px solid red; */
+    width: 230px
+}
+.house-count {
+margin-top: 12px;
+display: flex;
+font-size: 19px;
+border-bottom: 1px solid rgba(54, 53, 53, 0.362);
+height: 50px;
+width: 750px;
+
+}
+.home-hosted {
+font-size: 22px;
+margin-top: 55px;
+font-weight: bold;
+}
+
+
+.fa-square-parking {
+
+    position: absolute;
+    left: -30px;
+    height: 30px;
+
+
+
+}
+
+.symbol-info-container {
+    height: 70px;
+    margin-top: 25px;
+    font-size: 19px;
+    width: 750px;
+    display: flex;
+    justify-content: flex-start;
+    font-weight: bold;
+    position: relative;
+    left: 30px;
+    /* border-bottom: 1px solid rgba(54, 53, 53, 0.362); */
+
+
+}
+
+.parking-size {
+    font-size:28px;
+    height: 40px;
+}
+
+.great-parking {
+position: absolute;
+left: 15px;
+bottom: 43px
+
+}
+
+
+.location-excellent {
+position: relative;
+top: 75px;
+left: 15px;
+font-size: 18px;
+
+
+
+}
+
+
+.fa-location-dot {
+    position: relative;
+    right:28px;
+    top: 45px;
+}
+
+.symbols-container {
+    height: 130px;
+    border-bottom: 1px solid rgba(54, 53, 53, 0.362);
+    width: 750px;
+}
+.trev-container {
+    display: inline;
+    position: relative;
+    top: 110px;
+    left: -30px;
+    border-bottom: 1px solid rgba(54, 53, 53, 0.362);
+}
+.trev-cover {
+color:red
+}
+.cover-trev {
+position: relative;
+left: 53px;
+top: -34.2px;
+}
+.protection {
+    position: relative;
+    top: -20px;
+    font-weight: lighter;
+    font-size: 18px;
+    left: 0px;
+    border-bottom: 1px solid rgba(54, 53, 53, 0.362);
+    height: 80px;
+}
+
+.the-space-container {
+
+    font-weight: bold;
+    font-size:18px;
+    position: relative;
+    top: 270px;
+}
+
+.check-in {
+ position: relative;
+ top: 280px;
+
+
+}
+
+.what-this-offers {
+position: relative;
+top: 200px;
+font-weight: bold;
+font-size: 24px;
+
+}
+
+.amenity-grid-container {
+    width: 750px;
+    height: 280px;
+    border-bottom: 1px solid rgba(54, 53, 53, 0.362);
+position: relative;
+top: 250px;
+
+}
+
+
+.amenity-grid {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    /* justify-content: space-between; */
+}
+
+.amenities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 750px;
+    justify-content: space-between;
+    row-gap: 30px;
+    font-size: 20px;
+}
+.wifi {}
+.kitchen {}
+.long-stays {}
+.fridge {}
+.free-parking {}
+.heating {}
+.cooling {}
+.tv {}
+.smoking {}
+.coffee-maker {}
+.haunted {}
+.charging-station {}

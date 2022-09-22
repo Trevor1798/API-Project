@@ -8,12 +8,13 @@ padding: 0px
 display: flex;
 
 position:sticky;
-height: 20px;
+height: 25px;
 /* margin: auto; */
 width: 100%;
 /* justify-content: space-between; */
 border-bottom: 1px solid rgba(128, 128, 128, 0.198);
 padding-bottom: 10px;
+/* z-index: 2; */
 
 
 
@@ -24,22 +25,21 @@ padding-bottom: 10px;
     position: absolute;
     margin-top: 5px;
     bottom: 25px;
-    left: 92px;
+    left: 99px;
     height: 32px;
 
 
 }
 
 .user-container {
+    position: sticky;
+    z-index: 1;
 
-   position: relative;
-   left: 1680px;
-   top: 10px;
 }
 .user-profile-menu > button:hover{
     position: relative;
     border: none;
-    z-index: 0;
+    /* z-index: 1; */
     border: 1px solid grey;
     box-shadow: 0px 3px 4px rgba(74, 72, 72, 0.233);
 }
@@ -55,6 +55,9 @@ padding-bottom: 10px;
 
 
 
+}
+.open-menu {
+    z-index: 0;
 }
 .open-menu > button:hover {
 
@@ -88,10 +91,10 @@ bottom: 5px;
     position: absolute;
     display: flex;
     flex-direction: column;
-    border:1px solid rgba(84, 82, 82, 0.064);
+    /* border:1px solid rgba(84, 82, 82, 0.064); */
     border-radius: 7px;
     box-shadow: 0px 3px 19px rgba(0, 0, 0, 0.181);
-    z-index: 1;
+    z-index: 0;
     background-color: white;
 
 }
@@ -100,7 +103,7 @@ bottom: 5px;
 
 .profile-name {
 
-    border-bottom: 1px solid rgba(190, 190, 190, 0.195);
+    border-bottom: 1px outset rgba(190, 190, 190, 0.195);
     padding: 10px;
     font-weight: bold;
     cursor: pointer;
@@ -124,13 +127,24 @@ bottom: 5px;
 }
 
 .logout {
+    /* display: flex; */
+
    padding: 10px;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 7px ;
+    /* border-radius: 7px ; */
     width: 142px;
     height:35px;
     background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
     border:none
+}
+
+.test-route {
+    display: flex;
+    justify-content: end;
+    position: relative;
+    left: -133px;
+    top: 14px;
+
 }

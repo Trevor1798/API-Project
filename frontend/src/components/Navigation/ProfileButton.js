@@ -3,15 +3,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, NavLink, useHistory } from "react-router-dom";
+import { Modal } from "../../context/Modal";
 import * as sessionActions from '../../store/session';
 import * as spotsActions from '../../store/spots.js'
 import LoginFormModal from "../LoginFormModal";
 import SignupFormPage from "../SignupFormPage/SignupForm";
+import LoginForm from "../LoginFormModal/LoginForm";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   let history = useHistory()
   const [showMenu, setShowMenu] = useState(false);
+  const [showModal, setShowModal] = useState(false)
+  const [login, setLogin] = useState(false)
+  const [signup, setSignup] = useState(false)
   const sessionUser = useSelector((state) => state.session.user);
 // console.log(sessionUser.user.firstName)
   const openMenu = () => {
@@ -37,18 +42,16 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
     history.push('/')
   };
-  if (!sessionUser) {
-    return <div className="login-modal">
-      <LoginFormModal/>
-      Log In
-    <div className='signup-modal'>
-      <SignupFormPage/>
-    </div>
-    </div>
 
+  const handleClick = (e) => {
+    e.preventDefault()
+    setLogin(true)
   }
+  // if (!sessionUser) {
+
+  // }
   return (
-    <>
+
     <div className="test-route">
 
         {/* <NavLink to='/spots/owned-spots'></NavLink>
@@ -59,7 +62,7 @@ function ProfileButton({ user }) {
           <i className="fa-solid fa-bars"/>
           <i className="fas fa-user-circle fa-2xl"/>
         </button>
-      {showMenu && (
+      {showMenu && sessionUser && (
         <div className="profile-dropdown-container">
           <div className="profile-dropdown">
 
@@ -74,11 +77,25 @@ function ProfileButton({ user }) {
         </div>
         </div>
       )}
+      <div className="notloggedin">
+        {showMenu && !sessionUser &&(
+          <button className='log-in' onClick={handleClick}>
+            Log in
+             <Modal className='login-modal' onClose={() => setLogin(false)}><LoginForm/></Modal>
 
+          </button>
+        //       {login && (
+        //         <div className="login-modal-container">
+        // <Modal className='login-modal' onClose={() => setLogin(false)}>
+        //   <LoginForm />
+        // </Modal>
+      )}
       </div>
-      </div>
-      </div>
-      </>
+        {/* )} */}
+        </div>
+        </div>
+        </div>
+// </div>
   );
 }
 
