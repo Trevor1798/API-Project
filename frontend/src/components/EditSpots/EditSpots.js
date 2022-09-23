@@ -35,6 +35,7 @@ function EditSpots ({showModal, setShowModal}) {
     const handleSubmit = (e) => {
 
         e.preventDefault()
+
         let data = {
             name: name,
             address: address,
@@ -48,18 +49,18 @@ function EditSpots ({showModal, setShowModal}) {
             url: url
 
         }
-       if (!imageCheck(url)) {
-        setError({error: 'Image must be valid: jpg, jpeg, png, webp, avif, gif, svg'})
-       }
-       if (!name || name.length < 4 || name.length > 100) {
-        setError({error: 'Name must be between 4 and 100 characters'})
-    }
-    if (!imageCheck(url)) {
-        setError({error: 'Image must be valid: jpg, jpeg, png, webp, avif, gif, svg'})
-    }
-    if (!address || address.length < 5 || address.length > 100) {
-        setError({error: 'Address must be between 5 and 100 characters'})
-    }
+        if (!imageCheck(url)) {
+            setError({error: 'Image must be valid: jpg, jpeg, png, webp, avif, gif, svg'})
+        }
+        if (!name || name.length < 4 || name.length > 100) {
+            setError({error: 'Name must be between 4 and 100 characters'})
+        }
+        if (!imageCheck(url)) {
+            setError({error: 'Image must be valid: jpg, jpeg, png, webp, avif, gif, svg'})
+        }
+        if (!address || address.length < 5 || address.length > 100) {
+            setError({error: 'Address must be between 5 and 100 characters'})
+        }
     if (!city || city.length < 5 || city.length > 100) {
         setError({error: 'City must be between 5 and 100 characters'})
 
@@ -83,10 +84,17 @@ function EditSpots ({showModal, setShowModal}) {
     if (!price || price < 5 || price > 1000) {
         setError({error: 'Price must be between $5 and $1000'})
     }
-        dispatch(spotActions.getEditSpots(data, spotId )).then(() => dispatch(spotActions.getAllSpots()))
-        // .then(async (res) => setDispatched(true))
+    else {
 
-        setShowModal(false)
+        dispatch(spotActions.getEditSpots(data, spotId )).then(() => dispatch(spotActions.getAllSpots()))
+        // setShowModal(false)
+        // .catch(async (res) => {
+        //     const data = await res.json();
+        //     if (data && data.error) setError(data.error);
+        //   });
+
+        // .then(async (res) => setDispatched(true))
+    }
     }
 
 
@@ -94,14 +102,15 @@ function EditSpots ({showModal, setShowModal}) {
         <div className='wrapper'>
 
         <form className='spots-create' onSubmit={handleSubmit}>
-        <ul>{error.map((error, i) => (
+            <div className='edit-place'>Edit spot</div>
+        <ul className='edit-spots-error'>{Object.values(error).map((error, i) => (
             <li key={i}>{error}</li>
             ))}
        </ul>
-            <div className='host-place'>Edit spot</div>
+
 
        <label>
-           <input className="host-name"
+           <input className="edit-name"
                type='text'
                value={name}
                placeholder='Name'
@@ -110,7 +119,7 @@ function EditSpots ({showModal, setShowModal}) {
                />
        </label>
        <label>
-           <input className="preview-image"
+           <input className="edit-preview-image"
            type='text'
            placeholder='Image URL'
            value={previewImage}
@@ -119,7 +128,7 @@ function EditSpots ({showModal, setShowModal}) {
            />
        </label>
        <label>
-           <input className="host-address"
+           <input className="edit-address"
                type='text'
                placeholder='Address'
                value={address}
@@ -128,7 +137,7 @@ function EditSpots ({showModal, setShowModal}) {
                />
        </label>
        <label>
-           <input className='host-city'
+           <input className='edit-city'
                type='text'
                placeholder='City'
                value={city}
@@ -137,7 +146,7 @@ function EditSpots ({showModal, setShowModal}) {
                />
        </label>
        <label>
-           <input className='host-state'
+           <input className='edit-state'
            type='text'
            placeholder="State"
            value={state}
@@ -146,7 +155,7 @@ function EditSpots ({showModal, setShowModal}) {
            />
        </label>
        <label>
-           <input className="host-country"
+           <input className="edit-country"
                type='text'
                placeholder='Country'
                value={country}
@@ -155,7 +164,7 @@ function EditSpots ({showModal, setShowModal}) {
                />
        </label>
        <label>
-           <input className='host-lat'
+           <input className='edit-lat'
                type='text'
                placeholder="Latitude"
                value={lat}
@@ -163,7 +172,7 @@ function EditSpots ({showModal, setShowModal}) {
                />
        </label>
        <label>
-           <input className='host-lng'
+           <input className='edit-lng'
                type='text'
                placeholder="Longitude"
                value={lng}
@@ -171,7 +180,7 @@ function EditSpots ({showModal, setShowModal}) {
                />
        </label>
        <label>
-           <input className='host-description'
+           <input className='edit-description'
                type='text'
                placeholder="Describe your spot"
                value={description}
@@ -179,16 +188,17 @@ function EditSpots ({showModal, setShowModal}) {
                />
        </label>
        <label>
-           <input className='host-price'
+           <input className='edit-price'
                type='text'
                placeholder="Price"
                value={price}
                onChange={(e) => setPrice(e.target.value)}
                />
        </label>
-       <button className="host-form-button" type='submit' >
+       <button className="edit-form-button" type='submit' >
            Edit spot
        </button>
+
    </form>
 
                </div>

@@ -221,9 +221,10 @@ router.get("/", restoreUser,  paginationValidator, async (req, res) => {
   });
 
   for (let spot of allSpots) {
-    let avgRating = await Review.findAll({
-      where: { id: spot.id },
+    let avgRating = await Review.findOne({
+      where: { spotId: spot.id },
       attributes: [[Sequelize.fn("AVG", Sequelize.col("stars")), "avgRating"]],
+      raw: true,
     });
     let previewImage = await Image.findOne({
       attributes: ["url"],
@@ -231,11 +232,13 @@ router.get("/", restoreUser,  paginationValidator, async (req, res) => {
     });
     //  console.log(spot.dataValues)
     // console.log(avgRating[0].dataValues.avgRating)
-    spot.dataValues.avgRating = parseFloat(
-      Number(avgRating[0].dataValues.avgRating)
-    ).toFixed(1);
-    spot.dataValues.previewImage = previewImage.url;
-  }
+      spot.dataValues.avgRating = parseFloat(avgRating.avgRating).toFixed(1)
+      spot.dataValues.previewImage = previewImage.url;
+      console.log('this is spot', spot)
+      if (isNaN(spot.dataValues.avgRating)) {
+        spot.dataValues.avgRating = '0.0'
+      }
+    }
   // spot.dataValues.page = page
   // spot.dataValues.size = size
 
@@ -389,9 +392,9 @@ router.post("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
 
   const createUserReview = await Review.create({
     review: review,
-    stars,
+    stars: parseInt(stars),
     userId: req.user.id,
-    spotId: spotId,
+    spotId: parseInt(spotId),
   });
 
   res.status(200);

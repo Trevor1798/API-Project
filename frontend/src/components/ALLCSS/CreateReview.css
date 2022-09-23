@@ -9,6 +9,26 @@
     color: white;
     border:none
 }
+.title {
+
+    font-size: 24px;
+font-weight: bold;
+margin-bottom: 30px;
+display: flex;
+justify-content: center;
+border-bottom: 1px solid rgba(128, 128, 128, 0.198);
+padding: 15px;
+width: 419px;
+}
+.buttonss {
+    height: 70px;
+display: flex;
+align-items: flex-end;
+justify-content: center;
+gap: 10px;
+margin: 5px;
+padding: 5px;
+}
 .cancel-button {
 
     padding: 10px;
@@ -20,4 +40,35 @@
     background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
     border:none
+}
+
+.review-container-form {
+    width: 450px;
+    height: 300px;
+}
+.reviews-forms-location {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    height: 50px;
+    align-items: flex-end;
+}
+
+.review-input {
+
+    width: 250px;
+    height: 30px;
+}
+
+
+.review-rating {
+    width: 50px;
+    height: 30px;
+
+
+}
+
+.create-review-errors {
+ color: red;
+ font-size: 16px;
 }

@@ -24,12 +24,13 @@ width: 500px;
     font-weight: bold;
     cursor: pointer;
     border-radius: 7px ;
-    width: 506px;
-    height:45px;
+    width: 564px;
+    height:60px;
     background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
     border:none;
     margin-top: 5px;
+    font-size: 22px;
 }
 
 .host-place {
@@ -40,42 +41,48 @@ margin-bottom: 30px;
 display: flex;
 justify-content: center;
 
+padding: 15px;
+width: 100%;
+
+}
+.error-map {
+    display: flex;
+    justify-content: flex-start;
+    width: 500px;
+    height: 40px;
+    font-size: 16px;
+    color: red
 }
 
 .host-name {
-border-radius: 7px;
-height: 40px;
-width: 99%;
+    width: 550px;
+    height: 40px;
 
 }
 
 .preview-image {
 
-    border-radius: 7px;
+    width: 550px;
     height: 40px;
-    width: 99%;
 }
 
 .host-address {
 
-    border-radius: 7px;
+    width: 550px;
     height: 40px;
-    width: 99%;
 }
 
 .host-city {
 
 
-    border-radius: 7px;
+    width: 550px;
     height: 40px;
-    width: 99%;
 }
 
 .host-state {
 
-    border-radius: 7px;
+    width: 550px;
     height: 40px;
-    width: 99%;
 
 }
 
@@ -83,37 +90,32 @@ width: 99%;
 
 .host-country {
 
-    border-radius: 7px;
+    width: 550px;
     height: 40px;
-    width: 99%;
 
 }
 
 .host-lat {
 
-    border-radius: 7px;
+    width: 550px;
     height: 40px;
-    width: 99%;
 }
 
 .host-lng {
-    border-radius: 7px;
+    width: 550px;
     height: 40px;
-    width: 99%;
 
 }
 
 .host-description {
 
-    border-radius: 7px;
+    width: 550px;
     height: 40px;
-    width: 99%;
 }
 
 .host-price {
-    border-radius: 7px;
+    width: 550px;
     height: 40px;
-    width: 99%;
 
 
 }

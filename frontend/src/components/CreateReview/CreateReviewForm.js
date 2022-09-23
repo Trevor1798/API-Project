@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as reviewActions from "../../store/reviews";
+import * as spotsActions from '../../store/spots'
 import '../ALLCSS/CreateReview.css'
-function CreateReviewForm() {
+
+function CreateReviewForm({showReview, setShowReview}) {
   let dispatch = useDispatch();
   let history = useHistory();
   let { spotId } = useParams();
@@ -36,14 +38,16 @@ console.log('watch this pls=======', alreadyReviewed)
      if (stars < 1 || stars > 5 ) {
       setErrors({errors: 'Rating must be between 1 and 5'})
      }
-
-       dispatch(reviewActions.getCreateReviews(data));
-       history.push(`/spots/${spotId}`);
-
+      if (!alreadyReviewed) {
+        dispatch(reviewActions.getCreateReviews(data)).then(() => dispatch(reviewActions.getReviews(spotId)))
+        .then(() => dispatch(spotsActions.getAllSpots()))
+        // setShowReview(false)
+      }
+    //  dispatch(reviewActions.getCreateReviews(data)).then(() => history.push(`/spots/${spotId}`));
   };
 
   return (
-    <div>
+    <div className='review-container-form'>
       <form className="review-form" onSubmit={handleButtonClick}>
         <div className="title">Leave a review</div>
         <ul>
@@ -51,34 +55,40 @@ console.log('watch this pls=======', alreadyReviewed)
             <li className="create-review-errors" key={i}>{error}</li>
           ))}
         </ul>
-        <label>
+        <div className="reviews-forms-location">
+
+        <label className="reviewss">
           <input
             className="review-input"
             type="text"
             value={review}
             placeholder="Review"
             onChange={(e) => setReview(e.target.value)}
-          />
+            />
         </label>
-        <label>
+        <label className="ratings">
           <input
             className="review-rating"
             type="text"
             placeholder="rating"
             value={stars}
             onChange={(e) => setStars(e.target.value)}
-          />
+            />
         </label>
+            </div>
+        <div className="buttonss">
+
         <button className="set-review-button" type="submit">
           Submit Review
         </button>
         <button
           className="cancel-button"
           type="submit"
-          onClick={() => history.push(`/spots/${spotId}`)}
-        >
+          onClick={() => setShowReview(false)}
+          >
           Cancel Review
         </button>
+          </div>
       </form>
     </div>
   );
