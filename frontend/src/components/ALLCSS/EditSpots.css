@@ -1,10 +1,33 @@
 .wrapper {
 
-    width: 400px;
+    width: 582px;
     display: flex;
     justify-content: center;
+    height: 740px;
 }
+.edit-place {
 
+    border-bottom: 1px solid rgba(128, 128, 128, 0.198);
+    font-size: 28px;
+font-weight: bold;
+display: flex;
+justify-content: center;
+
+padding: 15px;
+align-content: center;
+width: 552px;
+margin-bottom:5px;
+
+}
+.edit-spots-error {
+display: flex;
+justify-content: flex-start;
+width: 500px;
+height: 40px;
+font-size: 16px;
+color: red
+
+}
 .edit-spot {
 
     padding: 10px;
@@ -46,7 +69,7 @@
 }
 
 
-.host-form-button {
+.edit-form-button {
     height: 60px;
     width: 335px;
     padding: 15px;
@@ -56,5 +79,68 @@
     background-image: linear-gradient(to right, #e51d4e, #d80665);
     color: white;
     font-size: 20px;
+
+}
+
+
+.edit-name{
+    width: 450px;
+    height: 40px;
+
+}
+
+.edit-preview-image {
+    width: 450px;
+    height: 40px;
+
+}
+.edit-address {
+
+    width: 450px;
+    height: 40px;
+}
+
+.edit-address {
+    width: 450px;
+    height: 40px;
+}
+
+.edit-city {
+    width: 450px;
+    height: 40px;
+}
+
+.edit-state {
+
+    width: 450px;
+    height: 40px;
+}
+
+.edit-country {
+    width: 450px;
+    height: 40px;
+}
+
+.edit-lat{
+    width: 450px;
+    height: 40px;
+}
+
+.edit-lng {
+    width: 450px;
+    height: 40px;
+}
+
+.edit-description {
+    width: 450px;
+    height: 40px;
+}
+.edit-price {
+    height: 40px;
+    width: 450px;
+}
+
+.edit-form-button {
+    width: 464px;
 
 }

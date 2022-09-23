@@ -49,7 +49,7 @@ function CreateSpots () {
             description,
             price,
             url: url,
-          
+
         }
         if (!user) {
             setError({error: 'User must be logged in to continue'})
@@ -74,10 +74,10 @@ function CreateSpots () {
         if (!country || country.length < 5 || country.length > 255) {
             setError({error: 'Country must be between 5 and 255 characters'})
         }
-        if (!lat || lat.length < 8 || lat.length > 8 ) {
+        if (!lat) {
             setError({error: 'Latitude must be 8 characters'})
         }
-        if (!lng || lng.length < 8 || lng.length > 8) {
+        if (!lng) {
             setError({error: 'Longitude must be 8 characters'})
         }
         if (!description || description.length < 10 || description.length > 300) {
@@ -96,13 +96,13 @@ function CreateSpots () {
 
      return (
         <div className="create-spot">
+            <div className='host-place'>Become a host today!</div>
 
         <form className="create-spots" onSubmit={handleSubmit}>
-             <ul>{Object.values(error).map((error, i) => (
-                 <li className="error-map" key={i}>{error}</li>
+             <ul className="error-map">{Object.values(error).map((error, i) => (
+                 <li key={i}>{error}</li>
                  ))}
             </ul>
-                 <div className='host-place'>Become a host!</div>
 
             <label>
                 <input className="host-name"
