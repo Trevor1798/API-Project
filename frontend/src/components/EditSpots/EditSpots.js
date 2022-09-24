@@ -92,8 +92,7 @@ function EditSpots ({showModal, setShowModal}) {
             // console.log('editspots errors',setError)
             setError(error)
             dispatch(spotActions.getEditSpots(data, spotId )).then(() => dispatch(spotActions.getAllSpots()))
-
-        // setShowModal(false)
+            setShowModal(false)
         // .catch(async (res) => {
             //     const data = await res.json();
             //     if (data && data.error) setError(data.error);

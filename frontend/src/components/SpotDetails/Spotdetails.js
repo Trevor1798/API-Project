@@ -33,7 +33,7 @@ const sessionUser = useSelector((state) => state.session.user);
 const spots = spot.find((spots) => spots.id === parseInt(spotId))
 
 console.log('check ', spots)
-let plswork = review.filter((review) => review.spotId === parseInt(spotId))
+let plswork = review.filter((review) => review.spotId === spotId)
 console.log('this is my session user obj', sessionUser)
 
     const [isLoaded, setIsLoaded] =useState(false)
@@ -98,7 +98,7 @@ if (!spots) return null
             <div className='delete-and-edit-location'>
 
 
-                {sessionUser && (sessionUser?.id === spots?.ownerId) &&  (
+                {(sessionUser?.id === spots?.ownerId) &&  (
 
                     <button className='edit-spot' onClick={onEditSpotClick} type='submit'>
                     Edit Spot
