@@ -33,7 +33,7 @@ const sessionUser = useSelector((state) => state.session.user);
 const spots = spot.find((spots) => spots.id === parseInt(spotId))
 
 console.log('check ', spots)
-let plswork = review.filter((review) => review.spotId === spotId)
+let plswork = review.filter((review) => review.spotId === parseInt(spotId))
 console.log('this is my session user obj', sessionUser)
 
     const [isLoaded, setIsLoaded] =useState(false)
@@ -254,7 +254,7 @@ if (!spots) return null
            </div>
                     </div>
         <div className="spotDetailReviews">
-            {sessionUser && (spots?.ownerId !== sessionUser.id) && (
+            { (spots?.ownerId !== sessionUser.id) && (
                 <div className='create-review-location'>
             <button className='create-review-button' onClick={onReviewClick} type='submit'>
             Create Review
@@ -268,7 +268,7 @@ if (!spots) return null
 
             </div>
                         )}
-        { plswork.map((review, i) => (
+        {plswork.map((review, i) => (
             <>
 
 
