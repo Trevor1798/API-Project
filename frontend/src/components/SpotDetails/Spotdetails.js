@@ -57,6 +57,7 @@ const handleDelete = (reviewId) => {
 const handleDeleteSpot = (spotId) => {
 
      dispatch(spotsActions.getDeleteSpots(spotId)).then(() => dispatch(spotsActions.getAllSpots()))
+     history.push('/owned-spots')
 
 }
 const onEditSpotClick = (e) => {
