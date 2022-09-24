@@ -33,10 +33,10 @@ function SignupFormPage() {
 
   return (
     <form className='signup-form' onSubmit={handleSubmit}>
-      <ul>
+      <ul className="signup-errors">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <div className="modal-header">Log in or Sign up</div>
+      <div className="modal-header">Log in or Sign Up</div>
       <div className='signup-form-input'>
         <div className='signup-welcome'>Welcome to AirBnb</div>
       <label>

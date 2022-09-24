@@ -11,6 +11,17 @@
 
 
 }
+.profile-name {
+    display: inline;
+
+    position:sticky;
+    height: 100px;
+    /* margin: auto; */
+    width: 100px;
+    /* justify-content: space-between; */
+    border-bottom: 1px solid rgba(128, 128, 128, 0.198);
+    /* padding-bottom: 10px; */
+}
 #modal-content {
     border-radius: 15px;
     background-color: #ffffff;
@@ -33,22 +44,22 @@
     border-bottom:  1px solid rgba(186, 162, 162, 0.3);
     font-size: 20px;
     font-weight: bold;
-
+    font-family: 'Monsterrat', sans-serif;
 
 }
 .login-welcome {
-display: flex;
-justify-content:left;
-align-content: flex-start;
+/* display: inline; */
+justify-content:center;
+/* align-content: center; */
 position: absolute;
-top: 85px;
-left: 0px;
+top: 75px;
+left: 140px;
 margin: 15px;
 padding: 10px;
 margin-top:20px;
-font-size: 30px;
+font-size: 24px;
 font-weight: bold;
-
+width: 300px;
 }
 
 .login-form-input {
@@ -66,25 +77,31 @@ width: 500px;
 } */
 
 .login-username {
-    height: 40px;
+    position: relative;
+    top: 20px;
+    height: 30px;
     width: 500px;
     padding: 15px;
-    margin: 15px;
-    border-radius: 10px;
-    border: 1px solid;
+  margin: 15px;
+    /* border-radius: 10px; */
+    /* border: 1px solid; */
 }
 .login-password {
-    height: 40px;
+    position: relative;
+    top: 20px;
+    height: 30px;
     width: 500px;
     padding: 15px;
     margin: 15px;
-    border-radius: 10px;
-    border: 1px solid;
+    /* border-radius: 10px; */
+    /* border: 1px solid; */
 
 }
 .login-button {
+    position: relative;
+    top:20px;
     height: 60px;
-    width: 535px;
+    width: 542px;
     padding: 15px;
     margin: 15px;
     border-radius: 10px;
@@ -96,17 +113,18 @@ width: 500px;
 .error-container {
     padding-top: 10px;
     position: relative;
-    bottom: 175px;
-    right: 80px;
-    font-family: 'Monsterrat', sans-serif
+    bottom: 145px;
+    right: 95px;
+    font-family: 'Monsterrat', sans-serif;
 
+    /* font-size: 16px; */
 
 }
 
 .login-error {
-   font-family: 'Monsterrat';
-   font-size: 24px;
-   position: relative;
+    font-family: 'Monsterrat', sans-serif;
+   font-size: 22px;
+
    color: red;
 
 }

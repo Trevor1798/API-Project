@@ -18,6 +18,7 @@
     background-color: rgba(128, 128, 128, 0.497) ;
 }
 .modal-header {
+    font-family: 'Monsterrat', sans-serif;
     display: flex;
     width: 550px;
     height: 50px;
@@ -32,23 +33,30 @@
     border-bottom:  1px solid rgba(186, 162, 162, 0.3);
     font-size: 20px;
     font-weight: bold;
-    font-family: Cereal;
+
 
 
 }
 .signup-welcome {
-    display: flex;
-
-    align-content: flex-start;
+   position: absolute;
     margin: 15px;
     padding: 10px;
     margin-top:20px;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
     position:fixed;
-    left: 670px;
+    right: 825px;
     top: 200px
 
+}
+.signup-errors {
+    color:red;
+    font-size:16px;
+    font-weight: bold;
+    position: absolute;
+    top: 130px;
+    left: -5px;
+    margin-bottom: 30px;
 }
 
 .signup-form-input {
@@ -59,97 +67,99 @@
     padding: 5px;
     margin: 5px;
     left: 10px;
+    top: 240px;
     border-radius: 7px;
     width: 550px;
 }
 
 .signup-email {
-    height: 30px;
+    height: 45px;
     flex-direction: column;
     align-items: center;
     display:flex;
     width: 550px;
-    padding: 5px;
+    /* padding: 5px;
     margin: 5px;
-    border-radius: 10px;
-    border: 1px solid;
+    border-radius: 10px; */
+    /* border: 1px solid; */
 }
 
 
 .signup-username {
-    height: 30px;
+    height: 45px;
    justify-content: center;
     align-items: center;
     display: flex;
     width: 550px;
-    padding: 5px;
+    /* padding: 5px;
     margin: 5px;
-    border-radius: 10px;
-    border: 1px solid;
+    border-radius: 10px; */
+    /* border: 1px solid; */
 }
 
 .signup-firstname{
-    height: 30px;
+    height: 45px;
     flex-direction: column;
     align-items: center;
     display: flex;
     width: 550px;
-    padding: 5px;
+    /* padding: 5px;
     margin: 5px;
-    border-radius: 10px;
-    border: 1px solid;
+    border-radius: 10px; */
+    /* border: 1px solid; */
 
 }
 
 .signup-lastname {
-    height: 30px;
+    height: 45px;
     flex-direction: column;
     align-items: center;
     display: flex;
     width: 550px;
-    padding: 5px;
+    /* padding: 5px;
     margin: 5px;
-    border-radius: 10px;
-    border: 1px solid;
+    border-radius: 10px; */
+    /* border: 1px solid; */
 
 }
 .signup-password {
-    height: 30px;
+    height: 45px;
     flex-direction: column;
     align-items: center;
     display: flex;
     width: 550px;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 10px;
-    border: 1px solid;
+    /* padding: 5px;
+    margin: 5px; */
+    /* border-radius: 10px; */
+    /* border: 1px solid; */
 }
 
 .confirm-password {
-    height: 30px;
+    height: 45px;
     flex-direction: column;
     align-items: center;
     display: flex;
     width: 550px;
-    padding: 5px;
+    /* padding: 5px;
     margin: 5px;
-    border-radius: 10px;
-    border: 1px solid;
+    border-radius: 10px; */
+    /* border: 1px solid; */
 }
 
 .signup-button {
     display: flex;
-    height: 50px;
-    width: 570px;
+    height: 60px;
+    width: 559px;
     padding: 20px;
-    margin: 15px;
+    /* margin: 15px;
     border-radius: 10px;
-    border: 1px solid;
+    border: 1px solid; */
     align-items: center;
     justify-content: center;
 
 
-    background-image: linear-gradient(to right, #e51d4e, #d80665);
+    background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
     font-size: 20px;
+    border: none;
 }

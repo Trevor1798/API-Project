@@ -4,7 +4,15 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 /* border: 2px solid black; */
-height: 800px;
+/* height: 800px; */
+
+
+}
+.form-wrapper {
+position:unset;
+/* top: 100px; */
+width: 550px;
+height: 700px;
 
 
 }
@@ -14,22 +22,22 @@ flex-direction: column;
 gap: 5px;
 border-radius: 7px;
 border: 45px, 10px rgb(237, 177, 177);
-width: 500px;
-/* border: 2px solid #d9d5d5; */
+position: relative;
+top: 30px;
 
 }
 
 .host-form-button {
-    padding: 10px;
+    /* padding: 10px; */
     font-weight: bold;
     cursor: pointer;
-    border-radius: 7px ;
-    width: 564px;
+    /* border-radius: 7px ; */
+    width: 559px;
     height:60px;
     background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
     border:none;
-    margin-top: 5px;
+    /* margin-top: 5px; */
     font-size: 22px;
 }
 
@@ -37,21 +45,21 @@ width: 500px;
 
 font-size: 28px;
 font-weight: bold;
-margin-bottom: 30px;
+margin-bottom: 10px;
 display: flex;
+position:relative;
+top: 30px;
 justify-content: center;
 
-padding: 15px;
+padding: 5px;
 width: 100%;
 
 }
 .error-map {
-    display: flex;
-    justify-content: flex-start;
-    width: 500px;
-    height: 40px;
-    font-size: 16px;
-    color: red
+
+    font-size: 14px;
+    color: red;
+    font-weight: bold;
 }
 
 .host-name {

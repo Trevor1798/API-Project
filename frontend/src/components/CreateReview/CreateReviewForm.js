@@ -11,7 +11,7 @@ function CreateReviewForm({showReview, setShowReview}) {
   let { spotId } = useParams();
   const [errors, setErrors] = useState([]);
   const [review, setReview] = useState("");
-  const [stars, setStars] = useState("");
+  const [stars, setStars] = useState(0);
 
   const user = useSelector(state => state.session.user)
   const reviewObj = useSelector(state => state.reviews)
@@ -22,27 +22,31 @@ const spots = Object.values(spotsObj)
 console.log('watch this pls=======', alreadyReviewed)
   const handleButtonClick = (e) => {
     e.preventDefault();
+    let errors = []
     const data = {
       review,
       stars,
       spotId
      };
-
      if (alreadyReviewed) {
-      setErrors({errors: 'User already has a review'})
+      errors.push('User already has a review')
      }
      if (!review || review.length < 5 || review.length > 200) {
-      setErrors({errors: 'Review must be between 5 and 200 characters'})
+      errors.push('Review must be between 5 and 200 characters')
 
      }
      if (stars < 1 || stars > 5 ) {
-      setErrors({errors: 'Rating must be between 1 and 5'})
+      errors.push('Rating must be between 1 and 5')
      }
-      if (!alreadyReviewed) {
-        dispatch(reviewActions.getCreateReviews(data)).then(() => dispatch(reviewActions.getReviews(spotId)))
-        .then(() => dispatch(spotsActions.getAllSpots()))
-        // setShowReview(false)
+     console.log(setErrors)
+     setErrors(errors)
+
+     if (!alreadyReviewed && (review && review.length > 5 && review.length < 200)) {
+       dispatch(reviewActions.getCreateReviews(data)).then(() => dispatch(reviewActions.getReviews(spotId)))
+       .then(() => dispatch(spotsActions.getAllSpots()))
+       setShowReview(false)
       }
+
     //  dispatch(reviewActions.getCreateReviews(data)).then(() => history.push(`/spots/${spotId}`));
   };
 
@@ -50,9 +54,9 @@ console.log('watch this pls=======', alreadyReviewed)
     <div className='review-container-form'>
       <form className="review-form" onSubmit={handleButtonClick}>
         <div className="title">Leave a review</div>
-        <ul>
-          {Object.values(errors).map((error, i) => (
-            <li className="create-review-errors" key={i}>{error}</li>
+        <ul className="create-review-errors">
+          {errors.map((errors, i) => (
+            <li  key={i}>{errors}</li>
           ))}
         </ul>
         <div className="reviews-forms-location">
@@ -61,18 +65,24 @@ console.log('watch this pls=======', alreadyReviewed)
           <input
             className="review-input"
             type="text"
+            min='5'
+            max='200'
             value={review}
             placeholder="Review"
             onChange={(e) => setReview(e.target.value)}
+            required
             />
         </label>
         <label className="ratings">
           <input
             className="review-rating"
-            type="text"
+            type="number"
             placeholder="rating"
+            max='5'
+            min='1'
             value={stars}
             onChange={(e) => setStars(e.target.value)}
+            required
             />
         </label>
             </div>

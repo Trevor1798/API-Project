@@ -7,10 +7,10 @@ import '../ALLCSS/Spotcard.css'
  const SpotCard = ({spots}) => {
     // console.log({spots})
     //
-    return ( 
+    return (
         <>
 
-        <Link className='card-container' to={`/spots/${spots.id}`}>
+        <Link className='card-container' to={`/spots/${spots.id}/${spots.ownerId}`}>
             <div className='card-container'>
                 <img className="spot-img" src={spots.previewImage} alt='previewImage' />
                 <div className="spot-description">

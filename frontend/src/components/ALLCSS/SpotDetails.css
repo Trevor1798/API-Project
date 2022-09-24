@@ -17,6 +17,10 @@ position: relative;
 
 /* border: 2px solid black */
 }
+.review-profile {
+    margin-top: 20px;
+    position: relative;
+}
 .review-details {
     display: flex;
     position: absolute;
@@ -65,9 +69,9 @@ justify-content: flex-start;
 font-size: 20px;
 }
 .spotdetails-address {
-display: block;
-text-align: left;
-width: 350px;
+position: relative;
+top: 300px;
+
 margin-top: 30px;
 font-weight: bold;
 font-size: 28px;
@@ -89,19 +93,22 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
 
 }
 .spotdetails-image {
-    width: 1065px;
+    width: 1020px;
+    height: 600px;
     border-radius: 7px;
 
+
+object-fit: fill;
 
 }
 
 .image-container {
     display: flex;
     margin-top: 65px;
-    width:1160px;
+    width:1020px;
     height: 600px;
     /* border: 2px solid black; */
-    object-fit: contain;
+    /* object-fit: contain; */
 
 
     /* display:flex;
@@ -133,15 +140,19 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
 
 .stardetails-rating{
     /* font-weight: lighter; */
-    /* display: flex; */
+    position: relative;
+    bottom: 170px;
+    left: 20px;
     /* justify-content:center; */
-    position:absolute;
-    right: 1105px;
-    bottom: -820px;
+    /* position:relative; */
+    /* right: 1125px;
+    bottom: -820px; */
     margin-top: 30px;
     /* border: 1px solid red; */
     font-size: 24px;
     font-weight: bold;
+    display: flex;
+    gap: 5px;
 }
 .star {
     font-size: 16px;
@@ -152,44 +163,63 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
 }
 .length-reviews {
 
-    position: relative;
-    top: 229.7px;
-    font-size: 24px;
-    left: 85px;
+    display:inline;
 }
 .dot {
-    position: absolute;
-    left: -12px;
+    padding: 6px;
+    display: inline;
 }
 .spotDetailReviews {
-
+    margin: 5px;
     margin-top: 100px;
-    width: 750px;
+width: 750px;
+position: absolute;
     /* margin-right: 100px; */
-    position: absolute;
+    /* display: flex; */
     /* border: 2px solid rgb(219, 215, 215); */
-    height: 200px;
-    left: 530px;
-    bottom: -1250px;
+    height: 400px;
+    left: 433px;
+    bottom: -988px;
 
-    border-radius: 7px;
+
+}
+
+.profile {
+
+    font-size: 28px;
+    position: relative;
+    right:65px;
+    top: 26px;
+    gap: 5px;
+}
+.reviews-stars-location {
+display: flex;
 
 }
 .detailscreate-review {
     gap: 0px;
     column-gap: 0px;
-    margin: 5px;
+    /* margin: 5px; */
     padding: 5px;
-    /* display: flex; */
-    justify-content: flex-start;
+    display: flex;
+    position: relative;
+    left: 37px;
     width: 750px;
-    font-size: 20px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    font-size: 22px;
+    /* font-size: 18px; */
+    /* display: grid; */
+    /* grid-template-columns: repeat(3, 1fr); */
 
 
 }
+.review-length {
+    font-size: 20px;
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+}
 .reviews-grid {
+    display: flex;
     width: 750px;
     justify-content: space-around;
     gap: 10px;
@@ -202,17 +232,18 @@ border-bottom: 1px solid rgba(54, 53, 53, 0.362);
     font-size: 16px; */
 
 .grid {
-
+    display: flex;
     column-gap: 20px;
     row-gap: 20px;
     gap: 20px;
-    position: relative;
-    left: -120px;
+
 }
 .fa-star {
 
 }
 .create-review-button {
+    position: absolute;
+    top: 31px;
     padding: 10px;
     font-weight: bold;
     cursor: pointer;
@@ -254,7 +285,7 @@ top: -80px;
 }
 .delete-review-location {
     position: absolute;
-    top: -80px;
+    top: -49px;
     left: 360px;
 }
 
@@ -281,16 +312,16 @@ top: -80px;
     left: 870px;
 }
 .delete-and-edit-location {
-    /* position: relative;
-    left: 633px; */
+    position: absolute;
+    left: 548px;
     display: flex;
     justify-content:flex-end;
     /* justify-content: space-between; */
     align-items: baseline;
     /* border: 2px solid red; */
-    width: 868px;
+    width: 468px;
     gap: 10px;
-    border: 2px solid red;
+
 }
 .house-count {
 margin-top: 12px;

@@ -1,5 +1,5 @@
 // frontend/src/components/LoginFormModal/index.js
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Modal } from '../../context/Modal';
 import LoginForm from './LoginForm';
 import * as sessionActions from '../../store/session'
@@ -12,8 +12,13 @@ function LoginFormModal() {
   const [login, setLogin] = useState(false)
   const [signup, setSignup] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showMenu, setShowMenu] = useState(false);
   // const [host, setHost] = useState(false)
 
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
   const onLoginClick = (e) =>{
     e.preventDefault()
 
@@ -30,15 +35,37 @@ function LoginFormModal() {
     e.preventDefault()
     return dispatch(sessionActions.login({credential: 'Musk1', password: 'password2'}))
   }
+  useEffect(() => {
+    // dispatch(spotsActions.getAllSpots())
+    if (!showMenu) return;
+
+    const closeMenu = () => {
+
+      setShowMenu(false);
+    };
+
+    document.addEventListener('click', closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
 
    return (
     <>
+    <div className='test-route'>
+
+      <div className='user-container'>
+        <div className='user-profile-menu'>
+            <button className='open-menu' onClick={openMenu}>
+            <i className="fa-solid fa-bars"/>
+          <i className="fas fa-user-circle fa-2xl"/>
+            </button>
+    <div className='profile-dropdown-container'>
       <div className='profile-dropdown'>
-        <ul className='profile-menu'>
-          <li className='Log-in'><button onClick={onLoginClick}>Log In</button></li>
-          <li><button onClick={onSignupClick}>Sign Up</button></li>
-          <li><button onClick={demoUserClick}>Demo User</button></li>
-        </ul>
+
+        <div className='profile-login' onClick={onLoginClick}>Log In</div>
+          <div className='profile-signup' onClick={onSignupClick}>Sign Up</div>
+          <div className='profile-demouser' onClick={demoUserClick}>Demo User</div>
+        </div>
       </div>
       {login && (
         <Modal className='login-modal' onClose={() => setLogin(false)}>
@@ -50,6 +77,10 @@ function LoginFormModal() {
           <SignupFormPage/>
         </Modal>
       )}
+      </div>
+      </div>
+      </div>
+
       </>
 
   );
