@@ -56,7 +56,7 @@ const handleDelete = (reviewId) => {
 }
 const handleDeleteSpot = (spotId) => {
 
-     dispatch(spotsActions.getDeleteSpots(spotId)).then(() => dispatch(reviewActions.getReviews(spotId)))
+     dispatch(spotsActions.getDeleteSpots(spotId)).then(() => dispatch(spotsActions.getAllSpots()))
 
 }
 const onEditSpotClick = (e) => {
