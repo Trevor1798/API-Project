@@ -41,10 +41,7 @@ console.log('watch this pls=======', alreadyReviewed)
      console.log(setErrors)
      setErrors(errors)
 
-     if (!alreadyReviewed) {
-
-
-
+     if (!alreadyReviewed && (review && review.length > 5 && review.length < 200)) {
        dispatch(reviewActions.getCreateReviews(data)).then(() => dispatch(reviewActions.getReviews(spotId)))
        .then(() => dispatch(spotsActions.getAllSpots()))
        setShowReview(false)

@@ -51,13 +51,13 @@ if (!isLoaded) return null
 
 const handleDelete = (reviewId) => {
 
-   dispatch(reviewActions.getDeleteReviews(parseInt(reviewId))).then(() => reviewActions.getReviews(reviewId)).then(() => setIsLoaded(true))
-
+//    dispatch(reviewActions.getDeleteReviews(parseInt(reviewId))).then(() => reviewActions.getReviews(reviewId)).then(() => setIsLoaded(true))
+   dispatch(reviewActions.getDeleteReviews(parseInt(reviewId))).then(() => dispatch(spotsActions.getAllSpots()))
 }
 const handleDeleteSpot = (spotId) => {
 
      dispatch(spotsActions.getDeleteSpots(spotId)).then(() => dispatch(reviewActions.getReviews(spotId)))
-     history.push('/')
+
 }
 const onEditSpotClick = (e) => {
     e.preventDefault();
