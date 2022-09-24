@@ -51,58 +51,60 @@ function CreateSpots () {
             url: url,
 
         }
+        let error = []
         if (!user) {
-            setError({error: 'User must be logged in to continue'})
+           error.push( 'User must be logged in to continue')
         }
         if (!name || name.length < 4 || name.length > 100) {
-            setError({error: 'Name must be between 4 and 100 characters'})
+           error.push( 'Name must be between 4 and 100 characters')
         }
         if (!imageCheck(url)) {
-            setError({error: 'Image must be valid: jpg, jpeg, png, webp, avif, gif, svg'})
+           error.push( 'Image must be valid: jpg, jpeg, png, webp, avif, gif, svg')
         }
         if (!address || address.length < 5 || address.length > 100) {
-            setError({error: 'Address must be between 5 and 100 characters'})
+           error.push( 'Address must be between 5 and 100 characters')
         }
         if (!city || city.length < 5 || city.length > 100) {
-            setError({error: 'City must be between 5 and 100 characters'})
+           error.push( 'City must be between 5 and 100 characters')
 
         }
         if (!state || state.length < 5 || state.length > 100) {
-            setError({error: 'State must be between 5 and 100 characters'})
+           error.push( 'State must be between 5 and 100 characters')
 
         }
         if (!country || country.length < 5 || country.length > 255) {
-            setError({error: 'Country must be between 5 and 255 characters'})
+           error.push( 'Country must be between 5 and 255 characters')
         }
         if (!lat) {
-            setError({error: 'Latitude must be 8 characters'})
+           error.push( 'Latitude must be 8 characters')
         }
         if (!lng) {
-            setError({error: 'Longitude must be 8 characters'})
+           error.push( 'Longitude must be 8 characters')
         }
         if (!description || description.length < 10 || description.length > 300) {
-            setError({error: 'Descriptions must be between 10 and 300 characters'})
+           error.push( 'Descriptions must be between 10 and 300 characters')
         }
         if (!price || price < 5 || price > 1000) {
-            setError({error: 'Price must be between $5 and $1000'})
+           error.push( 'Price must be between $5 and $1000')
         }
+        setError(error)
             console.log(data)
              dispatch(spotsActions.getCreateSpots(data))
             .then(async (res) => setDispatched(true))
-
-
-
         }
-
      return (
         <div className="create-spot">
             <div className='host-place'>Become a host today!</div>
 
         <form className="create-spots" onSubmit={handleSubmit}>
-             <ul className="error-map">{Object.values(error).map((error, i) => (
-                 <li key={i}>{error}</li>
-                 ))}
+            {error && (
+
+                <ul className="error-map">{error.map((error, i) => (
+                    <li key={i}>{error}</li>
+                    ))}
             </ul>
+                    )}
+                <div className="form-wrapper">
 
             <label>
                 <input className="host-name"
@@ -180,6 +182,7 @@ function CreateSpots () {
                     placeholder="Describe your spot"
                     value={description}
                     onChange={(e) =>  setDescription(e.target.value)}
+                    required
                     />
             </label>
             <label>
@@ -188,11 +191,13 @@ function CreateSpots () {
                     placeholder="Price"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
+                    required
                     />
             </label>
             <button className="host-form-button" type='submit'>
                 Create your spot!
             </button>
+                    </div>
         </form>
                     </div>
 

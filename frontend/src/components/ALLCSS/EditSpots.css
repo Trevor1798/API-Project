@@ -1,32 +1,41 @@
 .wrapper {
 
-    width: 582px;
+    width: 682px;
     display: flex;
     justify-content: center;
-    height: 740px;
+    height: 840px;
 }
 .edit-place {
-
+    display: flex;
+    justify-content: center;
     border-bottom: 1px solid rgba(128, 128, 128, 0.198);
     font-size: 28px;
 font-weight: bold;
-display: flex;
+position: relative;
+bottom: 30px;
+width: 652px;
+padding: 15px;
+/* display: flex;
 justify-content: center;
 
-padding: 15px;
-align-content: center;
-width: 552px;
-margin-bottom:5px;
+/* align-content: center;
+width: 652px;
+margin-bottom:15px; */
 
 }
 .edit-spots-error {
-display: flex;
-justify-content: flex-start;
+/* display: inline;
+justify-content: center;
 width: 500px;
 height: 40px;
-font-size: 16px;
-color: red
-
+font-size: 14px;
+color: red;
+position: relative;
+padding-bottom: 80px;
+font-weight: bold; */
+color: red;
+font-size: 15px;
+font-weight: bold;
 }
 .edit-spot {
 
@@ -62,10 +71,10 @@ color: red
     justify-content: center;
     position: relative;
     /* height: 682px; */
-    width: 468px;
+    /* width: 468px; */
     box-shadow: 7px #333434;
-    margin: 5px;
-    padding: 5px;
+    /* margin: 15px; */
+    /* padding: 25px; */
 }
 
 
@@ -73,7 +82,7 @@ color: red
     height: 60px;
     width: 335px;
     padding: 15px;
-    margin: 15px;
+    /* margin: 15px; */
     border-radius: 10px;
     border: 1px solid;
     background-image: linear-gradient(to right, #e51d4e, #d80665);

@@ -23,12 +23,15 @@ const spot = Object.values(spotObj)
 const review = Object.values(reviewObj)
 const users = Object.values(usersObj)
 console.log(review)
-
-console.log('-----------',users)
-// console.log('these are all my users', users.firstName)
+const spotOwner = usersObj[ownerId]
+// const userReview =
+console.log('spot owner', spotOwner)
+console.log('-----------',usersObj)
+console.log('these are all my users', users.firstName)
 
 const sessionUser = useSelector((state) => state.session.user);
 const spots = spot.find((spots) => spots.id === parseInt(spotId))
+
 console.log('check ', spots)
 let plswork = review.filter((review) => review.spotId === parseInt(spotId))
 console.log('this is my session user obj', sessionUser)
@@ -36,6 +39,7 @@ console.log('this is my session user obj', sessionUser)
     const [isLoaded, setIsLoaded] =useState(false)
     const [showModal, setShowModal] = useState(false)
     const [showReview, setShowReview] = useState(false)
+    const [,setRender] = useState(false)
 
 useEffect(() => {
     dispatch(spotsActions.getAllSpots()).then(() => setIsLoaded(true))
@@ -47,11 +51,13 @@ if (!isLoaded) return null
 
 const handleDelete = (reviewId) => {
 
-    dispatch(reviewActions.getDeleteReviews(parseInt(reviewId)))
+   dispatch(reviewActions.getDeleteReviews(parseInt(reviewId))).then(() => reviewActions.getReviews(reviewId)).then(() => setIsLoaded(true))
+
 }
 const handleDeleteSpot = (spotId) => {
-    history.push('/owned-spots')
-    return dispatch(spotsActions.getDeleteSpots(spotId))
+
+     dispatch(spotsActions.getDeleteSpots(spotId)).then(() => dispatch(reviewActions.getReviews(spotId)))
+     history.push('/')
 }
 const onEditSpotClick = (e) => {
     e.preventDefault();
@@ -92,7 +98,7 @@ if (!spots) return null
             <div className='delete-and-edit-location'>
 
 
-                {sessionUser && (
+                {sessionUser && (sessionUser?.id === spots?.ownerId) &&  (
 
                     <button className='edit-spot' onClick={onEditSpotClick} type='submit'>
                     Edit Spot
@@ -105,7 +111,7 @@ if (!spots) return null
                         </Modal>
 
                             )}
-                            {sessionUser && (
+                            {sessionUser && (sessionUser?.id === spots?.ownerId) &&(
 
                                 <button className='delete-spot-button' onClick={() => handleDeleteSpot(spotId)}>Delete Spot</button>
                                 )}
@@ -119,7 +125,7 @@ if (!spots) return null
         <div className='spotdetails-container'>
             {/* <div className='hosted-by'>Home hosted by {spots.ownerId}</div> */}
 
-            <div className='home-hosted'>Home hosted by a Superhost {users?.firstName} </div>
+            <div className='home-hosted'>{`Home hosted by ${spotOwner?.firstName} ${spotOwner?.lastName}`} </div>
             <div className='house-count'>{'2-4 guests'} {'•'} {'2 bedrooms'} {'•'} {'2 beds'} {'•'} {'3 baths'}</div>
                 </div>
                 <div className='symbols-container'>
@@ -161,7 +167,7 @@ if (!spots) return null
 
 
             </div>
-            <div className='what-this-offers'>
+            {/* <div className='what-this-offers'>
                 What this place offers
             </div>
             <div className='amenity-grid-container'>
@@ -220,14 +226,13 @@ if (!spots) return null
                 </div>
 
                 </div>
-            </div>
-            <div className='spotdetails-address'>
+            </div> */}
             {/* <div className='edit-spots'>
                 {sessionUser && (
 
                     <button className='edit-spot' onClick={onEditSpotClick} type='submit'>
                     Edit Spot
-                </button>
+                    </button>
                     )}
                     {showModal && (
                         <Modal onClose={() => setShowModal(false)}>
@@ -235,52 +240,62 @@ if (!spots) return null
 
                         </Modal>
                         )}
-            </div> */}
+                    </div> */}
+                    <div className='spotdetails-address'>
            <div className='stardetails-rating'>
             <i className=' star fa-solid fa-star'></i>
            {''} {spots.avgRating}
-            </div>
 
-           <div className='length-reviews'><div className='dot'>{'•'}</div>{review.length} reviews</div>
+           <div className='length-reviews'><div className='dot'>{'• '}</div>{review.length} reviews</div>
             </div>
             </div>
         </div>
            </div>
+                    </div>
         <div className="spotDetailReviews">
-            <div className='create-review-location'>
-            {sessionUser && (
-        <button className='create-review-button' onClick={onReviewClick} type='submit'>
+            {sessionUser && (spots?.ownerId !== sessionUser.id) && (
+                <div className='create-review-location'>
+            <button className='create-review-button' onClick={onReviewClick} type='submit'>
             Create Review
+
             </button>
-                    )}
-                {showReview && (
+                {showReview &&  (
                     <Modal onClose={() => setShowReview(false)}>
-                        <CreateReviewForm showReview={showReview} setShowReview={setShowReview}/>
+                    <CreateReviewForm showReview={showReview} setShowReview={setShowReview}/>
                     </Modal>
-                )}
+                    )}
 
             </div>
+                        )}
         { plswork.map((review, i) => (
             <>
-            <div className='reviews-grid'>
-            <div className='grid'>
 
-        <div className='detailscreate-review' key={review.id} review={review}>Anonymous User{' '}{getRandomUser(200)}: {''}
-         <div className='actual-review'>
-            <div className='reviews-stars-location'>
+
+
+            <div className='review-profile'>
+        <i className=" profile fas fa-user-circle fa-2xl"/>
+        <div className='detailscreate-review' key={review.id} review={review}>{review?.User?.firstName}: {''}
+            </div>
+
             {/* <i className='starss fa-solid fa-star'></i> */}
+            <div className='review-length'>
+
          {review.stars}/5{' •'}
          {' ' }{review.review}
             </div>
             </div>
+         <div className='actual-review'>
             </div>
-            </div>
-         </div>
-        <div className='detailscreate-review'>
-        <div className='delete-review-location'>
 
-        <button className='delete-review-button' onClick={() => handleDelete(review.id)}>Delete Review</button>
+
+
+        <div className='delete-review-location'>
+        {sessionUser && (spots?.ownerId !== sessionUser.id) &&  (
+
+            <button className='delete-review-button' type='submit' onClick={() => handleDelete(review.id)}>Delete Review</button>
+            )}
         </div>
+        <div className='detailscreate-review'>
         </div>
         </>
 

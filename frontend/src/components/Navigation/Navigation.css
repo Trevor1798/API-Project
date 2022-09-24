@@ -36,6 +36,10 @@ padding-bottom: 10px;
     z-index: 1;
 
 }
+.profile-spots {
+
+
+}
 .user-profile-menu > button:hover{
     position: relative;
     border: none;
@@ -60,6 +64,7 @@ padding-bottom: 10px;
     z-index: 0;
 }
 .open-menu > button:hover {
+    width: 80px;
 
     box-shadow: 2px 3px 19px rgba(14, 14, 14, 0.071);
 
@@ -87,10 +92,39 @@ bottom: 5px;
 
 
 }
+.profile-name{
+    display: flex;
+    margin-top: 10px;
+    height: 15px;
+    width: 110px;
+    border-bottom: 1px solid rgba(190, 190, 190, 0.195);
+align-items: flex-end;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+
+}
+
+.profile-spots {
+    display: flex;
+    margin-top: 10px;
+    height: 15px;
+    width: 110px;
+    border-bottom: 1px solid rgba(190, 190, 190, 0.195);
+align-items: flex-end;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+
+}
+
 .profile-dropdown-container {
     position: absolute;
-    display: flex;
+    right: -45px;
+    /* display:block; */
     flex-direction: column;
+    width: 120px;
+    height: 107.5px;
     /* border:1px solid rgba(84, 82, 82, 0.064); */
     border-radius: 7px;
     box-shadow: 0px 3px 19px rgba(0, 0, 0, 0.181);
@@ -101,19 +135,39 @@ bottom: 5px;
 
 
 
-.profile-name {
-
-    border-bottom: 1px outset rgba(190, 190, 190, 0.195);
-    padding: 10px;
+.profile-login  {
+    display: flex;
+    margin-top: 10px;
+    height: 15px;
+    width: 110px;
+    border-bottom: 1px solid rgba(190, 190, 190, 0.195);
+align-items: flex-end;
     font-weight: bold;
     cursor: pointer;
+    padding: 5px;
 }
+.profile-demouser {
 
-.profile-spots {
+    display: flex;
+    margin-top: 10px;
+    height: 15px;
+    width: 110px;
+    border-bottom: 1px solid rgba(190, 190, 190, 0.195);
+align-items: flex-end;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+}
+.profile-signup {
+    height: 25px;
+    width: 110px;
     border-bottom: 1px solid rgba(190, 190, 190, 0.195);
     padding: 10px;
     font-weight: bold;
-    cursor: pointer
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    padding: 5px;
 }
 
 .profile-host {
@@ -133,10 +187,10 @@ bottom: 5px;
     font-weight: bold;
     cursor: pointer;
     /* border-radius: 7px ; */
-    width: 142px;
+    width: 112px;
     height:35px;
-    background: linear-gradient(to left, #e51e50, #d70565);
-    color: white;
+    /* background: linear-gradient(to left, #e51e50, #d70565); */
+    /* color: white; */
     border:none
 }
 

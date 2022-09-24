@@ -73,7 +73,7 @@ function ProfileButton({ user }) {
           {/* <div className="profile-host">
               <Link to='/spots-create'>Become a Host</Link></div> */}
 
-            <button className="logout" onClick={logout}>Log Out</button>
+            <div className="logout" onClick={logout}>Log Out</div>
         </div>
         </div>
       )}
