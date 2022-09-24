@@ -57,9 +57,9 @@ function EditSpots ({showModal, setShowModal}) {
         if (!name || name.length < 4 || name.length > 100) {
             error.push('Name must be between 4 and 100 characters')
         }
-        if (!imageCheck(url)) {
-            error.push('Image must be valid: jpg, jpeg, png, webp, avif, gif, svg')
-        }
+        // if (!imageCheck(url)) {
+        //     error.push('Image must be valid: jpg, jpeg, png, webp, avif, gif, svg')
+        // }
         if (!address || address.length < 5 || address.length > 100) {
             error.push('Address must be between 5 and 100 characters')
         }
@@ -114,7 +114,7 @@ function EditSpots ({showModal, setShowModal}) {
             ))}
        </ul>
 
-            
+
        <label>
            <input className="edit-name"
                type='text'
@@ -124,7 +124,7 @@ function EditSpots ({showModal, setShowModal}) {
                required
                />
        </label>
-       <label>
+       {/* <label>
            <input className="edit-preview-image"
            type='text'
            placeholder='Image URL'
@@ -132,7 +132,7 @@ function EditSpots ({showModal, setShowModal}) {
            onChange={(e) => setPreviewImage(e.target.value)}
            required
            />
-       </label>
+       </label> */}
        <label>
            <input className="edit-address"
                type='text'
