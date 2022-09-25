@@ -22,18 +22,18 @@ function SpotDetails() {
   const spot = Object.values(spotObj);
   const review = Object.values(reviewObj);
   const users = Object.values(usersObj);
-  console.log(review);
+  console.log('reviewssss',reviewObj);
   const spotOwner = usersObj[ownerId];
   // const userReview =
-  console.log("spot owner", spotOwner);
-  console.log("-----------", usersObj);
-  console.log("these are all my users", users.firstName);
+  // console.log("spot owner", spotOwner);
+  // console.log("-----------", usersObj);
+  // console.log("these are all my users", users.firstName);
 
   const sessionUser = useSelector((state) => state.session.user);
   const spots = spot.find((spots) => spots.id === parseInt(spotId));
 
   console.log("check ", spots);
-  let plswork = review.filter((review) => review.spotId === parseInt(spotId));
+  let plswork = review.filter((review) =>(review.spotId) === spotId);
   console.log("this is my session user obj", sessionUser);
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -90,7 +90,7 @@ function SpotDetails() {
                 <div className="avg-rating">{spots?.avgRating}</div>
                 <div className="reviews-count">
                   {""}
-                  {plswork.length} {"reviews"}
+                  {review.length} {"reviews"}
                 </div>
               </div>
               <div className="delete-and-edit-location">
@@ -178,7 +178,7 @@ function SpotDetails() {
                 </div>
               </div>
               <div className="spotDetailReviews">
-                {sessionUser && spots?.ownerId !== sessionUser.id && (
+                {sessionUser && (spots?.ownerId !== sessionUser?.id) && (
                   <div className="create-review-location">
                     <div className="create-and-delete-location">
                       <button
@@ -199,7 +199,7 @@ function SpotDetails() {
                     )}
                   </div>
                 )}
-                {plswork.map((review, i) => (
+                {review.map((review, i) => (
                   <>
                     <i className=" profile fas fa-user-circle fa-2xl" />
                     <div
@@ -214,7 +214,7 @@ function SpotDetails() {
                     </div>
 
                     <div className="actual-review">
-                      {(sessionUser.id === review.userId) && (
+                      {(sessionUser?.id === review?.userId) && (
                         <button
                           className="delete-review-button"
                           type="submit"
