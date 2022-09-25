@@ -250,7 +250,7 @@ router.get("/", restoreUser,  paginationValidator, async (req, res) => {
 });
 
 //Get all reviews by a spots ID
-router.get("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
+router.get("/:spotId/reviews", restoreUser, async (req, res) => {
   const spotId = req.params.spotId;
 
   let spot = await Spot.findByPk(spotId);
