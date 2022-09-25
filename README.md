@@ -4,25 +4,27 @@ About trevbnb
 trevbnb is a full stack application using React, Redux, Express, and Sequelize. 
 Deployed on Heroku - https://airbnbproj.herokuapp.com/
 
-DB Schema - https://github.com/Trevor1798/API-Project/wiki/DB-Schema
-Api Docs - https://github.com/Trevor1798/API-Project/wiki/Api-Documentation
-Features - https://github.com/Trevor1798/API-Project/wiki/Features:-Spots-and-Reviews
-Redux Store Shape - https://github.com/Trevor1798/API-Project/wiki/Redux-store-shape
+## Site Info
+
+[DB Schema](https://github.com/Trevor1798/API-Project/wiki/DB-Schema)
+[Api Docs](https://github.com/Trevor1798/API-Project/wiki/Api-Documentation)
+[Features](https://github.com/Trevor1798/API-Project/wiki/Features:-Spots-and-Reviews)
+[Redux Store Shape](https://github.com/Trevor1798/API-Project/wiki/Redux-store-shape)
 
 
-Technologies Used 
+## Technologies Used 
 
 
-This application was built with the following technologies:
+## This application was built with the following technologies:
   
-    Javascript
-    Express
-    Sequelize
-    React
-    Redux
-    HTML
-    CSS
-    PostgresSQL
+   * Javascript
+   * Express
+   * Sequelize
+   * React
+   * Redux
+   * HTML
+   * CSS
+   * PostgresSQL
     
     
     
@@ -43,12 +45,12 @@ This application was built with the following technologies:
     ![reviewdetails](https://user-images.githubusercontent.com/102115797/192163426-2e6f1541-091b-4e8d-a407-f07e44f5572f.PNG)
 
     
-    Locally
+ ## Locally
 If you would like to launch the site locally please do the following:
 
 Clone this repo using a terminal by going to a directory where you would like to download and typing git clone git@github.com:Trevor1798/API-Project.git.
-Alternatively, you may download the zip file and extract it to a folder on your computer.
-Go into the 'backend' directory and in the terminal type npm install.
+* Alternatively, you may download the zip file and extract it to a folder on your computer.
+ Go into the 'backend' directory and in the terminal type npm install.
 
 Create a .env in your 'backend' directory and add your own values to these variables: PORT, DB_FILE (location of the database), JWT_SECRET, and JWT_EXPIRES_IN
 
