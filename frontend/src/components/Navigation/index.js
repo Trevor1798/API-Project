@@ -38,8 +38,11 @@ console.log({sessionUser})
           alt='AirBnb-logo.png'
           />
         </NavLink>
-        <div className="profile-host"
-            onClick={() => history.push('/spots-create')}>Become a Host</div>
+        {sessionUser && (
+
+          <div className="profile-host"
+          onClick={() => history.push('/spots-create')}>Become a Host</div>
+          )}
 
 
             </li>
