@@ -46,6 +46,7 @@ function ProfileButton({ user }) {
   const handleClick = (e) => {
     e.preventDefault()
     setLogin(true)
+    setSignup(false)
   }
   // if (!sessionUser) {
 
@@ -81,7 +82,7 @@ function ProfileButton({ user }) {
         {/* )} */}
         </div>
         </div>
-        
+
 // </div>
   );
 }
