@@ -23,6 +23,7 @@ function LoginFormModal() {
     e.preventDefault()
 
     setLogin(true)
+    setSignup(false)
   }
 
   const onSignupClick = (e) => {

@@ -2,7 +2,8 @@
 display: flex;
 justify-content: center;
 /* flex-direction: column; */
-
+width: 100%;
+align-items: center;
 }
 
 
@@ -14,12 +15,14 @@ justify-content:center;
 align-content: center;
 /* width: 1065px; */
 position: relative;
+max-width: 1120px;
+width: 100%;
 
 /* border: 2px solid black */
 }
 .review-profile {
-    margin-top: 20px;
-    position: relative;
+   position: relative;
+   right: 100px;
 }
 .review-details {
     display: flex;
@@ -28,6 +31,7 @@ position: relative;
     top: 54.5px;
     font-size: 18px;
     font-weight: lighter;
+    font-family: 'Montserrat', sans-serif;
 
 }
 .city-state {
@@ -37,6 +41,8 @@ position: relative;
     left: 271px;
     font-size: 18px;
     text-decoration: underline;
+
+    font-family: 'Montserrat', sans-serif;
 }
 .super-host {
     position: absolute;
@@ -44,11 +50,13 @@ position: relative;
     left: 171px;
     font-size: 18px;
     font-weight: lighter;
+    font-family: 'Montserrat', sans-serif;
 }
 .reviews-count {
    display: flex;
    position: relative;
    right: -11.5px;
+   font-family: 'Montserrat', sans-serif;
 
     text-decoration: underline;
 
@@ -67,14 +75,12 @@ margin-top: 20px;
 display: flex;
 justify-content: flex-start;
 font-size: 20px;
+font-family: 'Montserrat', sans-serif;
 }
 .spotdetails-address {
-position: relative;
-top: 300px;
-
-margin-top: 30px;
-font-weight: bold;
-font-size: 28px;
+display: flex;
+height: 70px;
+font-family: 'Montserrat', sans-serif;
 }
 
 .spotdetails-description {
@@ -89,9 +95,11 @@ top: 150px;
 font-weight:lighter;
 font-size: 18px;
 border-bottom: 1px solid rgba(54, 53, 53, 0.362);
+font-family: 'Montserrat', sans-serif;
 
 
 }
+
 .spotdetails-image {
     width: 1020px;
     height: 600px;
@@ -107,6 +115,8 @@ object-fit: fill;
     margin-top: 65px;
     width:1020px;
     height: 600px;
+    max-width: 1120px;
+/* width: 80%; */
     /* border: 2px solid black; */
     /* object-fit: contain; */
 
@@ -136,18 +146,19 @@ object-fit: fill;
     width: 500;
     height: 550;
     border-radius: 7px;
+
 }
 
 .stardetails-rating{
     /* font-weight: lighter; */
+    display: inline;
     position: relative;
-    bottom: 170px;
-    left: 20px;
     /* justify-content:center; */
     /* position:relative; */
     /* right: 1125px;
     bottom: -820px; */
-    margin-top: 30px;
+    margin-top: 160px;
+    margin-left: 17px;
     /* border: 1px solid red; */
     font-size: 24px;
     font-weight: bold;
@@ -163,23 +174,28 @@ object-fit: fill;
 }
 .length-reviews {
 
-    display:inline;
+    display: inline-flex;
+
+    gap: 10px;
+    height: 45px;
 }
 .dot {
-    padding: 6px;
-    display: inline;
+
 }
 .spotDetailReviews {
-    margin: 5px;
-    margin-top: 100px;
-width: 750px;
-position: absolute;
+    /* margin: 5px;
+    margin-top: 100px; */
+    display: inline;
+    align-items: center;
+    width: 750px;
+    /* margin-top: 142px */
+
     /* margin-right: 100px; */
     /* display: flex; */
     /* border: 2px solid rgb(219, 215, 215); */
-    height: 400px;
+    /* height: 400px;
     left: 433px;
-    bottom: -988px;
+    bottom: -988px; */
 
 
 }
@@ -188,9 +204,9 @@ position: absolute;
 
     font-size: 28px;
     position: relative;
-    right:65px;
-    top: 26px;
     gap: 5px;
+    top: 27px;
+   left: -3px;
 }
 .reviews-stars-location {
 display: flex;
@@ -202,7 +218,8 @@ display: flex;
     /* margin: 5px; */
     padding: 5px;
     display: flex;
-    position: relative;
+    margin-left: 27px;
+    /* position: relative; */
     left: 37px;
     width: 750px;
     font-size: 22px;
@@ -212,11 +229,16 @@ display: flex;
 
 
 }
+.containerrrr {
+    display: flex;
+    width: 100%;
+}
 .review-length {
     font-size: 20px;
     display: flex;
     margin: 5px;
     padding: 5px;
+    margin-left: 25px;
 }
 .reviews-grid {
     display: flex;
@@ -242,7 +264,9 @@ display: flex;
 
 }
 .create-review-button {
-    position: absolute;
+
+    display: flex;
+    justify-content: center;
     top: 31px;
     padding: 10px;
     font-weight: bold;
@@ -252,7 +276,8 @@ display: flex;
     height:35px;
     background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
-    border:none
+    border:none;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .create-review-button a {
@@ -263,13 +288,17 @@ display: flex;
 }
 
 .create-review-location {
-position: relative;
-left: 220px;
-top: -80px;
+display: flex;
+
+
+}
+.create-and-delete-location {
+display: inline;
 
 }
 .delete-review-button {
-
+    display: flex;
+    justify-content: center;
     padding: 10px;
     font-weight: bold;
     cursor: pointer;
@@ -279,14 +308,17 @@ top: -80px;
     background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
     border:none;
-    position: sticky;
-    bottom: 74px;
-    left: 300px
+    font-family: 'Montserrat', sans-serif;
+
+}
+.actual-review {
+display: flex;
+
 }
 .delete-review-location {
-    position: absolute;
+    /* position: absolute;
     top: -49px;
-    left: 360px;
+    left: 360px; */
 }
 
 .edit-spot {
@@ -310,6 +342,7 @@ top: -80px;
     border: none;
 
     left: 870px;
+    font-family: 'Montserrat', sans-serif;
 }
 .delete-and-edit-location {
     position: absolute;

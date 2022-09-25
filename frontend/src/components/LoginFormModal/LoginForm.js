@@ -27,7 +27,7 @@ function LoginForm() {
 
   return (
     <form className='login-form' onSubmit={handleSubmit}>
-      <div className='modal-header'>Log in or Sign up</div>
+      <div className='modal-header'>Log in or Sign Up</div>
       <div className="error-container">
 
       <ul>

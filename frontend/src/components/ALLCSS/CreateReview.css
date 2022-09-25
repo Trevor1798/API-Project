@@ -7,7 +7,8 @@
     height:35px;
     background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
-    border:none
+    border:none;
+    font-family: 'Montserrat', sans-serif;
 }
 .title {
 
@@ -19,6 +20,7 @@ justify-content: center;
 border-bottom: 1px solid rgba(128, 128, 128, 0.198);
 padding: 15px;
 width: 419px;
+font-family: 'Montserrat', sans-serif;
 }
 .buttonss {
     height: 70px;
@@ -28,6 +30,7 @@ justify-content: center;
 gap: 10px;
 margin: 5px;
 padding: 5px;
+font-family: 'Montserrat', sans-serif;
 }
 .cancel-button {
 
@@ -39,12 +42,14 @@ padding: 5px;
     height:35px;
     background: linear-gradient(to left, #e51e50, #d70565);
     color: white;
-    border:none
+    border:none;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .review-container-form {
     width: 450px;
     height: 300px;
+    font-family: 'Montserrat', sans-serif;
 }
 .reviews-forms-location {
     display: flex;
@@ -58,12 +63,14 @@ padding: 5px;
 
     width: 250px;
     height: 30px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
 .review-rating {
     width: 50px;
     height: 30px;
+    font-family: 'Montserrat', sans-serif;
 
 
 }
@@ -72,4 +79,5 @@ padding: 5px;
  color: red;
  font-size: 16px;
  font-weight: bold;
+ font-family: 'Montserrat', sans-serif;
 }

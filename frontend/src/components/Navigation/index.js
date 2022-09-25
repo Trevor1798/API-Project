@@ -40,7 +40,7 @@ console.log({sessionUser})
         </NavLink>
         <div className="profile-host"
             onClick={() => history.push('/spots-create')}>Become a Host</div>
-                    
+
 
             </li>
             </div>

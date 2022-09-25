@@ -75,11 +75,11 @@ function CreateSpots () {
         if (!country || country.length < 5 || country.length > 255) {
            error.push( 'Country must be between 5 and 255 characters')
         }
-        if (!lat) {
-           error.push( 'Latitude must be 8 characters')
+        if (!lat || lat.length < 8 || lat.length > 8) {
+           error.push( 'Latitude must be a number and equal to 8 characters')
         }
-        if (!lng) {
-           error.push( 'Longitude must be 8 characters')
+        if (!lng || lng.length < 8 || lng.length > 8) {
+           error.push( 'Longitude must be a number and equal to 8 characters')
         }
         if (!description || description.length < 10 || description.length > 300) {
            error.push( 'Descriptions must be between 10 and 300 characters')
