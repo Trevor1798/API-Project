@@ -169,6 +169,76 @@ function SpotDetails() {
                 Check in time starts at 4:00 pm and lasts till 8:00 pm
               </div>
               <div className="spotdetails-description">{spots.description}</div>
+              <div className="stardetails-rating">
+                <i className=" star fa-solid fa-star"></i>
+                {""} {spots.avgRating}
+                <div className="length-reviews">
+                  <div className="dot">{"• "}</div>
+                  {review.length} reviews
+                </div>
+              </div>
+              <div className="spotDetailReviews">
+                {sessionUser && spots?.ownerId !== sessionUser.id && (
+                  <div className="create-review-location">
+                    <div className="create-and-delete-location">
+                      <button
+                        className="create-review-button"
+                        onClick={onReviewClick}
+                        type="submit"
+                      >
+                        Create Review
+                      </button>
+                    </div>
+                    {showReview && (
+                      <Modal onClose={() => setShowReview(false)}>
+                        <CreateReviewForm
+                          showReview={showReview}
+                          setShowReview={setShowReview}
+                        />
+                      </Modal>
+                    )}
+                  </div>
+                )}
+                {plswork.map((review, i) => (
+                  <>
+                    <i className=" profile fas fa-user-circle fa-2xl" />
+                    <div
+                      className="detailscreate-review"
+                      key={review.id}
+                      review={review}
+                    >
+                      {review?.User?.firstName}: {""}
+                    </div>
+                    <div className="review-length">
+                      {review.stars}/5{" •"} {review.review}
+                    </div>
+
+                    <div className="actual-review">
+                      {(sessionUser.id === review.userId) && (
+                        <button
+                          className="delete-review-button"
+                          type="submit"
+                          onClick={() => handleDelete(review.id)}
+                        >
+                          Delete Review
+                        </button>
+                      )}
+                    </div>
+                    {/* <div className="delete-review-location">
+                {sessionUser && spots?.ownerId !== sessionUser.id && (
+                    <button
+                    className="delete-review-button"
+                    type="submit"
+                    onClick={() => handleDelete(review.id)}
+                    >
+                    Delete Review
+                  </button>
+                )}
+
+              </div> */}
+                  </>
+                ))}
+              </div>
               {/* <div className='what-this-offers'>
                 What this place offers
             </div>
@@ -245,19 +315,19 @@ function SpotDetails() {
                     </div> */}
 
               <div className="spotdetails-address">
-                <div className="stardetails-rating">
+                  </div>
+                {/* <div className="stardetails-rating">
                   <i className=" star fa-solid fa-star"></i>
                   {""} {spots.avgRating}
                   <div className="length-reviews">
                     <div className="dot">{"• "}</div>
                     {review.length} reviews
                   </div>
-                </div>
-              </div>
+                </div> */}
             </div>
           </div>
         </div>
-        <div className="spotDetailReviews">
+        {/* <div className="spotDetailReviews">
           {sessionUser && spots?.ownerId !== sessionUser.id && (
             <div className="create-review-location">
               <button
@@ -288,8 +358,6 @@ function SpotDetails() {
                 >
                   {review?.User?.firstName}: {""}
                 </div>
-
-                {/* <i className='starss fa-solid fa-star'></i> */}
                 <div className="review-length">
                   {review.stars}/5{" •"} {review.review}
                 </div>
@@ -310,8 +378,7 @@ function SpotDetails() {
               <div className="detailscreate-review"></div>
             </>
           ))}
-          {/* <button className='delete-spot-button' onClick={() => handleDeleteSpot(spotId)}>Delete Spot</button> */}
-        </div>
+        </div> */}
       </div>
     )
   );

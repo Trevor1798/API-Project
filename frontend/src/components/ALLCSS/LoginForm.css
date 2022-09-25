@@ -8,6 +8,7 @@
     box-shadow: 7px #333434;
     margin: 5px;
     padding: 5px;
+    font-family: 'Montserrat', sans-serif;
 
 
 }
@@ -44,7 +45,7 @@
     border-bottom:  1px solid rgba(186, 162, 162, 0.3);
     font-size: 20px;
     font-weight: bold;
-    font-family: 'Monsterrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 
 }
 .login-welcome {
@@ -115,14 +116,14 @@ width: 500px;
     position: relative;
     bottom: 145px;
     right: 95px;
-    font-family: 'Monsterrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 
     /* font-size: 16px; */
 
 }
 
 .login-error {
-    font-family: 'Monsterrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
    font-size: 22px;
 
    color: red;
