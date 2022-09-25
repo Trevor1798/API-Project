@@ -30,9 +30,8 @@ function CreateSpots () {
     if (dispatched) {
         return <Redirect to='/'/>
     }
-    const imageCheck = (url) => {
-        return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url)
-    }
+    const imageCheck =  /\.(jpg|jpeg|png|webp|avif|gif|svg)$/
+    
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -58,7 +57,7 @@ function CreateSpots () {
         if (!name || name.length < 4 || name.length > 100) {
            error.push( 'Name must be between 4 and 100 characters')
         }
-        if (!imageCheck(url)) {
+        if (!url.split('?')[0].match(imageCheck)) {
            error.push( 'Image must be valid: jpg, jpeg, png, webp, avif, gif, svg')
         }
         if (!address || address.length < 5 || address.length > 100) {
