@@ -77,24 +77,11 @@ function ProfileButton({ user }) {
         </div>
         </div>
       )}
-      <div className="notloggedin">
-        {showMenu && !sessionUser &&(
-          <button className='log-in' onClick={handleClick}>
-            Log in
-             <Modal className='login-modal' onClose={() => setLogin(false)}><LoginForm/></Modal>
-
-          </button>
-        //       {login && (
-        //         <div className="login-modal-container">
-        // <Modal className='login-modal' onClose={() => setLogin(false)}>
-        //   <LoginForm />
-        // </Modal>
-      )}
-      </div>
+            </div>
         {/* )} */}
         </div>
         </div>
-        </div>
+        
 // </div>
   );
 }

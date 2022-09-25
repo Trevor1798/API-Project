@@ -254,7 +254,7 @@ if (!spots) return null
            </div>
                     </div>
         <div className="spotDetailReviews">
-            { (spots?.ownerId !== sessionUser.id) && (
+            {sessionUser && (spots?.ownerId !== sessionUser.id) && (
                 <div className='create-review-location'>
             <button className='create-review-button' onClick={onReviewClick} type='submit'>
             Create Review
@@ -268,7 +268,7 @@ if (!spots) return null
 
             </div>
                         )}
-        {plswork.map((review, i) => (
+        { plswork.map((review, i) => (
             <>
 
 
