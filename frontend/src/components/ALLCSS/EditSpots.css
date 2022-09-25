@@ -49,6 +49,7 @@ font-weight: bold;
     color: white;
     border:none;
     margin-top: 5px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .delete-spot {
@@ -62,6 +63,7 @@ font-weight: bold;
     color: white;
     border:none;
     margin-top: 5px;
+    font-family: 'Montserrat', sans-serif;
 }
 .spots-create {
 
@@ -88,6 +90,7 @@ font-weight: bold;
     background-image: linear-gradient(to right, #e51d4e, #d80665);
     color: white;
     font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
 
 }
 
@@ -95,61 +98,73 @@ font-weight: bold;
 .edit-name{
     width: 450px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
 
 }
 
 .edit-preview-image {
     width: 450px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
 
 }
 .edit-address {
 
     width: 450px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .edit-address {
     width: 450px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .edit-city {
     width: 450px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .edit-state {
 
     width: 450px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .edit-country {
     width: 450px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .edit-lat{
     width: 450px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .edit-lng {
     width: 450px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .edit-description {
     width: 450px;
     height: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
 .edit-price {
     height: 40px;
     width: 450px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .edit-form-button {
     width: 464px;
+    font-family: 'Montserrat', sans-serif;
 
 }

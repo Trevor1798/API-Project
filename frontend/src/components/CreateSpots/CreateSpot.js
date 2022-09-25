@@ -78,7 +78,7 @@ function CreateSpots () {
         if (!lat) {
            error.push( 'Latitude must be 8 characters')
         }
-        if (!lng) {
+        if (!lng || lng.length < 8) {
            error.push( 'Longitude must be 8 characters')
         }
         if (!description || description.length < 10 || description.length > 300) {
