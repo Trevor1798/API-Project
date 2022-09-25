@@ -30,9 +30,8 @@ function CreateSpots () {
     if (dispatched) {
         return <Redirect to='/'/>
     }
-    const imageCheck = (url) => {
-        return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url)
-    }
+    const imageCheck =  /\.(jpg|jpeg|png|webp|avif|gif|svg)$/
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -58,7 +57,7 @@ function CreateSpots () {
         if (!name || name.length < 4 || name.length > 100) {
            error.push( 'Name must be between 4 and 100 characters')
         }
-        if (!imageCheck(url)) {
+        if (!url.split('?')[0].match(imageCheck)) {
            error.push( 'Image must be valid: jpg, jpeg, png, webp, avif, gif, svg')
         }
         if (!address || address.length < 5 || address.length > 100) {
@@ -75,13 +74,13 @@ function CreateSpots () {
         if (!country || country.length < 5 || country.length > 255) {
            error.push( 'Country must be between 5 and 255 characters')
         }
-        if (!lat || lat.length < 8 || lat.length > 8) {
-           error.push( 'Latitude must be a number and equal to 8 characters')
+        if (!lat ) {
+           error.push( 'Latitude must be a number and equal to 8 characters ex: (10.123445)')
         }
-        if (!lng || lng.length < 8 || lng.length > 8) {
-           error.push( 'Longitude must be a number and equal to 8 characters')
+        if (!lng ) {
+           error.push( 'Longitude must be a number and equal to  8 characters ex: (11.123456)')
         }
-        if (!description || description.length < 10 || description.length > 300) {
+        if (!description || description.length < 5 || description.length > 300) {
            error.push( 'Descriptions must be between 10 and 300 characters')
         }
         if (!price || price < 5 || price > 1000) {
