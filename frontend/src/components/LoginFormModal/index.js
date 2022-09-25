@@ -59,24 +59,28 @@ function LoginFormModal() {
             <i className="fa-solid fa-bars"/>
           <i className="fas fa-user-circle fa-2xl"/>
             </button>
-    <div className='profile-dropdown-container'>
+            {showMenu && (
+
+              <div className='profile-dropdown-container'>
       <div className='profile-dropdown'>
+
 
         <div className='profile-login' onClick={onLoginClick}>Log In</div>
           <div className='profile-signup' onClick={onSignupClick}>Sign Up</div>
           <div className='profile-demouser' onClick={demoUserClick}>Demo User</div>
         </div>
       </div>
+        )}
       {login && (
         <Modal className='login-modal' onClose={() => setLogin(false)}>
-          <LoginForm />
+        <LoginForm />
         </Modal>
-      )}
+        )}
       {signup && (
         <Modal className='signup-modal' onClose={() => setSignup(false)}>
-          <SignupFormPage/>
+        <SignupFormPage/>
         </Modal>
-      )}
+        )}
       </div>
       </div>
       </div>
