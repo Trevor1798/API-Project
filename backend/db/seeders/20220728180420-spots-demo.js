@@ -163,7 +163,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'East Side Beehive',
-        description: 'Clean, Zen modern backyard cottage, easy access to SXSW, convention center, great dining, and public transportation. Gorgeous, peaceful space, close to the action but perfect for rest and recharging. Easy access to SXSW, ACL, F1 and all festivals.',
+        description: 'Clean, Zen modern backyard cottage, easy access to SXSW, convention center, great dining, and public transportation. Gorgeous, peaceful space, close to the action but perfect for rest and recharging.',
         price: 254,
       },
       {
@@ -175,7 +175,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'Casa Acantilado',
-        description: 'Public parking space can be found near the property. Pets are not allowed. There are security cameras and/or audio recording devices on the premises, which activate when the alarm goes off. Boasting a beautiful view of the sea, the villa Casa Acantilado is located in Salobreña.',
+        description: 'Public parking space can be found near the property. Pets are not allowed. There are security cameras and/or audio recording devices on the premises, which activate when the alarm goes off. ',
         price: 489,
       },{
         ownerId: 3,
@@ -186,7 +186,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'Architectural wonder in the woods',
-        description: 'Unique experience, secluded. Enjoy a weekend or a few days eco-friendly retreat in an architectural, geometric masterpiece on 30 preserved acres just minutes from all that Rhinebeck and the Hudson Valley have to offer.',
+        description: 'Unique experience, secluded. Enjoy a weekend or a few days eco-friendly retreat in an architectural, geometric masterpiece.',
         price: 475,
       },{
         ownerId: 4 ,
@@ -197,7 +197,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'The Kellogg Doolittle House',
-        description: 'This is the famous Kellogg Doolittle estate in Joshua Tree California. It is one of the most exclusive homes in the world, and available for the first time as an Airbnb Luxe exclusive.',
+        description: 'This is the famous Kellogg Doolittle estate in Joshua Tree California. It is one of the most exclusive homes in the world.',
         price: 800,
       },{
         ownerId: 5 ,
@@ -208,7 +208,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'Vitra Cabin',
-        description: 'A design cabin at 1200 meters high, with architecture unlike anything you have ever seen, the Vitra Cabin, with its wide glass that overlooks the mountains, boasts a spectacular view of the mountains and sunsets.',
+        description: 'A design cabin at 1200 meters high, with architecture unlike anything you have ever seen.',
         price:190,
       },{
         ownerId:1 ,
@@ -219,7 +219,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'Poli settlement',
-        description: 'The village has 5 Icelandic cottages. Each cottage comes with a patio with a seating set and barbecue. Cottages are fully equipped, including separate access to wifi, making it easy to connect with remote work.',
+        description: 'The village has 5 Icelandic cottages. Each cottage comes with a patio with a seating set and barbecue.',
         price: 196,
       },{
         ownerId: 2,
@@ -230,7 +230,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'Mirrored House on Volcano',
-        description: 'Stay in an award-winning home - featured in Vogue, Forbes, NYT & the cover of Architectural Digest! Casa Etérea is a luxurious isolated hideaway for two, built on the slopes of an extinct volcano - only 20 mins from San Miguel de Allende.',
+        description: 'Stay in an award-winning home - featured in Vogue, Forbes, NYT & the cover of Architectural Digest! ',
         price: 419,
       },{
         ownerId: 3,
@@ -241,7 +241,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'East Sister Rock Island',
-        description: 'Your own private island right off the City of Marathon in the Florida Keys. 3 bedrooms, two baths, 12 ft veranda that surrounds the house and it even comes with a 21 ft. Carolina Skiff for transportation to and from the island.',
+        description: 'Your own private island right off the City of Marathon in the Florida Keys.',
         price: 830,
       },{
         ownerId: 4,
@@ -252,7 +252,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'Area 51 Futuro House',
-        description: 'Free pickup in new TESLA! Starting from late March.This amazing 1974 Futuro house (1 of only 50 in the world) has just been fully restored and is ready to offer you an amazing experience now! : ) the spaceship is massive and offers genuine rare furniture from designers such as verner panton and Luigi colani. ',
+        description: 'Free pickup in new TESLA! Starting from late March.This amazing 1974 Futuro house (1 of only 50 in the world) has just been fully restored and is ready to offer you an amazing experience now!',
         price: 287,
       },{
         ownerId: 5,
@@ -263,7 +263,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: '19th Century Dairy Barn',
-        description: 'THE POOL IS OPEN! 1869 hand-hewn hemlock dairy barn Rebuilt 2018-2020 on old Downer Family Farm.The 3 story back silo was built new to simulate original silo. Most of the slate roof is original. I was given this barn by a metal scrapper in exchange for a fence he wanted for his hunting dogs.',
+        description: 'THE POOL IS OPEN! 1869 hand-hewn hemlock dairy barn Rebuilt 2018-2020 on old Downer Family Farm.The 3 story back silo was built new to simulate original silo. Most of the slate roof is original.',
         price: 650,
       },{
         ownerId: 1,
@@ -296,7 +296,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'Castle Pines',
-        description: 'Play is at the heart of this modern mansion at the end of a cul-de-sac in the Reunion gated resort community. Living rooms in refined creams and grays lead to the Camp Morlando kids’ area and a life-size tree with slides shooting out of its branches.',
+        description: 'Play is at the heart of this modern mansion at the end of a cul-de-sac in the Reunion gated resort community.',
         price: 680,
       },{
         ownerId: 4,
@@ -318,7 +318,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'Nandana',
-        description: 'You and eleven others can call an immaculate, stylish villa on Grand Bahama Island your own. Nandana is an eclectic mix of an Asian beach house and top-notch Caribbean island home.',
+        description: 'You and eleven others can call an immaculate, stylish villa on Grand Bahama Island your own.',
         price: 570,
       },{
         ownerId: 1,
@@ -384,7 +384,7 @@ module.exports = {
         lat:10.123456,
         lng: 12.123456,
         name: 'Unique Earthouse',
-        description: 'Earthouse offers unique architectural design providing guests with an open inviting interior complete with high-end furnishings, modern decor, and abundant natural light.',
+        description: 'Earthouse offers unique architectural design providing guests with an open inviting interior.',
         price: 230,
       },
     ])
