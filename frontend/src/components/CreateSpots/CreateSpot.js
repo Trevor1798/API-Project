@@ -31,7 +31,7 @@ function CreateSpots () {
         return <Redirect to='/'/>
     }
     const imageCheck =  /\.(jpg|jpeg|png|webp|avif|gif|svg)$/
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -80,7 +80,7 @@ function CreateSpots () {
         if (!lng ) {
            error.push( 'Longitude must be a number and equal to  8 characters ex: (11.123456)')
         }
-        if (!description || description.length < 10 || description.length > 300) {
+        if (!description || description.length < 5 || description.length > 300) {
            error.push( 'Descriptions must be between 10 and 300 characters')
         }
         if (!price || price < 5 || price > 1000) {
