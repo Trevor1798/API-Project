@@ -33,7 +33,7 @@ const sessionUser = useSelector((state) => state.session.user);
 const spots = spot.find((spots) => spots.id === parseInt(spotId))
 
 console.log('check ', spots)
-let plswork = review.filter((review) => review.spotId === spotId)
+let plswork = review.filter((review) => review.spotId === parseInt(spotId))
 console.log('this is my session user obj', sessionUser)
 
     const [isLoaded, setIsLoaded] =useState(false)
@@ -57,6 +57,7 @@ const handleDelete = (reviewId) => {
 const handleDeleteSpot = (spotId) => {
 
      dispatch(spotsActions.getDeleteSpots(spotId)).then(() => dispatch(spotsActions.getAllSpots()))
+     history.push('/owned-spots')
 
 }
 const onEditSpotClick = (e) => {
