@@ -21,12 +21,13 @@ function CreateSpots () {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [country, setCountry] = useState('')
-    const [lat, setLat] = useState('')
-    const [lng, setLng] = useState('')
+    // const [lat, setLat] = useState('')
+    // const [lng, setLng] = useState('')
     const [url, setUrl] = useState('')
     const [error, setError] = useState([])
     // const spots= useSelector((state) => Object.values(state.spots))
-
+    const LAT = 12.123455
+    const LNG = 12.123455
     if (dispatched) {
         return <Redirect to='/'/>
     }
@@ -43,8 +44,8 @@ function CreateSpots () {
             city,
             state,
             country,
-            lat,
-            lng,
+            lat: LAT,
+            lng: LNG,
             description,
             price,
             url: url,
@@ -74,20 +75,28 @@ function CreateSpots () {
         if (!country || country.length < 5 || country.length > 255) {
            error.push( 'Country must be between 5 and 255 characters')
         }
-        if (!lat ) {
-           error.push( 'Latitude must be a number and equal to 8 characters ex: (10.123445)')
-        }
-        if (!lng ) {
-           error.push( 'Longitude must be a number and equal to  8 characters ex: (11.123456)')
-        }
+        // if (!lat ) {
+        //    error.push( 'Latitude must be a number and equal to 8 characters ex: (10.123445)')
+        // }
+        // if (!lng ) {
+        //    error.push( 'Longitude must be a number and equal to  8 characters ex: (11.123456)')
+        // }
         if (!description || description.length < 5 || description.length > 300) {
-           error.push( 'Descriptions must be between 10 and 300 characters')
+           error.push( 'Descriptions must be between 5 and 300 characters')
         }
         if (!price || price < 5 || price > 1000) {
            error.push( 'Price must be between $5 and $1000')
         }
+
         setError(error)
-            console.log(data)
+
+        if (description.length >= 5 && description.length < 300 &&
+            country.length >= 5 && country.length < 255 &&
+            state.length >= 5 && state.length < 100 &&
+            address.length >= 5 && address.length < 100 &&
+            name.length >= 5 && name.length < 100 &&
+            url.split('?')[0].match(imageCheck) && user)
+
              dispatch(spotsActions.getCreateSpots(data))
             .then(async (res) => setDispatched(true))
         }
@@ -159,7 +168,7 @@ function CreateSpots () {
                     required
                     />
             </label>
-            <label>
+            {/* <label>
                 <input className='host-lat'
                     type='text'
                     placeholder="Latitude"
@@ -174,10 +183,11 @@ function CreateSpots () {
                     value={lng}
                     onChange={(e) => setLng(e.target.value)}
                     />
-            </label>
+            </label> */}
             <label>
                 <input className='host-description'
                     type='text'
+                    min='5'
                     placeholder="Describe your spot"
                     value={description}
                     onChange={(e) =>  setDescription(e.target.value)}
