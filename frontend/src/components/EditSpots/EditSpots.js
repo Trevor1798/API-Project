@@ -32,7 +32,8 @@ function EditSpots ({showModal, setShowModal}) {
     function imageCheck(url) {
         return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url)
     }
-
+    const LAT = 12.123455
+    const LNG = 12.123455
     const handleSubmit = (e) => {
 
         e.preventDefault()
@@ -43,8 +44,8 @@ function EditSpots ({showModal, setShowModal}) {
             city: city,
             state:state,
             country: country,
-            lat: lat,
-            lng: lng,
+            lat: LAT,
+            lng: LNG,
             description: description,
             price: price,
             url: url
@@ -74,25 +75,35 @@ function EditSpots ({showModal, setShowModal}) {
         if (!country || country.length < 5 || country.length > 255) {
             error.push('Country must be between 5 and 255 characters')
         }
-        if (!lat) {
-            error.push('Latitude must be 8 characters')
-        }
-        if (!lng) {
-            error.push('Longitude must be 8 characters')
-        }
-        if (!description || description.length < 10 || description.length > 300) {
-            error.push('Descriptions must be between 10 and 300 characters')
+        // if (!lat) {
+        //     error.push('Latitude must be 8 characters')
+        // }
+        // if (!lng) {
+        //     error.push('Longitude must be 8 characters')
+        // }
+        if (!description || description.length < 5 || description.length > 300) {
+            error.push('Descriptions must be between 5 and 300 characters')
         }
         if (!price || price < 5 || price > 1000) {
             error.push('Price must be between $5 and $1000')
         }
+        setError(error)
+        if (description.length >= 5 && description.length < 300 &&
+            country.length >= 5 && country.length < 255 &&
+            state.length >= 5 && state.length < 100 &&
+            address.length >= 5 && address.length < 100 &&
+            name.length >= 5 && name.length < 100 && user)
 
+             dispatch(spotActions.getEditSpots(data, spotId )).then(() => dispatch(spotActions.getAllSpots())).then(() => {
+            setShowModal(false)
+            })
+
+
+
+        }
 
 
             // console.log('editspots errors',setError)
-            setError(error)
-            dispatch(spotActions.getEditSpots(data, spotId )).then(() => dispatch(spotActions.getAllSpots()))
-            setShowModal(false)
         // .catch(async (res) => {
             //     const data = await res.json();
             //     if (data && data.error) setError(data.error);
@@ -100,10 +111,9 @@ function EditSpots ({showModal, setShowModal}) {
 
             // .then(async (res) => setDispatched(true))
 
-        }
 
 
-    return (
+            return (
         <div className='wrapper'>
 
         <form className='spots-create' onSubmit={handleSubmit}>
@@ -168,7 +178,7 @@ function EditSpots ({showModal, setShowModal}) {
                required
                />
        </label>
-       <label>
+       {/* <label>
            <input className='edit-lat'
                type='text'
                placeholder="Latitude"
@@ -183,7 +193,7 @@ function EditSpots ({showModal, setShowModal}) {
                value={lng}
                onChange={(e) => setLng(e.target.value)}
                />
-       </label>
+       </label> */}
        <label>
            <input className='edit-description'
                type='text'

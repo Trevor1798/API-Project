@@ -20,6 +20,17 @@ width: 100%;
 
 /* border: 2px solid black */
 }
+.spotdetails-container2{
+    /* display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-content: center;
+    position: relative;
+    max-width: 1120px;
+    width: 100%; */
+    width: 100%;
+    max-width: 1020px;
+}
 .review-profile {
    position: relative;
    right: 100px;
@@ -28,7 +39,7 @@ width: 100%;
     display: flex;
     position: absolute;
     left: 15px;
-    top: 54.5px;
+    top: 85.5px;
     font-size: 18px;
     font-weight: lighter;
     font-family: 'Montserrat', sans-serif;
@@ -37,7 +48,7 @@ width: 100%;
 .city-state {
     position: absolute;
     font-weight: lighter;
-    top: 54.5px;
+    top: 85.5px;
     left: 271px;
     font-size: 18px;
     text-decoration: underline;
@@ -46,7 +57,7 @@ width: 100%;
 }
 .super-host {
     position: absolute;
-    top: 54.5px;
+    top: 85.5px;
     left: 171px;
     font-size: 18px;
     font-weight: lighter;
@@ -74,7 +85,7 @@ margin-bottom: 20px;
 margin-top: 20px;
 display: flex;
 justify-content: flex-start;
-font-size: 20px;
+font-size: 22px;
 font-family: 'Montserrat', sans-serif;
 }
 .spotdetails-address {
@@ -101,21 +112,23 @@ font-family: 'Montserrat', sans-serif;
 }
 
 .spotdetails-image {
-    width: 1020px;
+    /* width: 1020px; */
     height: 600px;
     border-radius: 7px;
-
-
-object-fit: fill;
+    width: 100%;
+    max-width:1020px;
+object-fit: cover;
 
 }
 
 .image-container {
     display: flex;
     margin-top: 65px;
-    width:1020px;
+    /* width:1020px; */
     height: 600px;
-    max-width: 1120px;
+    max-width: 1020px;
+    width: 100%;
+
 /* width: 80%; */
     /* border: 2px solid black; */
     /* object-fit: contain; */
@@ -345,16 +358,18 @@ display: flex;
     font-family: 'Montserrat', sans-serif;
 }
 .delete-and-edit-location {
-    position: absolute;
-    left: 548px;
+    /* position: relative; */
+    left: 248px;
     display: flex;
     justify-content:flex-end;
     /* justify-content: space-between; */
     align-items: baseline;
     /* border: 2px solid red; */
-    width: 468px;
+    max-width: 468px;
     gap: 10px;
-
+    width: 100%;
+    margin-left: 324px;
+  margin-top: 32px;
 }
 .house-count {
 margin-top: 12px;
