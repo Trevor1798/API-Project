@@ -1,12 +1,13 @@
 
 .container-top {
 margin: 0px;
-padding: 0px
+padding: 0px;
+/* z-index: 2; */
 
 }
 .container {
 display: flex;
-
+/* z-index: ; */
 position:sticky;
 height: 25px;
 /* margin: auto; */
@@ -21,12 +22,15 @@ padding-bottom: 10px;
 
 }
 
+
 .airbnb-logo {
     position: absolute;
     margin-top: 5px;
-    bottom: 25px;
-    left: 99px;
-    height: 32px;
+    bottom: 10px;
+    left: 90px;
+    height: 52px;
+    width: 130px;
+
 
 
 }
@@ -109,7 +113,7 @@ align-items: flex-end;
     display: flex;
     margin-top: 10px;
     height: 15px;
-    width: 110px;
+    width: 120px;
     border-bottom: 1px solid rgba(190, 190, 190, 0.195);
 align-items: flex-end;
     font-weight: bold;
