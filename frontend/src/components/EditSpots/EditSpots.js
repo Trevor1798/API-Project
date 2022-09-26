@@ -92,7 +92,8 @@ function EditSpots ({showModal, setShowModal}) {
             country.length >= 5 && country.length < 255 &&
             state.length >= 5 && state.length < 100 &&
             address.length >= 5 && address.length < 100 &&
-            name.length >= 5 && name.length < 100 && user)
+            name.length >= 5 && name.length < 100 &&
+            price > 5 && price < 1000 && user)
 
              dispatch(spotActions.getEditSpots(data, spotId )).then(() => dispatch(spotActions.getAllSpots())).then(() => {
             setShowModal(false)

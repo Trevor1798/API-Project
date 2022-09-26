@@ -7,6 +7,7 @@ import "./Navigation.css";
 import SignupFormPage from "../SignupFormPage/SignupForm";
 import {Modal} from '../../context/Modal.js'
 import CreateSpots from "../CreateSpots/CreateSpot";
+import trevbnb from '../ALLCSS/trebnb2.png'
 
 function Navigation({ isLoaded }) {
   // const [showModal, setShowModal] = useState(false)
@@ -34,10 +35,11 @@ console.log({sessionUser})
       <li className="container">
 
         <NavLink exact to="/">
-          <img className="airbnb-logo" src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png'
+          <img className="airbnb-logo" src={trevbnb}
           alt='AirBnb-logo.png'
           />
         </NavLink>
+
         {sessionUser && (
 
           <div className="profile-host"

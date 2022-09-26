@@ -84,7 +84,7 @@ function SpotDetails() {
           <div className="spotdetailscontainer2">
             <div className="spotdetails-name">
               {spots.name} {""}
-              <br></br>
+             
               <div className="review-details">
                 <i className="topstar fa-solid fa-star"></i>
                 <div className="avg-rating">{spots?.avgRating}</div>
