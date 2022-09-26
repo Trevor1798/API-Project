@@ -39,7 +39,7 @@ width: 100%;
     display: flex;
     position: absolute;
     left: 15px;
-    top: 85.5px;
+    top: 75.5px;
     font-size: 18px;
     font-weight: lighter;
     font-family: 'Montserrat', sans-serif;
@@ -48,7 +48,7 @@ width: 100%;
 .city-state {
     position: absolute;
     font-weight: lighter;
-    top: 85.5px;
+    top: 75.5px;
     left: 271px;
     font-size: 18px;
     text-decoration: underline;
@@ -57,7 +57,7 @@ width: 100%;
 }
 .super-host {
     position: absolute;
-    top: 85.5px;
+    top: 75.5px;
     left: 171px;
     font-size: 18px;
     font-weight: lighter;
@@ -81,12 +81,15 @@ width: 100%;
 }
 .spotdetails-name {
 font-weight: bold;
-margin-bottom: 20px;
+/* margin-bottom: 20px; */
 margin-top: 20px;
-display: flex;
+display:flex;
 justify-content: flex-start;
-font-size: 22px;
+font-size: 20px;
 font-family: 'Montserrat', sans-serif;
+max-width: 1020px;
+width: 100%;
+white-space: nowrap;
 }
 .spotdetails-address {
 display: flex;
@@ -118,15 +121,16 @@ font-family: 'Montserrat', sans-serif;
     width: 100%;
     max-width:1020px;
 object-fit: cover;
+/* margin-top: 15px */
 
 }
 
 .image-container {
     display: flex;
-    margin-top: 65px;
-    /* width:1020px; */
+    margin-top: 60px;
+    width:1020px;
     height: 600px;
-    max-width: 1020px;
+
     width: 100%;
 
 /* width: 80%; */
@@ -365,7 +369,7 @@ display: flex;
     /* justify-content: space-between; */
     align-items: baseline;
     /* border: 2px solid red; */
-    max-width: 468px;
+    max-width: 1020px;
     gap: 10px;
     width: 100%;
     margin-left: 324px;

@@ -151,7 +151,7 @@ module.exports = {
         lat: 12.123455,
         lng: 11.123455,
         name: 'Northern Air Temple',
-        description: 'Be just like Aang and learn the ways of airbending at the this all inlcusive resort!',
+        description: 'Be just like Aang and learn the ways of airbending at this all inlcusive resort!',
         price: 250,
       },
       {
