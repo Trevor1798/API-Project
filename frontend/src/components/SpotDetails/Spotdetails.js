@@ -59,7 +59,7 @@ function SpotDetails() {
     dispatch(spotsActions.getDeleteSpots(spotId)).then(() =>
       dispatch(spotsActions.getAllSpots())
     );
-    history.push("/owned-spots");
+    history.push("/");
   };
   const onEditSpotClick = (e) => {
     e.preventDefault();
@@ -84,7 +84,7 @@ function SpotDetails() {
           <div className="spotdetailscontainer2">
             <div className="spotdetails-name">
               {spots.name} {""}
-             
+
               <div className="review-details">
                 <i className="topstar fa-solid fa-star"></i>
                 <div className="avg-rating">{spots?.avgRating}</div>
