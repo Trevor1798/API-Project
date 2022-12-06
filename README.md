@@ -27,22 +27,21 @@ Deployed on Heroku - https://airbnbproj.herokuapp.com/
    * PostgresSQL
     
     
+# Features:
     
-    # Features:
-    
-     ## Home:
-    ![airbnbhome](https://user-images.githubusercontent.com/102115797/192163304-e15d8749-c8a3-4cbf-ad6c-40e3d8f6aff0.PNG)
+## Home:
+![airbnbhome](https://user-images.githubusercontent.com/102115797/192163304-e15d8749-c8a3-4cbf-ad6c-40e3d8f6aff0.PNG)
     
     
-    ## Spot Detail:
-    ![spotdetail](https://user-images.githubusercontent.com/102115797/192163359-6ba625a6-4098-40a3-a96d-4ee2f228560f.PNG)
+## Spot Detail:
+![spotdetail](https://user-images.githubusercontent.com/102115797/192163359-6ba625a6-4098-40a3-a96d-4ee2f228560f.PNG)
 
     
-    ## Spot Detail pt2:
-    ![spotdetailpt2](https://user-images.githubusercontent.com/102115797/192163382-06fd4fe8-2642-4427-abd2-debd740e889d.PNG)
+## Spot Detail pt2:
+![spotdetailpt2](https://user-images.githubusercontent.com/102115797/192163382-06fd4fe8-2642-4427-abd2-debd740e889d.PNG)
 
-    ## Reviews:
-    ![reviewdetails](https://user-images.githubusercontent.com/102115797/192163426-2e6f1541-091b-4e8d-a407-f07e44f5572f.PNG)
+## Reviews:
+![reviewdetails](https://user-images.githubusercontent.com/102115797/192163426-2e6f1541-091b-4e8d-a407-f07e44f5572f.PNG)
 
     
  ## Locally
