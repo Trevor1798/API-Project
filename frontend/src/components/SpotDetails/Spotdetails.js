@@ -11,6 +11,8 @@ import "../ALLCSS/SpotDetails.css";
 import { csrfFetch } from "../../store/csrf";
 import { getAllUsers } from "../../store/user";
 import CreateReviewForm from "../CreateReview/CreateReviewForm";
+import CreateBooking from "../CreateBooking/CreateBookings";
+
 function SpotDetails() {
   let history = useHistory();
   let dispatch = useDispatch();
@@ -30,9 +32,12 @@ function SpotDetails() {
   // console.log("these are all my users", users.firstName);
 
   const sessionUser = useSelector((state) => state.session.user);
+  const bookings = useSelector((state) => state.bookings)
+
+  const userBookings = bookings?.filter((booking) => booking?.userId === sessionUser.userId)
   const spots = spot.find((spots) => spots.id === parseInt(spotId));
 
-  console.log("check ", spots);
+  console.log("check ", bookings);
   let plswork = review.filter((review) =>(review.spotId) === spotId);
   console.log("this is my session user obj", sessionUser);
 
@@ -40,6 +45,11 @@ function SpotDetails() {
   const [showModal, setShowModal] = useState(false);
   const [showReview, setShowReview] = useState(false);
   const [, setRender] = useState(false);
+
+
+  const todayDate = (new Date()).toISOString().slice(0, 10)
+  const [startDate, setStartDate] = useState()
+  const [endDate, setEndDate] = useState()
 
   useEffect(() => {
     dispatch(spotsActions.getAllSpots()).then(() => setIsLoaded(true));
@@ -71,11 +81,33 @@ function SpotDetails() {
     setShowReview(true);
     setShowModal(false);
   };
-  function getRandomUser(max) {
-    return Math.floor(Math.random() * max);
+
+  let currentBooking;
+
+  if (sessionUser) {
+    currentBooking = (
+      <div className="spotDetailCheckBookings">
+        <NavLink to={`/current-bookings/${spotId}`}>Check current bookings</NavLink>
+      </div>
+    )
   }
+
+  let dateDiffInt;
+
+  if (isNaN((new Date(endDate) - new Date(startDate)) / 86400000) || ((new Date(endDate) - new Date(startDate)) / 86400000) < 0) {
+    dateDiffInt = 0;
+  } else {
+    dateDiffInt = (new Date(endDate) - new Date(startDate)) / 86400000
+  }
+
+
+  // function getRandomUser(max) {
+  //   return Math.floor(Math.random() * max);
+  // }
+  
   console.log("watch my avgRating", spots.avgRating);
   if (!spots) return null;
+
 
   return (
     isLoaded && (
