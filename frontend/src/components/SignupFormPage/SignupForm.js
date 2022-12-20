@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import '../ALLCSS/SignupForm.css'
+// heroku ps:scale web=1
+
 
 
 function SignupFormPage() {
