@@ -1,4 +1,4 @@
-import {useParams, useHistory} from 'react-route-dom'
+import {useParams, useHistory} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getBookingsByCurrentUser } from '../../store/booking'
