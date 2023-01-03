@@ -11,7 +11,7 @@ import "../ALLCSS/SpotDetails.css";
 import { csrfFetch } from "../../store/csrf";
 import { getAllUsers } from "../../store/user";
 import CreateReviewForm from "../CreateReview/CreateReviewForm";
-import CreateBooking from "../CreateBooking/CreateBookings";
+import CreateBooking from "../Bookings/CreateBookings";
 
 function SpotDetails() {
   let history = useHistory();
@@ -104,7 +104,7 @@ function SpotDetails() {
   // function getRandomUser(max) {
   //   return Math.floor(Math.random() * max);
   // }
-  
+
   console.log("watch my avgRating", spots.avgRating);
   if (!spots) return null;
 
