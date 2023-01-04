@@ -405,7 +405,7 @@ router.post("/:spotId/reviews", restoreUser, requireAuth, async (req, res) => {
 });
 
 //get all booking for a spot based on the spots id
-router.get("/:spotId/bookings", restoreUser, requireAuth, async (req, res) => {
+router.get("/:spotId/bookings", restoreUser,  async (req, res) => {
   let spotId = req.params.spotId;
   const spot = await Spot.findByPk(spotId);
 
@@ -423,25 +423,27 @@ router.get("/:spotId/bookings", restoreUser, requireAuth, async (req, res) => {
       attributes: ["id", "firstName", "lastName"],
     },
   });
+  if (spot.ownerId !== req.user.id) {
   const allBookings = await Booking.findAll({
-    where: { id: req.params.spotId },
-    attributes: [
-      "id",
-      "spotId",
-      "userId",
-      "startDate",
-      "endDate",
-      "createdAt",
-      "updatedAt",
-    ],
-  });
+      where: { id: req.params.spotId },
+      attributes: [
+        "id",
+        "spotId",
+        "userId",
+        "startDate",
+        "endDate",
+        "createdAt",
+        "updatedAt",
+      ],
+    });
+    return res.json({Bookings: allBookings });
+  }
 
-  if (spot.ownerId === req.user.id) return res.json({ spotBookings });
-  else return res.json({ allBookings });
+  if (spot.ownerId === req.user.id) return res.json({Bookings: spotBookings });
 });
 
 //create a booking from a spot based on the spots id
-router.post("/:spotId/bookings", restoreUser, requireAuth, async (req, res) => {
+router.post("/:spotId/bookings", restoreUser, async (req, res) => {
   const { startDate, endDate } = req.body;
   const spotId = req.params.spotId;
 
