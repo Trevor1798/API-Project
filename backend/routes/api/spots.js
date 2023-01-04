@@ -488,7 +488,7 @@ router.post("/:spotId/bookings", restoreUser, requireAuth, async (req, res) => {
     endDate,
   });
   res.status(201);
-  return res.json({ Booking: createBooking });
+  return res.json({ createBooking });
 });
 
 module.exports = router;

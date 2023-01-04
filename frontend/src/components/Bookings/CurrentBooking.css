@@ -1,0 +1,73 @@
+.current-booking-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .current-booking-inner-container {
+    width: 1440px;
+  }
+
+  .current-booking-header {
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 36px;
+    padding-bottom: 48px;
+    line-height: 36px;
+    font-size: 32px;
+  }
+
+  .current-booking-table-container {
+    max-width: 1440px;
+    flex-direction: column;
+  }
+
+  .current-booking-table-inner-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .current-booking-table {
+    max-width: 1440px;
+    width: 85%;
+  }
+
+  .current-booking-table-header {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .current-booking-table-column {
+    padding-bottom: 12px;
+    border-bottom: 1px solid black;
+  }
+
+  .current-booking-content {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    border-bottom: 1px solid rgb(228, 228, 228);
+  }
+
+  .current-booking-content-column {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid black;
+  }
+
+  .current-booking-go-back {
+    color: white;
+    margin-top: 24px;
+    padding: 10px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 16px;
+    width: 100px;
+    background-color: #e51d53;
+  }
+
+  .current-booking-bottom {
+    display: flex;
+    justify-content: center;
+  }
