@@ -10,15 +10,13 @@ import './CurrentBooking.css'
 const CurrentBooking = () => {
     const bookings = useSelector(state => Object.values(state.bookings))
     const todayDate = (new Date()).toISOString().slice(0, 10)
-
+    console.log('these are my bookings', bookings)
     bookings.sort(function(a, b) {
         return new Date(a.endDate) - new Date(b.endDate)
 
     })
 
-    const filteredBookings = bookings.filter(function(booking) {
-        return booking.endDate >= todayDate
-    })
+    const filteredBookings = bookings?.filter(booking => booking?.endDate >= todayDate)
 
     const spots = useSelector(state => state.spots)
 
@@ -58,14 +56,14 @@ const CurrentBooking = () => {
 
                                 </tr>
                             </tbody>
-                            {filteredBookings?.map((booking, i) => {
+                            {filteredBookings?.map((booking, i) => (
                                 <tbody key={i}>
                                     <tr className="current-booking-content">
                                         <td className="current-booking-content-column">{new Date(booking.startDate).toISOString().split("T")[0]}</td>
                                         <td className="current-booking-content-column">{new Date(booking.endDate).toISOString().split('T')[0]}</td>
                                     </tr>
                                 </tbody>
-                            })}
+                            ))}
                         </table>
                     </div>
                 </div>

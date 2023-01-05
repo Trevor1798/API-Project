@@ -20,8 +20,8 @@ const BookingConfirmed = () => {
     const history = useHistory()
 
     const bookings = useSelector(state => state.bookings)
-
     const currentBooked = bookings[bookingId]
+    console.log('bookingconfirmed', currentBooked)
 
     useEffect(() => {
         dispatch(getBookingsByCurrentUser())
