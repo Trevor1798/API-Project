@@ -100,7 +100,7 @@ font-family: 'Montserrat', sans-serif;
 .spotdetails-description {
     /* display:grid;
     grid-template-columns: 1fr 1fr 1fr 1fr; */
-    width: 650px;
+    width: 550px;
     margin-top: 150px;
     position: relative;
     height: 90px;
@@ -204,7 +204,7 @@ object-fit: cover;
     margin-top: 100px; */
     display: inline;
     align-items: center;
-    width: 650px;
+    width: 550px;
     /* margin-top: 142px */
 
     /* margin-right: 100px; */
@@ -219,7 +219,7 @@ object-fit: cover;
 .spotDetailBodyRight {
   display: flex;
   justify-content: space-between;
-  width: 41.666964%;
+  width: 51.666964%;
   flex-direction: column;
 }
 .spotDetailCheckBookings {
@@ -238,18 +238,20 @@ object-fit: cover;
 .spotDetailPriceContainer {
   display: flex;
   box-sizing: border-box;
-  /* margin-left: auto; */
+  margin-left: auto;
   /* height: 496px; */
-  max-width: 371.33;
+ width: 431.33;
   padding: 24px;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 12px;
   position: relative;
-  left: 100px;
-  /* margin-right: 2px; */
+  left: 340px;
+  bottom: 30px;
+  margin-right: 2px;
   flex-direction: column;
+  align-items: center;
 }
 
 .spotDetailBoxOne {
@@ -274,7 +276,7 @@ object-fit: cover;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  /* margin-top: 8px; */
+  margin-top: 8px;
   font-family: 'Montserrat', sans-serif;
   line-height: 26px;
   font-size: 14px;
@@ -359,7 +361,7 @@ display: flex;
     margin-left: 27px;
     /* position: relative; */
     left: 37px;
-    width: 650px;
+    width: 550px;
     font-size: 22px;
     /* font-size: 18px; */
     /* display: grid; */
@@ -380,7 +382,7 @@ display: flex;
 }
 .reviews-grid {
     display: flex;
-    width: 650px;
+    width: 550px;
     justify-content: space-around;
     gap: 10px;
 
@@ -502,7 +504,7 @@ display: flex;
 font-size: 19px;
 border-bottom: 1px solid rgba(54, 53, 53, 0.362);
 height: 50px;
-width: 650px;
+width: 550px;
 
 }
 .home-hosted {
@@ -526,7 +528,7 @@ font-weight: bold;
     height: 70px;
     margin-top: 25px;
     font-size: 19px;
-    width: 650px;
+    width: 550px;
     display: flex;
     justify-content: flex-start;
     font-weight: bold;
@@ -570,7 +572,7 @@ font-size: 18px;
 .symbols-container {
     height: 130px;
     border-bottom: 1px solid rgba(54, 53, 53, 0.362);
-    width: 650px;
+    width: 550px;
 }
 .trev-container {
     display: inline;
@@ -621,7 +623,7 @@ font-size: 24px;
 }
 
 .amenity-grid-container {
-    width: 650px;
+    width: 550px;
     height: 280px;
     border-bottom: 1px solid rgba(54, 53, 53, 0.362);
 position: relative;
@@ -640,7 +642,7 @@ top: 250px;
 .amenities {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    width: 650px;
+    width: 550px;
     justify-content: space-between;
     row-gap: 30px;
     font-size: 20px;

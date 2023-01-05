@@ -15,7 +15,7 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
       userId: req.user.id,
     },
   });
-
+  let bookingsArr = []
   for (let booking of BookingsCurrentlyOwned) {
     let spots = await Spot.findOne({
       where: { id: booking.spotId },
@@ -37,9 +37,23 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
     });
     booking.spots = spots;
     booking.previewImage = previewImage;
+    let response = {
+      id: booking.id,
+      spotId: booking.spotId,
+      Spot: spots,
+      userId: booking.userId,
+      startDate: new Date(booking.startDate).toISOString().split('T')[0],
+      endDate: new Date(booking.endDate).toISOString().split('T')[0],
+      // startDate: booking.startDate,
+      // endDate: booking.endDate,
+      createdAt: booking.createdAt,
+      updatedAt: booking.updatedAt
+    }
 
-    return res.json({ Bookings: BookingsCurrentlyOwned });
+    bookingsArr.push(response)
   }
+  res.json({ Bookings: bookingsArr })
+
 });
 
 //edit a booking

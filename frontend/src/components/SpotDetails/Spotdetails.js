@@ -159,7 +159,7 @@ function SpotDetails() {
               </div>
             </div>
             <div className="image-container">
-              <img className="spotdetails-image" src={spots.previewImage} />
+              <img className="spotdetails-image" src={spots?.previewImage} />
             </div>
             <div className="spotdetails-container">
               {/* <div className='hosted-by'>Home hosted by {spots.ownerId}</div> */}
@@ -170,20 +170,15 @@ function SpotDetails() {
               <div className="house-count">
                 {"2-4 guests"} {"•"} {"2 bedrooms"} {"•"} {"2 beds"} {"•"}{" "}
                 {"3 baths"}
-              </div>
               <div className="spotDetailBodyRight">
 
 <div className='spotDetailPriceContainer'>
 
   <div className="spotDetailBoxOne">
     <div className="spotDetailPrice">
-      <div className='spotPriceAmount'>{`$${spots?.price}`}</div>
-      <div className='spotNight'>night</div>
+      <div className='spotPriceAmount'>{`$${spots?.price} night • ${review?.length} reviews`}</div>
     </div>
-    <div className="spotDetailReview">
-      <i className="booking fa-solid fa-star"></i>
-      {spot?.avgRating} {` · `} {review?.length} {`reviews`}
-    </div>
+
   </div>
 
   <div className="spotDetailBoxTwo">
@@ -196,8 +191,8 @@ function SpotDetails() {
 
   <div className="spotDetailBoxFour">
     <div className="spotDetailFeeOne">
-      <div className="spotDetailFeeDescription">{`$100 x ${dateDiffInt} nights`}</div>
-      <div className="spotDetailFeeNumber">${dateDiffInt * spots?.price}</div>
+      <div className="spotDetailFeeDescription">{`$100 x ${dateDiffInt} nights`} ${dateDiffInt * spots?.price}</div>
+      {/* <div className="spotDetailFeeNumber">${dateDiffInt * spots?.price}</div> */}
     </div>
 
     <div className="spotDetailFeeTwo">
@@ -212,15 +207,16 @@ function SpotDetails() {
   </div>
 
   <div className="spotDetailBoxFive">
-    <div className='spotDetailTotalDescription'>Total before taxes</div>
-    <div className='spotDetailTotalPrice'>${dateDiffInt * spots?.price}</div>
+    <div className='spotDetailTotalDescription'>Total before taxes ${dateDiffInt * spots?.price}</div>
+    {/* <div className='spotDetailTotalPrice'>${dateDiffInt * spots?.price}</div> */}
   </div>
 
-</div>
-
 {currentBooking}
+</div>
+
 
 </div>
+              </div>
 
 </div>
             <div className="symbols-container">
