@@ -1,0 +1,84 @@
+.bookingCardContainer {
+    width: 300px;
+    /* height: 390px; */
+    margin-top: 10px
+  }
+
+  .bookingImage {
+    width: 300px;
+    height: 285px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .bookingDescription {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    /* padding: 15px 0px; */
+    padding-top: 15px;
+    width: 300px;
+  }
+
+  .bookingDescriptionLeft {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+  }
+
+  .bookingLocation {
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    width: 240px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .bookingPrice {
+    display: flex;
+    width: 70px;
+    text-decoration: none;
+    margin-top: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+  }
+
+  .bookingCardPriceAmount {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .bookingCardNight {
+    padding-left: 3px;
+    /* padding-bottom: 1px; */
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .bookingStar {
+    margin-right: 3px;
+  }
+
+  .bookingRating {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .bookingCountry {
+    width: 200px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    color: rgb(115, 115, 115);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+  }
+
+  .bookingCardDates {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    /* justify-content: space-between; */
+    width: 300px;
+    font-weight: 600;
+    font-size: 15px;
+  }

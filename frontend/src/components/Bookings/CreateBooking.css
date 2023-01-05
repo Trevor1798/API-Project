@@ -1,0 +1,218 @@
+.CreateBookingFormOutside {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    /* height: 176px; */
+  }
+
+  .CreateBookingFormContainer {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    /* height: 176px; */
+  }
+
+  .CreateBookingform {
+    max-width: 322.33px;
+    /* height: 176px; */
+    /* display: flex; */
+  }
+
+  .createBookingErrorContainer {
+    /* padding-top: 13px; */
+    /* padding-bottom: 13px; */
+    /* padding-left: 24px; */
+    /* padding-right: 24px; */
+    color: red;
+  }
+
+  .createBookingError {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    /* padding-top: 7px; */
+    padding-bottom: 12px;
+  }
+
+  .errorMessageContainer {
+    display: flex;
+  }
+
+  .exclamation-point {
+    margin-top: 2.5px
+  }
+
+  .errorMessage {
+    padding-left: 8px;
+  }
+
+  ul {
+    padding: 0
+  }
+
+  .CreateBookingDiv {
+    display: flex;
+    width: 322.33px;
+    /* border-radius: 8px 8px 0 0; */
+    height: 56px;
+  }
+
+  .CreateBookingInputContainer {
+    width: 50%;
+    position: relative;
+  }
+
+  .createSpotCheckin {
+    position: absolute;
+    padding-left: 13.5px;
+    padding-top: 13px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .createSpotCheckout {
+    position: absolute;
+    padding-left: 14px;
+    padding-top: 13px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .CreateBookingContainer {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+
+  .createBookingSubmit {
+    /* display: flex; */
+    /* justify-content: center; */
+    display: block;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    background: rgba(0, 0, 0, 0)
+    linear-gradient(
+      to right,
+      rgb(230, 30, 77) 0%,
+      rgb(227, 28, 95) 50%,
+      rgb(215, 4, 102) 100%
+      )
+      repeat scroll 0% 0%;
+    }
+
+    .createBookingSubmit {
+      box-sizing: border-box;
+      /* width: 100%; */
+      /* padding: 17px; */
+      border-radius: 8px;
+      background-color: transparent !important;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+    height: 48px;
+  }
+
+  .CreateBookingGuest {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    border-radius: 0 0 8px 8px;
+    height: 55px;
+    padding-left: 12px;
+    margin-bottom: 16px;
+
+    /* width: 100%; */
+    /* border-top: 0 solid #bbbbbb; */
+    /* padding:12px */
+    /* align-items: center; */
+  }
+
+  /* .CreateBookingGuestDropdown {
+    display: flex;
+  } */
+
+  .CreateBookingGuestOne {
+    font-weight: 600;
+    font-size: 10px;
+  }
+
+  .CreateBookingGuestTwo {
+    /* font-weight: 500; */
+    font-size: 13px;
+  }
+
+  .CreateBookingInputCheckout {
+    box-sizing: border-box;
+    /* width: 12%; */
+    padding: 12px;
+    padding-top: 25px;
+    /* border: 1px solid #bbbbbb; */
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    border-left: .5px solid #bbbbbb;
+    border-radius: 0 8px 0 0;
+    background-color: transparent !important;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    /* width: 50% */
+    width: 100%;
+    height: 100%;
+  }
+
+  input.CreateBookingInputCheckout[type="date"] {
+    position: relative;
+  }
+
+  input.CreateBookingInputCheckout[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    color: transparent;
+    background: transparent;
+  }
+
+  .CreateBookingInputCheckin {
+    box-sizing: border-box;
+    /* width: 12%; */
+    padding: 12px;
+    padding-top: 25px;
+    /* border: 1px solid #bbbbbb; */
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-right: .5px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-radius: 8px 0 0 0;
+    background-color: transparent !important;
+    font-family: 'Montserrat', sans-serif;
+    /* width: 50% */
+    width: 100%;
+    height: 100%;
+  }
+
+  input.CreateBookingInputCheckin[type="date"] {
+    position: relative;
+  }
+
+  input.CreateBookingInputCheckin[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    color: transparent;
+    background: transparent;
+  }

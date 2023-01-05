@@ -32,9 +32,9 @@ function SpotDetails() {
   // console.log("these are all my users", users.firstName);
 
   const sessionUser = useSelector((state) => state.session.user);
-  const bookings = useSelector((state) => state.bookings)
+  const bookings = useSelector((state) => Object.values(state.bookings))
 
-  const userBookings = bookings?.filter((booking) => booking?.userId === sessionUser.userId)
+  const userBookings = bookings?.filter((booking) => booking?.userId === sessionUser?.userId)
   const spots = spot.find((spots) => spots.id === parseInt(spotId));
 
   console.log("check ", bookings);
@@ -91,7 +91,6 @@ function SpotDetails() {
       </div>
     )
   }
-
   let dateDiffInt;
 
   if (isNaN((new Date(endDate) - new Date(startDate)) / 86400000) || ((new Date(endDate) - new Date(startDate)) / 86400000) < 0) {
@@ -99,7 +98,6 @@ function SpotDetails() {
   } else {
     dateDiffInt = (new Date(endDate) - new Date(startDate)) / 86400000
   }
-
 
   // function getRandomUser(max) {
   //   return Math.floor(Math.random() * max);
@@ -173,7 +171,58 @@ function SpotDetails() {
                 {"2-4 guests"} {"•"} {"2 bedrooms"} {"•"} {"2 beds"} {"•"}{" "}
                 {"3 baths"}
               </div>
-            </div>
+              <div className="spotDetailBodyRight">
+
+<div className='spotDetailPriceContainer'>
+
+  <div className="spotDetailBoxOne">
+    <div className="spotDetailPrice">
+      <div className='spotPriceAmount'>{`$${spots?.price}`}</div>
+      <div className='spotNight'>night</div>
+    </div>
+    <div className="spotDetailReview">
+      <i className="booking fa-solid fa-star"></i>
+      {spot?.avgRating} {` · `} {review?.length} {`reviews`}
+    </div>
+  </div>
+
+  <div className="spotDetailBoxTwo">
+      <CreateBooking setStartDate={setStartDate} setEndDate={setEndDate} todayDate={todayDate} startDate={startDate} endDate={endDate}/>
+  </div>
+
+  <div className="spotDetailBoxThree">
+    You won't be charged yet
+  </div>
+
+  <div className="spotDetailBoxFour">
+    <div className="spotDetailFeeOne">
+      <div className="spotDetailFeeDescription">{`$100 x ${dateDiffInt} nights`}</div>
+      <div className="spotDetailFeeNumber">${dateDiffInt * spots?.price}</div>
+    </div>
+
+    <div className="spotDetailFeeTwo">
+      <div className="spotDetailFeeDescription">Cleaning fee</div>
+      <div className="spotDetailFeeNumber">Free</div>
+    </div>
+
+    <div className="spotDetailFeeThree">
+      <div className="spotDetailFeeDescription">Service fee</div>
+      <div className="spotDetailFeeNumber">Free</div>
+    </div>
+  </div>
+
+  <div className="spotDetailBoxFive">
+    <div className='spotDetailTotalDescription'>Total before taxes</div>
+    <div className='spotDetailTotalPrice'>${dateDiffInt * spots?.price}</div>
+  </div>
+
+</div>
+
+{currentBooking}
+
+</div>
+
+</div>
             <div className="symbols-container">
               <div className="symbol-info-container">
                 <div className="great-parking">Great parking</div>
@@ -348,70 +397,10 @@ function SpotDetails() {
 
               <div className="spotdetails-address">
                   </div>
-                {/* <div className="stardetails-rating">
-                  <i className=" star fa-solid fa-star"></i>
-                  {""} {spots.avgRating}
-                  <div className="length-reviews">
-                    <div className="dot">{"• "}</div>
-                    {review.length} reviews
-                  </div>
-                </div> */}
             </div>
           </div>
         </div>
-        {/* <div className="spotDetailReviews">
-          {sessionUser && spots?.ownerId !== sessionUser.id && (
-            <div className="create-review-location">
-              <button
-                className="create-review-button"
-                onClick={onReviewClick}
-                type="submit"
-              >
-                Create Review
-              </button>
-              {showReview && (
-                <Modal onClose={() => setShowReview(false)}>
-                  <CreateReviewForm
-                    showReview={showReview}
-                    setShowReview={setShowReview}
-                  />
-                </Modal>
-              )}
-            </div>
-          )}
-          {plswork.map((review, i) => (
-            <>
-              <div className="review-profile">
-                <i className=" profile fas fa-user-circle fa-2xl" />
-                <div
-                  className="detailscreate-review"
-                  key={review.id}
-                  review={review}
-                >
-                  {review?.User?.firstName}: {""}
-                </div>
-                <div className="review-length">
-                  {review.stars}/5{" •"} {review.review}
-                </div>
-              </div>
-              <div className="actual-review"></div>
-
-              <div className="delete-review-location">
-                {sessionUser && spots?.ownerId !== sessionUser.id && (
-                  <button
-                    className="delete-review-button"
-                    type="submit"
-                    onClick={() => handleDelete(review.id)}
-                  >
-                    Delete Review
-                  </button>
-                )}
-              </div>
-              <div className="detailscreate-review"></div>
-            </>
-          ))}
-        </div> */}
-      </div>
+                    </div>
     )
   );
 }
