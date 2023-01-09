@@ -4,7 +4,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    height: 682px;
+    height: 562px;
     width: 568px;
     box-shadow: 7px #333434;
     margin: 5px;
@@ -47,17 +47,17 @@
     font-weight: bold;
 
     /* right: 825px; */
-    top: -174px;
+    top: -164px;
     font-family: 'Montserrat', sans-serif;
 
 }
 .signup-errors {
     color:red;
-    font-size:16px;
+    font-size:14px;
     font-weight: bold;
     position: absolute;
     top: 130px;
-    left: -5px;
+    /* left: px; */
     margin-bottom: 30px;
     font-family: 'Montserrat', sans-serif;
 }
@@ -70,14 +70,14 @@
     padding: 5px;
     margin: 5px;
     left: 10px;
-    top: 240px;
+    top: 230px;
     border-radius: 7px;
     width: 550px;
     font-family: 'Montserrat', sans-serif;
 }
 
 .signup-email {
-    height: 45px;
+    height: 35px;
     flex-direction: column;
     align-items: center;
     display:flex;
@@ -91,7 +91,7 @@
 
 
 .signup-username {
-    height: 45px;
+    height: 35px;
    justify-content: center;
     align-items: center;
     display: flex;
@@ -104,7 +104,7 @@
 }
 
 .signup-firstname{
-    height: 45px;
+    height: 35px;
     flex-direction: column;
     align-items: center;
     display: flex;
@@ -118,7 +118,7 @@
 }
 
 .signup-lastname {
-    height: 45px;
+    height: 35px;
     flex-direction: column;
     align-items: center;
     display: flex;
@@ -131,7 +131,7 @@
 
 }
 .signup-password {
-    height: 45px;
+    height: 35px;
     flex-direction: column;
     align-items: center;
     display: flex;
@@ -144,7 +144,7 @@
 }
 
 .confirm-password {
-    height: 45px;
+    height: 35px;
     flex-direction: column;
     align-items: center;
     display: flex;
@@ -158,9 +158,10 @@
 
 .signup-button {
     display: flex;
-    height: 60px;
+    height: 40px;
     width: 559px;
     padding: 20px;
+    margin-top: 15px;
     /* margin: 15px;
     border-radius: 10px;
     border: 1px solid; */

@@ -3,7 +3,7 @@ import './BookingCard.css'
 
 
 const BookingCard = ({booking}) => {
-
+    console.log('bookingcard booking object', booking.Spot.previewImage)
     const startInt = new Date(booking?.startDate).getDay()
     const endInt = new Date(booking?.endDate).getDay()
 
@@ -21,7 +21,7 @@ const BookingCard = ({booking}) => {
     return (
         <Link className='bookingCardContainer' to={`/confirmed/${booking.Spot.id}/${booking.id}`}>
             <div className='bookingCardContainer'>
-                <img className='bookingImage' src={booking.Spot.previewImage}/>
+                <img className='bookingImage' src={booking.Spot?.previewImage}/>
                 <div className='bookingDescription'>
                     <div className='bookingDescriptionLeft'>
                         <div className='bookingLocation'>{booking.Spot.city}, {booking.Spot.state}</div>

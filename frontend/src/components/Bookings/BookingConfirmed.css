@@ -2,17 +2,20 @@
   display: flex;
   width: 100%;
   height: 100%;
+  justify-content: center;
 }
 
 .booking-confirmed-container {
+  display: flex;
+  justify-content: center;
   min-width: 620px;
   max-width: 620px;
   width: 100%;
-  border: 1px solid rgb(221, 221, 221);
+  /* border: 1px solid rgb(221, 221, 221); */
   box-sizing: border-box;
   display: flex;
   height: 100vh;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .booking-confirmed-inner-container {
@@ -108,6 +111,7 @@
 
 .booking-confirmed-cancel-reservation {
   margin-left: 16px;
+  color: red;
 }
 
 .booking-confirmed-getting-there-container {
@@ -202,10 +206,4 @@
   margin-right: -24px;
   height: 8px;
   background-color: rgb(235, 235, 235);
-}
-
-.booking-confirmed-map-container {
-  display: flex;
-  width: 100%;
-  height: 100%;
 }

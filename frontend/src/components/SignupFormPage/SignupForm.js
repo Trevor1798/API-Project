@@ -40,7 +40,7 @@ function SignupFormPage() {
       </ul>
       <div className="modal-header">Log in or Sign Up</div>
       <div className='signup-form-input'>
-        <div className='signup-welcome'>Welcome to AirBnb</div>
+        <div className='signup-welcome'>Welcome to trevBnb</div>
       <label>
 
         <input className='signup-email'
