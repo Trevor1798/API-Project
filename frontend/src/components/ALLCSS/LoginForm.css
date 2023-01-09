@@ -3,8 +3,8 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    height: 682px;
-    width: 568px;
+    height: 452px;
+    width: 368px;
     box-shadow: 7px #333434;
     margin: 5px;
     padding: 5px;
@@ -50,14 +50,14 @@
 
 }
 .login-welcome {
-/* display: inline; */
+display: flex;
 justify-content:center;
-/* align-content: center; */
+align-content: center;
 position: absolute;
 top: 65px;
-left: 155px;
-margin: 15px;
-padding: 10px;
+/* left: 155px; */
+/* margin: 15px; */
+padding: 5px;
 margin-top:20px;
 font-size: 24px;
 font-weight: bold;
@@ -71,8 +71,9 @@ align-items: center;
 flex-direction: column;
 position: absolute;
 border-radius: 7px;
-width: 500px;
+width: 250px;
 font-family: 'Montserrat', sans-serif;
+margin-top: 50px;
 }
 /* .login-form-input > label {
 
@@ -82,8 +83,8 @@ font-family: 'Montserrat', sans-serif;
 .login-username {
     position: relative;
     top: 20px;
-    height: 30px;
-    width: 500px;
+    height: 10px;
+    width: 250px;
     padding: 15px;
   margin: 15px;
     /* border-radius: 10px; */
@@ -93,8 +94,8 @@ font-family: 'Montserrat', sans-serif;
 .login-password {
     position: relative;
     top: 20px;
-    height: 30px;
-    width: 500px;
+    height: 10px;
+    width: 250px;
     padding: 15px;
     margin: 15px;
     font-family: 'Montserrat', sans-serif;
@@ -106,8 +107,8 @@ font-family: 'Montserrat', sans-serif;
     font-family: 'Montserrat', sans-serif;
     position: relative;
     top:20px;
-    height: 60px;
-    width: 542px;
+    height: 50px;
+    width: 290px;
     padding: 15px;
     margin: 15px;
     border-radius: 10px;
@@ -115,22 +116,25 @@ font-family: 'Montserrat', sans-serif;
     background-image: linear-gradient(to right, #e51d4e, #d80665);
     color: white;
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .error-container {
-    padding-top: 10px;
-    position: relative;
-    bottom: 145px;
-    right: 95px;
+    /* padding-top: 10px; */
+     position: relative;
+    bottom: 85px;
+    /* right: 35px; */
     font-family: 'Montserrat', sans-serif;
-
     /* font-size: 16px; */
+    /* font-size: 14px; */
 
 }
 
 .login-error {
-    margin-left: 75px;
+    /* margin-left: 75px; */
     font-family: 'Montserrat', sans-serif;
-   font-size: 22px;
+   font-size: 14px;
 
    color: red;
 

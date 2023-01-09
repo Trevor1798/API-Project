@@ -1,34 +1,36 @@
-
-
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import {Link, NavLink, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { Modal } from "../../context/Modal";
-import * as sessionActions from '../../store/session';
-import * as spotsActions from '../../store/spots.js'
+import * as sessionActions from "../../store/session";
+import * as spotsActions from "../../store/spots.js";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormPage from "../SignupFormPage/SignupForm";
 import LoginForm from "../LoginFormModal/LoginForm";
+import img from './xButton.jpg'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
-  let history = useHistory()
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
-  const [showModal, setShowModal] = useState(false)
-  const [login, setLogin] = useState(false)
-  const [signup, setSignup] = useState(false)
-  const sessionUser = useSelector((state) => state.session.user);
-// console.log(sessionUser.user.firstName)
+
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
+
+  const demoUserClick = (e) => {
+    e.preventDefault()
+    return dispatch(sessionActions.login({credential: 'Musk1', password: 'password2'}))
+  }
+
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
   };
+
   useEffect(() => {
-    // dispatch(spotsActions.getAllSpots())
     if (!showMenu) return;
 
     const closeMenu = () => {
-
       setShowMenu(false);
     };
 
@@ -40,50 +42,114 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
-    history.push('/')
+    setShowLoginModal(false);
+    setShowSignupModal(false);
+    history.push('/');
   };
 
-  const handleClick = (e) => {
-    e.preventDefault()
-    setLogin(true)
-    setSignup(false)
-  }
-  // if (!sessionUser) {
+  let profileButton;
 
-  // }
-  return (
-
-    <div className="test-route">
-
-        {/* <NavLink to='/spots/owned-spots'></NavLink>
-        <NavLink to='/spots/spots-create'>Become a Host</NavLink> */}
-      <div className='user-container'>
-        <div className="user-profile-menu">
-        <button className='open-menu' onClick={openMenu}>
-          <i className="fa-solid fa-bars"/>
-          <i className="fas fa-user-circle fa-2xl"/>
+  if (user) {
+    profileButton = (
+      <div className="user-session">
+      <div className="userProfileMenu">
+        <button className='userProfileButton' onClick={openMenu}>
+          <i className="fa-solid fa-bars fa-lg"></i>
+          <i className="fas fa-user-circle fa-2xl" />
         </button>
-      {showMenu && sessionUser && (
-        <div className="profile-dropdown-container">
-          <div className="profile-dropdown">
-
-          <div className="profile-name">Hello, {user.firstName || sessionUser.user.firstName}
-           <Link to='/'></Link></div>
-          <div className="profile-spots">
-          <Link to='/owned-spots'>My Spots</Link></div>
-          {/* <div className="profile-host">
-              <Link to='/spots-create'>Become a Host</Link></div> */}
-
-            <div className="logout" onClick={logout}>Log Out</div>
-        </div>
-        </div>
-      )}
+        {showMenu && (
+          <div className="profile-container">
+          <div className="profile-item-container">
+            <div
+                className="profile-manage-listings"
+                onClick={() => history.push(`/users/account/${user.id}`)}
+              >
+                Account
             </div>
-        {/* )} */}
-        </div>
-        </div>
+            <div
+                className="profile-manage-listings"
+                onClick={() => history.push("/owned-spots")}
+              >
+                My Spots
+            </div>
+            <div
+                className="profile-manage-reviews"
+                onClick={() => history.push("/my-reviews")}
+              >
+                My Reviews
+            </div>
 
-// </div>
+              <div
+                className="profile-manage-bookings"
+                onClick={() => history.push("/my-bookings")}
+              >
+                My Bookings
+            </div>
+
+            <div className="profile-logout" onClick={logout}>
+              Log Out
+            </div>
+
+            </div>
+          </div>
+        )}
+
+      </div>
+    </div>
+    )
+  } else {
+    profileButton = (
+      <div className="user-session">
+        <div className="userProfileMenu">
+          <button className='userProfileButton' onClick={openMenu}>
+            <i className="fa-solid fa-bars fa-lg"></i>
+            <i className="fas fa-user-circle fa-2xl" />
+          </button>
+          {showMenu && (
+            <div className="profile-container">
+              <div className="profile-item-container">
+
+                <div className='no-user-profile-login-button' onClick={() => setShowLoginModal(true)}>Log In</div>
+                <div className='no-user-profile-signup-button' onClick={() => setShowSignupModal(true)}>Sign Up</div>
+                <div className='no-user-profile-demo-button' onClick={demoUserClick}>Demo User</div>
+              </div>
+            </div>
+          )}
+
+          {showLoginModal && (
+            <Modal onClose={() => setShowLoginModal(false)}>
+              <div className='login-modal-container'>
+                <div className='login-modal-header'>
+                </div>
+                <div className='login-modal-form'>
+
+                  <LoginForm/>
+                </div>
+              </div>
+            </Modal>
+            )}
+
+          {showSignupModal && (
+            <Modal onClose={() => setShowSignupModal(false)}>
+              <div className='signup-modal-container'>
+                <div className='signup-modal-header'>
+                </div>
+                <div className='signup-modal-form'>
+                  <SignupFormPage/>
+                </div>
+              </div>
+            </Modal>
+          )}
+
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      {profileButton}
+    </>
   );
 }
 

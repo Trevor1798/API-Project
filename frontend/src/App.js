@@ -13,6 +13,8 @@ import OwnerSpots from "./components/EditSpots/OwnedSpots";
 import CreateReviewForm from './components/CreateReview/CreateReviewForm.js'
 import CurrentBooking from './components/Bookings/CurrentBookings'
 import BookingConfirmed from "./components/Bookings/BookingConfirmed";
+import UserPastBookings from "./components/Bookings/UserPastBookings";
+import UserBookings from "./components/Bookings/UserBookings";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -48,6 +50,12 @@ function App() {
             <Route exact path='/spots/:spotId/create-reviews'>
               <CreateReviewForm/>
             </Route>
+             <Route path="/my-bookings/past">
+            <UserPastBookings/>
+          </Route>
+          <Route path="/my-bookings">
+            <UserBookings isLoaded={isLoaded} />
+          </Route>
             <Route exact path='/confirmed/:spotId/:bookingId'>
               <BookingConfirmed/>
             </Route>

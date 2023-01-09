@@ -36,7 +36,7 @@ function LoginForm() {
           ))}
       </ul>
           </div>
-          <div className='login-welcome'>Welcome to AirBnb</div>
+          <div className='login-welcome'>Welcome to trevBnb</div>
       <div className='login-form-input'>
       <label>
 

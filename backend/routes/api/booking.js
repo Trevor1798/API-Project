@@ -10,37 +10,36 @@ const { Op } = require("sequelize");
 
 //get all bookings for current user
 router.get("/current", restoreUser, requireAuth, async (req, res) => {
-  let BookingsCurrentlyOwned = await Booking.findAll({
-    where: {
-      userId: req.user.id,
-    },
+  const bookings = await Booking.findAll({
+    where: { userId: req.user.id }
   });
+
   let bookingsArr = []
-  for (let booking of BookingsCurrentlyOwned) {
-    let spots = await Spot.findOne({
+
+  for (let booking of bookings) {
+    let spot = await Spot.findOne({
       where: { id: booking.spotId },
-      attributes: [
-        "id",
-        "ownerId",
-        "address",
-        "city",
-        "state",
-        "country",
-        "lat",
-        "lng",
-        "name",
-        "price",
-      ],
-    });
-    previewImage = await Image.findOne({
-      where: { spotId: booking.spotId },
-    });
-    booking.spots = spots;
-    booking.previewImage = previewImage;
+        raw: true,
+        attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"]
+    })
+
+    let image = await Image.findOne({
+      where: {
+        spotId: booking.spotId,
+        previewImage: true
+      }
+    })
+
+    if (image) {
+      spot.previewImage = image.url
+    } else {
+      spot.previewImage = null
+    }
+
     let response = {
       id: booking.id,
       spotId: booking.spotId,
-      Spot: spots,
+      Spot: spot,
       userId: booking.userId,
       startDate: new Date(booking.startDate).toISOString().split('T')[0],
       endDate: new Date(booking.endDate).toISOString().split('T')[0],
@@ -52,9 +51,9 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
 
     bookingsArr.push(response)
   }
-  res.json({ Bookings: bookingsArr })
 
-});
+  res.json({ Bookings: bookingsArr })
+})
 
 //edit a booking
 router.put("/:bookingId", restoreUser, requireAuth, async (req, res) => {
