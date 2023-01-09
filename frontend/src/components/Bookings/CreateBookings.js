@@ -32,38 +32,29 @@ const CreateBooking = ({
   const handleValidation = () => {
     let errors = [];
     bookings?.map((booking) => {
-      let bookingStart = new Date(booking?.startDate) - 0;
-      let bookingEnd = new Date(booking?.endDate) - 0;
+      let bookedStartDate = new Date(booking?.startDate) - 0;
+      let bookedEndDate = new Date(booking?.endDate) - 0;
 
       if (startDateNum >= endDateNum) {
-        errors.push("Checkout date cannot be the same as or before Check-in");
+        errors.push('Checkout cannot be the same as or before Check-in')
+      }
+      if ((startDateNum === bookedStartDate) || (startDateNum === bookedEndDate) || (endDateNum === bookedStartDate) || (endDateNum === bookedEndDate)) {
+        errors.push("Chosen dates conflicts with an existing booking")
+      }
+      if ((startDateNum > bookedStartDate) && (startDateNum < bookedEndDate)) {
+        errors.push('Chosen dates conflicts with an existing booking')
+      }
+      if ((startDateNum < bookedStartDate) && (endDateNum > bookedStartDate) && (endDateNum < bookedEndDate)) {
+        errors.push('Chosen dates conflicts with an existing booking')
+      }
+      if ((startDateNum < bookedStartDate) && (endDateNum > bookedEndDate)) {
+        errors.push('Chosen dates conflicts with an existing booking')
       }
 
-      if (
-        startDateNum === bookingStart ||
-        startDateNum === bookingEnd ||
-        endDateNum === bookingStart ||
-        endDateNum === bookingEnd
-      ) {
-        errors.push("Chosen dates conflicts with an existing booking");
-      }
-      if (startDateNum > bookingStart && startDateNum < bookingEnd) {
-        errors.push("Chosen dates conflicts with an existing booking");
-      }
-      if (
-        startDateNum < bookingStart &&
-        endDateNum > bookingStart &&
-        endDateNum < bookingEnd
-      ) {
-        errors.push("Chosen dates conflict with an existing booking");
-      }
-      if (startDateNum < bookingStart && endDateNum > bookingEnd) {
-        errors.push("Chosen dates conflcit with an existing booking");
-      }
+      return setErrors(errors)
+    })
+  }
 
-      return setErrors(errors);
-    });
-  };
   useEffect(() => {
     dispatch(getBookingsBySpotId(spotId));
     handleValidation();
@@ -74,17 +65,18 @@ const CreateBooking = ({
   if (errors.length > 0) {
     errorsli = (
       <div className="createBookingError">
-        {errors?.map((error, i) => {
+        {(errors).map((error, i) => (
           <div className="errorMessageContainer" key={i}>
-            <i className="fa-solid fa-exclamation exclamation-point"></i>
+            <i class="fa-solid fa-exclamation exclamation-point"></i>
             <div className="errorMessage">{error}</div>
-          </div>;
-        })}
+          </div>
+        ))}
       </div>
-    );
+    )
   }
 
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     let data = {
       startDate,
@@ -96,9 +88,9 @@ const CreateBooking = ({
       errors.push("User cannot book their own spot");
       setErrors(errors);
     }
-    console.log('boooking idddddd', bookings?.id)
+
     if (errors.length === 0 && spot?.ownerId !== sessionUser?.id) {
-      dispatch(createNewBooking(spotId, data)).then((res) =>  history.push(`/confirmed/${spotId}/${res.createBooking.id}`))
+      dispatch(createNewBooking(spotId, data)).then((res) =>  history.push(`/confirmed/${spotId}/${res?.createBooking?.id}`))
     }
   };
 
