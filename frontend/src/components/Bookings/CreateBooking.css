@@ -19,13 +19,15 @@
   }
 
   .createBookingErrorContainer {
-    /* padding-top: 13px; */
-    /* padding-bottom: 13px; */
-    /* padding-left: 24px; */
-    /* padding-right: 24px; */
-    color: red;
-  }
 
+    color: red;
+    /* position: absolute */
+    ;
+  }
+.errorMessageContainer{
+  color: red;
+ display: flex;
+}
   .createBookingError {
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
