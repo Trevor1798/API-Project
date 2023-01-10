@@ -7,7 +7,7 @@ import * as spotsActions from "../../store/spots.js";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormPage from "../SignupFormPage/SignupForm";
 import LoginForm from "../LoginFormModal/LoginForm";
-import img from './xButton.jpg'
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
