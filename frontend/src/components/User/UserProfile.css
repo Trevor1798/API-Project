@@ -1,0 +1,156 @@
+.account-page-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .account-page-inner-container {
+    display: flex;
+    justify-content: space-between;
+    width: 1032px;
+    /* max-width: 1064px; */
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-top: 48px;
+    margin-bottom: 32px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .account-page-left-side-container {
+    /* box-sizing: border-box; */
+    width: 33.333333333333333333%;
+    height: 700px;
+    padding-left: 8px;
+    padding-right: 8px;
+    /* border: 1px solid black */
+  }
+
+  .account-page-right-side-container {
+    box-sizing: border-box;
+    width: 66.666666666666666666%;
+    height: 700px;
+    /* border: 1px solid black; */
+    /* padding-left: 8px; */
+    padding-right: 8px;
+    margin-left: 48px;
+    height: 975px;
+  }
+
+  .account-page-user-info-container {
+    box-sizing: border-box;
+    /* max-width: 308px; */
+    padding: 24px;
+    border: 1px solid #DDDDDD;
+    margin-right: 20px;
+    border-radius: 12px;
+    width: 308px;
+  }
+
+  .account-page-user-info-one {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .account-page-user-info-pic {
+    object-fit: fill;
+    width: 128px;
+    height: 128px;
+    margin: auto;
+  }
+
+  .account-page-user-info-name {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    margin-bottom: 32px;
+  }
+
+  .account-page-user-info-two {
+    display: flex;
+    margin-bottom: 16px;
+    line-height: 29.016px;
+  }
+
+  .account-page-user-info-review {
+    font-weight: 500;
+    margin-left: 3px;
+  }
+
+  .account-page-user-info-three {
+    display: flex;
+    margin-bottom: 16px;
+    line-height: 29.016px;
+  }
+
+  .account-page-user-info-identity {
+    margin-left: 10px;
+    font-weight: 500;
+  }
+
+  .account-page-star {
+    margin-top: 15px
+  }
+
+  .account-page-check {
+    margin-top: 15px
+  }
+
+  .account-page-user-info-four {
+    border-bottom: 1px solid #EBEBEB;
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+
+  .account-page-user-info-bottom-header {
+    margin-bottom: 24px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 26px;
+  }
+
+  .account-page-user-info-bottom {
+    display: flex;
+    /* line-height: 36px; */
+    padding-bottom: 17px;
+  }
+
+  .account-page-bottom-check {
+    margin-top: 10px
+  }
+
+  .account-page-user-info-detail {
+    margin-left: 10px
+  }
+
+  .account-page-right-side-top {
+    margin-bottom: 48px;
+  }
+
+  .account-page-right-side-header {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 36px;
+    margin-bottom: 8px;
+  }
+
+  .account-page-right-side-text {
+    font-size: 14px;
+    line-height: 18px;
+    color: #717171;
+    margin-bottom: 16px;
+  }
+
+  .account-page-right-side-bottom {
+    display: flex;
+    line-height: 26px;
+  }
+
+  .account-page-star-bottom {
+    margin-top: 5px;
+  }
+
+  .account-page-right-bottom-review {
+    font-size: 20px;
+    margin-left: 4px;
+    font-weight: 500;
+  }

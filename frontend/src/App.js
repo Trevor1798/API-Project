@@ -15,6 +15,7 @@ import CurrentBooking from './components/Bookings/CurrentBookings'
 import BookingConfirmed from "./components/Bookings/BookingConfirmed";
 import UserPastBookings from "./components/Bookings/UserPastBookings";
 import UserBookings from "./components/Bookings/UserBookings";
+import UserProfile from "./components/User/UserProfile";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -59,6 +60,9 @@ function App() {
             <Route exact path='/confirmed/:spotId/:bookingId'>
               <BookingConfirmed/>
             </Route>
+            <Route path="/users/account/:userId">
+            <UserProfile/>
+          </Route>
             <Route exact path='/current-bookings/:spotId'>
               <CurrentBooking/>
             </Route>
