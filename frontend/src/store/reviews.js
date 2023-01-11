@@ -1,9 +1,10 @@
 import { csrfFetch } from "./csrf";
 
-export const GET_REVIEW = 'reviews/getReview'
-export const CREATE_REVIEW = 'reviews/createReview'
-export const UPDATE_REVIEW = 'reviews/updateReview'
-export const DELETE_REVIEW = 'reviews/deleteReview'
+const GET_REVIEW = 'reviews/getReview'
+const CREATE_REVIEW = 'reviews/createReview'
+const UPDATE_REVIEW = 'reviews/updateReview'
+const DELETE_REVIEW = 'reviews/deleteReview'
+const GET_CURRENT = 'reviews/current'
 
 
 const getReview = (review) => {
@@ -34,7 +35,12 @@ const deleteReview = (reviewId) => {
         reviewId
     }
 }
-
+const getCurrentReviews = (reviews) => {
+    return {
+        type: GET_CURRENT,
+        reviews
+    }
+}
 
 export const getReviews = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
@@ -45,6 +51,14 @@ export const getReviews = (spotId) => async (dispatch) => {
                return data
     }
 }
+export const getReviewsByCurrentUser = () => async (dispatch) => {
+    const res = await csrfFetch(`/api/reviews/current`);
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(getCurrentReviews(data));
+    }
+  };
+
 
 export const getCreateReviews = (reviewData) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${reviewData.spotId}/reviews`,{
@@ -102,6 +116,11 @@ const reviewReducer = (state ={}, action) => {
           action.review.Reviews.forEach((review) => {
             newState[review.id] = review
         })
+        case GET_CURRENT:
+      newState = {};
+      action.reviews.forEach((review) => {
+        newState[review.id] = review
+      })
             return newState
             case DELETE_REVIEW:
                 newState = {...state}
