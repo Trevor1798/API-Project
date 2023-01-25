@@ -12,7 +12,7 @@ Deployed on Heroku - https://airbnbproj.herokuapp.com/
 [Redux Store Shape](https://github.com/Trevor1798/API-Project/wiki/Redux-store-shape)
 
 
-## Technologies Used 
+
 
 
 ## This application was built with the following technologies:
