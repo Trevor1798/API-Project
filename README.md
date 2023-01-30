@@ -64,3 +64,4 @@ Open up a second terminal, go into the 'frontend' directory and in the terminal 
 Type npm start to start your frontend. If you have Google Chrome, this should automatically launch the browser and direct you to localhost:3000. If it did not launch automatically, manually open up a browser and go to localhost:3000.
     
     
+[Conect with me!](https://www.linkedin.com/in/trevor-jones-0b8a57259/)
