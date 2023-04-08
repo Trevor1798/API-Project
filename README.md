@@ -1,7 +1,7 @@
 # API-Project
 About trevbnb
 
-trevbnb is a full stack application using React, Redux, Express, and Sequelize. 
+ trevbnb is a full stack application using React, Redux, Express, and Sequelize. 
 Deployed on Heroku - https://airbnbproj.herokuapp.com/
 
 ## Site Info
