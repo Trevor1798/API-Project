@@ -17,7 +17,7 @@ Deployed on Heroku - https://airbnbproj.herokuapp.com/
 
 ## This application was built with the following technologies:
   
-    * Javascript
+   * Javascript
    * Express
    * Sequelize
    * React
