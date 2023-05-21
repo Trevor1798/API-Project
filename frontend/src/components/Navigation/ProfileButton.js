@@ -72,12 +72,6 @@ function ProfileButton({ user }) {
               >
                 My Spots
             </div>
-            <div
-                className="profile-manage-reviews"
-                onClick={() => history.push("/my-reviews")}
-              >
-                My Reviews
-            </div>
 
               <div
                 className="profile-manage-bookings"

@@ -24,7 +24,7 @@ function SpotDetails() {
   const spot = Object.values(spotObj);
   const review = Object.values(reviewObj);
   const users = Object.values(usersObj);
-  console.log('reviewssss',reviewObj);
+  console.log('reviewssss',review.length);
   const spotOwner = usersObj[ownerId];
   // const userReview =
   // console.log("spot owner", spotOwner);

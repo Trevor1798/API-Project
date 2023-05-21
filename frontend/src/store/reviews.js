@@ -116,6 +116,8 @@ const reviewReducer = (state ={}, action) => {
           action.review.Reviews.forEach((review) => {
             newState[review.id] = review
         })
+        return newState
+    
         case GET_CURRENT:
       newState = {};
       action.reviews.forEach((review) => {
